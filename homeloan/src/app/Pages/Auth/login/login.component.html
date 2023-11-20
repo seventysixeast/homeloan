@@ -16,41 +16,46 @@
                 </div>
 
                 <p>Please login to your account</p>
+                <form  method="post" ngNativeValidate (ngSubmit) = "handleLoginSubmit()">   
+                  <div class="form-outline mb-4">
+                    <label class="form-label" for="form2Example11">Email</label>
+                    <input
+                      [(ngModel)]="email"
+                      autocomplete="off"
+                      type="email"
+                      id="form2Example11"
+                      class="form-control"
+                      placeholder="email address"
+                      [ngModelOptions]="{standalone: true}"
+                      required
+                    />
+                  </div>
+  
+                  <div class="form-outline mb-4">
+                    <label class="form-label" for="form2Example22"
+                      >Password</label
+                    >
+                    <input
+                      [(ngModel)]="password"
+                      type="password"
+                      id="form2Example22"
+                      class="form-control"
+                      placeholder="password"
+                      [ngModelOptions]="{standalone: true}"
+                      required
+                    />
+                  </div>
+  
+                  <div class="text-center pt-1 mb-5 pb-1">
+                    <button
+                      class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3"
+                      type="submit"
+                    >
+                      Log in
+                    </button>
+                  </div>
+                </form>
 
-                <div class="form-outline mb-4">
-                  <label class="form-label" for="form2Example11">Email</label>
-                  <input
-                    [(ngModel)]="email"
-                    autocomplete="off"
-                    type="email"
-                    id="form2Example11"
-                    class="form-control"
-                    placeholder="email address"
-                  />
-                </div>
-
-                <div class="form-outline mb-4">
-                  <label class="form-label" for="form2Example22"
-                    >Password</label
-                  >
-                  <input
-                    [(ngModel)]="password"
-                    type="password"
-                    id="form2Example22"
-                    class="form-control"
-                    placeholder="password"
-                  />
-                </div>
-
-                <div class="text-center pt-1 mb-5 pb-1">
-                  <button
-                    class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3"
-                    type="button"
-                    (click)="handleLoginSubmit()"
-                  >
-                    Log in
-                  </button>
-                </div>
               </div>
             </div>
             <div class="col-lg-6 d-flex align-items-center gradient-custom-2">

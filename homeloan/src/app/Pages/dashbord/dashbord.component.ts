@@ -19,6 +19,10 @@ export class DashbordComponent implements OnInit {
   dataList: any = [];
 
   ngOnInit(): void {
+    localStorage.removeItem("mId");
+    localStorage.removeItem("smId");
+    localStorage.removeItem("applicant1Id");
+    localStorage.removeItem("application_no");
     this.getData();
   }
 

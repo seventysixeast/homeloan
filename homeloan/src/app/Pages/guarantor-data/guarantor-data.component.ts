@@ -49,9 +49,11 @@ export class GuarantorDataComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe((params: any) => {
-      this.openId = params.id;
-      if (this.openId != 0) {
-        this.getSingleData();
+      if(params.id != null){
+        this.openId = params.id;
+        if (this.openId != 0) {
+          this.getSingleData();
+        }
       }
     });
   }
@@ -63,27 +65,29 @@ export class GuarantorDataComponent implements OnInit {
     data.append('action', 'getSingleDataGuar');
 
     this.ds.submitAppData(data).subscribe((response: any) => {
-      this.a1_name = response[0].a1_name;
-      this.a1_fName = response[0].a1_fName;
-      this.a1_activity = response[0].a1_activity;
-      this.a1_paddress = response[0].a1_paddress;
-      this.a1_age = response[0].a1_age;
-      this.a1_nrc = response[0].a1_nrc;
-      this.a1_phone = response[0].a1_phone;
-      this.a1_passport = response[0].a1_passport;
-      this.a1_photo = this.ds.mediaUrl + response[0].a1_photo;
-
-      this.a2_name = response[0].a2_name;
-      this.a2_fName = response[0].a2_fName;
-      this.a2_activity = response[0].a2_activity;
-      this.a2_paddress = response[0].a2_paddress;
-      this.a2_age = response[0].a2_age;
-      this.a2_nrc = response[0].a2_nrc;
-      this.a2_phone = response[0].a2_phone;
-      this.a2_passport = response[0].a2_passport;
-      this.a2_photo = this.ds.mediaUrl + response[0].a2_photo;
-
-      this.app_date = response[0].app_date;
+      if(response != null){
+        this.a1_name = response[0].a1_name;
+        this.a1_fName = response[0].a1_fName;
+        this.a1_activity = response[0].a1_activity;
+        this.a1_paddress = response[0].a1_paddress;
+        this.a1_age = response[0].a1_age;
+        this.a1_nrc = response[0].a1_nrc;
+        this.a1_phone = response[0].a1_phone;
+        this.a1_passport = response[0].a1_passport;
+        this.a1_photo = this.ds.mediaUrl + response[0].a1_photo;
+  
+        this.a2_name = response[0].a2_name;
+        this.a2_fName = response[0].a2_fName;
+        this.a2_activity = response[0].a2_activity;
+        this.a2_paddress = response[0].a2_paddress;
+        this.a2_age = response[0].a2_age;
+        this.a2_nrc = response[0].a2_nrc;
+        this.a2_phone = response[0].a2_phone;
+        this.a2_passport = response[0].a2_passport;
+        this.a2_photo = this.ds.mediaUrl + response[0].a2_photo;
+  
+        this.app_date = response[0].app_date;
+      }
     });
   }
 
@@ -115,6 +119,13 @@ export class GuarantorDataComponent implements OnInit {
   }
 
   handleSubmit(no: number) {
+    console.log('this.a1_name',this.a1_name)
+    console.log('this.openId',this.openId)
+    if(this.a1_name == ''){
+      alert('Applicant Full Name Is Required')
+      return;
+    }
+    // return;
     this.spinner.show();
     let data = new FormData();
     data.append('ref_id', this.openId);
@@ -140,6 +151,7 @@ export class GuarantorDataComponent implements OnInit {
 
     data.append('app_date', this.app_date);
     data.append('action', 'submit-guar-data');
+    data.append('status', "guarantor1");
 
     this.ds.submitAppData(data).subscribe((response: any) => {
       window.scroll({
@@ -166,7 +178,8 @@ export class GuarantorDataComponent implements OnInit {
   }
 
   goNext() {
-    this.router.navigateByUrl('guarantor-data2/' + this.openId);
+    console.log('this.openId',this.openId)
+    // this.router.navigateByUrl('guarantor-data2/' + this.openId);
     this.sideNav.openPage(1, 12);
   }
 
@@ -181,6 +194,7 @@ export class GuarantorDataComponent implements OnInit {
   }
 
   goBack() {
-    this.router.navigateByUrl('applicant-data2/' + this.openId);
+    // this.router.navigateByUrl('applicant-data2/' + this.openId);
+    this.sideNav.openPage(1, 11);
   }
 }

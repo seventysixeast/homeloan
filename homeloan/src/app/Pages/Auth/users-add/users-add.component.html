@@ -9,71 +9,84 @@
         <div class="card">
           <div class="card-body">
             <div class="row g-3 mx-2 my-1">
-              <div class="col-12">
-                <label for="inputNanme4" class="form-label">First Name</label>
-                <input
-                  autocomplete="nope"
-                  [(ngModel)]="f_name"
-                  type="text"
-                  class="form-control"
-                  id="inputNanme4"
-                />
-              </div>
-              <div class="col-12">
-                <label for="inputEmail4" class="form-label">Last Name</label>
-                <input
-                  autocomplete="nope"
-                  [(ngModel)]="l_name"
-                  type="text"
-                  class="form-control"
-                  id="inputEmail4"
-                />
-              </div>
-              <div class="col-12">
-                <label for="inputPassword4" class="form-label">Email</label>
-                <input
-                  autocomplete="nope"
-                  [(ngModel)]="email"
-                  type="text"
-                  class="form-control"
-                  id="inputPassword4"
-                />
-              </div>
-              <div class="col-12">
-                <label for="inputAddress" class="form-label">Password</label>
-                <input
-                  autocomplete="nope"
-                  [(ngModel)]="password"
-                  type="text"
-                  class="form-control"
-                  id="inputAddress"
-                />
-              </div>
-              <div class="col-12">
-                <label for="inputAddress" class="form-label">Type</label>
-
-                <select
-                  class="form-select"
-                  aria-label="Default select example"
-                  [(ngModel)]="type"
-                  placeholder="Select Role"
-                >
-                  <option value="0">Select Role</option>
-                  <option value="Admin">Admin</option>
-                  <option value="Credit-Analyst">Credit Analyst</option>
-                  <option value="Management">Management</option>
-                </select>
-              </div>
-
-              <div class="col-12">
-                <button
-                  type="submit"
-                  class="btn btn-primary"
-                  (click)="handleSubmit()"
-                >
-                  Save New User
-                </button>
-              </div>
+              <form  method="post" ngNativeValidate (ngSubmit) = "handleSubmit()">   
+                <div class="col-12">
+                  <label for="inputNanme4" class="form-label">First Name</label>
+                  <input
+                    autocomplete="nope"
+                    [(ngModel)]="f_name"
+                    type="text"
+                    class="form-control"
+                    id="inputNanme4"
+                    required
+                    [ngModelOptions]="{standalone: true}"
+                  />
+                </div>
+                <div class="col-12">
+                  <label for="inputEmail4" class="form-label">Last Name</label>
+                  <input
+                    autocomplete="nope"
+                    [(ngModel)]="l_name"
+                    type="text"
+                    class="form-control"
+                    id="inputEmail4"
+                    [ngModelOptions]="{standalone: true}"
+                  />
+                </div>
+                <div class="col-12">
+                  <label for="inputPassword4" class="form-label">Email</label>
+                  <input
+                    autocomplete="nope"
+                    [(ngModel)]="email"
+                    type="text"
+                    class="{{edit ? 'form-control edit-email' : 'form-control'}}"
+                    id="inputPassword4"
+                    required
+                    [readonly]="edit"
+                    [ngModelOptions]="{standalone: true}"
+                  />
+                </div>
+                <div class="col-12">
+                  <label for="inputAddress" class="form-label">Password</label>
+                  <input
+                    autocomplete="nope"
+                    [(ngModel)]="password"
+                    type="text"
+                    class="form-control"
+                    id="inputAddress"
+                    required
+                    [ngModelOptions]="{standalone: true}"
+                  />
+                </div>
+                <div class="col-12">
+                  <label for="inputAddress" class="form-label">Type</label>
+  
+                  <select
+                    class="form-select"
+                    aria-label="Default select example"
+                    [(ngModel)]="type"
+                    placeholder="Select Role"
+                    required  
+                    [ngModelOptions]="{standalone: true}"
+                  >
+                    <option value="">Select Role</option>
+                    <!-- <option value="Admin">Admin</option> -->
+                    <option value="Credit-Analyst">Credit Analyst</option>
+                    <option value="Credit-Underwriter">Credit Underwriter</option>
+                    <option value="Credit-Approver">Credit Approver</option>
+                    <!-- <option value="Management">Management</option> -->
+                  </select>
+                </div>
+  
+                <div class="col-12 mt-3">
+                  <button
+                    type="submit"
+                    class="btn btn-primary"
+                  >
+                    Save New User
+                  </button>
+                </div>
+              </form>
             </div>
           </div>
         </div>

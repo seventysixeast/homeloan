@@ -195,6 +195,7 @@ export class LoanRequestComponent implements OnInit {
   }
 
   goBack() {
-    this.router.navigateByUrl('guarantor-data2/' + this.openId);
+    this.sideNav.openPage(1, 12);
+    // this.router.navigateByUrl('guarantor-data2/' + this.openId);
   }
 }

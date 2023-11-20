@@ -1,7 +1,9 @@
 <?php
 include('config.php');    
-
-
+// echo "<pre>"; print_r($request->input()); die;
+// ini_set('display_errors', 1);
+// ini_set('display_startup_errors', 1);
+// error_reporting(E_ALL);
 
 if($_POST['action'] == 'submit-app-data')
 {
@@ -25,38 +27,52 @@ if($_POST['action'] == 'submit-app-data')
     $a2_phone = $_POST['a2_phone'];
     $a2_passport = $_POST['a2_passport'];
     $a2_photo = $_POST['a2_photo'];
-
     $app_date = $_POST['app_date'];
+    $application_no = $_POST['application_no'];
+    $applicant_type = $_POST['applicant_type'];
+    $status = $_POST['status'];
 
-     if($_FILES["a1_photo"] != ''){
+    // echo "<pre>"; print_r($_POST); die;
+    // echo "<pre>"; print_r($_FILES); die;
+//     ini_set('display_errors', 1);
+// ini_set('display_startup_errors', 1);
+// error_reporting(E_ALL);
+
+    // $target_file_one = ''
+
+    if($_FILES["a1_photo"] != ''){
 
         $target_dir = "uploads/";
         $target_file_one = time().basename($_FILES["a1_photo"]["name"]);
         move_uploaded_file($_FILES["a1_photo"]["tmp_name"], $target_dir .$target_file_one);
     }
 
-    if($_FILES["a2_photo"] != ''){        
+    // $target_file_two = ''
+
+    if($_FILES && $_FILES["a2_photo"] != ''){        
         $target_dir = "uploads/";
         $target_file_two = time().basename($_FILES["a2_photo"]["name"]);
         move_uploaded_file($_FILES["a2_photo"]["tmp_name"], $target_dir .$target_file_two);   
     }
 
-    if($id == 0){
-        $querry = "INSERT INTO app_data(a1_name, a1_fName, a1_activity , a1_paddress, a1_age, a1_nrc, a1_phone, a1_passport, a1_photo, a2_name, a2_fName, a2_activity, a2_paddress, a2_age, a2_nrc, a2_phone, a2_passport, a2_photo, app_date) VALUES('$a1_name', '$a1_fName', '$a1_activity','$a1_paddress' ,  '$a1_age', '$a1_nrc', '$a1_phone', '$a1_passport', '$target_file_one', '$a2_name', '$a2_fName', '$a2_activity', '$a2_paddress', '$a2_age', '$a2_nrc', '$a2_phone', '$a2_passport', '$target_file_two', '$app_date')";
+    // echo "<pre>"; print_r($target_file_one); die;
+
+    if($id == 0 || $id ==  null){
+        $querry = "INSERT INTO app_data(a1_name, a1_fName, a1_activity , a1_paddress, a1_age, a1_nrc, a1_phone, a1_passport, a1_photo, a2_name, a2_fName, a2_activity, a2_paddress, a2_age, a2_nrc, a2_phone, a2_passport, a2_photo, app_date, application_no, applicant_type, status) VALUES('$a1_name', '$a1_fName', '$a1_activity','$a1_paddress' ,  '$a1_age', '$a1_nrc', '$a1_phone', '$a1_passport', '$target_file_one', '$a2_name', '$a2_fName', '$a2_activity', '$a2_paddress', '$a2_age', '$a2_nrc', '$a2_phone', '$a2_passport', '$target_file_two', '$app_date', '$application_no', '$applicant_type', '$status')";
     }else{
         if($_FILES["a1_photo"] != ''){
-            $querry = "UPDATE app_data SET a1_name='$a1_name',a1_fName='$a1_fName',a1_activity='$a1_activity',a1_paddress='$a1_paddress',a1_age='$a1_age',a1_nrc='$a1_nrc',a1_phone='$a1_phone',a1_passport='$a1_passport',a1_photo='$target_file_one',a2_name='$a2_name',a2_fName='$a2_fName',a2_activity='$a2_activity',a2_paddress='$a2_paddress',a2_age='$a2_age',a2_nrc='$a2_nrc',a2_phone='$a2_phone',a2_passport='$a2_passport',app_date='$app_date' WHERE id=".$id;
+            $querry = "UPDATE app_data SET a1_name='$a1_name',a1_fName='$a1_fName',a1_activity='$a1_activity',a1_paddress='$a1_paddress',a1_age='$a1_age',a1_nrc='$a1_nrc',a1_phone='$a1_phone',a1_passport='$a1_passport',a1_photo='$target_file_one',a2_name='$a2_name',a2_fName='$a2_fName',a2_activity='$a2_activity',a2_paddress='$a2_paddress',a2_age='$a2_age',a2_nrc='$a2_nrc',a2_phone='$a2_phone',a2_passport='$a2_passport',app_date='$app_date',applicant_type='$applicant_type',status='$status' WHERE id=".$id;
         }
         if($_FILES["a2_photo"] != ''){
-           $querry = "UPDATE app_data SET a1_name='$a1_name',a1_fName='$a1_fName',a1_activity='$a1_activity',a1_paddress='$a1_paddress',a1_age='$a1_age',a1_nrc='$a1_nrc',a1_phone='$a1_phone',a1_passport='$a1_passport',a2_name='$a2_name',a2_fName='$a2_fName',a2_activity='$a2_activity',a2_paddress='$a2_paddress',a2_age='$a2_age',a2_nrc='$a2_nrc',a2_phone='$a2_phone',a2_passport='$a2_passport',a2_photo='$target_file_two',app_date='$app_date' WHERE id=".$id;
+           $querry = "UPDATE app_data SET a1_name='$a1_name',a1_fName='$a1_fName',a1_activity='$a1_activity',a1_paddress='$a1_paddress',a1_age='$a1_age',a1_nrc='$a1_nrc',a1_phone='$a1_phone',a1_passport='$a1_passport',a2_name='$a2_name',a2_fName='$a2_fName',a2_activity='$a2_activity',a2_paddress='$a2_paddress',a2_age='$a2_age',a2_nrc='$a2_nrc',a2_phone='$a2_phone',a2_passport='$a2_passport',a2_photo='$target_file_two',app_date='$app_date',applicant_type='$applicant_type',status='$status' WHERE id=".$id;
         }
 
         if($_FILES["a1_photo"] == '' && $_FILES["a2_photo"] == ''){
-           $querry = "UPDATE app_data SET a1_name='$a1_name',a1_fName='$a1_fName',a1_activity='$a1_activity',a1_paddress='$a1_paddress',a1_age='$a1_age',a1_nrc='$a1_nrc',a1_phone='$a1_phone',a1_passport='$a1_passport',a2_name='$a2_name',a2_fName='$a2_fName',a2_activity='$a2_activity',a2_paddress='$a2_paddress',a2_age='$a2_age',a2_nrc='$a2_nrc',a2_phone='$a2_phone',a2_passport='$a2_passport',app_date='$app_date' WHERE id=".$id;
+           $querry = "UPDATE app_data SET a1_name='$a1_name',a1_fName='$a1_fName',a1_activity='$a1_activity',a1_paddress='$a1_paddress',a1_age='$a1_age',a1_nrc='$a1_nrc',a1_phone='$a1_phone',a1_passport='$a1_passport',a2_name='$a2_name',a2_fName='$a2_fName',a2_activity='$a2_activity',a2_paddress='$a2_paddress',a2_age='$a2_age',a2_nrc='$a2_nrc',a2_phone='$a2_phone',a2_passport='$a2_passport',app_date='$app_date',applicant_type='$applicant_type',status='$status' WHERE id=".$id;
         }
 
         if($_FILES["a1_photo"] != '' && $_FILES["a2_photo"] != ''){
-           $querry = "UPDATE app_data SET a1_name='$a1_name',a1_fName='$a1_fName',a1_activity='$a1_activity',a1_paddress='$a1_paddress',a1_age='$a1_age',a1_nrc='$a1_nrc',a1_phone='$a1_phone',a1_passport='$a1_passport',a2_name='$a2_name',a2_fName='$a2_fName',a2_activity='$a2_activity',a2_paddress='$a2_paddress',a2_age='$a2_age',a2_nrc='$a2_nrc',a2_phone='$a2_phone',a2_passport='$a2_passport',app_date='$app_date' ,a1_photo='$target_file_one',a2_photo='$target_file_two' WHERE id=".$id;
+           $querry = "UPDATE app_data SET a1_name='$a1_name',a1_fName='$a1_fName',a1_activity='$a1_activity',a1_paddress='$a1_paddress',a1_age='$a1_age',a1_nrc='$a1_nrc',a1_phone='$a1_phone',a1_passport='$a1_passport',a2_name='$a2_name',a2_fName='$a2_fName',a2_activity='$a2_activity',a2_paddress='$a2_paddress',a2_age='$a2_age',a2_nrc='$a2_nrc',a2_phone='$a2_phone',a2_passport='$a2_passport',app_date='$app_date' ,a1_photo='$target_file_one',a2_photo='$target_file_two',applicant_type='$applicant_type',status='$status' WHERE id=".$id;
         }
     }
 
@@ -71,6 +87,9 @@ if($_POST['action'] == 'submit-app-data')
 }
 
 if($_POST['action'] == 'getAppDataList'){
+    ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
     $res_header = mysqli_query($conn, "SELECT * FROM app_data");
     while ($row_header = mysqli_fetch_assoc($res_header)) {
         $response[] = $row_header;
@@ -91,6 +110,7 @@ if($_POST['action'] == 'getSingleData'){
 if($_POST['action'] == 'submit-guar-data')
 {
     $ref_id = $_POST['ref_id'];
+    // $ref_id = 1;
     $a1_name = $_POST['a1_name'];
     $a1_fName = $_POST['a1_fName'];
     $a1_activity = $_POST['a1_activity'];
@@ -112,7 +132,12 @@ if($_POST['action'] == 'submit-guar-data')
     $a2_photo = $_POST['a2_photo'];
 
     $app_date = $_POST['app_date'];
-
+    $status = $_POST['status'];
+    // echo "<pre>"; print_r($_POST); die;
+    // echo "<pre>"; print_r($_FILES); die;
+//     ini_set('display_errors', 1);
+// ini_set('display_startup_errors', 1);
+// error_reporting(E_ALL);
 
      if($_FILES["a1_photo"] != ''){
         $target_dir = "uploads/";
@@ -128,6 +153,8 @@ if($_POST['action'] == 'submit-guar-data')
 
     $res_header = mysqli_query($conn, "SELECT * FROM guar_data Where ref_id=".$ref_id);
 
+    
+    // echo "<pre>"; print_r($res_header->num_rows); die;
     if($res_header->num_rows == 0){
         $querry = "INSERT INTO guar_data(ref_id,a1_name, a1_fName, a1_activity,a1_paddress, a1_age, a1_nrc, a1_phone, a1_passport, a1_photo, a2_name, a2_fName, a2_activity, a2_paddress, a2_age, a2_nrc, a2_phone, a2_passport, a2_photo, app_date) VALUES('$ref_id','$a1_name', '$a1_fName', '$a1_activity','$a1_paddress', '$a1_age', '$a1_nrc', '$a1_phone', '$a1_passport', '$target_file_one', '$a2_name', '$a2_fName', '$a2_activity', '$a2_paddress', '$a2_age', '$a2_nrc', '$a2_phone', '$a2_passport', '$target_file_two', '$app_date')";
     }else{
@@ -149,6 +176,9 @@ if($_POST['action'] == 'submit-guar-data')
     }
 
     $result = mysqli_query($conn,$querry); 
+
+    $querry1 = "UPDATE app_data SET status='$status' WHERE id=".$ref_id;
+    $result1 = mysqli_query($conn,$querry1); 
     echo $result;
 }
 
@@ -492,7 +522,17 @@ if($_POST['action'] == 'getScore'){
 
 
 if($_POST['action'] == 'getUsers'){
-    $res_header = mysqli_query($conn, "SELECT * FROM users");
+    $res_header = mysqli_query($conn, "SELECT * FROM users where type != 'Admin'");
+    while ($row_header = mysqli_fetch_assoc($res_header)) {
+        $response[] = $row_header;
+    
+    }
+    echo json_encode($response);
+}
+
+if($_POST['action'] == 'getUser'){
+    // echo "<pre>"; print_r($_POST); die;
+    $res_header = mysqli_query($conn, "SELECT * FROM users where id = ".$_POST['id']);
     while ($row_header = mysqli_fetch_assoc($res_header)) {
         $response[] = $row_header;
     
@@ -509,8 +549,63 @@ if($_POST['action'] == 'addUser'){
     $password =  $_POST['password'];
     $type =  $_POST['type'];
 
-    
+    // echo "<pre>"; print_r($_POST); die;
+    $to = $email;
+    // $to = "somebody@example.com, somebodyelse@example.com";
+    $subject = "HTML email";
+
+    $message = "
+    <html>
+    <head>
+    <title>Home Loan</title>
+    </head>
+    <body>
+    <p>This email contains HTML Tags!</p>
+    <table>
+    <tr>
+    <th>Login Url</th>
+    <th>Email</th>
+    <th>Password</th>
+    </tr>
+    <tr>
+    <td>https://www.acramm.com/homeloan/login</td>
+    <td>".$email."</td>
+    <td>".$password."</td>
+    </tr>
+    </table>
+    </body>
+    </html>
+    ";
+
+    // Always set content-type when sending HTML email
+    $headers = "MIME-Version: 1.0" . "\r\n";
+    $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+
+    // More headers
+    $headers .= 'From: <homeloan@info.com>' . "\r\n";
+    // $headers .= 'Cc: myboss@example.com' . "\r\n";
+
+    mail($to,$subject,$message,$headers);
+
     $querry = "INSERT INTO users(f_name, l_name,email,password,type) VALUES ('$f_name', '$l_name', '$email', '$password', '$type')";
+
+    $result = mysqli_query($conn,$querry); 
+
+    echo $result;
+}
+
+if($_POST['action'] == 'updateUser'){
+    $id =  $_POST['id'];
+    $f_name =  $_POST['f_name'];
+    $l_name =  $_POST['l_name'];
+    $email =  $_POST['email'];
+    $password =  $_POST['password'];
+    $type =  $_POST['type'];
+
+    // echo "<pre>"; print_r($_POST); die;
+    $querry = "UPDATE users SET f_name='$f_name',l_name='$l_name',password='$password',type='$type' WHERE id=".$id;
+
+    // $querry = "INSERT INTO users(f_name, l_name,email,password,type) VALUES ('$f_name', '$l_name', '$email', '$password', '$type')";
 
     $result = mysqli_query($conn,$querry); 
 
@@ -523,7 +618,7 @@ if($_POST['action']  == 'deleteUser'){
 }
 
 if($_POST['action']  == 'loginUser'){
-    
+    // echo "<pre>"; print_r($_POST); die;
     $email =  $_POST['email'];
     $password =  $_POST['password'];
 
@@ -535,5 +630,9 @@ if($_POST['action']  == 'loginUser'){
         $response[] = $row_header;
     
     }
-    echo json_encode($response);
+    if(count($response) > 0){
+        echo (json_encode(base64_encode(json_encode($response[0]))));
+    }else{
+        echo json_encode($response);
+    }
 }

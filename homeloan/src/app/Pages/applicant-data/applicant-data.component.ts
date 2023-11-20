@@ -50,10 +50,15 @@ export class ApplicantDataComponent implements OnInit {
   openType = 'new';
 
   ngOnInit(): void {
+    // this.sideNav.openPage(1, 1);
     this.route.params.subscribe((params: any) => {
-      this.openId = params.id;
-      if (this.openId != 0) {
-        this.getSingleData();
+      // this.sideNav.openPage(1, 1);
+      if(params.id && params.id != null){
+        console.log('params.id',params.id)
+        this.openId = params.id;
+        if (this.openId !== null && this.openId != 0) {
+          this.getSingleData();
+        }
       }
     });
   }
@@ -66,6 +71,7 @@ export class ApplicantDataComponent implements OnInit {
 
     this.ds.submitAppData(data).subscribe((response: any) => {
       if (response != null) {
+        console.log('hitignng')
         this.a1_name = response[0].a1_name;
         this.a1_fName = response[0].a1_fName;
         this.a1_activity = response[0].a1_activity;
@@ -88,6 +94,7 @@ export class ApplicantDataComponent implements OnInit {
 
         this.app_date = response[0].app_date;
         this.openType = 'old';
+        localStorage.setItem("applicant1Id",this.openId)
       }
     });
   }
@@ -120,9 +127,22 @@ export class ApplicantDataComponent implements OnInit {
   }
 
   handleSubmit(no: number) {
+    if(this.a1_name == ''){
+      alert('Applicant Full Name Is Required')
+      return;
+    }
+
+    var variableNumer = Date.now() + Math.random().toString(36).substr(2, 9)
+    // console.log('variableNumer',variableNumer)
+    // return;
     this.spinner.show();
     let data = new FormData();
+    console.log('this.a1_name',this.a1_name)
     data.append('id', this.openId == undefined ? 0 : this.openId);
+    data.append('application_no', variableNumer);
+    localStorage.setItem('application_no', variableNumer)
+    data.append('applicant_type', "applicant1");
+    data.append('status', "applicant1");
     data.append('a1_name', this.a1_name);
     data.append('openType', this.openType);
     data.append('a1_fName', this.a1_fName);
@@ -147,6 +167,7 @@ export class ApplicantDataComponent implements OnInit {
     this.ds.submitAppData(data).subscribe((response: any) => {
       if (response != 0) {
         this.openId = response;
+        localStorage.setItem("applicant1Id",response)
       }
       window.scroll({
         top: 0,

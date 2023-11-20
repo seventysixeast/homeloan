@@ -32,6 +32,7 @@ import { LayoutMainComponent } from './layout-main/layout-main.component';
 import { UsersComponent } from './Pages/Auth/users/users.component';
 import { UsersAddComponent } from './Pages/Auth/users-add/users-add.component';
 import { UploadReportComponent } from './Pages/upload-report/upload-report.component';
+import { RetailLoanComponent } from './Pages/retail-loan/retail-loan.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import { UploadReportComponent } from './Pages/upload-report/upload-report.compo
     UsersComponent,
     UsersAddComponent,
     UploadReportComponent,
+    RetailLoanComponent,
   ],
   imports: [
     BrowserModule,

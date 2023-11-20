@@ -33,6 +33,7 @@ export class UsersComponent {
 
   openData(id: any) {
     console.log(id);
+    this.router.navigateByUrl('user-update/' + id);
     // localStorage.setItem('activeId', id);
     // this.sideNav.openPage(1, 1);
     // // this.router.navigateByUrl('applicant-data/' + id);

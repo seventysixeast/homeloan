@@ -23,6 +23,8 @@ export class LoginComponent {
     this.spinner.show();
     let data = new FormData();
 
+    console.log('this.email',this.email)
+
     data.append('action', 'loginUser');
     data.append('email', this.email);
     data.append('password', this.password);
@@ -30,11 +32,12 @@ export class LoginComponent {
     this.ds.submitAppData(data).subscribe((response: any) => {
       this.spinner.hide();
 
-      let data = response;
+      // let data = response;
 
-      console.log(data);
+      console.log((response));
 
-      if (data != null) {
+      if (response != null) {
+        console.log('response',response)
         Swal.fire({
           position: 'top-end',
           icon: 'success',
@@ -42,7 +45,10 @@ export class LoginComponent {
           showConfirmButton: false,
           timer: 1500,
         });
-        this.router.navigateByUrl('/dashbord');
+        localStorage.setItem('admin',response)
+        // users
+        this.router.navigateByUrl('/users');
+        // this.router.navigateByUrl('/dashbord');
       } else {
         Swal.fire({
           position: 'top-end',

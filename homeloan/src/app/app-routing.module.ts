@@ -21,6 +21,9 @@ import { LayoutMainComponent } from './layout-main/layout-main.component';
 import { UsersComponent } from './Pages/Auth/users/users.component';
 import { UsersAddComponent } from './Pages/Auth/users-add/users-add.component';
 import { UploadReportComponent } from './Pages/upload-report/upload-report.component';
+import { RetailLoanComponent } from './Pages/retail-loan/retail-loan.component';
+import { AdminGuard } from './admin.guard'; 
+import { UserGuard } from './user.guard';
 
 const routes: Routes = [
   {
@@ -33,8 +36,14 @@ const routes: Routes = [
     component: LoginComponent,
   },
   {
+    path: 'retail-loan',
+    component: RetailLoanComponent,
+  },
+  {
     path: '',
     component: LayoutMainComponent,
+		// canActivate: [UserGuard],
+    canActivate: [AdminGuard],
     children: [
       {
         path: 'dashbord',
@@ -117,8 +126,27 @@ const routes: Routes = [
         path: 'users-add',
         component: UsersAddComponent,
       },
+      {
+        path: 'user-update/:id',
+        component: UsersAddComponent,
+      },
     ],
   },
+  // {
+  //   path: '',
+  //   component: LayoutMainComponent,
+	// 	// canActivate: [AdminGuard],
+  //   children: [
+  //     {
+  //       path: 'users',
+  //       component: UsersComponent,
+  //     },
+  //     {
+  //       path: 'users-add',
+  //       component: UsersAddComponent,
+  //     },
+  //   ],
+  // },
 ];
 
 @NgModule({

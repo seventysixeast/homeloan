@@ -95,19 +95,24 @@ export class SideNavComponent implements OnInit {
           link: 'risk-2',
           status: false,
         },
-
-        {
-          id: 8,
-          name: 'Photos / Videos Upload',
-          link: 'media-upload',
-          status: false,
-        },
         {
           id: 7,
           name: 'Proposal Information',
           link: 'add-info',
           status: false,
         },
+        {
+          id: 8,
+          name: 'Photos / Videos Upload',
+          link: 'media-upload',
+          status: false,
+        },
+        // {
+        //   id: 7,
+        //   name: 'Proposal Information',
+        //   link: 'add-info',
+        //   status: false,
+        // },
         {
           id: 6,
           name: 'Risk Assessment Report',
@@ -158,5 +163,31 @@ export class SideNavComponent implements OnInit {
     });
     let link: any = document.getElementById(`link${mId}${smId}`);
     link.click();
+    let applicant1Id = localStorage.getItem('applicant1Id')
+    console.log('applicant1Id',applicant1Id)
+    if(mId == 1 && smId == 1){
+      if(applicant1Id){
+        this.router.navigateByUrl('applicant-data/' + applicant1Id);
+      }else{
+        this.router.navigateByUrl('applicant-data');
+      }
+    }
+    if(mId == 1 && smId == 11){
+      this.router.navigateByUrl('applicant-data2/' + applicant1Id);
+    }
+
+    if(mId == 1 && smId == 2){
+      this.router.navigateByUrl('guarantor-data/' + applicant1Id);
+    }
+
+    if(mId == 1 && smId == 12){
+      this.router.navigateByUrl('guarantor-data2/' + applicant1Id);
+    }
+
+    if(mId == 1 && smId == 3){
+      this.router.navigateByUrl('loan-request/' + applicant1Id);
+    }
   }
+
+
 }

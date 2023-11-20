@@ -48,12 +48,15 @@ export class ApplicantData2Component {
   app_date = '';
 
   openType = 'new';
-
+  application_no: any;
   ngOnInit(): void {
+    this.application_no = localStorage.getItem('application_no');
     this.route.params.subscribe((params: any) => {
-      this.openId = params.id;
-      if (this.openId != 0) {
-        this.getSingleData();
+      if(params.id != null){
+        this.openId = params.id;
+        if (this.openId != 0) {
+          this.getSingleData();
+        }
       }
     });
   }
@@ -120,9 +123,18 @@ export class ApplicantData2Component {
   }
 
   handleSubmit(no: number) {
+    console.log('a2_name',this.a2_name)
+    if(this.a2_name == ''){
+      alert('Applicant Full Name Is Required')
+      return;
+    }
     this.spinner.show();
     let data = new FormData();
     data.append('id', this.openId == undefined ? 0 : this.openId);
+    // let application_no = localStorage.getItem('application_no');
+    data.append('application_no',this.application_no);
+    data.append('applicant_type', "applicant2");
+    data.append('status', "applicant2");
     data.append('a1_name', this.a1_name);
     data.append('openType', this.openType);
     data.append('a1_fName', this.a1_fName);
@@ -193,6 +205,7 @@ export class ApplicantData2Component {
   }
 
   goBack() {
-    this.router.navigateByUrl('applicant-data/' + this.openId);
+    // this.router.navigateByUrl('applicant-data/' + this.openId);
+    this.sideNav.openPage(1, 1);
   }
 }
