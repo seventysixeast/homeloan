@@ -1,0 +1,85 @@
+<main id="main" class="main">
+  <div class="pagetitle">
+    <h1>New User</h1>
+  </div>
+
+  <section class="section">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="card-body">
+            <div class="row g-3 mx-2 my-1">
+              <div class="col-12">
+                <label for="inputNanme4" class="form-label">First Name</label>
+                <input
+                  autocomplete="nope"
+                  [(ngModel)]="f_name"
+                  type="text"
+                  class="form-control"
+                  id="inputNanme4"
+                />
+              </div>
+              <div class="col-12">
+                <label for="inputEmail4" class="form-label">Last Name</label>
+                <input
+                  autocomplete="nope"
+                  [(ngModel)]="l_name"
+                  type="text"
+                  class="form-control"
+                  id="inputEmail4"
+                />
+              </div>
+              <div class="col-12">
+                <label for="inputPassword4" class="form-label">Email</label>
+                <input
+                  autocomplete="nope"
+                  [(ngModel)]="email"
+                  type="text"
+                  class="form-control"
+                  id="inputPassword4"
+                />
+              </div>
+              <div class="col-12">
+                <label for="inputAddress" class="form-label">Password</label>
+                <input
+                  autocomplete="nope"
+                  [(ngModel)]="password"
+                  type="text"
+                  class="form-control"
+                  id="inputAddress"
+                />
+              </div>
+              <div class="col-12">
+                <label for="inputAddress" class="form-label">Type</label>
+
+                <select
+                  class="form-select"
+                  aria-label="Default select example"
+                  [(ngModel)]="type"
+                  placeholder="Select Role"
+                >
+                  <option value="0">Select Role</option>
+                  <option value="Admin">Admin</option>
+                  <option value="Credit-Analyst">Credit Analyst</option>
+                  <option value="Management">Management</option>
+                </select>
+              </div>
+
+              <div class="col-12">
+                <button
+                  type="submit"
+                  class="btn btn-primary"
+                  (click)="handleSubmit()"
+                >
+                  Save New User
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<!-- End #main -->
+<ngx-spinner type="ball-scale-multiple"></ngx-spinner>

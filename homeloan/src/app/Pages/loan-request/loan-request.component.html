@@ -1,0 +1,440 @@
+<main id="main" class="main">
+  <div class="pagetitle">
+    <h1>Project Cost and Loan Request</h1>
+    <!-- <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+        <li class="breadcrumb-item active">Project Cost and Loan Request</li>
+      </ol>
+    </nav> -->
+  </div>
+  <!-- End Page Title -->
+
+  <section class="section">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">
+              <!-- Project Cost and Loan Request -->
+            </h5>
+            <div class="row g-3 mx-2 my-1">
+              <div class="col-12">
+                <label for="inputNanme4" class="form-label"
+                  >Purchase of Flat / Apartment</label
+                >
+                <div class="row">
+                  <div class="col-4">
+                    <div class="input-group">
+                      <span class="input-group-text" id="basic-addon3"
+                        >value / cost</span
+                      >
+                      <input
+                        autocomplete="nope"
+                        [(ngModel)]="am1"
+                        type="number"
+                        class="form-control"
+                        id="inputNanme4"
+                        (change)="updateTotal()"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-8">
+                    <div class="input-group">
+                      <span class="input-group-text" id="basic-addon3"
+                        >details</span
+                      >
+                      <input
+                        autocomplete="nope"
+                        [(ngModel)]="d1"
+                        type="text"
+                        class="form-control"
+                        id="inputNanme4"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12">
+                <label for="inputEmail4" class="form-label"
+                  >Purchase of House</label
+                >
+                <div class="row">
+                  <div class="col-4">
+                    <div class="input-group">
+                      <span class="input-group-text" id="basic-addon3"
+                        >value / cost</span
+                      >
+                      <input
+                        autocomplete="nope"
+                        [(ngModel)]="am2"
+                        (change)="updateTotal()"
+                        type="number"
+                        class="form-control"
+                        id="inputNanme4"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-8">
+                    <div class="input-group">
+                      <span class="input-group-text" id="basic-addon3"
+                        >details</span
+                      >
+                      <input
+                        autocomplete="nope"
+                        [(ngModel)]="d2"
+                        type="text"
+                        class="form-control"
+                        id="inputNanme4"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12">
+                <label for="inputPassword4" class="form-label"
+                  >Purchase of Land
+                </label>
+                <div class="row">
+                  <div class="col-4">
+                    <div class="input-group">
+                      <span class="input-group-text" id="basic-addon3"
+                        >value / cost</span
+                      >
+                      <input
+                        autocomplete="nope"
+                        [(ngModel)]="am3"
+                        (change)="updateTotal()"
+                        type="number"
+                        class="form-control"
+                        id="inputNanme4"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-8">
+                    <div class="input-group">
+                      <span class="input-group-text" id="basic-addon3"
+                        >details</span
+                      >
+                      <input
+                        autocomplete="nope"
+                        [(ngModel)]="d3"
+                        type="text"
+                        class="form-control"
+                        id="inputNanme4"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12">
+                <label for="inputAddress" class="form-label"
+                  >Registration Fee / Stamp Duty</label
+                >
+                <div class="row">
+                  <div class="col-4">
+                    <div class="input-group">
+                      <span class="input-group-text" id="basic-addon3"
+                        >value / cost</span
+                      >
+                      <input
+                        autocomplete="nope"
+                        [(ngModel)]="am4"
+                        (change)="updateTotal()"
+                        type="number"
+                        class="form-control"
+                        id="inputNanme4"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-8">
+                    <div class="input-group">
+                      <span class="input-group-text" id="basic-addon3"
+                        >details</span
+                      >
+                      <input
+                        autocomplete="nope"
+                        [(ngModel)]="d4"
+                        type="text"
+                        class="form-control"
+                        id="inputNanme4"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12">
+                <label for="inputAddress" class="form-label"
+                  >Construction / Additional Construction</label
+                >
+                <div class="row">
+                  <div class="col-4">
+                    <div class="input-group">
+                      <span class="input-group-text" id="basic-addon3"
+                        >value / cost</span
+                      >
+                      <input
+                        autocomplete="nope"
+                        [(ngModel)]="am5"
+                        (change)="updateTotal()"
+                        type="number"
+                        class="form-control"
+                        id="inputNanme4"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-8">
+                    <div class="input-group">
+                      <span class="input-group-text" id="basic-addon3"
+                        >details</span
+                      >
+                      <input
+                        autocomplete="nope"
+                        [(ngModel)]="d5"
+                        type="text"
+                        class="form-control"
+                        id="inputNanme4"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12">
+                <label for="inputAddress" class="form-label"
+                  >Home Renovation / Upgradation</label
+                >
+                <div class="row">
+                  <div class="col-4">
+                    <div class="input-group">
+                      <span class="input-group-text" id="basic-addon3"
+                        >value / cost</span
+                      >
+                      <input
+                        autocomplete="nope"
+                        [(ngModel)]="am6"
+                        (change)="updateTotal()"
+                        type="number"
+                        class="form-control"
+                        id="inputNanme4"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-8">
+                    <div class="input-group">
+                      <span class="input-group-text" id="basic-addon3"
+                        >details</span
+                      >
+                      <input
+                        autocomplete="nope"
+                        [(ngModel)]="d6"
+                        type="text"
+                        class="form-control"
+                        id="inputNanme4"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12">
+                <label for="inputAddress" class="form-label"
+                  >Home Furnishing
+                </label>
+                <div class="row">
+                  <div class="col-4">
+                    <div class="input-group">
+                      <span class="input-group-text" id="basic-addon3"
+                        >value / cost</span
+                      >
+                      <input
+                        autocomplete="nope"
+                        [(ngModel)]="am7"
+                        (change)="updateTotal()"
+                        type="number"
+                        class="form-control"
+                        id="inputNanme4"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-8">
+                    <div class="input-group">
+                      <span class="input-group-text" id="basic-addon3"
+                        >details</span
+                      >
+                      <input
+                        autocomplete="nope"
+                        [(ngModel)]="d7"
+                        type="text"
+                        class="form-control"
+                        id="inputNanme4"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12">
+                <label for="inputAddress" class="form-label">Total </label>
+                <div class="row">
+                  <div class="col-12">
+                    <div class="input-group">
+                      <span class="input-group-text" id="basic-addon3"
+                        >Total value / cost</span
+                      >
+                      <input
+                        autocomplete="nope"
+                        type="text"
+                        class="form-control"
+                        id="inputNanme4"
+                        [(ngModel)]="total"
+                        disabled
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12">
+                <label for="inputAddress" class="form-label"
+                  >Applicant's Margin Contribution
+                </label>
+                <div class="row">
+                  <div class="col-12">
+                    <div class="input-group">
+                      <span class="input-group-text" id="basic-addon3"
+                        >Amount</span
+                      >
+                      <input
+                        autocomplete="nope"
+                        [(ngModel)]="appMargin"
+                        (change)="updateTotal()"
+                        type="number"
+                        class="form-control"
+                        id="inputNanme4"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-6" style="display: none">
+                    <div class="input-group">
+                      <span class="input-group-text" id="basic-addon3"
+                        >details</span
+                      >
+                      <input
+                        autocomplete="nope"
+                        [(ngModel)]="appMarginD"
+                        type="text"
+                        class="form-control"
+                        id="inputNanme4"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12">
+                <label for="inputAddress" class="form-label"
+                  >Margin % age
+                </label>
+                <div class="row">
+                  <div class="col-12">
+                    <div class="input-group">
+                      <!-- <span class="input-group-text" id="basic-addon3"></span> -->
+                      <input
+                        autocomplete="nope"
+                        [(ngModel)]="marginAge"
+                        (change)="updateTotal()"
+                        type="number"
+                        class="form-control"
+                        id="inputNanme4"
+                        disabled
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12">
+                <label for="inputAddress" class="form-label"
+                  >Loan Request Amount (Kyats)
+                </label>
+                <div class="row">
+                  <div class="col-12">
+                    <div class="input-group">
+                      <span class="input-group-text" id="basic-addon3"
+                        >Amount</span
+                      >
+                      <input
+                        autocomplete="nope"
+                        [(ngModel)]="loanRequest"
+                        (change)="updateTotal()"
+                        type="number"
+                        class="form-control"
+                        id="inputNanme4"
+                        disabled
+                      />
+                    </div>
+                  </div>
+                  <div class="col-6" style="display: none">
+                    <div class="input-group">
+                      <span class="input-group-text" id="basic-addon3"
+                        >details</span
+                      >
+                      <input
+                        autocomplete="nope"
+                        [(ngModel)]="loanRequestD"
+                        type="text"
+                        class="form-control"
+                        id="inputNanme4"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12">
+                <label for="inputAddress" class="form-label"
+                  >Purpose of Loan
+                </label>
+                <div class="row">
+                  <div class="col-12">
+                    <textarea
+                      [(ngModel)]="propertyD"
+                      class="form-control"
+                      rows="6"
+                    ></textarea>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12">
+                <label for="inputAddress" class="form-label"
+                  >Comments ( If Any )
+                </label>
+                <div class="row">
+                  <div class="col-12">
+                    <textarea
+                      [(ngModel)]="comment"
+                      class="form-control"
+                      rows="6"
+                    ></textarea>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 mt-3">
+                <button
+                  type="submit"
+                  class="btn btn-primary"
+                  (click)="goBack()"
+                >
+                  Back
+                </button>
+                <button
+                  type="submit"
+                  class="btn btn-primary mx-3"
+                  (click)="handleSubmit()"
+                >
+                  Save & Next
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<!-- End #main -->
+<ngx-spinner type="ball-scale-multiple"></ngx-spinner>

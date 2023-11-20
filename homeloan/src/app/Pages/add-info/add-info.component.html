@@ -1,0 +1,282 @@
+<main id="main" class="main">
+  <div class="pagetitle">
+    <h1>Proposal Information</h1>
+    <!-- <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+        <li class="breadcrumb-item active">Proposal Information</li>
+      </ol>
+    </nav> -->
+  </div>
+  <!-- End Page Title -->
+
+  <section class="section">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title" style="text-align: center">
+              <!-- Additional Information - Proposal / Sanction Details -->
+            </h5>
+            <div class="row mx-2 my-3" style="align-items: center">
+              <div class="col-3 mb-3">
+                <label for="inputNanme4" class="form-label"
+                  >Loan Proposal No.</label
+                >
+              </div>
+              <div class="col-3 mb-3">
+                <input
+                  autocomplete="nope"
+                  type="text"
+                  class="form-control"
+                  id="inputNanme4"
+                  [(ngModel)]="loanNo"
+                />
+              </div>
+              <div class="col-3 mb-3">
+                <label for="inputNanme4" class="form-label"
+                  >Proposal Date
+                </label>
+              </div>
+              <div class="col-3 mb-3">
+                <input
+                  autocomplete="nope"
+                  type="date"
+                  class="form-control"
+                  id="inputNanme4"
+                  [(ngModel)]="loandate"
+                />
+              </div>
+
+              <!-- <div class="col-3 mb-3">
+                <label for="inputNanme4" class="form-label"
+                  >Purpose of Loan
+                </label>
+              </div>
+
+              <div class="col-9 mb-3">
+                <textarea
+                  [(ngModel)]="purposeLoan"
+                  rows="6"
+                  type="text"
+                  class="form-control"
+                  id="inputNanme4"
+                ></textarea>
+              </div> -->
+
+              <div class="col-3 mb-3">
+                <label for="inputNanme4" class="form-label"
+                  >Rate of Interest ( % age)
+                </label>
+              </div>
+
+              <div class="col-9 mb-3">
+                <input
+                  autocomplete="nope"
+                  [(ngModel)]="roi"
+                  (change)="updateTotal()"
+                  type="text"
+                  class="form-control"
+                  id="inputNanme4"
+                  readonly
+                />
+              </div>
+
+              <div class="col-3 mb-3">
+                <label for="inputNanme4" class="form-label"
+                  >Penal ROI, if any (% age)
+                </label>
+              </div>
+
+              <div class="col-9 mb-3">
+                <input
+                  autocomplete="nope"
+                  [(ngModel)]="roia"
+                  type="text"
+                  class="form-control"
+                  id="inputNanme4"
+                />
+              </div>
+
+              <div class="col-3 mb-3">
+                <label for="inputNanme4" class="form-label">Moratorium </label>
+              </div>
+
+              <div class="col-9 mb-3">
+                <input
+                  autocomplete="nope"
+                  [(ngModel)]="moratorium"
+                  type="text"
+                  class="form-control"
+                  id="inputNanme4"
+                />
+              </div>
+
+              <div class="col-3 mb-3">
+                <label for="inputNanme4" class="form-label">Repayment </label>
+              </div>
+
+              <div class="col-7 mb-3">
+                <div class="row">
+                  <div class="col-6 mb-2">No. of Installments</div>
+                  <div class="col-6 mb-2">
+                    <input
+                      autocomplete="nope"
+                      type="text"
+                      class="form-control"
+                      id="inputNanme4"
+                      [(ngModel)]="c_months"
+                      (keyup)="updateTotal()"
+                      readonly
+                    />
+                  </div>
+                  <div class="col-6 mb-2">EMI Amount</div>
+                  <div class="col-6 mb-2">
+                    <input
+                      autocomplete="nope"
+                      type="text"
+                      class="form-control"
+                      id="inputNanme4"
+                      [(ngModel)]="EMI"
+                      readonly
+                    />
+                  </div>
+                  <div class="col-6 mb-2">EMI Starting Month</div>
+                  <div class="col-6 mb-2">
+                    <input
+                      autocomplete="nope"
+                      [(ngModel)]="emiStatingMonth"
+                      type="text"
+                      class="form-control"
+                      id="inputNanme4"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="col-2 mb-3"></div>
+
+              <div class="col-3 mb-3">
+                <label for="inputNanme4" class="form-label"
+                  >Other Terms, if any
+                </label>
+              </div>
+
+              <div class="col-9 mb-3">
+                <textarea
+                  rows="6"
+                  [(ngModel)]="terms"
+                  type="text"
+                  class="form-control"
+                  id="inputNanme4"
+                ></textarea>
+              </div>
+
+              <div class="col-12 mb-3">
+                <label for="inputNanme4" class="form-label"
+                  >Recommending / Sanctioning Staff
+                </label>
+              </div>
+
+              <div class="col-4 mb-3">
+                <input
+                  autocomplete="nope"
+                  [(ngModel)]="name1"
+                  placeholder="Name"
+                  type="text"
+                  class="form-control"
+                  id="inputNanme4"
+                />
+              </div>
+              <div class="col-4 mb-3">
+                <input
+                  autocomplete="nope"
+                  type="text"
+                  [(ngModel)]="name2"
+                  placeholder="Name"
+                  class="form-control"
+                  id="inputNanme4"
+                />
+              </div>
+              <div class="col-4 mb-3">
+                <input
+                  autocomplete="nope"
+                  [(ngModel)]="name3"
+                  placeholder="Name"
+                  type="text"
+                  class="form-control"
+                  id="inputNanme4"
+                />
+              </div>
+
+              <div class="col-4 mb-3">
+                <input
+                  autocomplete="nope"
+                  [(ngModel)]="designation1"
+                  placeholder="Designation"
+                  type="text"
+                  class="form-control"
+                  id="inputNanme4"
+                />
+              </div>
+              <div class="col-4 mb-3">
+                <input
+                  autocomplete="nope"
+                  [(ngModel)]="designation2"
+                  placeholder="Designation"
+                  type="text"
+                  class="form-control"
+                  id="inputNanme4"
+                />
+              </div>
+              <div class="col-4 mb-3">
+                <input
+                  autocomplete="nope"
+                  [(ngModel)]="designation3"
+                  placeholder="Designation"
+                  type="text"
+                  class="form-control"
+                  id="inputNanme4"
+                />
+              </div>
+
+              <!-- <div class="col-3 mb-3">
+                <label for="inputNanme4" class="form-label"
+                  >Guarantor Names (In one line)
+                </label>
+              </div>
+              <div class="col-9 mb-3">
+                <input
+                  autocomplete="nope"
+                  [(ngModel)]="guarantor"
+                  placeholder="Mention Guarantor's Names"
+                  type="text"
+                  class="form-control"
+                  id="inputNanme4"
+                />
+              </div> -->
+
+              <div class="col-12 mt-3">
+                <button
+                  type="submit"
+                  class="btn btn-primary"
+                  (click)="goBack()"
+                >
+                  Back
+                </button>
+                <button
+                  type="submit"
+                  class="btn btn-primary mx-3"
+                  (click)="handleSubmit()"
+                >
+                  Save & Next
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<!-- End #main -->
+<ngx-spinner type="ball-scale-multiple"></ngx-spinner>
