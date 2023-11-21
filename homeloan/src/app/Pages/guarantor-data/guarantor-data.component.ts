@@ -51,6 +51,7 @@ export class GuarantorDataComponent implements OnInit {
     this.route.params.subscribe((params: any) => {
       if(params.id != null){
         this.openId = params.id;
+        localStorage.setItem("applicant1Id",params.id)
         if (this.openId != 0) {
           this.getSingleData();
         }

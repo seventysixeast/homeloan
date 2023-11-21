@@ -54,6 +54,7 @@ export class ApplicantData2Component {
     this.route.params.subscribe((params: any) => {
       if(params.id != null){
         this.openId = params.id;
+        localStorage.setItem("applicant1Id",params.id)
         if (this.openId != 0) {
           this.getSingleData();
         }

@@ -40,11 +40,14 @@ export class NetWorthComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe((params: any) => {
+      console.log('params.id',params.id)
       this.openId = params.id;
+      localStorage.setItem("applicant1Id",params.id)
       if (this.openId != 0) {
         this.getSingleData();
       }
     });
+    console.log('this.openId',this.openId)
   }
 
   getSingleData() {
@@ -105,6 +108,7 @@ export class NetWorthComponent implements OnInit {
     data.append('totalNetWorth', this.totalNetWorth);
     data.append('loanAmmount', this.loanAmmount);
     data.append('loanAmountRatio', this.loanAmountRatio);
+    data.append('status', "net-worth");
 
     this.ds.submitAppData(data).subscribe((response: any) => {
       this.spinner.hide();
@@ -166,6 +170,7 @@ export class NetWorthComponent implements OnInit {
   }
 
   goBack() {
-    this.router.navigateByUrl('loan-request/' + this.openId);
+    // this.router.navigateByUrl('loan-request/' + this.openId);
+    this.sideNav.openPage(1, 3);
   }
 }

@@ -187,6 +187,39 @@ export class SideNavComponent implements OnInit {
     if(mId == 1 && smId == 3){
       this.router.navigateByUrl('loan-request/' + applicant1Id);
     }
+    if(mId == 2 && smId == 1){
+      this.router.navigateByUrl('net-worth/' + applicant1Id);
+    }
+
+    if(mId == 2 && smId == 2){
+      this.router.navigateByUrl('client-vist/' + applicant1Id);
+    }
+
+    if(mId == 2 && smId == 3){
+      // this.router.navigateByUrl('client-vist/' + applicant1Id);
+      this.router.navigateByUrl('site-vist/' + applicant1Id);
+    }
+
+    if(mId == 2 && smId == 4){
+      this.router.navigateByUrl('risk-1/' + applicant1Id);
+    }
+
+    if(mId == 2 && smId == 5){
+      this.router.navigateByUrl('risk-2/' + applicant1Id);
+    }
+
+    if(mId == 2 && smId == 7){
+      this.router.navigateByUrl('add-info/' + applicant1Id);
+    }
+
+    if(mId == 2 && smId == 8){
+      this.router.navigateByUrl('media-upload/' + applicant1Id);
+    }
+
+
+
+
+
   }
 
 

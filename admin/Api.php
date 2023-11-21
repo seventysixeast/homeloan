@@ -203,10 +203,24 @@ if($_POST['action'] == 'submit-loan-request'){
     $loanRequestD =  $_POST['loanRequestD'];
     $propertyD =  $_POST['propertyD'];
     $comment =  $_POST['comment'];
+    $status = $_POST['status'];
+    // echo "<pre>"; print_r($_POST); die;
+    // echo "<pre>"; print_r($_FILES); die;
+    ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+    $res_header = mysqli_query($conn, "SELECT * FROM loan_request Where ref_id=".$ref_id);
 
-    $querry = "INSERT INTO loan_request(ref_id, dataJson, total, appMargin, appMarginD, marginAge, loanRequest, loanRequestD, propertyD, comment) VALUES ('$ref_id', '$dataJson', '$total', '$appMargin', '$appMarginD', '$marginAge', '$loanRequest', '$loanRequestD', '$propertyD', '$comment')";
+    // if($res_header->num_rows == 0){
+        $querry = "INSERT INTO loan_request(ref_id, dataJson, total, appMargin, appMarginD, marginAge, loanRequest, loanRequestD, propertyD, comment) VALUES ('$ref_id', '$dataJson', '$total', '$appMargin', '$appMarginD', '$marginAge', '$loanRequest', '$loanRequestD', '$propertyD', '$comment')";
+    // }else{
+    //     $querry = "UPDATE loan_request SET dataJson='$dataJson',total='$total',appMargin='$appMargin',appMarginD='$appMarginD',marginAge='$marginAge',loanRequest='$loanRequest',loanRequestD='$loanRequestD',propertyD='$propertyD',comment='$comment' WHERE ref_id=".$ref_id;
+    // }
+
 
     $result = mysqli_query($conn,$querry); 
+    $querry1 = "UPDATE app_data SET status='$status' WHERE id=".$ref_id;
+    $result1 = mysqli_query($conn,$querry1); 
 
     echo $result;
 }
@@ -239,10 +253,14 @@ if($_POST['action'] == 'submit-net-worth'){
     $totalNetWorth =  $_POST['totalNetWorth'];
     $loanAmmount =  $_POST['loanAmmount'];
     $loanAmountRatio =  $_POST['loanAmountRatio'];
+    $status = $_POST['status'];
+    // echo "<pre>"; print_r($_POST); die;
 
     $querry = "INSERT INTO net_worth(ref_id,c_loanAmount, c_intrestRate, c_months, c_emi, ammountPEMI, EMI1, EMI2, IIR1, IIR2, netWorth1, netWorth2, totalNetWorth, loanAmmount, loanAmountRatio) VALUES ('$ref_id','$c_loanAmount', '$c_intrestRate', '$c_months', '$c_emi', '$ammountPEMI', '$EMI1', '$EMI2', '$IIR1', '$IIR2', '$netWorth1', '$netWorth2', '$totalNetWorth', '$loanAmmount', '$loanAmountRatio')";
 
     $result = mysqli_query($conn,$querry); 
+    $querry1 = "UPDATE app_data SET status='$status' WHERE id=".$ref_id;
+    $result1 = mysqli_query($conn,$querry1); 
 
     echo $result;
     
@@ -274,10 +292,15 @@ if($_POST['action'] == 'submit-client-visit'){
     $comment3 =  $_POST['comment3'];
     $comment4 =  $_POST['comment4'];
     $g_visitDate =  $_POST['g_visitDate'];
+    $status = $_POST['status'];
+
+    // echo "<pre>"; print_r($_POST); die;
     
     $querry = "INSERT INTO client_visit(ref_id, name1, name2, designation1, designation2, visitDate1, visitDate2, comment1, comment2, comment3, comment4, g_visitDate) VALUES ('$ref_id', '$name1', '$name2', '$designation1', '$designation2', '$visitDate1', '$visitDate2', '$comment1', '$comment2', '$comment3', '$comment4', '$g_visitDate')";
 
     $result = mysqli_query($conn,$querry); 
+    $querry1 = "UPDATE app_data SET status='$status' WHERE id=".$ref_id;
+    $result1 = mysqli_query($conn,$querry1); 
 
     echo $result;
     
@@ -314,10 +337,13 @@ if($_POST['action'] == 'submit-site-visit'){
     $reportDate2 =  $_POST['reportDate2'];
     $comments2 =  $_POST['comments2'];
     $comments3 =  $_POST['comments3'];
+    $status = $_POST['status'];
     
     $querry = "INSERT INTO site_visit(ref_id, name1, name2, designation1, designation2, visitDate1, visitDate2, details, mValue, dsValue, reportDate, valuerName, comments1, advocateName, reportDate2, comments2, comments3) VALUES ('$ref_id', '$name1', '$name2', '$designation1', '$designation2', '$visitDate1', '$visitDate2', '$details', '$mValue', '$dsValue', '$reportDate', '$valuerName', '$comments1', '$advocateName', '$reportDate2', '$comments2', '$comments3')";
 
     $result = mysqli_query($conn,$querry); 
+    $querry1 = "UPDATE app_data SET status='$status' WHERE id=".$ref_id;
+    $result1 = mysqli_query($conn,$querry1); 
 
     echo $result;
     
@@ -338,11 +364,14 @@ if($_POST['action'] == 'submit-risk-1'){
     $ref_id =  $_POST['ref_id'];
 
     $JsonData =  $_POST['JsonData'];
-
-    
+    $status = $_POST['status'];
+    // echo "<pre>"; print_r($_POST); die;
     $querry = "INSERT INTO risk_one(ref_id, JsonData) VALUES ('$ref_id', '$JsonData')";
 
     $result = mysqli_query($conn,$querry); 
+
+    $querry1 = "UPDATE app_data SET status='$status' WHERE id=".$ref_id;
+    $result1 = mysqli_query($conn,$querry1); 
 
     echo $result;
     
@@ -363,11 +392,13 @@ if($_POST['action'] == 'submit-risk-2'){
     $ref_id =  $_POST['ref_id'];
 
     $JsonData =  $_POST['JsonData'];
-
+    $status = $_POST['status'];
     
     $querry = "INSERT INTO risk_two(ref_id, JsonData) VALUES ('$ref_id', '$JsonData')";
 
     $result = mysqli_query($conn,$querry); 
+    $querry1 = "UPDATE app_data SET status='$status' WHERE id=".$ref_id;
+    $result1 = mysqli_query($conn,$querry1); 
 
     echo $result;
     
@@ -387,10 +418,11 @@ if($_POST['action'] == 'submit-add-info'){
     $ref_id =  $_POST['ref_id'];
 
     $JsonData =  $_POST['JsonData'];
+    $status = $_POST['status'];
 
     $noi =  $_POST['noi'];
     $EMI =  $_POST['EMI'];
-
+    // echo "<pre>"; print_r($_POST); die;
     
     $querry = "INSERT INTO addinfo(ref_id, JsonData) VALUES ('$ref_id', '$JsonData')";
 
@@ -399,6 +431,9 @@ if($_POST['action'] == 'submit-add-info'){
     $querry2 = "UPDATE net_worth SET c_months='$noi',c_emi='$EMI' WHERE ref_id=".$_POST['ref_id'];
 
     $result2 = mysqli_query($conn,$querry2); 
+
+    $querry1 = "UPDATE app_data SET status='$status' WHERE id=".$ref_id;
+    $result1 = mysqli_query($conn,$querry1); 
 
     echo $result2;
     
@@ -635,4 +670,19 @@ if($_POST['action']  == 'loginUser'){
     }else{
         echo json_encode($response);
     }
+}
+
+if($_POST['action'] == 'submit-all-forms'){
+ 
+    $ref_id =  $_POST['ref_id'];
+
+    $status = $_POST['status'];
+
+    // echo "<pre>"; print_r($_POST); die;
+
+    $querry1 = "UPDATE app_data SET status='$status' WHERE id=".$ref_id;
+    $result1 = mysqli_query($conn,$querry1); 
+
+    echo $result1;
+    
 }

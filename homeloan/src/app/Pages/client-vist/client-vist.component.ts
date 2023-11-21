@@ -41,9 +41,12 @@ export class ClientVistComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe((params: any) => {
-      this.openId = params.id;
-      if (this.openId != 0) {
-        this.getSingleData();
+      if(params.id != null){
+        this.openId = params.id;
+        localStorage.setItem("applicant1Id",params.id)
+        if (this.openId != 0) {
+          this.getSingleData();
+        }
       }
     });
   }
@@ -105,6 +108,7 @@ export class ClientVistComponent implements OnInit {
     data.append('comment3', this.comment3);
     data.append('comment4', this.comment4);
     data.append('g_visitDate', this.g_visitDate);
+    data.append('status', "client-visit");
 
     this.ds.submitAppData(data).subscribe((response: any) => {
       this.spinner.hide();
@@ -130,6 +134,7 @@ export class ClientVistComponent implements OnInit {
   }
 
   goBack() {
-    this.router.navigateByUrl('net-worth/' + this.openId);
+    // this.router.navigateByUrl('net-worth/' + this.openId);
+    this.sideNav.openPage(2, 1);
   }
 }

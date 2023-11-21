@@ -74,9 +74,12 @@ export class RiskOneComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe((params: any) => {
-      this.openId = params.id;
-      if (this.openId != 0) {
-        this.getSingleData();
+      if(params.id != null){
+        localStorage.setItem("applicant1Id",params.id)
+        this.openId = params.id;
+        if (this.openId != 0) {
+          this.getSingleData();
+        }
       }
     });
   }
@@ -451,6 +454,7 @@ export class RiskOneComponent implements OnInit {
     data.append('action', 'submit-risk-1');
     data.append('ref_id', this.openId);
     data.append('JsonData', JSON.stringify(JsonData));
+    data.append('status', "risk-1");
 
     this.ds.submitAppData(data).subscribe((response: any) => {
       this.spiner.hide();
@@ -472,6 +476,7 @@ export class RiskOneComponent implements OnInit {
     this.sideNav.openPage(2, 5);
   }
   goBack() {
-    this.router.navigateByUrl('site-vist/' + this.openId);
+    this.sideNav.openPage(2, 3);
+    // this.router.navigateByUrl('site-vist/' + this.openId);
   }
 }

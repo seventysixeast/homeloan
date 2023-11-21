@@ -71,12 +71,16 @@ export class RiskTwoComponent implements OnInit {
   f1 = '';
   f2 = '';
   f3 = '';
+  f4 = '';
 
   ngOnInit(): void {
     this.route.params.subscribe((params: any) => {
-      this.openId = params.id;
-      if (this.openId != 0) {
-        this.getSingleData();
+      if(params.id != null){
+        localStorage.setItem("applicant1Id",params.id)
+        this.openId = params.id;
+        if (this.openId != 0) {
+          this.getSingleData();
+        }
       }
     });
   }
@@ -277,16 +281,26 @@ export class RiskTwoComponent implements OnInit {
         this.f1 = 'activeOpt';
         this.f2 = '';
         this.f3 = '';
+        this.f4 = '';
       }
       if (no == 2) {
         this.f1 = '';
         this.f2 = 'activeOpt';
         this.f3 = '';
+        this.f4 = '';
       }
       if (no == 3) {
         this.f1 = '';
         this.f2 = '';
         this.f3 = 'activeOpt';
+        this.f4 = '';
+      }
+
+      if (no == 4) {
+        this.f1 = '';
+        this.f2 = '';
+        this.f3 = '';
+        this.f4 = 'activeOpt';
       }
       this.mws6 = value * 2;
       this.s_mws6 = value;
@@ -421,6 +435,7 @@ export class RiskTwoComponent implements OnInit {
         this.f1 = result.f1;
         this.f2 = result.f2;
         this.f3 = result.f3;
+        this.f4 = result.f4;
       }
 
       let data2 = new FormData();
@@ -482,6 +497,7 @@ export class RiskTwoComponent implements OnInit {
       f1: this.f1,
       f2: this.f2,
       f3: this.f3,
+      f4: this.f4
     };
     console.log(JsonData);
     let data: any = new FormData();
@@ -489,6 +505,7 @@ export class RiskTwoComponent implements OnInit {
     data.append('action', 'submit-risk-2');
     data.append('ref_id', this.openId);
     data.append('JsonData', JSON.stringify(JsonData));
+    data.append('status', "risk-2");
 
     this.ds.submitAppData(data).subscribe((response: any) => {
       this.spiner.hide();
@@ -506,10 +523,12 @@ export class RiskTwoComponent implements OnInit {
 
   goNext() {
     // this.router.navigateByUrl('score/' + this.openId);
-    this.sideNav.openPage(2, 8);
+    // this.sideNav.openPage(2, 8);
+    this.sideNav.openPage(2, 7);
   }
 
   goBack() {
-    this.router.navigateByUrl('risk-1/' + this.openId);
+    // this.router.navigateByUrl('risk-1/' + this.openId);
+    this.sideNav.openPage(2, 4);
   }
 }

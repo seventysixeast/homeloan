@@ -41,9 +41,13 @@ export class MedisUploadComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe((params: any) => {
-      this.openId = params.id;
+      if(params.id != null){
+        localStorage.setItem("applicant1Id",params.id)
+        this.openId = params.id;
+        this.getData();
+      }
     });
-    this.getData();
+    // this.getData();
   }
 
   getData() {
@@ -74,6 +78,8 @@ export class MedisUploadComponent implements OnInit {
     data.append('type', this.type);
     data.append('comment', this.comment);
     data.append('file', files.files.item(0));
+    // data.append('status', "media-upload");
+    // data.append('status', "Submitted-by-Admin");
 
     this.ds.submitAppData(data).subscribe((response: any) => {
       this.spiner.hide();
@@ -86,16 +92,36 @@ export class MedisUploadComponent implements OnInit {
 
   handleSubmit() {
     this.spiner.show();
-    this.spiner.hide();
+    // this.spiner.hide();
 
-    Swal.fire({
-      position: 'top-end',
-      icon: 'success',
-      title: 'Your work has been saved',
-      showConfirmButton: false,
-      timer: 1500,
+    // Swal.fire({
+    //   position: 'top-end',
+    //   icon: 'success',
+    //   // title: 'Your work has been saved',
+    //   title: 'Application Submitted',
+    //   showConfirmButton: false,
+    //   timer: 1500,
+    // });
+    let data = new FormData();
+
+    data.append('action', 'submit-all-forms');
+    data.append('ref_id', this.openId);
+    data.append('status', "Submitted-by-Admin");
+    this.ds.submitAppData(data).subscribe((response: any) => {
+      this.spiner.hide();
+
+      Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: 'Application Submitted',
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      this.goNext();
+      // console.log(response);
     });
-    this.goNext();
+
+    // this.goNext();
   }
 
   showImg(data: any) {
@@ -126,9 +152,10 @@ export class MedisUploadComponent implements OnInit {
 
   goNext() {
     // this.router.navigateByUrl('report/' + this.openId);
-    this.sideNav.openPage(2, 7);
+    // this.sideNav.openPage(2, 7);
   }
   goBack() {
-    this.router.navigateByUrl('risk-2/' + this.openId);
+    // this.router.navigateByUrl('risk-2/' + this.openId);
+    this.sideNav.openPage(2, 7);
   }
 }

@@ -42,7 +42,8 @@ export class LoanRequestComponent implements OnInit {
   appMargin: any = '';
   appMarginD: any = '';
 
-  marginAge: number = 0;
+  // marginAge: number = 0;
+  marginAge: string = "0";
 
   loanRequest: number = 0;
   loanRequestD: any = '';
@@ -53,7 +54,8 @@ export class LoanRequestComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe((params: any) => {
       this.openId = params.id;
-      if (this.openId != 0) {
+      if (this.openId != 0 && this.openId != null) {
+        localStorage.setItem("applicant1Id",params.id)
         this.getSingleData();
       }
     });
@@ -68,10 +70,11 @@ export class LoanRequestComponent implements OnInit {
     data.append('action', 'getSingleDataLoan');
 
     this.ds.submitAppData(data).subscribe((response: any) => {
+      console.log('response',response)
       if (response != null) {
         let data = response[response.length - 1];
         let dataJson = JSON.parse(data.dataJson);
-
+        console.log('dataJson',typeof dataJson[0].cost)
         this.am1 = dataJson[0].cost;
         this.d1 = dataJson[0].detail;
 
@@ -90,14 +93,14 @@ export class LoanRequestComponent implements OnInit {
         this.am6 = dataJson[5].cost;
         this.d6 = dataJson[5].detail;
 
-        this.am7 = dataJson[6].cost;
+        this.am7 = (dataJson[6].cost);
         this.d7 = dataJson[6].detail;
 
-        this.total = data.total;
-        this.appMargin = data.appMargin;
+        this.total = parseInt(data.total);
+        this.appMargin = parseInt(data.appMargin);
         this.appMarginD = data.appMarginD;
-        this.marginAge = data.marginAge;
-        this.loanRequest = data.loanRequest;
+        this.marginAge = (data.marginAge);
+        this.loanRequest = parseInt(data.loanRequest);
         this.loanRequestD = data.loanRequestD;
 
         this.propertyD = data.propertyD;
@@ -118,7 +121,7 @@ export class LoanRequestComponent implements OnInit {
 
     console.log(this.total);
 
-    this.marginAge = (this.appMargin / this.total) * 100;
+    this.marginAge = ((this.appMargin / this.total) * 100).toFixed(2);
 
     this.loanRequest = this.total - this.appMargin;
   }
@@ -163,18 +166,25 @@ export class LoanRequestComponent implements OnInit {
       },
     ];
 
+    console.log('this.marginAge',typeof this.marginAge)
+    // return;
     let data: any = new FormData();
     data.append('ref_id', this.openId);
     data.append('dataJson', JSON.stringify(arr));
     data.append('total', this.total);
     data.append('appMargin', this.appMargin);
     data.append('appMarginD', this.appMarginD);
-    data.append('marginAge', this.marginAge);
+    // if(isNaN(this.marginAge)){
+    //   data.append('marginAge', 0);
+    // }else{
+      data.append('marginAge', this.marginAge);
+    // }
     data.append('loanRequest', this.loanRequest);
     data.append('loanRequestD', this.loanRequestD);
     data.append('propertyD', this.propertyD);
     data.append('comment', this.comment);
     data.append('action', 'submit-loan-request');
+    data.append('status', "loan-request");
 
     this.ds.submitAppData(data).subscribe((response: any) => {
       this.spinner.hide();

@@ -41,9 +41,12 @@ export class SiteVistComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe((params: any) => {
-      this.openId = params.id;
-      if (this.openId != 0) {
-        this.getSingleData();
+      if(params.id != null){
+        this.openId = params.id;
+        localStorage.setItem("applicant1Id",params.id)
+        if (this.openId != 0) {
+          this.getSingleData();
+        }
       }
     });
   }
@@ -99,6 +102,7 @@ export class SiteVistComponent implements OnInit {
     data.append('reportDate2', this.reportDate2);
     data.append('comments2', this.comments2);
     data.append('comments3', this.comments3);
+    data.append('status', "site-visit");
 
     this.ds.submitAppData(data).subscribe((response: any) => {
       this.spiner.hide();
@@ -124,6 +128,7 @@ export class SiteVistComponent implements OnInit {
     console.log('ok');
   }
   goBack() {
-    this.router.navigateByUrl('client-vist/' + this.openId);
+    // this.router.navigateByUrl('client-vist/' + this.openId);
+    this.sideNav.openPage(2, 2);
   }
 }

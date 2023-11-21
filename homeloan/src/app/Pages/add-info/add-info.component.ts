@@ -22,6 +22,9 @@ export class AddInfoComponent implements OnInit {
 
   openId: any = 0;
 
+  bankName: any = "";
+  branchName: any = "";
+  irdm: any = "";
   loanNo: any = '';
   loandate: any = '';
   purposeLoan: any = '';
@@ -43,9 +46,12 @@ export class AddInfoComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe((params: any) => {
-      this.openId = params.id;
-      if (this.openId != 0) {
-        this.getSingleData();
+      if(params.id != null){
+        localStorage.setItem("applicant1Id",params.id)
+        this.openId = params.id;
+        if (this.openId != 0) {
+          this.getSingleData();
+        }
       }
     });
   }
@@ -106,6 +112,9 @@ export class AddInfoComponent implements OnInit {
       this.ds.submitAppData(data2).subscribe((response2: any) => {
         let result = response2[response2.length - 1];
         result = JSON.parse(result.JsonData);
+        this.bankName = result.bankName;
+        this.branchName = result.branchName;
+        this.irdm = result.irdm;
         this.loanNo = result.loanNo;
         this.loandate = result.loandate;
         this.purposeLoan = result.purposeLoan;
@@ -134,6 +143,9 @@ export class AddInfoComponent implements OnInit {
   handleSubmit() {
     this.spiner.show();
     let JsonData = {
+      bankName: this.bankName,
+      branchName: this.branchName,
+      irdm: this.irdm,
       loanNo: this.loanNo,
       loandate: this.loandate,
       purposeLoan: this.purposeLoan,
@@ -160,6 +172,7 @@ export class AddInfoComponent implements OnInit {
     data.append('noi', this.c_months);
     data.append('EMI', this.EMI);
     data.append('JsonData', JSON.stringify(JsonData));
+    data.append('status', "add-info");
 
     this.ds.submitAppData(data).subscribe((response: any) => {
       this.spiner.hide();
@@ -178,9 +191,10 @@ export class AddInfoComponent implements OnInit {
 
   goNext() {
     // this.router.navigateByUrl('media-upload/' + this.openId);
-    this.sideNav.openPage(2, 6);
+    this.sideNav.openPage(2, 8);
   }
   goBack() {
-    this.router.navigateByUrl('media-upload/' + this.openId);
+    // this.router.navigateByUrl('media-upload/' + this.openId);
+    this.sideNav.openPage(2, 5);
   }
 }
