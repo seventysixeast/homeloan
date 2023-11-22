@@ -51,14 +51,21 @@ export class LoanRequestComponent implements OnInit {
   propertyD: any = '';
   comment: any = '';
 
+  logedInUser : any;
+  userId = "";
+  status = "";
+
   ngOnInit(): void {
     this.route.params.subscribe((params: any) => {
       this.openId = params.id;
       if (this.openId != 0 && this.openId != null) {
         localStorage.setItem("applicant1Id",params.id)
         this.getSingleData();
+        this.getSingleAppData()
       }
     });
+    this.logedInUser = this.ds.userLoggedIn()
+    console.log('this.logedInUser',this.logedInUser)
 
     this.updateTotal();
   }
@@ -105,6 +112,20 @@ export class LoanRequestComponent implements OnInit {
 
         this.propertyD = data.propertyD;
         this.comment = data.comment;
+      }
+    });
+  }
+
+  getSingleAppData() {
+    let data = new FormData();
+
+    data.append('id', this.openId);
+    data.append('action', 'getSingleData');
+
+    this.ds.submitAppData(data).subscribe((response: any) => {
+      if (response != null) {
+        this.status = response[0].status;
+        this.userId = response[0].userId;
       }
     });
   }
@@ -169,6 +190,20 @@ export class LoanRequestComponent implements OnInit {
     console.log('this.marginAge',typeof this.marginAge)
     // return;
     let data: any = new FormData();
+
+    // if(this.logedInUser.type == "Credit-Analyst"){
+    //   data.append('status', "Processing by Credit Analyst("+this.logedInUser.f_name +")");
+    // }else if(this.logedInUser.type == "Credit-Underwriter"){
+    //   data.append('status', "Reveiwing by Credit Underwriter("+this.logedInUser.f_name  +")");
+    // }else if(this.logedInUser.type == "Credit-Approver"){
+    //   data.append('status', "Reveiwing by Credit Approver("+this.logedInUser.f_name +")");
+    // }else if(this.logedInUser.type == "Admin" && this.userId != '' && parseInt(this.logedInUser.id) != parseInt(this.userId)){
+    //   data.append('status', "Reveiwing by Admin");
+    // }else if(this.logedInUser.type == "Admin" && this.userId == ''){
+    //   data.append('status', "Processing by Admin");
+    // }
+
+    data.append('status', this.ds.addStatus(this.logedInUser, this.userId, this.status));
     data.append('ref_id', this.openId);
     data.append('dataJson', JSON.stringify(arr));
     data.append('total', this.total);
@@ -184,7 +219,7 @@ export class LoanRequestComponent implements OnInit {
     data.append('propertyD', this.propertyD);
     data.append('comment', this.comment);
     data.append('action', 'submit-loan-request');
-    data.append('status', "loan-request");
+    // data.append('status', "loan-request");
 
     this.ds.submitAppData(data).subscribe((response: any) => {
       this.spinner.hide();

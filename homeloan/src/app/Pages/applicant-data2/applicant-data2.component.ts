@@ -49,6 +49,11 @@ export class ApplicantData2Component {
 
   openType = 'new';
   application_no: any;
+  logedInUser : any;
+  submittedBy = "";
+  userId = "";
+  status = "";
+
   ngOnInit(): void {
     this.application_no = localStorage.getItem('application_no');
     this.route.params.subscribe((params: any) => {
@@ -60,6 +65,8 @@ export class ApplicantData2Component {
         }
       }
     });
+    this.logedInUser = this.ds.userLoggedIn()
+    console.log('this.logedInUser',this.logedInUser)
   }
 
   getSingleData() {
@@ -92,6 +99,9 @@ export class ApplicantData2Component {
 
         this.app_date = response[0].app_date;
         this.openType = 'old';
+        this.submittedBy = response[0].submittedBy;
+        this.userId = response[0].userId;
+        this.status = response[0].status;
       }
     });
   }
@@ -132,10 +142,34 @@ export class ApplicantData2Component {
     this.spinner.show();
     let data = new FormData();
     data.append('id', this.openId == undefined ? 0 : this.openId);
+
+
+
     // let application_no = localStorage.getItem('application_no');
+    if(this.logedInUser.type == "Credit-Analyst"){
+      data.append('submittedBy', "Credit-Analyst");
+      data.append('userId', this.logedInUser.id);
+      data.append('status', "Processing by Credit Analyst("+this.logedInUser.f_name +")");
+    }else if(this.logedInUser.type == "Credit-Underwriter"){
+      data.append('submittedBy', this.submittedBy);
+      data.append('userId', this.userId);
+      data.append('status', "Reveiwing by Credit Underwriter("+this.logedInUser.f_name  +")");
+    }else if(this.logedInUser.type == "Credit-Approver"){
+      data.append('submittedBy', this.submittedBy);
+      data.append('userId', this.userId);
+      data.append('status', "Reveiwing by Credit Approver("+this.logedInUser.f_name +")");
+    }else if(this.logedInUser.type == "Admin" && (this.status.indexOf("Reveiwing by Admin") > -1)){
+      data.append('submittedBy', this.submittedBy);
+      data.append('userId', this.userId);
+      data.append('status', "Reveiwing by Admin");
+    }else if(this.logedInUser.type == "Admin" && (this.status.indexOf("Processing by Admin") > -1)){
+      data.append('submittedBy', "Admin");
+      data.append('userId', this.logedInUser.id);
+      data.append('status', "Processing by Admin");
+    }
     data.append('application_no',this.application_no);
     data.append('applicant_type', "applicant2");
-    data.append('status', "applicant2");
+    // data.append('status', "applicant2");
     data.append('a1_name', this.a1_name);
     data.append('openType', this.openType);
     data.append('a1_fName', this.a1_fName);

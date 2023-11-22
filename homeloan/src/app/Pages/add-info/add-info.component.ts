@@ -44,6 +44,10 @@ export class AddInfoComponent implements OnInit {
   guarantor: any = '';
   c_loanAmount: any = '';
 
+  logedInUser : any;
+  userId = "";
+  status = "";
+
   ngOnInit(): void {
     this.route.params.subscribe((params: any) => {
       if(params.id != null){
@@ -51,9 +55,11 @@ export class AddInfoComponent implements OnInit {
         this.openId = params.id;
         if (this.openId != 0) {
           this.getSingleData();
+          this.getSingleAppData()
         }
       }
     });
+    this.logedInUser = this.ds.userLoggedIn()
   }
 
   handleUpdate(value: number, type: number, no: number) {}
@@ -140,6 +146,20 @@ export class AddInfoComponent implements OnInit {
     });
   }
 
+  getSingleAppData() {
+    let data = new FormData();
+
+    data.append('id', this.openId);
+    data.append('action', 'getSingleData');
+
+    this.ds.submitAppData(data).subscribe((response: any) => {
+      if (response != null) {
+        this.status = response[0].status;
+        this.userId = response[0].userId;
+      }
+    });
+  }
+
   handleSubmit() {
     this.spiner.show();
     let JsonData = {
@@ -172,7 +192,8 @@ export class AddInfoComponent implements OnInit {
     data.append('noi', this.c_months);
     data.append('EMI', this.EMI);
     data.append('JsonData', JSON.stringify(JsonData));
-    data.append('status', "add-info");
+    // data.append('status', "add-info");
+    data.append('status', this.ds.addStatus(this.logedInUser, this.userId, this.status));
 
     this.ds.submitAppData(data).subscribe((response: any) => {
       this.spiner.hide();

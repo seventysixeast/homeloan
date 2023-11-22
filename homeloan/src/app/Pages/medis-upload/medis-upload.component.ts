@@ -39,15 +39,21 @@ export class MedisUploadComponent implements OnInit {
 
   medialist: any = [];
 
+  logedInUser : any;
+  userId = "";
+  status = "";
+
   ngOnInit(): void {
     this.route.params.subscribe((params: any) => {
       if(params.id != null){
         localStorage.setItem("applicant1Id",params.id)
         this.openId = params.id;
         this.getData();
+        this.getSingleAppData()
       }
     });
     // this.getData();
+    this.logedInUser = this.ds.userLoggedIn()
   }
 
   getData() {
@@ -64,6 +70,20 @@ export class MedisUploadComponent implements OnInit {
         });
       });
       this.medialist = response;
+    });
+  }
+
+  getSingleAppData() {
+    let data = new FormData();
+
+    data.append('id', this.openId);
+    data.append('action', 'getSingleData');
+
+    this.ds.submitAppData(data).subscribe((response: any) => {
+      if (response != null) {
+        this.status = response[0].status;
+        this.userId = response[0].userId;
+      }
     });
   }
 
@@ -103,6 +123,16 @@ export class MedisUploadComponent implements OnInit {
     //   timer: 1500,
     // });
     let data = new FormData();
+
+    // if(this.logedInUser.type == "Admin" && (status.indexOf("Reveiwing by Admin") > -1)){
+    //   return "Reveiwing by Admin";
+    // }else if(logedInUser.type == "Admin" && ((status.indexOf("Processing by Admin") > -1))){
+    //   return "Processing by Admin";
+    // }
+
+    // if((this.logedInUser.type == "Admin" && this.userId == '' ) || ){
+
+    // }
 
     data.append('action', 'submit-all-forms');
     data.append('ref_id', this.openId);

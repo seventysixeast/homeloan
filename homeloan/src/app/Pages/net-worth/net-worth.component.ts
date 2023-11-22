@@ -38,6 +38,10 @@ export class NetWorthComponent implements OnInit {
   loanAmmount: any = 0;
   loanAmountRatio: any = 0;
 
+  logedInUser : any;
+  userId = "";
+  status = "";
+
   ngOnInit(): void {
     this.route.params.subscribe((params: any) => {
       console.log('params.id',params.id)
@@ -45,9 +49,12 @@ export class NetWorthComponent implements OnInit {
       localStorage.setItem("applicant1Id",params.id)
       if (this.openId != 0) {
         this.getSingleData();
+        this.getSingleAppData()
       }
     });
-    console.log('this.openId',this.openId)
+    // console.log('this.openId',this.openId)
+    this.logedInUser = this.ds.userLoggedIn()
+    console.log('this.logedInUser',this.logedInUser)
   }
 
   getSingleData() {
@@ -86,11 +93,37 @@ export class NetWorthComponent implements OnInit {
     });
   }
 
+  getSingleAppData() {
+    let data = new FormData();
+
+    data.append('id', this.openId);
+    data.append('action', 'getSingleData');
+
+    this.ds.submitAppData(data).subscribe((response: any) => {
+      if (response != null) {
+        this.status = response[0].status;
+        this.userId = response[0].userId;
+      }
+    });
+  }
+
   handleSubmit() {
     this.spinner.show();
     let data: any = new FormData();
 
     data.append('action', 'submit-net-worth');
+    
+    if(this.logedInUser.type == "Credit-Analyst"){
+      data.append('status', "Processing by Credit Analyst("+this.logedInUser.f_name +")");
+    }else if(this.logedInUser.type == "Credit-Underwriter"){
+      data.append('status', "Reveiwing by Credit Underwriter("+this.logedInUser.f_name  +")");
+    }else if(this.logedInUser.type == "Credit-Approver"){
+      data.append('status', "Reveiwing by Credit Approver("+this.logedInUser.f_name +")");
+    }else if(this.logedInUser.type == "Admin" && this.userId != '' && parseInt(this.logedInUser.id) != parseInt(this.userId)){
+      data.append('status', "Reveiwing by Admin");
+    }else if(this.logedInUser.type == "Admin" && this.userId == ''){
+      data.append('status', "Processing by Admin");
+    }
 
     data.append('ref_id', this.openId);
     data.append('c_loanAmount', this.c_loanAmount);
@@ -108,7 +141,7 @@ export class NetWorthComponent implements OnInit {
     data.append('totalNetWorth', this.totalNetWorth);
     data.append('loanAmmount', this.loanAmmount);
     data.append('loanAmountRatio', this.loanAmountRatio);
-    data.append('status', "net-worth");
+    // data.append('status', "net-worth");
 
     this.ds.submitAppData(data).subscribe((response: any) => {
       this.spinner.hide();

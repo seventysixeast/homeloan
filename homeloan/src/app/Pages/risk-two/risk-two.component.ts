@@ -73,6 +73,10 @@ export class RiskTwoComponent implements OnInit {
   f3 = '';
   f4 = '';
 
+  logedInUser : any;
+  userId = "";
+  status = "";
+
   ngOnInit(): void {
     this.route.params.subscribe((params: any) => {
       if(params.id != null){
@@ -80,9 +84,11 @@ export class RiskTwoComponent implements OnInit {
         this.openId = params.id;
         if (this.openId != 0) {
           this.getSingleData();
+          this.getSingleAppData()
         }
       }
     });
+    this.logedInUser = this.ds.userLoggedIn()
   }
 
   handleUpdate(value: number, type: number, no: number) {
@@ -452,6 +458,20 @@ export class RiskTwoComponent implements OnInit {
     });
   }
 
+  getSingleAppData() {
+    let data = new FormData();
+
+    data.append('id', this.openId);
+    data.append('action', 'getSingleData');
+
+    this.ds.submitAppData(data).subscribe((response: any) => {
+      if (response != null) {
+        this.status = response[0].status;
+        this.userId = response[0].userId;
+      }
+    });
+  }
+
   handleSubmit() {
     this.spiner.show();
     let JsonData = {
@@ -505,7 +525,8 @@ export class RiskTwoComponent implements OnInit {
     data.append('action', 'submit-risk-2');
     data.append('ref_id', this.openId);
     data.append('JsonData', JSON.stringify(JsonData));
-    data.append('status', "risk-2");
+    // data.append('status', "risk-2");
+    data.append('status', this.ds.addStatus(this.logedInUser, this.userId,this.status));
 
     this.ds.submitAppData(data).subscribe((response: any) => {
       this.spiner.hide();

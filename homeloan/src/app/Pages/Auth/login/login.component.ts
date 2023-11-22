@@ -45,10 +45,24 @@ export class LoginComponent {
           showConfirmButton: false,
           timer: 1500,
         });
-        localStorage.setItem('admin',response)
+
+        let user = JSON.parse(atob(response));
+        console.log('user',user)
+        // return;
+        this.ds.userLogin(user)
+        // localStorage.setItem('admin',response)
+        if(user.type == "Admin"){
+          localStorage.setItem('admin',response)
+        }else if(user.type == "Credit-Approver"){
+          localStorage.setItem('creditApprover',response)
+        }else if(user.type == "Credit-Analyst"){
+          localStorage.setItem('creditAnalyst',response)
+        }else if(user.type == "Credit-Underwriter"){
+          localStorage.setItem('creditUnderwriter',response)
+        }
         // users
-        this.router.navigateByUrl('/users');
-        // this.router.navigateByUrl('/dashbord');
+        // this.router.navigateByUrl('/users');
+        this.router.navigateByUrl('/dashbord');
       } else {
         Swal.fire({
           position: 'top-end',

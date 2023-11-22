@@ -39,6 +39,10 @@ export class SiteVistComponent implements OnInit {
   comments2 = '';
   comments3 = '';
 
+  logedInUser : any;
+  userId = "";
+  status = "";
+
   ngOnInit(): void {
     this.route.params.subscribe((params: any) => {
       if(params.id != null){
@@ -46,9 +50,11 @@ export class SiteVistComponent implements OnInit {
         localStorage.setItem("applicant1Id",params.id)
         if (this.openId != 0) {
           this.getSingleData();
+          this.getSingleAppData()
         }
       }
     });
+    this.logedInUser = this.ds.userLoggedIn()
   }
 
   getSingleData() {
@@ -79,6 +85,20 @@ export class SiteVistComponent implements OnInit {
     });
   }
 
+  getSingleAppData() {
+    let data = new FormData();
+
+    data.append('id', this.openId);
+    data.append('action', 'getSingleData');
+
+    this.ds.submitAppData(data).subscribe((response: any) => {
+      if (response != null) {
+        this.status = response[0].status;
+        this.userId = response[0].userId;
+      }
+    });
+  }
+
   handleSubmit() {
     this.spiner.show();
     let data: any = new FormData();
@@ -102,7 +122,8 @@ export class SiteVistComponent implements OnInit {
     data.append('reportDate2', this.reportDate2);
     data.append('comments2', this.comments2);
     data.append('comments3', this.comments3);
-    data.append('status', "site-visit");
+    // data.append('status', "site-visit");
+    data.append('status', this.ds.addStatus(this.logedInUser, this.userId, this.status));
 
     this.ds.submitAppData(data).subscribe((response: any) => {
       this.spiner.hide();
