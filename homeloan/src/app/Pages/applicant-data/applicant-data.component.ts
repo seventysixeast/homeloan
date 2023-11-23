@@ -52,6 +52,7 @@ export class ApplicantDataComponent implements OnInit {
   submittedBy = "";
   userId = "";
   status = "";
+  viewOnly = "";
 
   ngOnInit(): void {
     // this.sideNav.openPage(1, 1);
@@ -67,6 +68,7 @@ export class ApplicantDataComponent implements OnInit {
     });
     this.logedInUser = this.ds.userLoggedIn()
     console.log('this.logedInUser',this.logedInUser)
+
   }
 
   getSingleData() {

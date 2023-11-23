@@ -46,6 +46,21 @@
                   Dashboard
                 </button>
               </div>
+              <div class="col-12 mt-3">
+                <!-- File Upload Option 1 for PDF -->
+                <input type="file" (change)="handlePdfUpload($event, 'pdf1')" accept=".pdf" />
+                <button type="submit" class="btn btn-primary" (click)="uploadPdf('pdf1')">
+                  Upload PDF 1
+                </button>
+              </div>
+        
+              <div class="col-12 mt-3">
+                <!-- File Upload Option 2 for PDF -->
+                <input type="file" (change)="handlePdfUpload($event, 'pdf2')" accept=".pdf" />
+                <button type="submit" class="btn btn-primary" (click)="uploadPdf('pdf2')">
+                  Upload PDF 2
+                </button>
+              </div>
             </div>
           </div>
         </div>

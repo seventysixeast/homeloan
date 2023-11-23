@@ -38,6 +38,9 @@ export class ReportGenComponent implements OnInit {
 
   medialist: any = [];
 
+  pdf1: File | null = null;
+  pdf2: File | null = null;
+
   ngOnInit(): void {
     this.route.params.subscribe((params: any) => {
       this.openId = params.id;
@@ -85,6 +88,40 @@ export class ReportGenComponent implements OnInit {
     this.goNext();
     console.log(this.fileToUpload);
   }
+
+  handlePdfUpload(event: any, type: 'pdf1' | 'pdf2') {
+    const file = event.target.files[0];
+    if (file && file.type === 'application/pdf') {
+      this[type] = file;
+    } else {
+      console.log('Invalid file type. Please upload a PDF file.');
+    }
+  }
+
+  uploadPdf(type: 'pdf1' | 'pdf2') {
+    const file = this[type];
+  
+    if (file) {
+      const data = new FormData();
+  
+      data.append('action', 'savePdfFile'); // Adjust the action accordingly
+      data.append('ref_id', this.openId);
+      data.append('type', type); // You can pass the type to differentiate between pdf1 and pdf2
+      data.append('file', file);
+  
+      this.ds.submitAppData(data).subscribe((response: any) => {
+        // Handle the response as needed
+        console.log(response);
+  
+        // Clear the selected file and perform any other necessary actions
+        this[type] = null;
+        this.getData();
+      });
+    } else {
+      console.log('No file selected. Please choose a PDF file to upload.');
+    }
+  }
+  
 
   showImg(data: any) {
     console.log(data.filename);

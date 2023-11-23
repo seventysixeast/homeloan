@@ -57,6 +57,7 @@ export class DashbordComponent implements OnInit {
 
   openData(id: any) {
     localStorage.setItem('activeId', id);
+    localStorage.setItem('viewOnly',"1")
     console.log('check')
     this.sideNav.openPage(1, 1);
     // this.router.navigateByUrl('applicant-data/' + id);
@@ -86,7 +87,7 @@ export class DashbordComponent implements OnInit {
       if(status.indexOf("Submitted by Credit Analyst") > -1){
         console.log('htti')
         return "badge bg-success";
-      }else if(status.indexOf("Processing by Credit Analyst") > -1){
+      }else if(status.indexOf("Processing by Credit Analyst") > -1 || status.indexOf("Reveiwing by Credit Underwriter") > -1){
         return "badge bg-warning";
       }
     }
@@ -98,6 +99,18 @@ export class DashbordComponent implements OnInit {
         return "badge bg-warning";
       }
     }
+
+    if(this.logedInUser.type == "Admin"){
+      // if(){
+        return "badge bg-warning";
+      // }
+    }
+
+    if(this.logedInUser.type == "Credit-Approver"){
+      // if(){
+        return "badge bg-warning";
+      // }
+    }
     return "";
   }
 
@@ -106,42 +119,95 @@ export class DashbordComponent implements OnInit {
       if((status.indexOf("Submitted by Credit Analyst") > -1) || status.indexOf("Reveiwing by Credit Underwriter") > -1){
         // console.log('htti')
         return "bx bxs-edit-alt";
-      }else if(status.indexOf("Processing by Credit Analyst") > -1){
-        return "bx bxs-edit-alt notShowEdit";
       }
-    }
-    if(this.logedInUser.type == "Credit-Analyst"){
-      if(status.indexOf("Submitted by Credit Analyst") > -1 || status.indexOf("Reveiwing by Credit Underwriter") > -1){
-        console.log('htti')
-        return "bx bxs-show";
-      }else if(status.indexOf("Processing by Credit Analyst") > -1 ){
-        return "bx bxs-edit-alt notShowEdit";
+      // else 
+      // if(status.indexOf("Processing by Credit Analyst") > -1){
+      //   return "bx bxs-edit-alt notShowEdit";
+      // }
+    }else if(this.logedInUser.type == "Credit-Analyst"){
+      // if(status.indexOf("Submitted by Credit Analyst") > -1 || status.indexOf("Reveiwing by Credit Underwriter") > -1){
+      //   console.log('htti')
+      //   return "bx bxs-edit-alt notShowEdit";
+      // }
+      // else 
+      if(status.indexOf("Processing by Credit Analyst") > -1 ){
+        return "bx bxs-edit-alt";
       }
 
-      // return "bx bxs-edit-alt notShowEdit";
+    }else if(this.logedInUser.type == "Admin"){
+      // if(status.indexOf("Submitted by Credit Analyst") > -1 || status.indexOf("Reveiwing by Credit Underwriter") > -1 || status.indexOf("Processing by Credit Analyst") > -1){
+      //   console.log('htti')
+      //   return "bx bxs-edit-alt notShowEdit";
+      // }
+      // else 
+      if(status.indexOf("Submitted by Credit Underwriter") > -1 || (status.indexOf("Reveiwing by Admin")) > -1 ){
+        return "bx bxs-edit-alt";
+      }
+
+    }else if(this.logedInUser.type == "Credit-Approver"){
+      // if(status.indexOf("Submitted by Credit Analyst") > -1 || status.indexOf("Reveiwing by Credit Underwriter") > -1 || status.indexOf("Processing by Credit Analyst") > -1){
+      //   console.log('htti')
+      //   return "bx bxs-edit-alt notShowEdit";
+      // }
+      // else 
+      if(status.indexOf("Submitted by Admin") > -1 || (status.indexOf("Reveiwing by Credit Approver")) > -1 ){
+        return "bx bxs-edit-alt";
+      }
+
     }
-    return "";
+    return "bx bxs-edit-alt notShowEdit";
   }
 
   notShowingViewOption(status: any){
     console.log('status',status)
     if(this.logedInUser.type == "Credit-Underwriter"){
-      if(status.indexOf("Submitted by Credit Analyst") > -1){
-        console.log('htti')
-        return "badge bg-success";
-      }else if(status.indexOf("Processing by Credit Analyst") > -1){
-        return "badge bg-warning";
+      // if(status.indexOf("Submitted by Credit Analyst") > -1){
+      //   console.log('htti')
+      //   return "bx bxs-show notShowEdit";
+      // }else 
+      if(status.indexOf("Processing by Credit Analyst") > -1){
+        return "bx bxs-show";
       }
     }
     if(this.logedInUser.type == "Credit-Analyst"){
       if(status.indexOf("Submitted by Credit Analyst") > -1 || status.indexOf("Reveiwing by Credit Underwriter") > -1){
         console.log('htti')
         return "bx bxs-show";
-      }else if(status.indexOf("Processing by Credit Analyst") > -1 ){
-        return "bx bxs-show notShowEdit";
       }
+      // else if(status.indexOf("Processing by Credit Analyst") > -1 ){
+      //   return "bx bxs-show notShowEdit";
+      // }
     }
-    return "";
+
+    if(this.logedInUser.type == "Admin"){
+
+      // if(status.indexOf("Submitted by Credit Analyst") > -1 || status.indexOf("Reveiwing by Credit Underwriter") > -1 || status.indexOf("Processing by Credit Analyst") > -1){
+      //   console.log('htti')
+      //   return "bx bxs-show";
+      // }
+      // else 
+      if(status.indexOf("Processing by Admin") > -1 || (status.indexOf("Reveiwing by Admin") > -1) || (status.indexOf("Submitted by Credit Underwriter") > -1)){
+        return "bx bxs-show notShowEdit";
+      }else{
+        return "bx bxs-show";
+      }
+
+    }
+
+    if(this.logedInUser.type == "Credit-Approver"){
+      if(status.indexOf("Submitted by Admin") > -1 || status.indexOf("Reveiwing by Credit Approver") > -1 ) {
+        console.log('htti')
+        return "bx bxs-show notShowEdit";
+      }else{
+        return "bx bxs-show";
+      }
+
+      // else if(status.indexOf("Submitted by Credit Underwriter" || status.indexOf("Reveiwing by Admin")) > -1 ){
+      //   return "bx bxs-show notShowEdit";
+      // }
+
+    }
+    return "bx bxs-show notShowEdit";
   }
 
   
