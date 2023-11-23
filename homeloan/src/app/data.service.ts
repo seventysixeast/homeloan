@@ -13,8 +13,8 @@ export class DataService {
   // baseurl = 'http://localhost/Harman/Surinder/HomeLoan/admin/Api.php';
   // mediaUrl = 'http://localhost/Harman/Surinder/HomeLoan/admin/uploads/';
 
-  baseurl = 'http://localhost/homeloan/admin/Api.php';
-  mediaUrl = 'http://localhost/homeloan/admin/uploads/';
+  baseurl = 'https://76east.com/homeloan_server/admin/Api.php';
+  mediaUrl = 'https://76east.com/homeloan_server/admin/uploads/';
 
   getAppDataList(data: any) {
     return this.http.post(this.baseurl, data);

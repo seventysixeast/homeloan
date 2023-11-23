@@ -116,6 +116,7 @@ export class SideNavComponent implements OnInit {
         {
           id: 6,
           name: 'Risk Assessment Report',
+          //name: 'Risk Assessment',
           link: 'score',
           status: false,
         },
