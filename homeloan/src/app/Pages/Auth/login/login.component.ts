@@ -62,7 +62,7 @@ export class LoginComponent {
         }
         // users
         // this.router.navigateByUrl('/users');
-        this.router.navigateByUrl('/dashbord');
+        this.router.navigateByUrl('/dashboard');
       } else {
         Swal.fire({
           position: 'top-end',

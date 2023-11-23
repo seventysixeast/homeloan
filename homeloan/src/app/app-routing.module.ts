@@ -35,10 +35,10 @@ const routes: Routes = [
     path: 'login',
     component: LoginComponent,
   },
-  {
-    path: 'retail-loan',
-    component: RetailLoanComponent,
-  },
+  // {
+  //   path: 'retail-loan',
+  //   component: RetailLoanComponent,
+  // },
   {
     path: '',
     component: LayoutMainComponent,
@@ -46,8 +46,12 @@ const routes: Routes = [
     canActivate: [AdminGuard],
     children: [
       {
-        path: 'dashbord',
+        path: 'dashboard',
         component: DashbordComponent,
+      },
+      {
+        path: 'retail-loan',
+        component: RetailLoanComponent,
       },
       {
         path: 'applicant-data',
