@@ -49,6 +49,8 @@ export class GuarantorDataComponent implements OnInit {
   logedInUser : any;
   userId = "";
   status = "";
+  viewOnly: any = false;
+  nextButtonText: any = "";
 
   ngOnInit(): void {
     this.route.params.subscribe((params: any) => {
@@ -64,6 +66,15 @@ export class GuarantorDataComponent implements OnInit {
     });
     this.logedInUser = this.ds.userLoggedIn()
     console.log('this.logedInUser',this.logedInUser)
+    let checkView = localStorage.getItem("viewOnly")
+    // checkView =  JSON.parse(checkView)
+    // console.log('checkView',checkView)
+    if(checkView === 'true'){
+      this.viewOnly =  true;
+      this.nextButtonText = "Next"
+    }else{
+      this.nextButtonText = "Save And Next"
+    }
   }
 
   getSingleData() {
@@ -143,6 +154,11 @@ export class GuarantorDataComponent implements OnInit {
   handleSubmit(no: number) {
     console.log('this.a1_name',this.a1_name)
     console.log('this.openId',this.openId)
+    console.log('this.viewOnly',this.viewOnly)
+    if(this.viewOnly){
+      this.goNext();
+      return;
+    }
     if(this.a1_name == ''){
       alert('Applicant Full Name Is Required')
       return;

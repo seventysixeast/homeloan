@@ -52,7 +52,8 @@ export class ApplicantDataComponent implements OnInit {
   submittedBy = "";
   userId = "";
   status = "";
-  viewOnly = "";
+  viewOnly: any = false;
+  nextButtonText: any = "";
 
   ngOnInit(): void {
     // this.sideNav.openPage(1, 1);
@@ -67,8 +68,18 @@ export class ApplicantDataComponent implements OnInit {
       }
     });
     this.logedInUser = this.ds.userLoggedIn()
-    console.log('this.logedInUser',this.logedInUser)
+    // console.log('this.logedInUser',this.logedInUser)
+    let checkView = localStorage.getItem("viewOnly")
+    // checkView =  JSON.parse(checkView)
+    // console.log('checkView',checkView)
+    if(checkView === 'true'){
+      this.viewOnly =  true;
+      this.nextButtonText = "Next"
+    }else{
+      this.nextButtonText = "Save And Next"
+    }
 
+    // console.log('this.viewOnly ',this.viewOnly )
   }
 
   getSingleData() {
@@ -111,121 +122,135 @@ export class ApplicantDataComponent implements OnInit {
   }
 
   handleFileInput(files: any, no: number) {
-    if (no == 1) {
-      this.a1_photo_data = files.files.item(0);
-
-      if (files.files && files.files[0]) {
-        var reader = new FileReader();
-        reader.readAsDataURL(files.files[0]); // read file as data url
-        reader.onload = (event: any) => {
-          // called once readAsDataURL is completed
-          this.a1_photo = event.target.result;
-        };
+    if(!this.viewOnly){
+      // return false;
+      if (no == 1) {
+        this.a1_photo_data = files.files.item(0);
+  
+        if (files.files && files.files[0]) {
+          var reader = new FileReader();
+          reader.readAsDataURL(files.files[0]); // read file as data url
+          reader.onload = (event: any) => {
+            // called once readAsDataURL is completed
+            this.a1_photo = event.target.result;
+          };
+        }
       }
-    }
-    if (no == 2) {
-      this.a2_photo_data = files.files.item(0);
-
-      if (files.files && files.files[0]) {
-        var reader = new FileReader();
-        reader.readAsDataURL(files.files[0]); // read file as data url
-        reader.onload = (event: any) => {
-          // called once readAsDataURL is completed
-          this.a2_photo = event.target.result;
-        };
+      if (no == 2) {
+        this.a2_photo_data = files.files.item(0);
+  
+        if (files.files && files.files[0]) {
+          var reader = new FileReader();
+          reader.readAsDataURL(files.files[0]); // read file as data url
+          reader.onload = (event: any) => {
+            // called once readAsDataURL is completed
+            this.a2_photo = event.target.result;
+          };
+        }
       }
     }
   }
 
   handleSubmit(no: number) {
-    if(this.a1_name == ''){
-      alert('Applicant Full Name Is Required')
+
+    console.log('this.viewOnly',this.viewOnly)
+    if(this.viewOnly){
+      this.goNext();
       return;
     }
 
-    var variableNumer = Date.now() + Math.random().toString(36).substr(2, 9)
-    // console.log('variableNumer',variableNumer)
-    // return;
-    this.spinner.show();
-    let data = new FormData();
-    console.log('this.a1_name',this.a1_name)
-    data.append('id', this.openId == undefined ? 0 : this.openId);
-    data.append('application_no', variableNumer);
-    localStorage.setItem('application_no', variableNumer)
-    data.append('applicant_type', "applicant1");
-    if(this.logedInUser.type == "Credit-Analyst"){
-      data.append('submittedBy', "Credit-Analyst");
-      data.append('userId', this.logedInUser.id);
-      data.append('status', "Processing by Credit Analyst("+this.logedInUser.f_name +")");
-    }else if(this.logedInUser.type == "Credit-Underwriter"){
-      data.append('submittedBy', this.submittedBy);
-      data.append('userId', this.userId);
-      data.append('status', "Reveiwing by Credit Underwriter("+this.logedInUser.f_name  +")");
-    }else if(this.logedInUser.type == "Credit-Approver"){
-      data.append('submittedBy', this.submittedBy);
-      data.append('userId', this.userId);
-      data.append('status', "Reveiwing by Credit Approver("+this.logedInUser.f_name +")");
-    }else if(this.logedInUser.type == "Admin" && this.userId != '' && parseInt(this.logedInUser.id) != parseInt(this.userId)){
-      data.append('submittedBy', this.submittedBy);
-      data.append('userId', this.userId);
-      data.append('status', "Reveiwing by Admin");
-    }else if(this.logedInUser.type == "Admin" && this.status == ''){
-      data.append('submittedBy', "Admin");
-      data.append('userId', this.logedInUser.id);
-      data.append('status', "Processing by Admin");
-    }
-    data.append('a1_name', this.a1_name);
-    data.append('openType', this.openType);
-    data.append('a1_fName', this.a1_fName);
-    data.append('a1_activity', this.a1_activity);
-    data.append('a1_paddress', this.a1_paddress);
-    data.append('a1_age', this.a1_age);
-    data.append('a1_nrc', this.a1_nrc);
-    data.append('a1_phone', this.a1_phone);
-    data.append('a1_passport', this.a1_passport);
-    data.append('a1_photo', this.a1_photo_data);
-    data.append('a2_name', this.a2_name);
-    data.append('a2_fName', this.a2_fName);
-    data.append('a2_activity', this.a2_activity);
-    data.append('a2_paddress', this.a2_paddress);
-    data.append('a2_age', this.a2_age);
-    data.append('a2_nrc', this.a2_nrc);
-    data.append('a2_phone', this.a2_phone);
-    data.append('a2_passport', this.a2_passport);
-    data.append('a2_photo', this.a2_photo_data);
-    data.append('app_date', this.app_date);
-    data.append('action', 'submit-app-data');
-    this.ds.submitAppData(data).subscribe((response: any) => {
-      if (response != 0) {
-        this.openId = response;
-        localStorage.setItem("applicant1Id",response)
+    // if(this.viewOnly){
+      if(this.a1_name == ''){
+        alert('Applicant Full Name Is Required')
+        return;
       }
-      window.scroll({
-        top: 0,
-        left: 0,
-        behavior: 'smooth',
-      });
-      if (no == 1) {
-        // let div2: any = document.getElementById('profile-tab');
-        // div2.click();
-        // window.scroll({
-        //   top: 0,
-        //   left: 0,
-        //   behavior: 'smooth',
-        // });
-        // this.router.navigateByUrl('dashbord');
+  
+      var variableNumer = Date.now() + Math.random().toString(36).substr(2, 9)
+      // console.log('variableNumer',variableNumer)
+      // return;
+      this.spinner.show();
+      let data = new FormData();
+      console.log('this.a1_name',this.a1_name)
+      data.append('id', this.openId == undefined ? 0 : this.openId);
+      data.append('application_no', variableNumer);
+      localStorage.setItem('application_no', variableNumer)
+      data.append('applicant_type', "applicant1");
+      if(this.logedInUser.type == "Credit-Analyst"){
+        data.append('submittedBy', "Credit-Analyst");
+        data.append('userId', this.logedInUser.id);
+        data.append('status', "Processing by Credit Analyst("+this.logedInUser.f_name +")");
+      }else if(this.logedInUser.type == "Credit-Underwriter"){
+        data.append('submittedBy', this.submittedBy);
+        data.append('userId', this.userId);
+        data.append('status', "Reveiwing by Credit Underwriter("+this.logedInUser.f_name  +")");
+      }else if(this.logedInUser.type == "Credit-Approver"){
+        data.append('submittedBy', this.submittedBy);
+        data.append('userId', this.userId);
+        data.append('status', "Reveiwing by Credit Approver("+this.logedInUser.f_name +")");
+      }else if(this.logedInUser.type == "Admin" && this.userId != '' && parseInt(this.logedInUser.id) != parseInt(this.userId)){
+        data.append('submittedBy', this.submittedBy);
+        data.append('userId', this.userId);
+        data.append('status', "Reveiwing by Admin");
+      }else if(this.logedInUser.type == "Admin" && this.status == ''){
+        data.append('submittedBy', "Admin");
+        data.append('userId', this.logedInUser.id);
+        data.append('status', "Processing by Admin");
       }
-      this.spinner.hide();
-      Swal.fire({
-        position: 'top-end',
-        icon: 'success',
-        title: 'Your work has been saved',
-        showConfirmButton: false,
-        timer: 1500,
+      data.append('a1_name', this.a1_name);
+      data.append('openType', this.openType);
+      data.append('a1_fName', this.a1_fName);
+      data.append('a1_activity', this.a1_activity);
+      data.append('a1_paddress', this.a1_paddress);
+      data.append('a1_age', this.a1_age);
+      data.append('a1_nrc', this.a1_nrc);
+      data.append('a1_phone', this.a1_phone);
+      data.append('a1_passport', this.a1_passport);
+      data.append('a1_photo', this.a1_photo_data);
+      data.append('a2_name', this.a2_name);
+      data.append('a2_fName', this.a2_fName);
+      data.append('a2_activity', this.a2_activity);
+      data.append('a2_paddress', this.a2_paddress);
+      data.append('a2_age', this.a2_age);
+      data.append('a2_nrc', this.a2_nrc);
+      data.append('a2_phone', this.a2_phone);
+      data.append('a2_passport', this.a2_passport);
+      data.append('a2_photo', this.a2_photo_data);
+      data.append('app_date', this.app_date);
+      data.append('action', 'submit-app-data');
+      this.ds.submitAppData(data).subscribe((response: any) => {
+        if (response != 0) {
+          this.openId = response;
+          localStorage.setItem("applicant1Id",response)
+        }
+        window.scroll({
+          top: 0,
+          left: 0,
+          behavior: 'smooth',
+        });
+        if (no == 1) {
+          // let div2: any = document.getElementById('profile-tab');
+          // div2.click();
+          // window.scroll({
+          //   top: 0,
+          //   left: 0,
+          //   behavior: 'smooth',
+          // });
+          // this.router.navigateByUrl('dashbord');
+        }
+        this.spinner.hide();
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Your work has been saved',
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        // window.location.reload();
+        this.goNext();
       });
-      // window.location.reload();
-      this.goNext();
-    });
+    // }
+    
+
   }
 
   showApp1() {

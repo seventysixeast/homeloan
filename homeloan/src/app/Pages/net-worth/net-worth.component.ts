@@ -41,6 +41,8 @@ export class NetWorthComponent implements OnInit {
   logedInUser : any;
   userId = "";
   status = "";
+  viewOnly: any = false;
+  nextButtonText: any = "";
 
   ngOnInit(): void {
     this.route.params.subscribe((params: any) => {
@@ -55,6 +57,15 @@ export class NetWorthComponent implements OnInit {
     // console.log('this.openId',this.openId)
     this.logedInUser = this.ds.userLoggedIn()
     console.log('this.logedInUser',this.logedInUser)
+    let checkView = localStorage.getItem("viewOnly")
+    // checkView =  JSON.parse(checkView)
+    // console.log('checkView',checkView)
+    if(checkView === 'true'){
+      this.viewOnly =  true;
+      this.nextButtonText = "Next"
+    }else{
+      this.nextButtonText = "Save And Next"
+    }
   }
 
   getSingleData() {
@@ -108,6 +119,10 @@ export class NetWorthComponent implements OnInit {
   }
 
   handleSubmit() {
+    if(this.viewOnly){
+      this.goNext();
+      return;
+    }
     this.spinner.show();
     let data: any = new FormData();
 

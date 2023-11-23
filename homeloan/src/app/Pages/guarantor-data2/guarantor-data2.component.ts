@@ -49,6 +49,8 @@ export class GuarantorData2Component {
   logedInUser : any;
   userId = "";
   status = "";
+  viewOnly: any = false;
+  nextButtonText: any = "";
 
   ngOnInit(): void {
     this.route.params.subscribe((params: any) => {
@@ -64,6 +66,15 @@ export class GuarantorData2Component {
     });
     this.logedInUser = this.ds.userLoggedIn()
     console.log('this.logedInUser',this.logedInUser)
+    let checkView = localStorage.getItem("viewOnly")
+    // checkView =  JSON.parse(checkView)
+    // console.log('checkView',checkView)
+    if(checkView === 'true'){
+      this.viewOnly =  true;
+      this.nextButtonText = "Next"
+    }else{
+      this.nextButtonText = "Save Guarantor 2"
+    }
   }
 
   getSingleData() {
@@ -144,6 +155,11 @@ export class GuarantorData2Component {
     console.log('a2_name',this.a2_name)
     if(this.a2_name == ''){
       alert('Applicant Full Name Is Required')
+      return;
+    }
+
+    if(this.viewOnly){
+      this.goNext();
       return;
     }
     // return;

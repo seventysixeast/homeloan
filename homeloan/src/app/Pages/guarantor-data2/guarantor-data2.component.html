@@ -68,6 +68,7 @@
                       type="text"
                       class="form-control"
                       id="inputNanme4"
+                      [readonly]="viewOnly"
                     />
                   </div>
                   <div class="col-12">
@@ -80,6 +81,7 @@
                       type="text"
                       class="form-control"
                       id="inputEmail4"
+                      [readonly]="viewOnly"
                     />
                   </div>
                   <div class="col-12">
@@ -92,6 +94,7 @@
                       type="text"
                       class="form-control"
                       id="inputPassword4"
+                      [readonly]="viewOnly"
                     />
                   </div>
                   <div class="col-12">
@@ -104,6 +107,7 @@
                       type="text"
                       class="form-control"
                       id="inputAddress"
+                      [readonly]="viewOnly"
                     />
                   </div>
                   <div class="col-12">
@@ -116,6 +120,7 @@
                       type="text"
                       class="form-control"
                       id="inputAddress"
+                      [readonly]="viewOnly"
                     />
                   </div>
                   <div class="col-12">
@@ -126,6 +131,7 @@
                       type="text"
                       class="form-control"
                       id="inputAddress"
+                      [readonly]="viewOnly"
                     />
                   </div>
                   <div class="col-12">
@@ -138,6 +144,7 @@
                       type="text"
                       class="form-control"
                       id="inputAddress"
+                      [readonly]="viewOnly"
                     />
                   </div>
                   <div class="col-12">
@@ -150,6 +157,7 @@
                       type="text"
                       class="form-control"
                       id="inputAddress"
+                      [readonly]="viewOnly"
                     />
                   </div>
                   <div class="col-6">
@@ -161,6 +169,7 @@
                       type="file"
                       class="form-control"
                       id="inputAddress"
+                      [readonly]="viewOnly"
                     />
                   </div>
                   <div class="col-6" style="text-align: center">
@@ -179,7 +188,7 @@
                       class="btn btn-primary"
                       (click)="handleSubmit(2)"
                     >
-                      Save Guarantor 2
+                      {{nextButtonText}}
                     </button>
                   </div>
                 </div>

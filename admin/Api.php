@@ -486,6 +486,31 @@ if($_POST['action'] == 'getMediaFile'){
 }
 
 
+if ($_POST['action'] == 'savePdfFile') {
+    // //$target_dir = "pdf_uploads/";
+
+    // /*if (!file_exists($target_dir)) {
+    //     mkdir($target_dir, 0777, true);
+    // }*/
+
+    $target_file = time() . basename($_FILES["file"]["name"]);
+
+    if (move_uploaded_file($_FILES["file"]["tmp_name"], $target_dir . $target_file)) {
+        echo "success";
+    } else {
+        echo "error: " . $_FILES["file"]["error"];
+    }
+
+    $ref_id = $_POST['ref_id'];
+    $type = $_POST['type'];
+    $filename = $target_file;
+    echo $filename;
+
+    // $query = "INSERT INTO pdf_files(ref_id, type, filename) VALUES ('$ref_id', '$type', '$filename')";
+    // $result = mysqli_query($conn, $query);
+    // echo $result;
+}
+
 if($_POST['action'] == 'deleteMediaFile'){
     $result = mysqli_query($conn, "DELETE FROM media Where id=".$_POST['id']);
     echo $result;

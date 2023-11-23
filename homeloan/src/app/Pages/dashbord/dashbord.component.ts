@@ -25,6 +25,7 @@ export class DashbordComponent implements OnInit {
     localStorage.removeItem("applicant1Id");
     localStorage.removeItem("activeId");
     localStorage.removeItem("application_no");
+    localStorage.removeItem("viewOnly");
     this.logedInUser = this.ds.userLoggedIn()
     this.getData();
     console.log('this.logedInUser',this.logedInUser)
@@ -51,14 +52,14 @@ export class DashbordComponent implements OnInit {
     this.ds.getAppDataList(data).subscribe((response: any) => {
       this.dataList = response;
     });
-    console.log('check123')
+    // console.log('check123')
     // this.sideNav.openPage(Number(null), Number(null));
   }
 
   openData(id: any) {
     localStorage.setItem('activeId', id);
-    localStorage.setItem('viewOnly',"1")
-    console.log('check')
+    localStorage.setItem('viewOnly',"true")
+    // console.log('check')
     this.sideNav.openPage(1, 1);
     // this.router.navigateByUrl('applicant-data/' + id);
     window.location.href = 'applicant-data/' + id;
@@ -66,7 +67,7 @@ export class DashbordComponent implements OnInit {
 
   editData(id: any) {
     localStorage.setItem('activeId', id);
-    console.log('check')
+    // console.log('check')
     this.sideNav.openPage(1, 1);
     // this.router.navigateByUrl('applicant-data/' + id);
     window.location.href = 'applicant-data/' + id;
@@ -77,7 +78,7 @@ export class DashbordComponent implements OnInit {
     data.append('action', 'deleteAppDataList');
     data.append('id', id);
     this.ds.getAppDataList(data).subscribe((response: any) => {
-      console.log(response);
+      // console.log(response);
       this.getData();
     });
   }
@@ -85,7 +86,7 @@ export class DashbordComponent implements OnInit {
   displayStatus(status: any){
     if(this.logedInUser.type == "Credit-Underwriter"){
       if(status.indexOf("Submitted by Credit Analyst") > -1){
-        console.log('htti')
+        // console.log('htti')
         return "badge bg-success";
       }else if(status.indexOf("Processing by Credit Analyst") > -1 || status.indexOf("Reveiwing by Credit Underwriter") > -1){
         return "badge bg-warning";
@@ -93,7 +94,7 @@ export class DashbordComponent implements OnInit {
     }
     if(this.logedInUser.type == "Credit-Analyst"){
       if(status.indexOf("Submitted by Credit Analyst") > -1){
-        console.log('htti')
+        // console.log('htti')
         return "badge bg-success";
       }else if(status.indexOf("Processing by Credit Analyst") > -1 || status.indexOf("Reveiwing by Credit Underwriter") > -1){
         return "badge bg-warning";
@@ -159,7 +160,7 @@ export class DashbordComponent implements OnInit {
   }
 
   notShowingViewOption(status: any){
-    console.log('status',status)
+    // console.log('status',status)
     if(this.logedInUser.type == "Credit-Underwriter"){
       // if(status.indexOf("Submitted by Credit Analyst") > -1){
       //   console.log('htti')
@@ -171,7 +172,7 @@ export class DashbordComponent implements OnInit {
     }
     if(this.logedInUser.type == "Credit-Analyst"){
       if(status.indexOf("Submitted by Credit Analyst") > -1 || status.indexOf("Reveiwing by Credit Underwriter") > -1){
-        console.log('htti')
+        // console.log('htti')
         return "bx bxs-show";
       }
       // else if(status.indexOf("Processing by Credit Analyst") > -1 ){

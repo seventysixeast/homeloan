@@ -81,6 +81,7 @@
                       type="text"
                       class="form-control"
                       id="inputNanme4"
+                      [readonly]="viewOnly"
                     />
                   </div>
                   <div class="col-12">
@@ -93,6 +94,7 @@
                       type="text"
                       class="form-control"
                       id="inputEmail4"
+                      [readonly]="viewOnly"
                     />
                   </div>
                   <div class="col-12">
@@ -105,6 +107,7 @@
                       type="text"
                       class="form-control"
                       id="inputPassword4"
+                      [readonly]="viewOnly"
                     />
                   </div>
                   <div class="col-12">
@@ -117,6 +120,7 @@
                       type="text"
                       class="form-control"
                       id="inputAddress"
+                      [readonly]="viewOnly"
                     />
                   </div>
                   <div class="col-12">
@@ -129,6 +133,7 @@
                       type="text"
                       class="form-control"
                       id="inputAddress"
+                      [readonly]="viewOnly"
                     />
                   </div>
                   <div class="col-12">
@@ -139,6 +144,7 @@
                       type="text"
                       class="form-control"
                       id="inputAddress"
+                      [readonly]="viewOnly"
                     />
                   </div>
                   <div class="col-12">
@@ -151,6 +157,7 @@
                       type="text"
                       class="form-control"
                       id="inputAddress"
+                      [readonly]="viewOnly"
                     />
                   </div>
                   <div class="col-12">
@@ -163,6 +170,7 @@
                       type="text"
                       class="form-control"
                       id="inputAddress"
+                      [readonly]="viewOnly"
                     />
                   </div>
                   <div class="col-6">
@@ -176,7 +184,7 @@
                       (change)="handleFileInput($event.target, 2)"
                     />
                   </div>
-                  <div class="col-6" style="text-align: center">
+                  <div class="col-6" *ngIf="a2_photo !=''" style="text-align: center">
                     <img [src]="a2_photo" style="width: 200px" />
                   </div>
                   <div class="col-12">
@@ -199,7 +207,7 @@
                       class="btn btn-primary mx-2"
                       (click)="handleSubmit(2)"
                     >
-                      Save And Next
+                      {{ nextButtonText }}
                     </button>
                   </div>
                 </div>

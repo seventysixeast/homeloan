@@ -40,6 +40,7 @@
                   id="inputNanme4"
                   [(ngModel)]="c_intrestRate"
                   (keyup)="updateTotal()"
+                  [readonly]="viewOnly"
                 />
               </div>
               <div class="col-6 mb-3">Loan Tenure (months)</div>
@@ -51,6 +52,7 @@
                   id="inputNanme4"
                   [(ngModel)]="c_months"
                   (keyup)="updateTotal()"
+                  [readonly]="viewOnly"
                 />
               </div>
               <div class="col-6 mb-3">EMI</div>
@@ -110,6 +112,7 @@
                       type="number"
                       class="form-control"
                       id="inputNanme4"
+                      [readonly]="viewOnly"
                     />
                   </div>
                   <div class="col-6">
@@ -120,6 +123,7 @@
                       type="number"
                       class="form-control"
                       id="inputNanme4"
+                      [readonly]="viewOnly"
                     />
                   </div>
                 </div>
@@ -173,6 +177,7 @@
                   type="number"
                   class="form-control"
                   id="inputNanme4"
+                  [readonly]="viewOnly"
                 />
               </div>
               <div class="col-3 mb-3">
@@ -183,6 +188,7 @@
                   type="number"
                   class="form-control"
                   id="inputNanme4"
+                  [readonly]="viewOnly"
                 />
               </div>
               <div class="col-3 mb-3">
@@ -233,7 +239,7 @@
                   class="btn btn-primary mx-3"
                   (click)="handleSubmit()"
                 >
-                  Save & Next
+                  {{nextButtonText}}
                 </button>
               </div>
             </div>
