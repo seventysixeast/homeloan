@@ -53,15 +53,14 @@
             alt="Profile"
             class="rounded-circle"
           />
-          <span class="d-none d-md-block dropdown-toggle ps-2"
-            >K. Anderson</span
-          > </a
+          <span class="d-none d-md-block dropdown-toggle ps-2">{{ logedInUser.fname + ' ' + logedInUser.lname }}</span>
+           </a
         ><!-- End Profile Iamge Icon -->
 
         <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
           <li class="dropdown-header">
-            <h6>Kevin Anderson</h6>
-            <span>Web Designer</span>
+            <h6>{{ logedInUser.fname + ' ' + logedInUser.lname }}</h6>
+            <span>{{ logedInUser.type }}</span>
           </li>
           <li>
             <hr class="dropdown-divider" />
@@ -71,6 +70,8 @@
             <a
               class="dropdown-item d-flex align-items-center"
               href="users-profile.html"
+              [style.pointer-events]="'none'"
+              [style.opacity]="0.5"
             >
               <i class="bi bi-person"></i>
               <span>My Profile</span>

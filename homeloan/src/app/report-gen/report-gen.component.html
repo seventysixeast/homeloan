@@ -61,6 +61,11 @@
                   Upload PDF 2
                 </button>
               </div>
+              <div class="col-12 mt-3" *ngFor="let pdfFile of pdfFiles">
+                <button (click)="downloadPdf(pdfFile)">
+                  Download PDF {{ pdfFiles.indexOf(pdfFile) + 1 }}
+                </button>
+              </div>
             </div>
           </div>
         </div>

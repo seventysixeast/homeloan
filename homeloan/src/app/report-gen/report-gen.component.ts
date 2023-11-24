@@ -14,7 +14,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ReportGenComponent implements OnInit {
   constructor(
-    private ds: DataService,
+    public ds: DataService,
     private route: ActivatedRoute,
     private router: Router,
     private Http: HttpClient
@@ -38,6 +38,8 @@ export class ReportGenComponent implements OnInit {
 
   medialist: any = [];
 
+  pdfFiles: string[] = [];
+
   pdf1: File | null = null;
   pdf2: File | null = null;
 
@@ -46,6 +48,7 @@ export class ReportGenComponent implements OnInit {
       this.openId = params.id;
     });
     this.getData();
+    this.getPdfFiles();
   }
 
   getData() {
@@ -120,6 +123,25 @@ export class ReportGenComponent implements OnInit {
     } else {
       console.log('No file selected. Please choose a PDF file to upload.');
     }
+  }
+
+  getPdfFiles() {
+    let data = new FormData();
+    data.append('action', 'getPdfFiles');
+    data.append('ref_id', this.openId);
+
+    this.ds.submitAppData(data).subscribe((response: any) => {
+      this.pdfFiles = response;
+    });
+  }
+
+  downloadPdf(pdfFile: string) {
+    const url = this.ds.mediaUrl + pdfFile;
+    const anchor = document.createElement('a');
+    anchor.href = url;
+    anchor.target = '_blank';
+    anchor.download = pdfFile;
+    anchor.click();
   }
   
 

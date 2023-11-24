@@ -487,7 +487,7 @@ if($_POST['action'] == 'getMediaFile'){
 
 
 if ($_POST['action'] == 'savePdfFile') {
-    // //$target_dir = "pdf_uploads/";
+    $target_dir = "uploads/";
 
     // /*if (!file_exists($target_dir)) {
     //     mkdir($target_dir, 0777, true);
@@ -504,11 +504,28 @@ if ($_POST['action'] == 'savePdfFile') {
     $ref_id = $_POST['ref_id'];
     $type = $_POST['type'];
     $filename = $target_file;
-    echo $filename;
 
-    // $query = "INSERT INTO pdf_files(ref_id, type, filename) VALUES ('$ref_id', '$type', '$filename')";
-    // $result = mysqli_query($conn, $query);
-    // echo $result;
+    $query = "INSERT INTO pdf_files(ref_id, type, filename) VALUES ('$ref_id', '$type', '$filename')";
+    $result = mysqli_query($conn, $query);
+    echo $result;
+}
+
+if ($_POST['action'] === 'getPdfFiles') {
+    $ref_id = $_POST['ref_id'];
+    
+    // Adjust the table name and column names accordingly
+    $query = "SELECT filename FROM pdf_files WHERE ref_id = '$ref_id'";
+    $result = mysqli_query($conn, $query);
+    if ($result) {
+        $pdfFiles = [];
+        while ($row = mysqli_fetch_assoc($result)) {
+            $pdfFiles[] = $row['filename'];
+        }
+        
+        echo json_encode($pdfFiles);
+    } else {
+        echo json_encode(['error' => 'Failed to retrieve PDF files.']);
+    }
 }
 
 if($_POST['action'] == 'deleteMediaFile'){
@@ -674,7 +691,7 @@ if($_POST['action'] == 'updateUser'){
     $type =  $_POST['type'];
 
     // echo "<pre>"; print_r($_POST); die;
-    $querry = "UPDATE users SET f_name='$f_name',l_name='$l_name',password='$password',type='$type' WHERE id=".$id;
+    $querry = "UPDATE users SET f_name='$f_name',l_name='$L_name',password='$password',type='$type' WHERE id=".$id;
 
     // $querry = "INSERT INTO users(f_name, l_name,email,password,type) VALUES ('$f_name', '$l_name', '$email', '$password', '$type')";
 

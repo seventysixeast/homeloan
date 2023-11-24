@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { DataService } from 'src/app/data.service';
 
 @Component({
   selector: 'app-header',
@@ -9,10 +10,15 @@ import { Router } from '@angular/router';
 export class HeaderComponent implements OnInit {
 
   constructor(
+    private ds: DataService,
     private router: Router
   ) {}
 
+  logedInUser : any;
+
   ngOnInit(): void {
+    this.logedInUser = this.ds.userLoggedIn();
+    console.log('this.logedInUser',this.logedInUser)
   }
 
   logout(){
