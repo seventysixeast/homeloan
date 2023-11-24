@@ -155,8 +155,6 @@ export class DashbordComponent implements OnInit {
       if(status.indexOf("Submitted by Admin") > -1 || (status.indexOf("Reveiwing by Credit Approver")) > -1 ){
         return "bx bxs-edit-alt";
       }
-      
-
     }
     return "bx bxs-edit-alt notShowEdit";
   }
