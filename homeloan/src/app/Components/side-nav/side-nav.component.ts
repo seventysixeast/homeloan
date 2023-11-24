@@ -143,12 +143,12 @@ export class SideNavComponent implements OnInit, AfterViewInit {
           link: 'score',
           status: false,
         },
-        {
-          id: 10,
-          name: 'Upload Report',
-          link: 'upload-report',
-          status: false,
-        },
+        // {
+        //   id: 10,
+        //   name: 'Upload Report',
+        //   link: 'upload-report',
+        //   status: false,
+        // },
         {
           id: 9,
           name: 'Report',
@@ -244,6 +244,16 @@ export class SideNavComponent implements OnInit, AfterViewInit {
   
       if(mId == 2 && smId == 8){
         this.router.navigateByUrl('media-upload/' + applicant1Id);
+      }
+
+      if(mId == 2 && smId == 6){
+        this.router.navigateByUrl('score/' + applicant1Id);
+      }
+      console.log('mId',mId)
+      console.log('smId',smId)
+
+      if(mId == 2 && smId == 9){
+        this.router.navigateByUrl('report/' + applicant1Id);
       }
     }
 

@@ -185,7 +185,7 @@
                       id="inputAddress"
                     />
                   </div>
-                  <div class="col-6"  *ngIf="a1_photo !==''" style="text-align: center">
+                  <div class="col-6"  *ngIf="(a1_photo !='') && (a1_photo != ds.mediaUrl)" style="text-align: center">
                     <img  [src]="a1_photo" style="width: 200px" />
                   </div>
                   <div class="col-12">

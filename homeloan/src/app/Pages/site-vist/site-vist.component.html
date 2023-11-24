@@ -32,6 +32,7 @@
                   id="inputNanme4"
                   placeholder="Name"
                   [(ngModel)]="name1"
+                  [readonly]="viewOnly"
                 />
               </div>
               <div class="col-3 mb-3">
@@ -42,6 +43,7 @@
                   id="inputNanme4"
                   placeholder="Designation"
                   [(ngModel)]="designation1"
+                  [readonly]="viewOnly"
                 />
               </div>
               <div class="col-3 mb-3">
@@ -52,6 +54,7 @@
                   id="inputNanme4"
                   placeholder="Visit Date"
                   [(ngModel)]="visitDate1"
+                  [readonly]="viewOnly"
                 />
               </div>
               <div class="col-3 mb-3">
@@ -65,6 +68,7 @@
                   id="inputNanme4"
                   placeholder="Name"
                   [(ngModel)]="name2"
+                  [readonly]="viewOnly"
                 />
               </div>
               <div class="col-3 mb-3">
@@ -75,6 +79,7 @@
                   id="inputNanme4"
                   placeholder="Designation"
                   [(ngModel)]="designation2"
+                  [readonly]="viewOnly"
                 />
               </div>
               <div class="col-3 mb-3">
@@ -85,6 +90,7 @@
                   id="inputNanme4"
                   placeholder="Visit Date"
                   [(ngModel)]="visitDate2"
+                  [readonly]="viewOnly"
                 />
               </div>
               <div class="col-3 mb-3">
@@ -98,6 +104,7 @@
                   id="inputNanme4"
                   placeholder="Full Details"
                   [(ngModel)]="details"
+                  [readonly]="viewOnly"
                 ></textarea>
               </div>
               <div class="col-3 mb-3">Property Valuation Details</div>
@@ -111,6 +118,7 @@
                       [(ngModel)]="mValue"
                       class="form-control"
                       id="inputNanme4"
+                      [readonly]="viewOnly"
                     />
                   </div>
                   <div class="col-4 mb-2">Distress Sale Value (Kyats)</div>
@@ -121,6 +129,7 @@
                       [(ngModel)]="dsValue"
                       class="form-control"
                       id="inputNanme4"
+                      [readonly]="viewOnly"
                     />
                   </div>
                   <div class="col-4 mb-2">Report Date</div>
@@ -131,6 +140,7 @@
                       [(ngModel)]="reportDate"
                       class="form-control"
                       id="inputNanme4"
+                      [readonly]="viewOnly"
                     />
                   </div>
                   <div class="col-4 mb-2">Valuer's Name</div>
@@ -141,6 +151,7 @@
                       [(ngModel)]="valuerName"
                       class="form-control"
                       id="inputNanme4"
+                      [readonly]="viewOnly"
                     />
                   </div>
                   <div class="col-4 mb-2">Comments ( if any )</div>
@@ -151,6 +162,7 @@
                       id="inputNanme4"
                       rows="6"
                       [(ngModel)]="comments1"
+                      [readonly]="viewOnly"
                     ></textarea>
                   </div>
                 </div>
@@ -166,6 +178,7 @@
                       [(ngModel)]="advocateName"
                       class="form-control"
                       id="inputNanme4"
+                      [readonly]="viewOnly"
                     />
                   </div>
                   <div class="col-4 mb-2">Report Date</div>
@@ -176,6 +189,7 @@
                       [(ngModel)]="reportDate2"
                       class="form-control"
                       id="inputNanme4"
+                      [readonly]="viewOnly"
                     />
                   </div>
                   <div class="col-4 mb-2">Comments</div>
@@ -186,6 +200,7 @@
                       class="form-control"
                       id="inputNanme4"
                       rows="6"
+                      [readonly]="viewOnly"
                     ></textarea>
                   </div>
                 </div>
@@ -212,7 +227,7 @@
                   class="btn btn-primary mx-3"
                   (click)="handleSubmit()"
                 >
-                  Save & Next
+                {{nextButtonText}}
                 </button>
               </div>
             </div>

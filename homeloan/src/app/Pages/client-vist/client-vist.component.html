@@ -33,6 +33,7 @@
                   id="inputNanme4"
                   placeholder="Name"
                   [(ngModel)]="name1"
+                  [readonly]="viewOnly"
                 />
               </div>
               <div class="col-3 mb-3">
@@ -43,6 +44,7 @@
                   id="inputNanme4"
                   placeholder="Designation"
                   [(ngModel)]="designation1"
+                  [readonly]="viewOnly"
                 />
               </div>
               <div class="col-3 mb-3">
@@ -53,6 +55,7 @@
                   id="inputNanme4"
                   placeholder="Visit Date"
                   [(ngModel)]="visitDate1"
+                  [readonly]="viewOnly"
                 />
               </div>
               <div class="col-3 mb-3">
@@ -66,6 +69,7 @@
                   id="inputNanme4"
                   placeholder="Name"
                   [(ngModel)]="name2"
+                  [readonly]="viewOnly"
                 />
               </div>
               <div class="col-3 mb-3">
@@ -76,6 +80,7 @@
                   id="inputNanme4"
                   placeholder="Designation"
                   [(ngModel)]="designation2"
+                  [readonly]="viewOnly"
                 />
               </div>
               <div class="col-3 mb-3">
@@ -86,6 +91,7 @@
                   id="inputNanme4"
                   placeholder="Visit Date"
                   [(ngModel)]="visitDate2"
+                  [readonly]="viewOnly"
                 />
               </div>
               <div class="col-12 mb-3">
@@ -110,6 +116,7 @@
                   id="inputNanme4"
                   placeholder="Comments"
                   [(ngModel)]="comment1"
+                  [readonly]="viewOnly"
                 ></textarea>
               </div>
               <div class="col-3 mt-3">
@@ -129,6 +136,7 @@
                   id="inputNanme4"
                   placeholder="Comments"
                   [(ngModel)]="comment2"
+                  [readonly]="viewOnly"
                 ></textarea>
               </div>
               <!-- <div class="col-6 mt-3">
@@ -162,6 +170,7 @@
                   id="inputNanme4"
                   placeholder="Comments"
                   [(ngModel)]="comment3"
+                  [readonly]="viewOnly"
                 ></textarea>
               </div>
               <div class="col-3 mt-3">
@@ -181,6 +190,7 @@
                   id="inputNanme4"
                   placeholder="Comments"
                   [(ngModel)]="comment4"
+                  [readonly]="viewOnly"
                 ></textarea>
               </div>
               <div class="col-12 mt-3">
@@ -196,7 +206,7 @@
                   class="btn btn-primary mx-3"
                   (click)="handleSubmit()"
                 >
-                  Save & Next
+                {{nextButtonText}}
                 </button>
               </div>
             </div>

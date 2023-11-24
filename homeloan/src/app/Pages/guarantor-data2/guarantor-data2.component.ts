@@ -153,15 +153,15 @@ export class GuarantorData2Component {
 
   handleSubmit(no: number) {
     console.log('a2_name',this.a2_name)
+    if(this.viewOnly){
+      this.goNext();
+      return;
+    }
     if(this.a2_name == ''){
       alert('Applicant Full Name Is Required')
       return;
     }
 
-    if(this.viewOnly){
-      this.goNext();
-      return;
-    }
     // return;
     this.spinner.show();
     let data = new FormData();

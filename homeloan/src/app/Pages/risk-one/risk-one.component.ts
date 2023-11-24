@@ -75,6 +75,8 @@ export class RiskOneComponent implements OnInit {
   logedInUser : any;
   userId = "";
   status = "";
+  viewOnly: any = false;
+  nextButtonText: any = "";
 
   ngOnInit(): void {
     this.route.params.subscribe((params: any) => {
@@ -88,6 +90,13 @@ export class RiskOneComponent implements OnInit {
       }
     });
     this.logedInUser = this.ds.userLoggedIn()
+    let checkView = localStorage.getItem("viewOnly")
+    if(checkView === 'true'){
+      this.viewOnly =  true;
+      this.nextButtonText = "Next"
+    }else{
+      this.nextButtonText = "Save And Next"
+    }
   }
 
   handleUpdate(value: number, type: number, no: number) {
@@ -423,6 +432,10 @@ export class RiskOneComponent implements OnInit {
   }
 
   handleSubmit() {
+    if(this.viewOnly){
+      this.goNext();
+      return;
+    }
     this.spiner.show();
     let JsonData = {
       mws1: this.mws1,

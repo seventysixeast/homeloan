@@ -20,6 +20,12 @@ export class UsersComponent {
   logedInUser : any;
 
   ngOnInit(): void {
+    localStorage.removeItem("mId");
+    localStorage.removeItem("smId");
+    localStorage.removeItem("applicant1Id");
+    localStorage.removeItem("activeId");
+    localStorage.removeItem("application_no");
+    localStorage.removeItem("viewOnly");
     this.getData();
     this.logedInUser = this.ds.userLoggedIn()
     console.log('this.logedInUser',this.logedInUser)
@@ -28,7 +34,7 @@ export class UsersComponent {
   getData() {
     let data = new FormData();
     data.append('action', 'getUsers');
-    data.append('userId', this.logedInUser.id);
+    // data.append('userId', this.logedInUser.id);
     this.ds.getAppDataList(data).subscribe((response: any) => {
       this.dataList = response;
       console.log(response);

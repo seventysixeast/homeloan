@@ -1267,3 +1267,7 @@ td.selectable {
 .notShowEdit{
   display: none;
 }
+
+.onlyViewClass{
+  pointer-events: none;
+}

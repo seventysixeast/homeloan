@@ -93,12 +93,13 @@ export class DashbordComponent implements OnInit {
       }
     }
     if(this.logedInUser.type == "Credit-Analyst"){
-      if(status.indexOf("Submitted by Credit Analyst") > -1){
+      if(status.indexOf("Approved by Credit Approver") > -1){
         // console.log('htti')
         return "badge bg-success";
-      }else if(status.indexOf("Processing by Credit Analyst") > -1 || status.indexOf("Reveiwing by Credit Underwriter") > -1){
-        return "badge bg-warning";
       }
+      // else if(status.indexOf("Processing by Credit Analyst") > -1 || status.indexOf("Reveiwing by Credit Underwriter") > -1){
+      //   return "badge bg-warning";
+      // }
     }
 
     if(this.logedInUser.type == "Admin"){
@@ -112,7 +113,7 @@ export class DashbordComponent implements OnInit {
         return "badge bg-warning";
       // }
     }
-    return "";
+    return "badge bg-warning";
   }
 
   notShowingEditoption(status: any){
@@ -166,7 +167,9 @@ export class DashbordComponent implements OnInit {
       //   console.log('htti')
       //   return "bx bxs-show notShowEdit";
       // }else 
-      if(status.indexOf("Processing by Credit Analyst") > -1){
+      if(status.indexOf("Reveiwing by Credit Underwriter") > -1 || status.indexOf("Submitted by Credit Analyst") > -1){
+        return "bx bxs-show notShowEdit";
+      }else{
         return "bx bxs-show";
       }
     }

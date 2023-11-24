@@ -184,7 +184,7 @@
                       (change)="handleFileInput($event.target, 2)"
                     />
                   </div>
-                  <div class="col-6" *ngIf="a2_photo !=''" style="text-align: center">
+                  <div class="col-6" *ngIf="(a2_photo !='') && (a2_photo != ds.mediaUrl)" style="text-align: center">
                     <img [src]="a2_photo" style="width: 200px" />
                   </div>
                   <div class="col-12">

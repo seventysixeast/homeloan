@@ -42,6 +42,8 @@ export class ClientVistComponent implements OnInit {
   logedInUser : any;
   userId = "";
   status = "";
+  viewOnly: any = false;
+  nextButtonText: any = "";
 
   ngOnInit(): void {
     this.route.params.subscribe((params: any) => {
@@ -57,6 +59,13 @@ export class ClientVistComponent implements OnInit {
 
     this.logedInUser = this.ds.userLoggedIn()
     console.log('this.logedInUser',this.logedInUser)
+    let checkView = localStorage.getItem("viewOnly")
+    if(checkView === 'true'){
+      this.viewOnly =  true;
+      this.nextButtonText = "Next"
+    }else{
+      this.nextButtonText = "Save And Next"
+    }
   }
 
   getSingleData() {
@@ -113,6 +122,10 @@ export class ClientVistComponent implements OnInit {
   }
 
   handleSubmit() {
+    if(this.viewOnly){
+      this.goNext();
+      return;
+    }
     this.spinner.show();
     let data: any = new FormData();
 

@@ -43,6 +43,8 @@ export class MedisUploadComponent implements OnInit {
   userId = "";
   status = "";
   submitButtonText = "";
+  viewOnly: any = false;
+  nextButtonText: any = "";
 
   ngOnInit(): void {
     this.route.params.subscribe((params: any) => {
@@ -55,23 +57,31 @@ export class MedisUploadComponent implements OnInit {
     });
     // this.getData();
     this.logedInUser = this.ds.userLoggedIn()
-
-    if(this.logedInUser.type == "Credit-Analyst"){
-
-      this.submitButtonText = "Submit"
-     
-    }else if(this.logedInUser.type == "Credit-Underwriter"){
-      this.submitButtonText = "Save & Next"
-    }else if(this.logedInUser.type == "Credit-Approver"){
-      // return  "Reveiwing by Credit Approver("+this.logedInUser.f_name +")";
-      this.submitButtonText = "Save & Next"
-    }else if(this.logedInUser.type == "Admin" && (status.indexOf("Reveiwing by Admin") > -1)){
-      this.submitButtonText = "Save & Next"
-      // return "Reveiwing by Admin";
-    }else if(this.logedInUser.type == "Admin" && ((status.indexOf("Processing by Admin") > -1))){
-      // return "Processing by Admin";
-      this.submitButtonText = "Submit"
+    let checkView = localStorage.getItem("viewOnly")
+    if(checkView === 'true'){
+      this.viewOnly =  true;
+      this.nextButtonText = "Next"
+    }else{
+      // this.nextButtonText = "Save And Next"
+      if(this.logedInUser.type == "Credit-Analyst"){
+  
+        this.nextButtonText = "Submit"
+       
+      }else if(this.logedInUser.type == "Credit-Underwriter"){
+        this.nextButtonText = "Save & Next"
+      }else if(this.logedInUser.type == "Credit-Approver"){
+        // return  "Reveiwing by Credit Approver("+this.logedInUser.f_name +")";
+        this.nextButtonText = "Save & Next"
+      }else if(this.logedInUser.type == "Admin" && (status.indexOf("Reveiwing by Admin") > -1)){
+        this.nextButtonText = "Save & Next"
+        // return "Reveiwing by Admin";
+      }
     }
+
+    // else if(this.logedInUser.type == "Admin" && ((status.indexOf("Processing by Admin") > -1))){
+    //   // return "Processing by Admin";
+    //   this.submitButtonText = "Submit"
+    // }
   }
 
   getData() {
@@ -129,6 +139,10 @@ export class MedisUploadComponent implements OnInit {
   }
 
   handleSubmit() {
+    if(this.viewOnly){
+      this.goNext();
+      return;
+    }
     this.spiner.show();
     // this.spiner.hide();
 
@@ -142,10 +156,10 @@ export class MedisUploadComponent implements OnInit {
     // });
     let data = new FormData();
 
+    data.append('action', 'submit-all-forms');
+    data.append('ref_id', this.openId);
     if(this.logedInUser.type == "Credit-Analyst"){
       // return ("Processing by Credit Analyst("+this.logedInUser.f_name +")");
-      data.append('action', 'submit-all-forms');
-      data.append('ref_id', this.openId);
       data.append('status', "Submitted by Credit Analyst("+this.logedInUser.f_name +")");
       this.ds.submitAppData(data).subscribe((response: any) => {
         this.spiner.hide();
@@ -163,8 +177,8 @@ export class MedisUploadComponent implements OnInit {
       });
     }else if(this.logedInUser.type == "Credit-Underwriter"){
       // return ("Reveiwing by Credit Underwriter("+this.logedInUser.f_name  +")");
-      data.append('action', 'submit-all-forms');
-      data.append('ref_id', this.openId);
+      // data.append('action', 'submit-all-forms');
+      // data.append('ref_id', this.openId);
       data.append('status', "Reveiwing by Credit Underwriter("+this.logedInUser.f_name  +")");
       this.ds.submitAppData(data).subscribe((response: any) => {
         this.spiner.hide();
@@ -188,9 +202,38 @@ export class MedisUploadComponent implements OnInit {
       //   timer: 1500,
       // });
     }else if(this.logedInUser.type == "Credit-Approver"){
+      // data.append('action', 'submit-all-forms');
+      // data.append('ref_id', this.openId);
+      data.append('status', "Reveiwing by Credit Approver("+this.logedInUser.f_name  +")");
+      this.ds.submitAppData(data).subscribe((response: any) => {
+        this.spiner.hide();
+
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Your work has been saved',
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        this.goNext();
+        // console.log(response);
+      });
       // return  "Reveiwing by Credit Approver("+this.logedInUser.f_name +")";
     }else if(this.logedInUser.type == "Admin" && (status.indexOf("Reveiwing by Admin") > -1)){
       // return "Reveiwing by Admin";
+      data.append('status', "Reveiwing by Admin");
+      this.ds.submitAppData(data).subscribe((response: any) => {
+        this.spiner.hide();
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Your work has been saved',
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        this.goNext();
+        // console.log(response);
+      });
     }else if(this.logedInUser.type == "Admin" && ((status.indexOf("Processing by Admin") > -1))){
       // return "Processing by Admin";
       data.append('action', 'submit-all-forms');
@@ -265,6 +308,7 @@ export class MedisUploadComponent implements OnInit {
   goNext() {
     // this.router.navigateByUrl('report/' + this.openId);
     // this.sideNav.openPage(2, 7);
+    this.sideNav.openPage(2, 6);
   }
   goBack() {
     // this.router.navigateByUrl('risk-2/' + this.openId);

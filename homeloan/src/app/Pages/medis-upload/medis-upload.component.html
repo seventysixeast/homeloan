@@ -30,7 +30,7 @@
                 </label>
               </div>
 
-              <div class="col-4 mb-3">
+              <div class="col-4 mb-3" [class]="viewOnly ? 'onlyViewClass':''">
                 <select
                   class="form-select"
                   aria-label="Default select example"
@@ -41,7 +41,7 @@
                   </option>
                 </select>
               </div>
-              <div class="col-4 mb-3">
+              <div class="col-4 mb-3" [class]="viewOnly ? 'onlyViewClass':''">
                 <input
                   autocomplete="nope"
                   class="form-control"
@@ -50,7 +50,7 @@
                   placeholder="Details"
                 />
               </div>
-              <div class="col-4 mb-3">
+              <div class="col-4 mb-3" [class]="viewOnly ? 'onlyViewClass':''">
                 <input
                   autocomplete="nope"
                   class="form-control"
@@ -75,7 +75,7 @@
                           (click)="showImg(i)"
                         ></i>
                       </div>
-                      <div class="col-1">
+                      <div class="col-1" [class]="viewOnly ? 'notShowEdit':''">
                         <i
                           class="bx bxs-trash-alt"
                           style="font-size: 25px; cursor: pointer"
@@ -111,7 +111,7 @@
                   class="btn btn-primary mx-3"
                   (click)="handleSubmit()"
                 >
-                  {{submitButtonText}}
+                  {{nextButtonText}}
                 </button>
               </div>
             </div>

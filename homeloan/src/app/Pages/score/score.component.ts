@@ -34,13 +34,46 @@ export class ScoreComponent implements OnInit {
   c_months = 0;
   c_emi = 0;
 
+  logedInUser : any;
+  userId = "";
+  status = "";
+  viewOnly: any = false;
+  nextButtonText: any = "";
+
   ngOnInit(): void {
     this.route.params.subscribe((params: any) => {
-      this.openId = params.id;
-      if (this.openId != 0) {
-        this.getSingleData();
+      if(params.id != null){
+        this.openId = params.id;
+        if (this.openId != 0) {
+          this.getSingleData();
+          this.getSingleAppData()
+        }
       }
     });
+    this.logedInUser = this.ds.userLoggedIn()
+    let checkView = localStorage.getItem("viewOnly")
+    console.log('checkView',checkView)
+    if(checkView === 'true'){
+      this.viewOnly =  true;
+      this.nextButtonText = "Next"
+    }else{
+      // this.nextButtonText = "Save And Next"
+      if(this.logedInUser.type == "Credit-Underwriter"){
+  
+        this.nextButtonText = "Submit"
+       
+      }else if(this.logedInUser.type == "Credit-Approver"){
+        // return  "Reveiwing by Credit Approver("+this.logedInUser.f_name +")";
+        this.nextButtonText = "Save & Next"
+      }else if(this.logedInUser.type == "Admin" && (status.indexOf("Reveiwing by Admin") > -1)){
+        this.nextButtonText = "Save & Next"
+        // return "Reveiwing by Admin";
+      }
+
+      // else if(this.logedInUser.type == "Credit-Underwriter"){
+      //   this.nextButtonText = "Save & Next"
+      // }
+    }
   }
 
   getSingleData() {
@@ -77,6 +110,20 @@ export class ScoreComponent implements OnInit {
           this.getSeaftySorce();
         });
       });
+    });
+  }
+
+  getSingleAppData() {
+    let data = new FormData();
+
+    data.append('id', this.openId);
+    data.append('action', 'getSingleData');
+
+    this.ds.submitAppData(data).subscribe((response: any) => {
+      if (response != null) {
+        this.status = response[0].status;
+        this.userId = response[0].userId;
+      }
     });
   }
 
@@ -118,6 +165,10 @@ export class ScoreComponent implements OnInit {
   }
 
   handleSubmit() {
+    if(this.viewOnly){
+      this.goNext();
+      return;
+    }
     this.spiner.show();
     let JsonData = {
       mws_total: this.mws_total,
@@ -135,18 +186,59 @@ export class ScoreComponent implements OnInit {
     data.append('c_months', this.c_months);
     data.append('c_emi', this.c_emi);
 
-    this.ds.submitAppData(data).subscribe((response: any) => {
-      this.spiner.hide();
-      Swal.fire({
-        position: 'top-end',
-        icon: 'success',
-        title: 'Your work has been saved',
-        showConfirmButton: false,
-        timer: 1500,
+    if(this.logedInUser.type == "Credit-Underwriter"){
+      // return ("Processing by Credit Analyst("+this.logedInUser.f_name +")");
+      // data.append('action', 'submit-all-forms');
+      data.append('ref_id', this.openId);
+      data.append('status', "Submitted by Credit Underwriter("+this.logedInUser.f_name +")");
+      this.ds.submitAppData(data).subscribe((response: any) => {
+        this.spiner.hide();
+
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Application Submitted',
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        this.router.navigateByUrl('dashboard');
+        // this.goNext();
+        // console.log(response);
       });
-      this.goNext();
-      console.log(response);
-    });
+    }else if(this.logedInUser.type == "Credit-Approver"){
+      data.append('ref_id', this.openId);
+      data.append('status', "Processing by Credit Approver("+this.logedInUser.f_name +")");
+      this.ds.submitAppData(data).subscribe((response: any) => {
+        this.spiner.hide();
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Your work has been saved',
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        this.goNext();
+        console.log(response);
+      });
+    }else if(this.logedInUser.type == "Admin"){
+      data.append('ref_id', this.openId);
+      data.append('status', "Processing by Admin");
+      this.ds.submitAppData(data).subscribe((response: any) => {
+        this.spiner.hide();
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Your work has been saved',
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        this.goNext();
+        console.log(response);
+      });
+    }
+
+
+
   }
 
   handleUpdate(value: number, type: number, no: number) {}
@@ -186,6 +278,7 @@ export class ScoreComponent implements OnInit {
   }
 
   goBack() {
-    this.router.navigateByUrl('add-info/' + this.openId);
+    // this.router.navigateByUrl('add-info/' + this.openId);
+    this.sideNav.openPage(2, 6);
   }
 }

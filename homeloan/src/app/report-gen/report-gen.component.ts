@@ -6,18 +6,24 @@ import { experiences, education, skills, achievements } from './cv-data';
 import { DocumentCreator } from './cv-generator';
 import { DocumentCreator2 } from './cv-generator2';
 import { HttpClient } from '@angular/common/http';
+import { SideNavComponent } from '../Components/side-nav/side-nav.component';
+import { NgxSpinnerService } from 'ngx-spinner';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-report-gen',
   templateUrl: './report-gen.component.html',
   styleUrls: ['./report-gen.component.css'],
+  providers: [SideNavComponent],
 })
 export class ReportGenComponent implements OnInit {
   constructor(
     public ds: DataService,
     private route: ActivatedRoute,
     private router: Router,
-    private Http: HttpClient
+    private Http: HttpClient,
+    private sideNav: SideNavComponent,
+    private spiner: NgxSpinnerService,
   ) {}
 
   filename: any = '';
@@ -43,12 +49,55 @@ export class ReportGenComponent implements OnInit {
   pdf1: File | null = null;
   pdf2: File | null = null;
 
+  logedInUser : any;
+  userId = "";
+  status = "";
+  viewOnly: any = false;
+  nextButtonText: any = "";
+  showUploadButton: any =  false;
+  submitButtonForAdmin =  false;
+  showButtonForApprover = false;
+
   ngOnInit(): void {
     this.route.params.subscribe((params: any) => {
-      this.openId = params.id;
+      if(params.id != null){
+        localStorage.setItem("applicant1Id",params.id)
+        this.openId = params.id;
+        if (this.openId != 0) {
+          this.getData();
+          this.getPdfFiles();
+          this.getSingleAppData()
+        }
+      }
+      // this.openId = params.id;
     });
-    this.getData();
-    this.getPdfFiles();
+    this.logedInUser = this.ds.userLoggedIn()
+    let checkView = localStorage.getItem("viewOnly")
+    if(checkView === 'true'){
+      this.viewOnly =  true;
+      this.nextButtonText = "Next"
+      // this.showUploadButton = true;
+    }else{
+      // this.nextButtonText = "Save And Next"
+      if(this.logedInUser.type == "Credit-Analyst"){
+  
+        this.nextButtonText = "Submit"
+       
+      }else if(this.logedInUser.type == "Credit-Underwriter"){
+        this.nextButtonText = "Save & Next"
+      }else if(this.logedInUser.type == "Credit-Approver"){
+        this.showButtonForApprover = true;
+        // return  "Reveiwing by Credit Approver("+this.logedInUser.f_name +")";
+        // this.nextButtonText = "Save & Next"
+      }else if(this.logedInUser.type == "Admin" && (status.indexOf("Reveiwing by Admin") > -1)){
+        // this.nextButtonText = "Save & Next"
+        this.submitButtonForAdmin =  true;
+        this.showUploadButton = true;
+        // return "Reveiwing by Admin";
+      }
+    }
+    // this.getData();
+    // this.getPdfFiles();
   }
 
   getData() {
@@ -65,6 +114,20 @@ export class ReportGenComponent implements OnInit {
         });
       });
       this.medialist = response;
+    });
+  }
+
+  getSingleAppData() {
+    let data = new FormData();
+
+    data.append('id', this.openId);
+    data.append('action', 'getSingleData');
+
+    this.ds.submitAppData(data).subscribe((response: any) => {
+      if (response != null) {
+        this.status = response[0].status;
+        this.userId = response[0].userId;
+      }
     });
   }
 
@@ -167,10 +230,17 @@ export class ReportGenComponent implements OnInit {
   }
 
   goBack() {
-    this.router.navigateByUrl('score/' + this.openId);
+    // this.router.navigateByUrl('score/' + this.openId);
+    this.sideNav.openPage(2, 6);
   }
 
   doc1() {
+
+    // console.log('sta',this.status)
+    if(this.status.indexOf('Processing by Credit Analyst') > -1){
+      alert('Being Filled by Credit Analyst')
+      return;
+    }
     let data = new FormData();
 
     data.append('action', 'getDoc1Data');
@@ -188,6 +258,10 @@ export class ReportGenComponent implements OnInit {
   }
 
   doc2() {
+    if(this.status.indexOf('Processing by Credit Analyst') > -1){
+      alert('Being Filled by Credit Analyst')
+      return;
+    }
     let data = new FormData();
 
     data.append('action', 'getDoc1Data');
@@ -209,5 +283,50 @@ export class ReportGenComponent implements OnInit {
     anchor.download = name;
     anchor.href = (window.webkitURL || window.URL).createObjectURL(data);
     anchor.click();
+  }
+
+  submitStatus(status: any){
+    this.spiner.show();
+    let data = new FormData();
+    if(this.logedInUser.type == "Admin"){
+      data.append('action', 'submit-all-forms');
+      data.append('ref_id', this.openId);
+      data.append('status', "Submitted by Admin");
+      this.ds.submitAppData(data).subscribe((response: any) => {
+        this.spiner.hide();
+
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Application Submitted',
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        // this.goNext();
+        // console.log(response);
+      });
+    }
+    if(this.logedInUser.type == "Admin"){
+      data.append('action', 'submit-all-forms');
+      data.append('ref_id', this.openId);
+      if(status == "Approved"){
+        data.append('status', "Approved by Credit Approver ("+this.logedInUser.f_name  +")");
+      }else if(status == "Rejected"){
+        data.append('status', "Rejected by Credit Approver ("+this.logedInUser.f_name  +")");
+      }
+      this.ds.submitAppData(data).subscribe((response: any) => {
+        this.spiner.hide();
+
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Application Submitted',
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        // this.goNext();
+        // console.log(response);
+      });
+    }
   }
 }
