@@ -70,7 +70,7 @@ export class LoanRequestComponent implements OnInit {
     console.log('this.logedInUser',this.logedInUser)
     let checkView = localStorage.getItem("viewOnly")
     // checkView =  JSON.parse(checkView)
-    // console.log('checkView',checkView)
+    console.log('checkView',checkView)
     if(checkView === 'true'){
       this.viewOnly =  true;
       this.nextButtonText = "Next"
@@ -79,6 +79,7 @@ export class LoanRequestComponent implements OnInit {
     }
 
     this.updateTotal();
+    console.log('viewOnly',this.viewOnly)
   }
 
   getSingleData() {

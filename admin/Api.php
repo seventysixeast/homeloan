@@ -594,6 +594,8 @@ if($_POST['action'] == 'scoreSubmit'){
     $querry = "INSERT INTO score(ref_id, m_score,total1,total2) VALUES ('$ref_id', '$m_score', '$total1', '$total2')";
 
     $result = mysqli_query($conn,$querry); 
+    $querry1 = "UPDATE app_data SET status='$status' WHERE id=".$ref_id;
+    $result1 = mysqli_query($conn,$querry1); 
 
     echo $result;
     
