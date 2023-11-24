@@ -488,27 +488,43 @@ if($_POST['action'] == 'getMediaFile'){
 
 if ($_POST['action'] == 'savePdfFile') {
     $target_dir = "uploads/";
-
-    // /*if (!file_exists($target_dir)) {
-    //     mkdir($target_dir, 0777, true);
-    // }*/
-
     $target_file = time() . basename($_FILES["file"]["name"]);
 
     if (move_uploaded_file($_FILES["file"]["tmp_name"], $target_dir . $target_file)) {
-        echo "success";
+        $ref_id = $_POST['ref_id'];
+        $type = $_POST['type'];
+        $filename = $target_file;
+
+        // Check if a record with the given ref_id and type already exists
+        $checkQuery = "SELECT * FROM pdf_files WHERE ref_id = '$ref_id' AND type = '$type'";
+        $checkResult = mysqli_query($conn, $checkQuery);
+
+        if ($checkResult) {
+            if (mysqli_num_rows($checkResult) > 0) {
+                // If the record exists, update the filename
+                $updateQuery = "UPDATE pdf_files SET filename = '$filename' WHERE ref_id = '$ref_id' AND type = '$type'";
+                $updateResult = mysqli_query($conn, $updateQuery);
+
+                echo $updateResult ? "update success" : "update error: " . mysqli_error($conn);
+            } else {
+                // If the record doesn't exist, insert a new record
+                $insertQuery = "INSERT INTO pdf_files(ref_id, type, filename) VALUES ('$ref_id', '$type', '$filename')";
+                $insertResult = mysqli_query($conn, $insertQuery);
+
+                echo $insertResult ? "insert success" : "insert error: " . mysqli_error($conn);
+            }
+        } else {
+            echo "check error: " . mysqli_error($conn);
+        }
     } else {
-        echo "error: " . $_FILES["file"]["error"];
+        // Get detailed error information about the last error
+        $lastError = error_get_last();
+        echo "error: Could not move uploaded file. Details: " . json_encode($lastError);
     }
-
-    $ref_id = $_POST['ref_id'];
-    $type = $_POST['type'];
-    $filename = $target_file;
-
-    $query = "INSERT INTO pdf_files(ref_id, type, filename) VALUES ('$ref_id', '$type', '$filename')";
-    $result = mysqli_query($conn, $query);
-    echo $result;
 }
+
+
+
 
 if ($_POST['action'] === 'getPdfFiles') {
     $ref_id = $_POST['ref_id'];
@@ -678,7 +694,6 @@ if ($_POST['action'] == 'addUser') {
 
     // Check if a file was uploaded
     if (isset($_FILES['photo']) && $_FILES['photo']['error'] == UPLOAD_ERR_OK) {
-        echo "2";
         $target_dir = "uploads/";
         $target_file = time() . basename($_FILES["photo"]["name"]);
 
@@ -687,7 +702,6 @@ if ($_POST['action'] == 'addUser') {
 
         // Check if the file was moved successfully
         if ($result) {
-            // Add the photo filename to the database
             $querry = "INSERT INTO users(f_name, l_name, email, password, type, photo) VALUES ('$f_name', '$l_name', '$email', '$password', '$type', '$target_file')";
             $result = mysqli_query($conn, $querry);
             echo $result;
@@ -695,8 +709,6 @@ if ($_POST['action'] == 'addUser') {
             echo "Upload failed";
         }
     } else {
-        echo "0";
-        // If no photo was uploaded, insert without the photo filename
         $querry = "INSERT INTO users(f_name, l_name, email, password, type) VALUES ('$f_name', '$l_name', '$email', '$password', '$type')";
         $result = mysqli_query($conn, $querry);
         echo $result;
