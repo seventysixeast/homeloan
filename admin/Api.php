@@ -629,14 +629,14 @@ if($_POST['action'] == 'getUser'){
 }
 
 
-if($_POST['action'] == 'addUser'){
+if ($_POST['action'] == 'addUser') {
+    $f_name = $_POST['f_name'];
+    $l_name = $_POST['l_name'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $type = $_POST['type'];
 
-    $f_name =  $_POST['f_name'];
-    $l_name =  $_POST['l_name'];
-    $email =  $_POST['email'];
-    $password =  $_POST['password'];
-    $type =  $_POST['type'];
-
+     /****************send mail****************** */
     // echo "<pre>"; print_r($_POST); die;
     $to = $email;
     // $to = "somebody@example.com, somebodyelse@example.com";
@@ -674,31 +674,69 @@ if($_POST['action'] == 'addUser'){
     // $headers .= 'Cc: myboss@example.com' . "\r\n";
 
     mail($to,$subject,$message,$headers);
+    /****************send mail****************** */
 
-    $querry = "INSERT INTO users(f_name, l_name,email,password,type) VALUES ('$f_name', '$l_name', '$email', '$password', '$type')";
+    // Check if a file was uploaded
+    if (isset($_FILES['photo']) && $_FILES['photo']['error'] == UPLOAD_ERR_OK) {
+        echo "2";
+        $target_dir = "uploads/";
+        $target_file = time() . basename($_FILES["photo"]["name"]);
 
-    $result = mysqli_query($conn,$querry); 
+        // Move the uploaded file to the target directory
+        $result = move_uploaded_file($_FILES["photo"]["tmp_name"], $target_dir . $target_file);
 
-    echo $result;
+        // Check if the file was moved successfully
+        if ($result) {
+            // Add the photo filename to the database
+            $querry = "INSERT INTO users(f_name, l_name, email, password, type, photo) VALUES ('$f_name', '$l_name', '$email', '$password', '$type', '$target_file')";
+            $result = mysqli_query($conn, $querry);
+            echo $result;
+        } else {
+            echo "Upload failed";
+        }
+    } else {
+        echo "0";
+        // If no photo was uploaded, insert without the photo filename
+        $querry = "INSERT INTO users(f_name, l_name, email, password, type) VALUES ('$f_name', '$l_name', '$email', '$password', '$type')";
+        $result = mysqli_query($conn, $querry);
+        echo $result;
+    }
 }
 
-if($_POST['action'] == 'updateUser'){
-    $id =  $_POST['id'];
-    $f_name =  $_POST['f_name'];
-    $l_name =  $_POST['l_name'];
-    $email =  $_POST['email'];
-    $password =  $_POST['password'];
-    $type =  $_POST['type'];
 
-    // echo "<pre>"; print_r($_POST); die;
-    $querry = "UPDATE users SET f_name='$f_name',l_name='$L_name',password='$password',type='$type' WHERE id=".$id;
+if ($_POST['action'] == 'updateUser') {
+    $id = $_POST['id'];
+    $f_name = $_POST['f_name'];
+    $l_name = $_POST['l_name'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $type = $_POST['type'];
 
-    // $querry = "INSERT INTO users(f_name, l_name,email,password,type) VALUES ('$f_name', '$l_name', '$email', '$password', '$type')";
+    // Check if a file was uploaded
+    if (isset($_FILES['photo']) && $_FILES['photo']['error'] == UPLOAD_ERR_OK) {
+        $target_dir = "uploads/";
+        $target_file = time() . basename($_FILES["photo"]["name"]);
 
-    $result = mysqli_query($conn,$querry); 
+        // Move the uploaded file to the target directory
+        $result = move_uploaded_file($_FILES["photo"]["tmp_name"], $target_dir . $target_file);
 
-    echo $result;
+        // Check if the file was moved successfully
+        if ($result) {
+            // Update the user with the new photo filename
+            $querry = "UPDATE users SET f_name='$f_name', l_name='$l_name', email='$email', password='$password', type='$type', photo='$target_file' WHERE id=".$id;
+            $result = mysqli_query($conn, $querry);
+            echo $result;
+        } else {
+            echo "Upload failed";
+        }
+    } else {
+        // If no photo was uploaded, update without changing the existing photo filename
+        $querry = "UPDATE users SET f_name='$f_name', l_name='$l_name', email='$email', password='$password', type='$type' WHERE id=".$id;
+        $result = mysqli_query($conn, $querry);
+        echo $result;
+    }
 }
+
 
 if($_POST['action']  == 'deleteUser'){
     $result = mysqli_query($conn, "DELETE FROM users Where id=".$_POST['id']);

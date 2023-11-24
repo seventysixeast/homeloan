@@ -77,7 +77,17 @@
                     <!-- <option value="Management">Management</option> -->
                   </select>
                 </div>
-  
+                <div class="col-12">
+                  <label for="inputPhoto" class="form-label">Photo</label>
+                  <input
+                    type="file"
+                    (change)="handlePhotoUpload($event)"
+                    accept="image/*"
+                    class="form-control"
+                    id="inputPhoto"
+                  />
+                </div>
+                
                 <div class="col-12 mt-3">
                   <button
                     type="submit"

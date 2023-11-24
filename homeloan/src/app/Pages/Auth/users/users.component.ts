@@ -28,7 +28,7 @@ export class UsersComponent {
   getData() {
     let data = new FormData();
     data.append('action', 'getUsers');
-    data.append('userId', this.logedInUser.id);
+    //data.append('userId', this.logedInUser.id);
     this.ds.getAppDataList(data).subscribe((response: any) => {
       this.dataList = response;
       console.log(response);
