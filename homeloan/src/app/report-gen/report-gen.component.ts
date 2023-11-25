@@ -57,6 +57,8 @@ export class ReportGenComponent implements OnInit {
   showUploadButton: any =  false;
   submitButtonForAdmin =  false;
   showButtonForApprover = false;
+  showDownloadButton =  false;
+  showStatusButton =  false;
 
   ngOnInit(): void {
     this.route.params.subscribe((params: any) => {
@@ -71,31 +73,7 @@ export class ReportGenComponent implements OnInit {
       }
       // this.openId = params.id;
     });
-    this.logedInUser = this.ds.userLoggedIn()
-    let checkView = localStorage.getItem("viewOnly")
-    if(checkView === 'true'){
-      this.viewOnly =  true;
-      this.nextButtonText = "Next"
-      // this.showUploadButton = true;
-    }else{
-      // this.nextButtonText = "Save And Next"
-      if(this.logedInUser.type == "Credit-Analyst"){
-  
-        this.nextButtonText = "Submit"
-       
-      }else if(this.logedInUser.type == "Credit-Underwriter"){
-        this.nextButtonText = "Save & Next"
-      }else if(this.logedInUser.type == "Credit-Approver"){
-        this.showButtonForApprover = true;
-        // return  "Reveiwing by Credit Approver("+this.logedInUser.f_name +")";
-        // this.nextButtonText = "Save & Next"
-      }else if(this.logedInUser.type == "Admin" && (status.indexOf("Reveiwing by Admin") > -1)){
-        // this.nextButtonText = "Save & Next"
-        this.submitButtonForAdmin =  true;
-        this.showUploadButton = true;
-        // return "Reveiwing by Admin";
-      }
-    }
+   
     // this.getData();
     // this.getPdfFiles();
   }
@@ -127,6 +105,47 @@ export class ReportGenComponent implements OnInit {
       if (response != null) {
         this.status = response[0].status;
         this.userId = response[0].userId;
+        console.log('this.status',this.status)
+        this.logedInUser = this.ds.userLoggedIn()
+        let checkView = localStorage.getItem("viewOnly")
+        if(checkView === 'true'){
+          this.viewOnly =  true;
+          this.nextButtonText = "Next"
+          if(this.logedInUser.type == "Credit-Approver" && (this.status.indexOf("Reveiwing by Credit Approver") > -1)){
+            this.showButtonForApprover = true;
+            // return  "Reveiwing by Credit Approver("+this.logedInUser.f_name +")";
+            // this.nextButtonText = "Save & Next"
+          }
+
+          // this.showUploadButton = true;
+        }else{
+          // this.nextButtonText = "Save And Next"
+          if(this.logedInUser.type == "Credit-Analyst"){
+      
+            this.nextButtonText = "Submit"
+           
+          }else if(this.logedInUser.type == "Credit-Underwriter"){
+            this.nextButtonText = "Save & Next"
+          }else if(this.logedInUser.type == "Credit-Approver"){
+            this.showButtonForApprover = true;
+            // return  "Reveiwing by Credit Approver("+this.logedInUser.f_name +")";
+            // this.nextButtonText = "Save & Next"
+          }else if(this.logedInUser.type == "Admin" && (this.status.indexOf("Reveiwing by Admin") > -1)){
+            // this.nextButtonText = "Save & Next"
+            this.submitButtonForAdmin = true;
+            this.showUploadButton = true;
+            // return "Reveiwing by Admin";
+          }
+        }
+
+        if((this.status.indexOf("Submitted by Admin") > -1) || this.status.indexOf("Reveiwing by Admin") > -1 || this.status.indexOf("Reveiwing by Credit Approver") > -1 || this.status.indexOf("Approved by Credit Approver") > -1 || this.status.indexOf("Rejected by Credit Approver") > -1){
+
+          this.showDownloadButton =  true;
+        }
+
+        if(this.status.indexOf("Approved by Credit Approver") > -1 || this.status.indexOf("Rejected by Credit Approver") > -1){
+          this.showStatusButton = true
+        }
       }
     });
   }
@@ -226,7 +245,7 @@ export class ReportGenComponent implements OnInit {
   }
 
   goNext() {
-    this.router.navigateByUrl('/');
+    this.router.navigateByUrl('/dashboard');
   }
 
   goBack() {
@@ -302,11 +321,12 @@ export class ReportGenComponent implements OnInit {
           showConfirmButton: false,
           timer: 1500,
         });
+        // this.router.navigateByUrl('dashboard');
         // this.goNext();
         // console.log(response);
       });
     }
-    if(this.logedInUser.type == "Admin"){
+    if(this.logedInUser.type == "Credit-Approver"){
       data.append('action', 'submit-all-forms');
       data.append('ref_id', this.openId);
       if(status == "Approved"){
@@ -328,5 +348,6 @@ export class ReportGenComponent implements OnInit {
         // console.log(response);
       });
     }
+    this.router.navigateByUrl('dashboard');
   }
 }

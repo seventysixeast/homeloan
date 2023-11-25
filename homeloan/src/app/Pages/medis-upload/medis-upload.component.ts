@@ -53,30 +53,10 @@ export class MedisUploadComponent implements OnInit {
         this.openId = params.id;
         this.getData();
         this.getSingleAppData()
+       
       }
     });
     // this.getData();
-    this.logedInUser = this.ds.userLoggedIn()
-    let checkView = localStorage.getItem("viewOnly")
-    if(checkView === 'true'){
-      this.viewOnly =  true;
-      this.nextButtonText = "Next"
-    }else{
-      // this.nextButtonText = "Save And Next"
-      if(this.logedInUser.type == "Credit-Analyst"){
-  
-        this.nextButtonText = "Submit"
-       
-      }else if(this.logedInUser.type == "Credit-Underwriter"){
-        this.nextButtonText = "Save & Next"
-      }else if(this.logedInUser.type == "Credit-Approver"){
-        // return  "Reveiwing by Credit Approver("+this.logedInUser.f_name +")";
-        this.nextButtonText = "Save & Next"
-      }else if(this.logedInUser.type == "Admin" && (status.indexOf("Reveiwing by Admin") > -1)){
-        this.nextButtonText = "Save & Next"
-        // return "Reveiwing by Admin";
-      }
-    }
 
     // else if(this.logedInUser.type == "Admin" && ((status.indexOf("Processing by Admin") > -1))){
     //   // return "Processing by Admin";
@@ -111,6 +91,30 @@ export class MedisUploadComponent implements OnInit {
       if (response != null) {
         this.status = response[0].status;
         this.userId = response[0].userId;
+
+        this.logedInUser = this.ds.userLoggedIn()
+        let checkView = localStorage.getItem("viewOnly")
+        console.log('this.status',this.status)
+        if(checkView === 'true'){
+          this.viewOnly =  true;
+          this.nextButtonText = "Next"
+        }else{
+          // this.nextButtonText = "Save And Next"
+          if(this.logedInUser.type == "Credit-Analyst"){
+      
+            this.nextButtonText = "Submit"
+           
+          }else if(this.logedInUser.type == "Credit-Underwriter"){
+            this.nextButtonText = "Save & Next"
+          }else if(this.logedInUser.type == "Credit-Approver"){
+            // return  "Reveiwing by Credit Approver("+this.logedInUser.f_name +")";
+            this.nextButtonText = "Save & Next"
+          }else if(this.logedInUser.type == "Admin" && (this.status.indexOf("Reveiwing by Admin") > -1)){
+            // console.log('this.status',this.status)
+            this.nextButtonText = "Save & Next"
+            // return "Reveiwing by Admin";
+          }
+        }
       }
     });
   }
@@ -219,7 +223,7 @@ export class MedisUploadComponent implements OnInit {
         // console.log(response);
       });
       // return  "Reveiwing by Credit Approver("+this.logedInUser.f_name +")";
-    }else if(this.logedInUser.type == "Admin" && (status.indexOf("Reveiwing by Admin") > -1)){
+    }else if(this.logedInUser.type == "Admin" && (this.status.indexOf("Reveiwing by Admin") > -1)){
       // return "Reveiwing by Admin";
       data.append('status', "Reveiwing by Admin");
       this.ds.submitAppData(data).subscribe((response: any) => {
@@ -234,7 +238,7 @@ export class MedisUploadComponent implements OnInit {
         this.goNext();
         // console.log(response);
       });
-    }else if(this.logedInUser.type == "Admin" && ((status.indexOf("Processing by Admin") > -1))){
+    }else if(this.logedInUser.type == "Admin" && ((this.status.indexOf("Processing by Admin") > -1))){
       // return "Processing by Admin";
       data.append('action', 'submit-all-forms');
       data.append('ref_id', this.openId);
