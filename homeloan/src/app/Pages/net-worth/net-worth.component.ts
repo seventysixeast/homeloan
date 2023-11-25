@@ -215,6 +215,7 @@ export class NetWorthComponent implements OnInit {
       parseInt(this.netWorth2 == '' ? 0 : this.netWorth2);
 
     this.loanAmountRatio = this.totalNetWorth / this.loanAmmount;
+    this.loanAmountRatio = this.loanAmountRatio.toFixed(2);
   }
 
   goBack() {

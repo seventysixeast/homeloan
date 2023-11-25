@@ -459,6 +459,9 @@ if($_POST['action'] == 'getaddinfo'){
 }
 
 if($_POST['action'] == 'saveMediaFile'){
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
     $target_dir = "uploads/";
     $target_file = time().basename($_FILES["file"]["name"]);
     $result = move_uploaded_file($_FILES["file"]["tmp_name"], $target_dir .$target_file);
@@ -488,6 +491,9 @@ if($_POST['action'] == 'getMediaFile'){
 
 if ($_POST['action'] == 'savePdfFile') {
     $target_dir = "uploads/";
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
 
     // /*if (!file_exists($target_dir)) {
     //     mkdir($target_dir, 0777, true);
@@ -589,11 +595,17 @@ if($_POST['action'] == 'scoreSubmit'){
     $total1 =  $_POST['total1'];
 
     $total2 =  $_POST['total2'];
-
+    $status = $_POST['status'];
+    // echo "<pre>"; print_r($_POST); die;
+    // ini_set('display_errors', 1);
+    // ini_set('display_startup_errors', 1);
+    // error_reporting(E_ALL);
     
     $querry = "INSERT INTO score(ref_id, m_score,total1,total2) VALUES ('$ref_id', '$m_score', '$total1', '$total2')";
 
     $result = mysqli_query($conn,$querry); 
+    $querry1 = "UPDATE app_data SET status='$status' WHERE id=".$ref_id;
+    $result1 = mysqli_query($conn,$querry1); 
 
     echo $result;
     
@@ -730,6 +742,9 @@ if($_POST['action'] == 'submit-all-forms'){
     $ref_id =  $_POST['ref_id'];
 
     $status = $_POST['status'];
+    // ini_set('display_errors', 1);
+    // ini_set('display_startup_errors', 1);
+    // error_reporting(E_ALL);
 
     // echo "<pre>"; print_r($_POST); die;
 

@@ -50,30 +50,7 @@ export class ScoreComponent implements OnInit {
         }
       }
     });
-    this.logedInUser = this.ds.userLoggedIn()
-    let checkView = localStorage.getItem("viewOnly")
-    console.log('checkView',checkView)
-    if(checkView === 'true'){
-      this.viewOnly =  true;
-      this.nextButtonText = "Next"
-    }else{
-      // this.nextButtonText = "Save And Next"
-      if(this.logedInUser.type == "Credit-Underwriter"){
-  
-        this.nextButtonText = "Submit"
-       
-      }else if(this.logedInUser.type == "Credit-Approver"){
-        // return  "Reveiwing by Credit Approver("+this.logedInUser.f_name +")";
-        this.nextButtonText = "Save & Next"
-      }else if(this.logedInUser.type == "Admin" && (status.indexOf("Reveiwing by Admin") > -1)){
-        this.nextButtonText = "Save & Next"
-        // return "Reveiwing by Admin";
-      }
-
-      // else if(this.logedInUser.type == "Credit-Underwriter"){
-      //   this.nextButtonText = "Save & Next"
-      // }
-    }
+    
   }
 
   getSingleData() {
@@ -123,6 +100,24 @@ export class ScoreComponent implements OnInit {
       if (response != null) {
         this.status = response[0].status;
         this.userId = response[0].userId;
+        this.logedInUser = this.ds.userLoggedIn()
+        let checkView = localStorage.getItem("viewOnly")
+        // console.log('checkView',checkView)
+        if(checkView === 'true'){
+          this.viewOnly =  true;
+          this.nextButtonText = "Next"
+        }else{
+          // this.nextButtonText = "Save And Next"
+          if(this.logedInUser.type == "Credit-Underwriter"){
+      
+            this.nextButtonText = "Submit"
+           
+          }else if(this.logedInUser.type == "Credit-Approver"){
+            this.nextButtonText = "Save & Next"
+          }else if(this.logedInUser.type == "Admin" && (this.status.indexOf("Reveiwing by Admin") > -1)){
+            this.nextButtonText = "Save & Next"
+          }
+        }
       }
     });
   }
@@ -222,7 +217,7 @@ export class ScoreComponent implements OnInit {
       });
     }else if(this.logedInUser.type == "Admin"){
       data.append('ref_id', this.openId);
-      data.append('status', "Processing by Admin");
+      data.append('status', "Reveiwing by Admin");
       this.ds.submitAppData(data).subscribe((response: any) => {
         this.spiner.hide();
         Swal.fire({
