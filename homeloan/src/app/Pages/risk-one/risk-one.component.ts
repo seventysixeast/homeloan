@@ -58,6 +58,7 @@ export class RiskOneComponent implements OnInit {
   c3 = '';
   c4 = '';
   c5 = '';
+  c6 = '';
 
   d1 = '';
   d2 = '';
@@ -97,6 +98,37 @@ export class RiskOneComponent implements OnInit {
     }else{
       this.nextButtonText = "Save And Next"
     }
+  }
+
+  getNetWorth() {
+    let data = new FormData();
+    data.append('id', this.openId);
+    data.append('action', 'getSingleNetWorth');
+    this.ds.submitAppData(data).subscribe((response: any) => {
+      let newWorth = response[response.length - 1];
+      let loanAmountRatio = newWorth.loanAmountRatio;
+
+      if (loanAmountRatio >= 1.5) {
+        this.handleUpdate(2, 3, 1);
+      }
+      if (loanAmountRatio >= 1 && loanAmountRatio < 1.5) {
+        this.handleUpdate(1.75, 3, 2);
+      }
+      if (loanAmountRatio >= 0.75 && loanAmountRatio < 1) {
+        this.handleUpdate(1.5, 3, 3);
+      }
+      if (loanAmountRatio >= 0.5 && loanAmountRatio < 0.75) {
+        this.handleUpdate(1.25, 3, 4);
+      }
+      if (loanAmountRatio >= 0.25 && loanAmountRatio < 0.5) {
+        this.handleUpdate(1, 3, 4);
+      }
+      if (loanAmountRatio < 0.25) {
+        this.handleUpdate(0.5, 1, 4);
+      }
+
+      
+    });
   }
 
   handleUpdate(value: number, type: number, no: number) {
@@ -239,6 +271,7 @@ export class RiskOneComponent implements OnInit {
         this.c3 = '';
         this.c4 = '';
         this.c5 = '';
+        this.c6 = '';
       }
       if (no == 2) {
         this.c1 = '';
@@ -246,6 +279,7 @@ export class RiskOneComponent implements OnInit {
         this.c3 = '';
         this.c4 = '';
         this.c5 = '';
+        this.c6 = '';
       }
       if (no == 3) {
         this.c1 = '';
@@ -253,6 +287,7 @@ export class RiskOneComponent implements OnInit {
         this.c3 = 'activeOpt';
         this.c4 = '';
         this.c5 = '';
+        this.c6 = '';
       }
       if (no == 4) {
         this.c1 = '';
@@ -260,6 +295,7 @@ export class RiskOneComponent implements OnInit {
         this.c3 = '';
         this.c4 = 'activeOpt';
         this.c5 = '';
+        this.c6 = '';
       }
       if (no == 5) {
         this.c1 = '';
@@ -267,6 +303,15 @@ export class RiskOneComponent implements OnInit {
         this.c3 = '';
         this.c4 = '';
         this.c5 = 'activeOpt';
+        this.c6 = '';
+      }
+      if (no == 6) {
+        this.c1 = '';
+        this.c2 = '';
+        this.c3 = '';
+        this.c4 = '';
+        this.c5 = '';
+        this.c6 = 'activeOpt';
       }
       this.mws3 = value * 1;
       this.s_mws3 = value;

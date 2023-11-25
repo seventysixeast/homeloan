@@ -221,6 +221,7 @@ export class ApplicantDataComponent implements OnInit {
         if (response != 0) {
           this.openId = response;
           localStorage.setItem("applicant1Id",response)
+          // localStorage.setItem('activeId', response);
         }
         window.scroll({
           top: 0,
