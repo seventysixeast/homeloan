@@ -51,22 +51,22 @@
               </div>
               <div [class]="showUploadButton ? 'col-12 mt-3' : 'col-12 mt-3 notShowEdit'" >
                 <!-- File Upload Option 1 for PDF -->
-                <input type="file" (change)="handlePdfUpload($event, 'pdf1')" accept=".pdf" />
-                <button type="submit" class="btn btn-primary" (click)="uploadPdf('pdf1')">
-                  Upload PDF 1
+                <input type="file" (change)="handlePdfUpload($event, 'application')" accept=".pdf" />
+                <button type="submit" class="btn btn-primary" (click)="uploadPdf('application')">
+                  Upload Application PDF
                 </button>
               </div>
         
               <div [class]="showUploadButton ? 'col-12 mt-3' : 'col-12 mt-3 notShowEdit'">
                 <!-- File Upload Option 2 for PDF -->
-                <input type="file" (change)="handlePdfUpload($event, 'pdf2')" accept=".pdf" />
-                <button type="submit" class="btn btn-primary" (click)="uploadPdf('pdf2')">
-                  Upload PDF 2
+                <input type="file" (change)="handlePdfUpload($event, 'proposal')" accept=".pdf" />
+                <button type="submit" class="btn btn-primary" (click)="uploadPdf('proposal')">
+                  Upload Proposal PDF
                 </button>
               </div>
               <div [class]="showDownloadButton ? 'col-12 mt-3' : 'col-12 mt-3 notShowEdit'"   *ngFor="let pdfFile of pdfFiles">
-                <button (click)="downloadPdf(pdfFile)">
-                  Download PDF {{ pdfFiles.indexOf(pdfFile) + 1 }}
+                <button (click)="downloadPdf(pdfFile.filename)">
+                  Download {{ pdfFile.type | titlecase }} PDF
                 </button>
               </div>
               <div  *ngIf="submitButtonForAdmin" class="col-12 mt-3">

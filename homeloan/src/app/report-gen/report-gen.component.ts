@@ -44,10 +44,10 @@ export class ReportGenComponent implements OnInit {
 
   medialist: any = [];
 
-  pdfFiles: string[] = [];
+  pdfFiles: any[] = [];
 
-  pdf1: File | null = null;
-  pdf2: File | null = null;
+  application: File | null = null;
+  proposal: File | null = null;
 
   logedInUser : any;
   userId = "";
@@ -174,7 +174,7 @@ export class ReportGenComponent implements OnInit {
     console.log(this.fileToUpload);
   }
 
-  handlePdfUpload(event: any, type: 'pdf1' | 'pdf2') {
+  handlePdfUpload(event: any, type: 'application' | 'proposal') {
     const file = event.target.files[0];
     if (file && file.type === 'application/pdf') {
       this[type] = file;
@@ -183,29 +183,53 @@ export class ReportGenComponent implements OnInit {
     }
   }
 
-  uploadPdf(type: 'pdf1' | 'pdf2') {
+  uploadPdf(type: 'application' | 'proposal') {
     const file = this[type];
-  
+
     if (file) {
-      const data = new FormData();
-  
-      data.append('action', 'savePdfFile'); // Adjust the action accordingly
-      data.append('ref_id', this.openId);
-      data.append('type', type); // You can pass the type to differentiate between pdf1 and pdf2
-      data.append('file', file);
-  
-      this.ds.submitAppData(data).subscribe((response: any) => {
-        // Handle the response as needed
-        console.log(response);
-  
-        // Clear the selected file and perform any other necessary actions
-        this[type] = null;
-        this.getData();
-      });
+        const data = new FormData();
+
+        data.append('action', 'savePdfFile');
+        data.append('ref_id', this.openId);
+        data.append('type', type);
+        data.append('file', file);
+
+        this.ds.submitAppData(data).subscribe((response: any) => {
+            console.log(response);
+
+            // Handle the response message
+            if (response.success) {
+                console.log("File saved successfully");
+                this.getPdfFiles();
+                Swal.fire({
+                     position: 'top-end',
+                     icon: 'success',
+                     title: 'File Saved',
+                     showConfirmButton: false,
+                     timer: 1500,
+                });
+            } else {
+                console.error("File save failed:", response.message);
+                Swal.fire({
+                     icon: 'error',
+                     title: 'Oops...',
+                     text: 'File save failed',
+                });
+            }
+
+            // Clear the selected file and perform any other necessary actions
+            this[type] = null;
+            this.getData();
+        });
     } else {
-      console.log('No file selected. Please choose a PDF file to upload.');
+      Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'No file selected. Please choose a PDF file to upload.',
+      });
     }
-  }
+}
+
 
   getPdfFiles() {
     let data = new FormData();
@@ -308,6 +332,14 @@ export class ReportGenComponent implements OnInit {
     this.spiner.show();
     let data = new FormData();
     if(this.logedInUser.type == "Admin"){
+      if(this.pdfFiles.length < 2){
+        Swal.fire({
+          icon: 'error',
+          title: 'failed...',
+          text: 'Both pdf files need to be uploaded before submit',
+      });
+      return;
+      }
       data.append('action', 'submit-all-forms');
       data.append('ref_id', this.openId);
       data.append('status', "Submitted by Admin");

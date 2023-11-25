@@ -27,6 +27,7 @@ export class UsersAddComponent {
   type = '0';
   edit = false;
   id = "0";
+  photo: File | null = null;
 
 
   ngOnInit(): void {
@@ -60,6 +61,15 @@ export class UsersAddComponent {
     console.log('this.type',this.type)
   }
 
+  handlePhotoUpload(event: any) {
+    const file = event.target.files[0];
+    if (file && file.type.startsWith('image/')) {
+      this.photo = file;
+    } else {
+      console.log('Invalid file type. Please upload an image.');
+    }
+  }
+
   handleSubmit() {
     this.spinner.show();
     let data = new FormData();
@@ -69,6 +79,9 @@ export class UsersAddComponent {
     data.append('email', this.email);
     data.append('password', this.password);
     data.append('type', this.type);
+    if (this.photo) {
+      data.append('photo', this.photo);
+    }
 
     if(this.edit){
       data.append('id', this.id);

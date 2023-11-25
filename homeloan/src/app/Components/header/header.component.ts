@@ -15,10 +15,12 @@ export class HeaderComponent implements OnInit {
   ) {}
 
   logedInUser : any;
+  mediaUrl: string = '';;
 
   ngOnInit(): void {
     this.logedInUser = this.ds.userLoggedIn();
-    console.log('this.logedInUser',this.logedInUser)
+    console.log('this.logedInUser',this.logedInUser);
+    this.mediaUrl = this.ds.mediaUrl;
   }
 
   logout(){

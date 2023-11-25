@@ -221,11 +221,11 @@ if($_POST['action'] == 'submit-loan-request'){
     error_reporting(E_ALL);
     $res_header = mysqli_query($conn, "SELECT * FROM loan_request Where ref_id=".$ref_id);
 
-    // if($res_header->num_rows == 0){
+     if($res_header->num_rows == 0){
         $querry = "INSERT INTO loan_request(ref_id, dataJson, total, appMargin, appMarginD, marginAge, loanRequest, loanRequestD, propertyD, comment) VALUES ('$ref_id', '$dataJson', '$total', '$appMargin', '$appMarginD', '$marginAge', '$loanRequest', '$loanRequestD', '$propertyD', '$comment')";
-    // }else{
-    //     $querry = "UPDATE loan_request SET dataJson='$dataJson',total='$total',appMargin='$appMargin',appMarginD='$appMarginD',marginAge='$marginAge',loanRequest='$loanRequest',loanRequestD='$loanRequestD',propertyD='$propertyD',comment='$comment' WHERE ref_id=".$ref_id;
-    // }
+     }else{
+        $querry = "UPDATE loan_request SET dataJson='$dataJson',total='$total',appMargin='$appMargin',appMarginD='$appMarginD',marginAge='$marginAge',loanRequest='$loanRequest',loanRequestD='$loanRequestD',propertyD='$propertyD',comment='$comment' WHERE ref_id=".$ref_id;
+    }
 
 
     $result = mysqli_query($conn,$querry); 
@@ -267,7 +267,14 @@ if($_POST['action'] == 'submit-net-worth'){
     $status = $_POST['status'];
     // echo "<pre>"; print_r($_POST); die;
 
-    $querry = "INSERT INTO net_worth(ref_id,c_loanAmount, c_intrestRate, c_months, c_emi, ammountPEMI, EMI1, EMI2, IIR1, IIR2, netWorth1, netWorth2, totalNetWorth, loanAmmount, loanAmountRatio) VALUES ('$ref_id','$c_loanAmount', '$c_intrestRate', '$c_months', '$c_emi', '$ammountPEMI', '$EMI1', '$EMI2', '$IIR1', '$IIR2', '$netWorth1', '$netWorth2', '$totalNetWorth', '$loanAmmount', '$loanAmountRatio')";
+    //$querry = "INSERT INTO net_worth(ref_id,c_loanAmount, c_intrestRate, c_months, c_emi, ammountPEMI, EMI1, EMI2, IIR1, IIR2, netWorth1, netWorth2, totalNetWorth, loanAmmount, loanAmountRatio) VALUES ('$ref_id','$c_loanAmount', '$c_intrestRate', '$c_months', '$c_emi', '$ammountPEMI', '$EMI1', '$EMI2', '$IIR1', '$IIR2', '$netWorth1', '$netWorth2', '$totalNetWorth', '$loanAmmount', '$loanAmountRatio')";
+    $res_net_worth = mysqli_query($conn, "SELECT * FROM net_worth WHERE ref_id=" . $ref_id);
+
+    if ($res_net_worth->num_rows == 0) {
+        $querry = "INSERT INTO net_worth(ref_id,c_loanAmount, c_intrestRate, c_months, c_emi, ammountPEMI, EMI1, EMI2, IIR1, IIR2, netWorth1, netWorth2, totalNetWorth, loanAmmount, loanAmountRatio) VALUES ('$ref_id','$c_loanAmount', '$c_intrestRate', '$c_months', '$c_emi', '$ammountPEMI', '$EMI1', '$EMI2', '$IIR1', '$IIR2', '$netWorth1', '$netWorth2', '$totalNetWorth', '$loanAmmount', '$loanAmountRatio')";
+    } else {
+        $querry = "UPDATE net_worth SET c_loanAmount='$c_loanAmount', c_intrestRate='$c_intrestRate', c_months='$c_months', c_emi='$c_emi', ammountPEMI='$ammountPEMI', EMI1='$EMI1', EMI2='$EMI2', IIR1='$IIR1', IIR2='$IIR2', netWorth1='$netWorth1', netWorth2='$netWorth2', totalNetWorth='$totalNetWorth', loanAmmount='$loanAmmount', loanAmountRatio='$loanAmountRatio' WHERE ref_id=" . $ref_id;
+    }
 
     $result = mysqli_query($conn,$querry); 
     $querry1 = "UPDATE app_data SET status='$status' WHERE id=".$ref_id;
@@ -307,7 +314,14 @@ if($_POST['action'] == 'submit-client-visit'){
 
     // echo "<pre>"; print_r($_POST); die;
     
-    $querry = "INSERT INTO client_visit(ref_id, name1, name2, designation1, designation2, visitDate1, visitDate2, comment1, comment2, comment3, comment4, g_visitDate) VALUES ('$ref_id', '$name1', '$name2', '$designation1', '$designation2', '$visitDate1', '$visitDate2', '$comment1', '$comment2', '$comment3', '$comment4', '$g_visitDate')";
+    //$querry = "INSERT INTO client_visit(ref_id, name1, name2, designation1, designation2, visitDate1, visitDate2, comment1, comment2, comment3, comment4, g_visitDate) VALUES ('$ref_id', '$name1', '$name2', '$designation1', '$designation2', '$visitDate1', '$visitDate2', '$comment1', '$comment2', '$comment3', '$comment4', '$g_visitDate')";
+    $res_client_visit = mysqli_query($conn, "SELECT * FROM client_visit WHERE ref_id=" . $ref_id);
+
+    if ($res_client_visit->num_rows == 0) {
+        $querry = "INSERT INTO client_visit(ref_id, name1, name2, designation1, designation2, visitDate1, visitDate2, comment1, comment2, comment3, comment4, g_visitDate) VALUES ('$ref_id', '$name1', '$name2', '$designation1', '$designation2', '$visitDate1', '$visitDate2', '$comment1', '$comment2', '$comment3', '$comment4', '$g_visitDate')";
+    } else {
+        $querry = "UPDATE client_visit SET name1='$name1', name2='$name2', designation1='$designation1', designation2='$designation2', visitDate1='$visitDate1', visitDate2='$visitDate2', comment1='$comment1', comment2='$comment2', comment3='$comment3', comment4='$comment4', g_visitDate='$g_visitDate' WHERE ref_id=" . $ref_id;
+    }
 
     $result = mysqli_query($conn,$querry); 
     $querry1 = "UPDATE app_data SET status='$status' WHERE id=".$ref_id;
@@ -350,7 +364,14 @@ if($_POST['action'] == 'submit-site-visit'){
     $comments3 =  $_POST['comments3'];
     $status = $_POST['status'];
     
-    $querry = "INSERT INTO site_visit(ref_id, name1, name2, designation1, designation2, visitDate1, visitDate2, details, mValue, dsValue, reportDate, valuerName, comments1, advocateName, reportDate2, comments2, comments3) VALUES ('$ref_id', '$name1', '$name2', '$designation1', '$designation2', '$visitDate1', '$visitDate2', '$details', '$mValue', '$dsValue', '$reportDate', '$valuerName', '$comments1', '$advocateName', '$reportDate2', '$comments2', '$comments3')";
+    //$querry = "INSERT INTO site_visit(ref_id, name1, name2, designation1, designation2, visitDate1, visitDate2, details, mValue, dsValue, reportDate, valuerName, comments1, advocateName, reportDate2, comments2, comments3) VALUES ('$ref_id', '$name1', '$name2', '$designation1', '$designation2', '$visitDate1', '$visitDate2', '$details', '$mValue', '$dsValue', '$reportDate', '$valuerName', '$comments1', '$advocateName', '$reportDate2', '$comments2', '$comments3')";
+    $res_site_visit = mysqli_query($conn, "SELECT * FROM site_visit WHERE ref_id=" . $ref_id);
+
+    if ($res_site_visit->num_rows == 0) {
+        $querry = "INSERT INTO site_visit(ref_id, name1, name2, designation1, designation2, visitDate1, visitDate2, details, mValue, dsValue, reportDate, valuerName, comments1, advocateName, reportDate2, comments2, comments3) VALUES ('$ref_id', '$name1', '$name2', '$designation1', '$designation2', '$visitDate1', '$visitDate2', '$details', '$mValue', '$dsValue', '$reportDate', '$valuerName', '$comments1', '$advocateName', '$reportDate2', '$comments2', '$comments3')";
+    } else {
+        $querry = "UPDATE site_visit SET name1='$name1', name2='$name2', designation1='$designation1', designation2='$designation2', visitDate1='$visitDate1', visitDate2='$visitDate2', details='$details', mValue='$mValue', dsValue='$dsValue', reportDate='$reportDate', valuerName='$valuerName', comments1='$comments1', advocateName='$advocateName', reportDate2='$reportDate2', comments2='$comments2', comments3='$comments3' WHERE ref_id=" . $ref_id;
+    }
 
     $result = mysqli_query($conn,$querry); 
     $querry1 = "UPDATE app_data SET status='$status' WHERE id=".$ref_id;
@@ -377,7 +398,14 @@ if($_POST['action'] == 'submit-risk-1'){
     $JsonData =  $_POST['JsonData'];
     $status = $_POST['status'];
     // echo "<pre>"; print_r($_POST); die;
-    $querry = "INSERT INTO risk_one(ref_id, JsonData) VALUES ('$ref_id', '$JsonData')";
+    //$querry = "INSERT INTO risk_one(ref_id, JsonData) VALUES ('$ref_id', '$JsonData')";
+    $res_risk_one = mysqli_query($conn, "SELECT * FROM risk_one WHERE ref_id=" . $ref_id);
+
+    if ($res_risk_one->num_rows == 0) {
+        $querry = "INSERT INTO risk_one(ref_id, JsonData) VALUES ('$ref_id', '$JsonData')";
+    } else {
+        $querry = "UPDATE risk_one SET JsonData='$JsonData' WHERE ref_id=" . $ref_id;
+    }
 
     $result = mysqli_query($conn,$querry); 
 
@@ -405,7 +433,14 @@ if($_POST['action'] == 'submit-risk-2'){
     $JsonData =  $_POST['JsonData'];
     $status = $_POST['status'];
     
-    $querry = "INSERT INTO risk_two(ref_id, JsonData) VALUES ('$ref_id', '$JsonData')";
+    //$querry = "INSERT INTO risk_two(ref_id, JsonData) VALUES ('$ref_id', '$JsonData')";
+    $res_risk_two = mysqli_query($conn, "SELECT * FROM risk_two WHERE ref_id=" . $ref_id);
+
+    if ($res_risk_two->num_rows == 0) {
+        $querry = "INSERT INTO risk_two(ref_id, JsonData) VALUES ('$ref_id', '$JsonData')";
+    } else {
+        $querry = "UPDATE risk_two SET JsonData='$JsonData' WHERE ref_id=" . $ref_id;
+    }
 
     $result = mysqli_query($conn,$querry); 
     $querry1 = "UPDATE app_data SET status='$status' WHERE id=".$ref_id;
@@ -435,7 +470,16 @@ if($_POST['action'] == 'submit-add-info'){
     $EMI =  $_POST['EMI'];
     // echo "<pre>"; print_r($_POST); die;
     
-    $querry = "INSERT INTO addinfo(ref_id, JsonData) VALUES ('$ref_id', '$JsonData')";
+    //$querry = "INSERT INTO addinfo(ref_id, JsonData) VALUES ('$ref_id', '$JsonData')";
+    $res_addinfo = mysqli_query($conn, "SELECT * FROM addinfo WHERE ref_id=" . $ref_id);
+
+    if ($res_addinfo->num_rows == 0) {
+        // No record found, perform INSERT operation
+        $querry = "INSERT INTO addinfo(ref_id, JsonData) VALUES ('$ref_id', '$JsonData')";
+    } else {
+        // Record found, perform UPDATE operation
+        $querry = "UPDATE addinfo SET JsonData='$JsonData' WHERE ref_id=" . $ref_id;
+    }
 
     $result = mysqli_query($conn,$querry); 
 
@@ -490,42 +534,69 @@ if($_POST['action'] == 'getMediaFile'){
 
 
 if ($_POST['action'] == 'savePdfFile') {
+    $response = array("success" => false, "message" => "");
     $target_dir = "uploads/";
-    ini_set('display_errors', 1);
-    ini_set('display_startup_errors', 1);
-    error_reporting(E_ALL);
-
-    // /*if (!file_exists($target_dir)) {
-    //     mkdir($target_dir, 0777, true);
-    // }*/
 
     $target_file = time() . basename($_FILES["file"]["name"]);
 
     if (move_uploaded_file($_FILES["file"]["tmp_name"], $target_dir . $target_file)) {
-        echo "success";
+        $ref_id = $_POST['ref_id'];
+        $type = $_POST['type'];
+        $filename = $target_file;
+
+        // Check if a record with the given ref_id and type already exists
+        $checkQuery = "SELECT * FROM pdf_files WHERE ref_id = '$ref_id' AND type = '$type'";
+        $checkResult = mysqli_query($conn, $checkQuery);
+
+        if ($checkResult) {
+            if (mysqli_num_rows($checkResult) > 0) {
+                // If the record exists, update the filename
+                $updateQuery = "UPDATE pdf_files SET filename = '$filename' WHERE ref_id = '$ref_id' AND type = '$type'";
+                $updateResult = mysqli_query($conn, $updateQuery);
+
+                if ($updateResult) {
+                    $response["success"] = true;
+                    $response["message"] = "Update successful";
+                } else {
+                    $response["message"] = "Update failed";
+                    $response["error"] = mysqli_error($conn);
+                }
+            } else {
+                // If the record doesn't exist, insert a new record
+                $insertQuery = "INSERT INTO pdf_files(ref_id, type, filename) VALUES ('$ref_id', '$type', '$filename')";
+                $insertResult = mysqli_query($conn, $insertQuery);
+
+                if ($insertResult) {
+                    $response["success"] = true;
+                    $response["message"] = "Insert successful";
+                } else {
+                    $response["message"] = "Insert failed";
+                    $response["error"] = mysqli_error($conn);
+                }
+            }
+        } else {
+            $response["message"] = "Check error";
+            $response["error"] = mysqli_error($conn);
+        }
     } else {
-        echo "error: " . $_FILES["file"]["error"];
+        // Get detailed error information about the last error
+        $lastError = error_get_last();
+        $response["message"] = "Could not move uploaded file";
+        $response["errorDetails"] = $lastError;
     }
-
-    $ref_id = $_POST['ref_id'];
-    $type = $_POST['type'];
-    $filename = $target_file;
-
-    $query = "INSERT INTO pdf_files(ref_id, type, filename) VALUES ('$ref_id', '$type', '$filename')";
-    $result = mysqli_query($conn, $query);
-    echo $result;
+    echo json_encode($response);
 }
 
 if ($_POST['action'] === 'getPdfFiles') {
     $ref_id = $_POST['ref_id'];
     
     // Adjust the table name and column names accordingly
-    $query = "SELECT filename FROM pdf_files WHERE ref_id = '$ref_id'";
+    $query = "SELECT filename, type FROM pdf_files WHERE ref_id = '$ref_id'";
     $result = mysqli_query($conn, $query);
     if ($result) {
         $pdfFiles = [];
         while ($row = mysqli_fetch_assoc($result)) {
-            $pdfFiles[] = $row['filename'];
+            $pdfFiles[] = $row;
         }
         
         echo json_encode($pdfFiles);
@@ -642,13 +713,13 @@ if($_POST['action'] == 'getUser'){
 
 
 if($_POST['action'] == 'addUser'){
+    $f_name = $_POST['f_name'];
+    $l_name = $_POST['l_name'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $type = $_POST['type'];
 
-    $f_name =  $_POST['f_name'];
-    $l_name =  $_POST['l_name'];
-    $email =  $_POST['email'];
-    $password =  $_POST['password'];
-    $type =  $_POST['type'];
-
+     /****************send mail****************** */
     // echo "<pre>"; print_r($_POST); die;
     $to = $email;
     // $to = "somebody@example.com, somebodyelse@example.com";
@@ -686,31 +757,65 @@ if($_POST['action'] == 'addUser'){
     // $headers .= 'Cc: myboss@example.com' . "\r\n";
 
     mail($to,$subject,$message,$headers);
+    /****************send mail****************** */
 
-    $querry = "INSERT INTO users(f_name, l_name,email,password,type) VALUES ('$f_name', '$l_name', '$email', '$password', '$type')";
+    // Check if a file was uploaded
+    if (isset($_FILES['photo']) && $_FILES['photo']['error'] == UPLOAD_ERR_OK) {
+        $target_dir = "uploads/";
+        $target_file = time() . basename($_FILES["photo"]["name"]);
 
-    $result = mysqli_query($conn,$querry); 
+        // Move the uploaded file to the target directory
+        $result = move_uploaded_file($_FILES["photo"]["tmp_name"], $target_dir . $target_file);
 
-    echo $result;
+        // Check if the file was moved successfully
+        if ($result) {
+            $querry = "INSERT INTO users(f_name, l_name, email, password, type, photo) VALUES ('$f_name', '$l_name', '$email', '$password', '$type', '$target_file')";
+            $result = mysqli_query($conn, $querry);
+            echo $result;
+        } else {
+            echo "Upload failed";
+        }
+    } else {
+        $querry = "INSERT INTO users(f_name, l_name, email, password, type) VALUES ('$f_name', '$l_name', '$email', '$password', '$type')";
+        $result = mysqli_query($conn, $querry);
+        echo $result;
+    }
 }
 
-if($_POST['action'] == 'updateUser'){
-    $id =  $_POST['id'];
-    $f_name =  $_POST['f_name'];
-    $l_name =  $_POST['l_name'];
-    $email =  $_POST['email'];
-    $password =  $_POST['password'];
-    $type =  $_POST['type'];
 
-    // echo "<pre>"; print_r($_POST); die;
-    $querry = "UPDATE users SET f_name='$f_name',l_name='$L_name',password='$password',type='$type' WHERE id=".$id;
+if ($_POST['action'] == 'updateUser') {
+    $id = $_POST['id'];
+    $f_name = $_POST['f_name'];
+    $l_name = $_POST['l_name'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $type = $_POST['type'];
 
-    // $querry = "INSERT INTO users(f_name, l_name,email,password,type) VALUES ('$f_name', '$l_name', '$email', '$password', '$type')";
+    // Check if a file was uploaded
+    if (isset($_FILES['photo']) && $_FILES['photo']['error'] == UPLOAD_ERR_OK) {
+        $target_dir = "uploads/";
+        $target_file = time() . basename($_FILES["photo"]["name"]);
 
-    $result = mysqli_query($conn,$querry); 
+        // Move the uploaded file to the target directory
+        $result = move_uploaded_file($_FILES["photo"]["tmp_name"], $target_dir . $target_file);
 
-    echo $result;
+        // Check if the file was moved successfully
+        if ($result) {
+            // Update the user with the new photo filename
+            $querry = "UPDATE users SET f_name='$f_name', l_name='$l_name', email='$email', password='$password', type='$type', photo='$target_file' WHERE id=".$id;
+            $result = mysqli_query($conn, $querry);
+            echo $result;
+        } else {
+            echo "Upload failed";
+        }
+    } else {
+        // If no photo was uploaded, update without changing the existing photo filename
+        $querry = "UPDATE users SET f_name='$f_name', l_name='$l_name', email='$email', password='$password', type='$type' WHERE id=".$id;
+        $result = mysqli_query($conn, $querry);
+        echo $result;
+    }
 }
+
 
 if($_POST['action']  == 'deleteUser'){
     $result = mysqli_query($conn, "DELETE FROM users Where id=".$_POST['id']);
@@ -742,9 +847,6 @@ if($_POST['action'] == 'submit-all-forms'){
     $ref_id =  $_POST['ref_id'];
 
     $status = $_POST['status'];
-    // ini_set('display_errors', 1);
-    // ini_set('display_startup_errors', 1);
-    // error_reporting(E_ALL);
 
     // echo "<pre>"; print_r($_POST); die;
 
