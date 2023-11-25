@@ -1,0 +1,210 @@
+<main id="main" class="main">
+  <div class="pagetitle">
+    <h1>Client Visit Information</h1>
+    <!-- <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+        <li class="breadcrumb-item active">Income and Net Worth</li>
+      </ol>
+    </nav> -->
+  </div>
+  <!-- End Page Title -->
+
+  <section class="section">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title" style="text-align: center">
+              <!-- Applicant's Net Worth and Repayment Capacity -->
+              <!-- Client Visit Details -->
+            </h5>
+            <div class="row mx-2 my-1">
+              <div class="col-3 mb-3">
+                <label for="inputNanme4" class="form-label"
+                  >Name of Visiting Staff</label
+                >
+              </div>
+              <div class="col-3 mb-3">
+                <input
+                  autocomplete="nope"
+                  type="text"
+                  class="form-control"
+                  id="inputNanme4"
+                  placeholder="Name"
+                  [(ngModel)]="name1"
+                />
+              </div>
+              <div class="col-3 mb-3">
+                <input
+                  autocomplete="nope"
+                  type="text"
+                  class="form-control"
+                  id="inputNanme4"
+                  placeholder="Designation"
+                  [(ngModel)]="designation1"
+                />
+              </div>
+              <div class="col-3 mb-3">
+                <input
+                  autocomplete="nope"
+                  type="date"
+                  class="form-control"
+                  id="inputNanme4"
+                  placeholder="Visit Date"
+                  [(ngModel)]="visitDate1"
+                />
+              </div>
+              <div class="col-3 mb-3">
+                <label for="inputNanme4" class="form-label"></label>
+              </div>
+              <div class="col-3 mb-3">
+                <input
+                  autocomplete="nope"
+                  type="text"
+                  class="form-control"
+                  id="inputNanme4"
+                  placeholder="Name"
+                  [(ngModel)]="name2"
+                />
+              </div>
+              <div class="col-3 mb-3">
+                <input
+                  autocomplete="nope"
+                  type="text"
+                  class="form-control"
+                  id="inputNanme4"
+                  placeholder="Designation"
+                  [(ngModel)]="designation2"
+                />
+              </div>
+              <div class="col-3 mb-3">
+                <input
+                  autocomplete="nope"
+                  type="date"
+                  class="form-control"
+                  id="inputNanme4"
+                  placeholder="Visit Date"
+                  [(ngModel)]="visitDate2"
+                />
+              </div>
+              <div class="col-12 mb-3">
+                <label for="inputNanme4" class="form-label"
+                  >A. Applicant/s Visit Details</label
+                >
+              </div>
+              <div class="col-3 mt-3">
+                <div class="row">
+                  <div class="col-12">Comments / Findings</div>
+                  <div class="col-12" style="font-weight: bold">
+                    {{ app_1 }}
+                  </div>
+                  <div class="col-12">1st Applicant</div>
+                </div>
+              </div>
+              <div class="col-9 mt-3">
+                <textarea
+                  type="text"
+                  rows="6"
+                  class="form-control"
+                  id="inputNanme4"
+                  placeholder="Comments"
+                  [(ngModel)]="comment1"
+                ></textarea>
+              </div>
+              <div class="col-3 mt-3">
+                <div class="row">
+                  <div class="col-12">Comments / Findings</div>
+                  <div class="col-12" style="font-weight: bold">
+                    {{ app_2 }}
+                  </div>
+                  <div class="col-12">2nd Applicant</div>
+                </div>
+              </div>
+              <div class="col-9 mt-3">
+                <textarea
+                  rows="6"
+                  type="text"
+                  class="form-control"
+                  id="inputNanme4"
+                  placeholder="Comments"
+                  [(ngModel)]="comment2"
+                ></textarea>
+              </div>
+              <!-- <div class="col-6 mt-3">
+                <label for="inputNanme4" class="form-label"
+                  >B. Guarantor/s Visit Details
+                </label>
+              </div>
+              <div class="col-6 mt-3">
+                <input
+                  autocomplete="nope"
+                  [(ngModel)]="g_visitDate"
+                  type="date"
+                  class="form-control"
+                  id="inputNanme4"
+                />
+              </div> -->
+              <div class="col-3 mt-3">
+                <div class="row">
+                  <div class="col-12">Comments / Findings</div>
+                  <div class="col-12" style="font-weight: bold">
+                    {{ gur_1 }}
+                  </div>
+                  <div class="col-12">1st Guarantor</div>
+                </div>
+              </div>
+              <div class="col-9 mt-3">
+                <textarea
+                  rows="6"
+                  type="text"
+                  class="form-control"
+                  id="inputNanme4"
+                  placeholder="Comments"
+                  [(ngModel)]="comment3"
+                ></textarea>
+              </div>
+              <div class="col-3 mt-3">
+                <div class="row">
+                  <div class="col-12">Comments / Findings</div>
+                  <div class="col-12" style="font-weight: bold">
+                    {{ gur_2 }}
+                  </div>
+                  <div class="col-12">2nd Guarantor</div>
+                </div>
+              </div>
+              <div class="col-9 mt-3">
+                <textarea
+                  rows="6"
+                  type="text"
+                  class="form-control"
+                  id="inputNanme4"
+                  placeholder="Comments"
+                  [(ngModel)]="comment4"
+                ></textarea>
+              </div>
+              <div class="col-12 mt-3">
+                <button
+                  type="submit"
+                  class="btn btn-primary"
+                  (click)="goBack()"
+                >
+                  Back
+                </button>
+                <button
+                  type="submit"
+                  class="btn btn-primary mx-3"
+                  (click)="handleSubmit()"
+                >
+                  Save & Next
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<!-- End #main -->
+<ngx-spinner type="ball-scale-multiple"></ngx-spinner>

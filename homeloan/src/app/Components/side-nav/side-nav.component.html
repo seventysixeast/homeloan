@@ -2,7 +2,7 @@
 <aside id="sidebar" class="sidebar">
   <ul class="sidebar-nav" id="sidebar-nav">
     <li class="nav-item">
-      <a class="nav-link" routerLink="/dashbord">
+      <a class="nav-link" routerLink="/dashboard">
         <i class="bi bi-grid"></i>
         <span>Dashboard</span>
       </a>
@@ -28,7 +28,11 @@
         "
         data-bs-parent="#sidebar-nav"
       >
-        <li *ngFor="let y of x.subMenuLinks">
+        <li *ngFor="let y of x.subMenuLinks" [class]="
+        activeId == null
+          ? 'disableMouse'
+          : ''
+      ">
           <a
             [routerLink]="y.link + '/' + activeId"
             [class]="y.status == true ? 'active' : null"
@@ -40,7 +44,8 @@
         </li>
       </ul>
     </li>
-    <li class="nav-item">
+
+    <li class="nav-item" *ngIf = "logedInUser && logedInUser.type == 'Admin'">
       <a class="nav-link" routerLink="/users">
         <i class="bi bi-grid"></i>
         <span>Users</span>

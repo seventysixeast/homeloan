@@ -17,14 +17,18 @@ export class UsersComponent {
   ) {}
 
   dataList: any = [];
+  logedInUser : any;
 
   ngOnInit(): void {
     this.getData();
+    this.logedInUser = this.ds.userLoggedIn()
+    console.log('this.logedInUser',this.logedInUser)
   }
 
   getData() {
     let data = new FormData();
     data.append('action', 'getUsers');
+    data.append('userId', this.logedInUser.id);
     this.ds.getAppDataList(data).subscribe((response: any) => {
       this.dataList = response;
       console.log(response);

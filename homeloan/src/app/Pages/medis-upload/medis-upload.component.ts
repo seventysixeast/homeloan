@@ -39,15 +39,39 @@ export class MedisUploadComponent implements OnInit {
 
   medialist: any = [];
 
+  logedInUser : any;
+  userId = "";
+  status = "";
+  submitButtonText = "";
+
   ngOnInit(): void {
     this.route.params.subscribe((params: any) => {
       if(params.id != null){
         localStorage.setItem("applicant1Id",params.id)
         this.openId = params.id;
         this.getData();
+        this.getSingleAppData()
       }
     });
     // this.getData();
+    this.logedInUser = this.ds.userLoggedIn()
+
+    if(this.logedInUser.type == "Credit-Analyst"){
+
+      this.submitButtonText = "Submit"
+     
+    }else if(this.logedInUser.type == "Credit-Underwriter"){
+      this.submitButtonText = "Save & Next"
+    }else if(this.logedInUser.type == "Credit-Approver"){
+      // return  "Reveiwing by Credit Approver("+this.logedInUser.f_name +")";
+      this.submitButtonText = "Save & Next"
+    }else if(this.logedInUser.type == "Admin" && (status.indexOf("Reveiwing by Admin") > -1)){
+      this.submitButtonText = "Save & Next"
+      // return "Reveiwing by Admin";
+    }else if(this.logedInUser.type == "Admin" && ((status.indexOf("Processing by Admin") > -1))){
+      // return "Processing by Admin";
+      this.submitButtonText = "Submit"
+    }
   }
 
   getData() {
@@ -64,6 +88,20 @@ export class MedisUploadComponent implements OnInit {
         });
       });
       this.medialist = response;
+    });
+  }
+
+  getSingleAppData() {
+    let data = new FormData();
+
+    data.append('id', this.openId);
+    data.append('action', 'getSingleData');
+
+    this.ds.submitAppData(data).subscribe((response: any) => {
+      if (response != null) {
+        this.status = response[0].status;
+        this.userId = response[0].userId;
+      }
     });
   }
 
@@ -104,22 +142,96 @@ export class MedisUploadComponent implements OnInit {
     // });
     let data = new FormData();
 
-    data.append('action', 'submit-all-forms');
-    data.append('ref_id', this.openId);
-    data.append('status', "Submitted-by-Admin");
-    this.ds.submitAppData(data).subscribe((response: any) => {
-      this.spiner.hide();
+    if(this.logedInUser.type == "Credit-Analyst"){
+      // return ("Processing by Credit Analyst("+this.logedInUser.f_name +")");
+      data.append('action', 'submit-all-forms');
+      data.append('ref_id', this.openId);
+      data.append('status', "Submitted by Credit Analyst("+this.logedInUser.f_name +")");
+      this.ds.submitAppData(data).subscribe((response: any) => {
+        this.spiner.hide();
 
-      Swal.fire({
-        position: 'top-end',
-        icon: 'success',
-        title: 'Application Submitted',
-        showConfirmButton: false,
-        timer: 1500,
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Application Submitted',
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        this.router.navigateByUrl('dashboard');
+        // this.goNext();
+        // console.log(response);
       });
-      this.goNext();
-      // console.log(response);
-    });
+    }else if(this.logedInUser.type == "Credit-Underwriter"){
+      // return ("Reveiwing by Credit Underwriter("+this.logedInUser.f_name  +")");
+      data.append('action', 'submit-all-forms');
+      data.append('ref_id', this.openId);
+      data.append('status', "Reveiwing by Credit Underwriter("+this.logedInUser.f_name  +")");
+      this.ds.submitAppData(data).subscribe((response: any) => {
+        this.spiner.hide();
+
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Your work has been saved',
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        this.goNext();
+        // console.log(response);
+      });
+      // Swal.fire({
+      //   position: 'top-end',
+      //   icon: 'success',
+      //   title: 'Your work has been saved',
+      //   // title: 'Application Submitted',
+      //   showConfirmButton: false,
+      //   timer: 1500,
+      // });
+    }else if(this.logedInUser.type == "Credit-Approver"){
+      // return  "Reveiwing by Credit Approver("+this.logedInUser.f_name +")";
+    }else if(this.logedInUser.type == "Admin" && (status.indexOf("Reveiwing by Admin") > -1)){
+      // return "Reveiwing by Admin";
+    }else if(this.logedInUser.type == "Admin" && ((status.indexOf("Processing by Admin") > -1))){
+      // return "Processing by Admin";
+      data.append('action', 'submit-all-forms');
+      data.append('ref_id', this.openId);
+      data.append('status', "Submitted by Admin");
+      this.ds.submitAppData(data).subscribe((response: any) => {
+        this.spiner.hide();
+
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Application Submitted',
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        this.router.navigateByUrl('dashboard');
+        // this.goNext();
+        // console.log(response);
+      });
+    }
+
+    // if((this.logedInUser.type == "Admin" && this.userId == '' ) || ){
+
+    // }
+
+    // data.append('action', 'submit-all-forms');
+    // data.append('ref_id', this.openId);
+    // data.append('status', "Submitted-by-Admin");
+    // this.ds.submitAppData(data).subscribe((response: any) => {
+    //   this.spiner.hide();
+
+    //   Swal.fire({
+    //     position: 'top-end',
+    //     icon: 'success',
+    //     title: 'Application Submitted',
+    //     showConfirmButton: false,
+    //     timer: 1500,
+    //   });
+    //   this.goNext();
+    //   // console.log(response);
+    // });
 
     // this.goNext();
   }

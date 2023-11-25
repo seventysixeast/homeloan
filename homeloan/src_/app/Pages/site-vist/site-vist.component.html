@@ -1,0 +1,226 @@
+<main id="main" class="main">
+  <div class="pagetitle">
+    <h1>Site Visit Information</h1>
+    <!-- <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+        <li class="breadcrumb-item active">Site Visit</li>
+      </ol>
+    </nav> -->
+  </div>
+  <!-- End Page Title -->
+
+  <section class="section">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title" style="text-align: center">
+              <!-- Site Visit Details -->
+            </h5>
+            <div class="row mx-2 my-1">
+              <div class="col-3 mb-3">
+                <label for="inputNanme4" class="form-label"
+                  >Name of Visiting Staff</label
+                >
+              </div>
+              <div class="col-3 mb-3">
+                <input
+                  autocomplete="nope"
+                  type="text"
+                  class="form-control"
+                  id="inputNanme4"
+                  placeholder="Name"
+                  [(ngModel)]="name1"
+                />
+              </div>
+              <div class="col-3 mb-3">
+                <input
+                  autocomplete="nope"
+                  type="text"
+                  class="form-control"
+                  id="inputNanme4"
+                  placeholder="Designation"
+                  [(ngModel)]="designation1"
+                />
+              </div>
+              <div class="col-3 mb-3">
+                <input
+                  autocomplete="nope"
+                  type="date"
+                  class="form-control"
+                  id="inputNanme4"
+                  placeholder="Visit Date"
+                  [(ngModel)]="visitDate1"
+                />
+              </div>
+              <div class="col-3 mb-3">
+                <label for="inputNanme4" class="form-label"></label>
+              </div>
+              <div class="col-3 mb-3">
+                <input
+                  autocomplete="nope"
+                  type="text"
+                  class="form-control"
+                  id="inputNanme4"
+                  placeholder="Name"
+                  [(ngModel)]="name2"
+                />
+              </div>
+              <div class="col-3 mb-3">
+                <input
+                  autocomplete="nope"
+                  type="text"
+                  class="form-control"
+                  id="inputNanme4"
+                  placeholder="Designation"
+                  [(ngModel)]="designation2"
+                />
+              </div>
+              <div class="col-3 mb-3">
+                <input
+                  autocomplete="nope"
+                  type="date"
+                  class="form-control"
+                  id="inputNanme4"
+                  placeholder="Visit Date"
+                  [(ngModel)]="visitDate2"
+                />
+              </div>
+              <div class="col-3 mb-3">
+                Full Property Details (Such as Location, Ownership etc.)
+              </div>
+              <div class="col-9 mb-3">
+                <textarea
+                  type="text"
+                  rows="6"
+                  class="form-control"
+                  id="inputNanme4"
+                  placeholder="Full Details"
+                  [(ngModel)]="details"
+                ></textarea>
+              </div>
+              <div class="col-3 mb-3">Property Valuation Details</div>
+              <div class="col-9 mb-3">
+                <div class="row">
+                  <div class="col-4 mb-2">Market Value (Kyats)</div>
+                  <div class="col-8 mb-2">
+                    <input
+                      autocomplete="nope"
+                      type="text"
+                      [(ngModel)]="mValue"
+                      class="form-control"
+                      id="inputNanme4"
+                    />
+                  </div>
+                  <div class="col-4 mb-2">Distress Sale Value (Kyats)</div>
+                  <div class="col-8 mb-2">
+                    <input
+                      autocomplete="nope"
+                      type="text"
+                      [(ngModel)]="dsValue"
+                      class="form-control"
+                      id="inputNanme4"
+                    />
+                  </div>
+                  <div class="col-4 mb-2">Report Date</div>
+                  <div class="col-8 mb-2">
+                    <input
+                      autocomplete="nope"
+                      type="date"
+                      [(ngModel)]="reportDate"
+                      class="form-control"
+                      id="inputNanme4"
+                    />
+                  </div>
+                  <div class="col-4 mb-2">Valuer's Name</div>
+                  <div class="col-8 mb-2">
+                    <input
+                      autocomplete="nope"
+                      type="text"
+                      [(ngModel)]="valuerName"
+                      class="form-control"
+                      id="inputNanme4"
+                    />
+                  </div>
+                  <div class="col-4 mb-2">Comments ( if any )</div>
+                  <div class="col-8 mb-2">
+                    <textarea
+                      type="text"
+                      class="form-control"
+                      id="inputNanme4"
+                      rows="6"
+                      [(ngModel)]="comments1"
+                    ></textarea>
+                  </div>
+                </div>
+              </div>
+              <div class="col-3 mb-3">Property Legal Search</div>
+              <div class="col-9 mb-3">
+                <div class="row">
+                  <div class="col-4 mb-2">Advocate Name</div>
+                  <div class="col-8 mb-2">
+                    <input
+                      autocomplete="nope"
+                      type="text"
+                      [(ngModel)]="advocateName"
+                      class="form-control"
+                      id="inputNanme4"
+                    />
+                  </div>
+                  <div class="col-4 mb-2">Report Date</div>
+                  <div class="col-8 mb-2">
+                    <input
+                      autocomplete="nope"
+                      type="date"
+                      [(ngModel)]="reportDate2"
+                      class="form-control"
+                      id="inputNanme4"
+                    />
+                  </div>
+                  <div class="col-4 mb-2">Comments</div>
+                  <div class="col-8 mb-2">
+                    <textarea
+                      [(ngModel)]="comments2"
+                      type="text"
+                      class="form-control"
+                      id="inputNanme4"
+                      rows="6"
+                    ></textarea>
+                  </div>
+                </div>
+              </div>
+              <!-- <div class="col-3 mb-3">Comments / Findings</div>
+              <div class="col-9 mb-3">
+                <textarea
+                  type="text"
+                  class="form-control"
+                  id="inputNanme4"
+                  [(ngModel)]="comments3"
+                ></textarea>
+              </div> -->
+              <div class="col-12 mt-3">
+                <button
+                  type="submit"
+                  class="btn btn-primary"
+                  (click)="goBack()"
+                >
+                  Back
+                </button>
+                <button
+                  type="submit"
+                  class="btn btn-primary mx-3"
+                  (click)="handleSubmit()"
+                >
+                  Save & Next
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<!-- End #main -->
+<ngx-spinner type="ball-scale-multiple"></ngx-spinner>

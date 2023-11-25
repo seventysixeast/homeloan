@@ -1,0 +1,125 @@
+<main id="main" class="main">
+  <div class="pagetitle">
+    <h1>Photos / Videos Upload</h1>
+    <!-- <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+          <li class="breadcrumb-item active">Photos / Videos Upload</li>
+        </ol>
+      </nav> -->
+  </div>
+  <!-- End Page Title -->
+
+  <section class="section">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title" style="text-align: center">
+              <!-- Photographs / Documents -->
+            </h5>
+            <div class="row mx-2 my-3" style="align-items: center">
+              <div class="col-6 mb-3">
+                <label for="inputNanme4" class="form-label">
+                  Select Purpose
+                </label>
+              </div>
+              <div class="col-6 mb-3">
+                <label for="inputNanme4" class="form-label">
+                  Select File
+                </label>
+              </div>
+
+              <div class="col-4 mb-3">
+                <select
+                  class="form-select"
+                  aria-label="Default select example"
+                  [(ngModel)]="type"
+                >
+                  <option [value]="i.id" *ngFor="let i of typeList">
+                    {{ i.name }}
+                  </option>
+                </select>
+              </div>
+              <div class="col-4 mb-3">
+                <input
+                  autocomplete="nope"
+                  class="form-control"
+                  name="comment"
+                  [(ngModel)]="comment"
+                  placeholder="Details"
+                />
+              </div>
+              <div class="col-4 mb-3">
+                <input
+                  autocomplete="nope"
+                  class="form-control"
+                  type="file"
+                  id="formFile"
+                  [(ngModel)]="filename"
+                  (change)="handleFileInput($event.target)"
+                />
+              </div>
+
+              <div class="col-12 my-5">
+                <div class="row">
+                  <div class="col-6">
+                    <div class="row" *ngFor="let i of medialist; let x = index">
+                      <div class="col-1">{{ x + 1 }}</div>
+                      <div class="col-5">{{ i.typeName }}</div>
+                      <div class="col-4">{{ i.comment }}</div>
+                      <div class="col-1">
+                        <i
+                          class="bx bx-show"
+                          style="font-size: 25px; cursor: pointer"
+                          (click)="showImg(i)"
+                        ></i>
+                      </div>
+                      <div class="col-1">
+                        <i
+                          class="bx bxs-trash-alt"
+                          style="font-size: 25px; cursor: pointer"
+                          (click)="deleteImg(i)"
+                        ></i>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <img [src]="showImageLink" style="width: 25rem" />
+                    <video
+                      width="400"
+                      *ngIf="showVideoLink != ''"
+                      [src]="showVideoLink"
+                      controls
+                    >
+                      Your browser does not support HTML video.
+                    </video>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-12 mt-3">
+                <button
+                  type="submit"
+                  class="btn btn-primary"
+                  (click)="goBack()"
+                >
+                  Back
+                </button>
+                <button
+                  type="submit"
+                  class="btn btn-primary mx-3"
+                  (click)="handleSubmit()"
+                >
+                  Save & Next
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<!-- End #main -->
+<ngx-spinner type="ball-scale-multiple"></ngx-spinner>

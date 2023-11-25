@@ -1,0 +1,936 @@
+<main id="main" class="main">
+  <div class="pagetitle">
+    <h1>Credit Capacity Credetials</h1>
+    <!-- <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+        <li class="breadcrumb-item active">Risk Assessment Data - II</li>
+      </ol>
+    </nav> -->
+  </div>
+  <!-- End Page Title -->
+
+  <section class="section">
+    <div class="row">
+      <!-- <div class="col-lg-8">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title" style="text-align: center">
+              Management Assessment Score : Guidance Sheet
+            </h5>
+            <div
+              class="row mx-2 my-1"
+              style="text-align: center; font-size: 14px"
+            >
+              <div
+                class="col-6 mb-3"
+                style="color: #4154f1; font-weight: 600; font-size: 16px"
+              >
+                Safety Level Score
+              </div>
+              <div
+                class="col-6 mb-3"
+                style="color: #4154f1; font-weight: 600; font-size: 16px"
+              >
+                Client Safety Level
+              </div>
+              <div class="col-6 mb-3">
+                If Client Safety Score is 80 and More.
+              </div>
+              <div class="col-6 mb-3">High</div>
+              <div class="col-6 mb-3">
+                If Client Safety Score is 70 and above but < 80
+              </div>
+              <div class="col-6 mb-3">Good</div>
+              <div class="col-6 mb-3">
+                If Client Safety Score is 60 and above but < 70
+              </div>
+              <div class="col-6 mb-3">Moderate</div>
+              <div class="col-6 mb-3">
+                If Client Safety Score is 50 and above but < 60
+              </div>
+              <div class="col-6 mb-3">Average</div>
+              <div class="col-6 mb-3">If Safety Client Score is < 50</div>
+              <div class="col-6 mb-3">Poor</div>
+            </div>
+          </div>
+        </div>
+      </div> -->
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title" style="text-align: center">
+              <!-- Credit Capacity Credetials -->
+            </h5>
+            <div>
+              <table id="customers">
+                <tr>
+                  <th>Sr No.</th>
+                  <th>Parameter</th>
+                  <!-- <th>Particulars</th>
+                  <th>Score Options</th>
+                  <th>Assigned Weight</th>
+                  <th>Max Weignted Score</th>
+                  <th>Assigned Score</th>
+                  <th>Assigned Weigted Score</th> -->
+                </tr>
+                <tr>
+                  <td>1</td>
+                  <td style="font-weight: bold; font-size: 15px">
+                    Applicant's Monthly Income
+                  </td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td [class]="a1" colspan="2">
+                    A. Applicant's estimated Monthly Income is at 3 times and
+                    more of Monthly Installment.
+                  </td>
+                  <!-- <td>5</td>
+                  <td rowspan="4">3</td>
+                  <td rowspan="4">15</td>
+                  <td rowspan="4" class="finAnaIptTd">{{ s_mws1 }}</td>
+                  <td rowspan="4">{{ mws1 }}</td> -->
+                </tr>
+                <tr>
+                  <td></td>
+                  <td colspan="2" [class]="a2">
+                    B. Applicant's estimated Monthly Income is at 2 time and
+                    more but Less than 3 times of Monthly Installment.
+                  </td>
+                  <!-- <td>3</td> -->
+                </tr>
+                <tr>
+                  <td></td>
+                  <td colspan="2" [class]="a3">
+                    C. Applicant's estimated Monthly Income is at 1 time and
+                    more but Less than 2 times of Monthly Installment.
+                  </td>
+                  <!-- <td>2</td> -->
+                </tr>
+                <tr>
+                  <td></td>
+                  <td colspan="2" [class]="a4">
+                    D. Applicant's estimated Monthly Income is Less than 1 time
+                    of Monthly Installment.
+                  </td>
+                  <!-- <td>-1</td> -->
+                </tr>
+
+                <tr>
+                  <td>2</td>
+                  <td style="font-weight: bold; font-size: 15px">
+                    Family's Combined Monthly Income
+                  </td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td colspan="2" [class]="b1">
+                    A. Estimated combined Family Income is more than 4 times of
+                    Monthly Installment.
+                  </td>
+                  <!-- <td>4</td>
+                  <td rowspan="4">1</td>
+                  <td rowspan="4">4</td>
+                  <td rowspan="4" class="finAnaIptTd">{{ s_mws2 }}</td>
+                  <td rowspan="4">{{ mws2 }}</td> -->
+                </tr>
+                <tr>
+                  <td></td>
+                  <td colspan="2" [class]="b2">
+                    B. Estimated combined Family Income is at 3 times and more
+                    but less than 4 times of Monthly Installment.
+                  </td>
+                  <!-- <td>3</td> -->
+                </tr>
+                <tr>
+                  <td></td>
+                  <td colspan="2" [class]="b3">
+                    C. Estimated combined Family Income is at 2 times and more
+                    but less than 3 times of Monthly Installment.
+                  </td>
+                  <!-- <td>1.5</td> -->
+                </tr>
+                <tr>
+                  <td></td>
+                  <td colspan="2" [class]="b4">
+                    D. Estimated combined Family Income is Less than 2 times of
+                    Monthly Installment.
+                  </td>
+                  <!-- <td>-1</td> -->
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td style="font-weight: bold; font-size: 15px">
+                    Applicant's Saving and other deposit accounts :
+                  </td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td
+                    colspan="2"
+                    [class]="'selectable ' + c1"
+                    (click)="handleUpdate(4, 3, 1)"
+                  >
+                    A. Applicant/s have Saving and Other Deposit accounts with
+                    Banks and maintaining HIGH level of balances. (Equivalent to
+                    > 6 Installments).
+                  </td>
+                  <!-- <td>4</td>
+                  <td rowspan="5">1</td>
+                  <td rowspan="5">4</td>
+                  <td rowspan="5" class="finAnaIptTd">{{ s_mws3 }}</td>
+                  <td rowspan="5">{{ mws3 }}</td> -->
+                </tr>
+                <tr>
+                  <td></td>
+                  <td
+                    colspan="2"
+                    [class]="'selectable ' + c2"
+                    (click)="handleUpdate(3, 3, 2)"
+                  >
+                    B. Applicant/s have Saving and Other Deposit accounts with
+                    Banks and maintaining Moderate level of balances (Equivalent
+                    to 3 To 6 MIs).
+                  </td>
+                  <!-- <td>3</td> -->
+                </tr>
+                <tr>
+                  <td></td>
+                  <td
+                    colspan="2"
+                    [class]="'selectable ' + c3"
+                    (click)="handleUpdate(2, 3, 3)"
+                  >
+                    C. Applicant/s have Saving and Other Deposit accounts with
+                    Banks and maintaining LOW level of balances (Equivalent to <
+                    3 Installments).
+                  </td>
+                  <!-- <td>2</td> -->
+                </tr>
+                <tr>
+                  <td></td>
+                  <td
+                    colspan="2"
+                    [class]="'selectable ' + c4"
+                    (click)="handleUpdate(-3, 3, 4)"
+                  >
+                    D. Applicant/s is Not Maintaining any Saving and Other
+                    Deposit accounts with Banks.
+                  </td>
+                  <!-- <td>-3</td> -->
+                </tr>
+
+                <tr>
+                  <td>4</td>
+                  <td style="font-weight: bold; font-size: 15px">
+                    Applicant's Margin Contribution :
+                  </td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td colspan="2" [class]="d1">
+                    A. Applicant's Margin Contribution is Less than 10 %
+                  </td>
+                  <!-- <td>-5</td>
+                  <td rowspan="8">3</td>
+                  <td rowspan="8">15</td>
+                  <td rowspan="8" class="finAnaIptTd">{{ s_mws4 }}</td>
+                  <td rowspan="8">{{ mws4 }}</td> -->
+                </tr>
+                <tr>
+                  <td></td>
+                  <td colspan="2" [class]="d2">
+                    B. Applicant's Margin Contribution is 10 % and more but Less
+                    than 15 %
+                  </td>
+                  <!-- <td>-1</td> -->
+                </tr>
+                <tr>
+                  <td></td>
+                  <td colspan="2" [class]="d3">
+                    C. Applicant's Margin Contribution is 15 % and more but Less
+                    than 20 %
+                  </td>
+                  <!-- <td>2</td> -->
+                </tr>
+                <tr>
+                  <td></td>
+                  <td colspan="2" [class]="d4">
+                    D. Applicant's Margin Contribution is 20 % and more but Less
+                    than 25 %
+                  </td>
+                  <!-- <td>3</td> -->
+                </tr>
+                <tr>
+                  <td></td>
+                  <td colspan="2" [class]="d5">
+                    E. Applicant's Margin Contribution is 25 % and more but Less
+                    than 30 %
+                  </td>
+                  <!-- <td>3.5</td> -->
+                </tr>
+                <tr>
+                  <td></td>
+                  <td colspan="2" [class]="d6">
+                    F. Applicant's Margin Contribution is 30 % and more but Less
+                    than 35 %
+                  </td>
+                  <!-- <td>4</td> -->
+                </tr>
+                <tr>
+                  <td></td>
+                  <td colspan="2" [class]="d7">
+                    G. Applicant's Margin Contribution is 35 % and more but Less
+                    than 40 %
+                  </td>
+                  <!-- <td>4.5</td> -->
+                </tr>
+                <tr>
+                  <td></td>
+                  <td colspan="2" [class]="d8">
+                    H. Applicant's Margin Contribution is 40 % and more.
+                  </td>
+                  <!-- <td>5</td> -->
+                </tr>
+                <tr>
+                  <td>5</td>
+                  <td style="font-weight: bold; font-size: 15px">
+                    Source of Margin Contribution
+                  </td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td
+                    colspan="2"
+                    [class]="'selectable ' + e1"
+                    (click)="handleUpdate(3, 5, 1)"
+                  >
+                    A. Margin money is coming from applicant's own personal
+                    savings.
+                  </td>
+                  <!-- <td>3</td>
+                  <td rowspan="3">2</td>
+                  <td rowspan="3">6</td>
+                  <td rowspan="3" class="finAnaIptTd">{{ s_mws5 }}</td>
+                  <td rowspan="3">{{ mws5 }}</td> -->
+                </tr>
+                <tr>
+                  <td></td>
+                  <td
+                    colspan="2"
+                    [class]="'selectable ' + e2"
+                    (click)="handleUpdate(2, 5, 2)"
+                  >
+                    B. Margin money is coming from applicant's own savings and
+                    also from family member's savings.
+                  </td>
+                  <!-- <td>2</td> -->
+                </tr>
+                <tr>
+                  <td></td>
+                  <td
+                    colspan="2"
+                    [class]="'selectable ' + e3"
+                    (click)="handleUpdate(-2, 5, 3)"
+                  >
+                    C. Margin money is partly coming from applicant's own and
+                    family savings and partly from short term loans from friends
+                    and relatives.
+                  </td>
+                  <!-- <td>-2</td> -->
+                </tr>
+                <tr>
+                  <td>6</td>
+                  <td style="font-weight: bold; font-size: 15px">
+                    Debit Standing Instructions
+                  </td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td
+                    colspan="2"
+                    [class]="'selectable ' + f1"
+                    (click)="handleUpdate(3, 6, 1)"
+                  >
+                    A. Applicants have their main Savings Account with the bank
+                    and ready to submit Debit Standing Instructions or
+                    Post-dated Cheques towards monthly installments.
+                  </td>
+                  <!-- <td>3</td>
+                  <td rowspan="3">3</td>
+                  <td rowspan="3">6</td>
+                  <td rowspan="3" class="finAnaIptTd">{{ s_mws6 }}</td>
+                  <td rowspan="3">{{ mws6 }}</td> -->
+                </tr>
+                <tr>
+                  <td></td>
+                  <td
+                    colspan="2"
+                    [class]="'selectable ' + f2"
+                    (click)="handleUpdate(2, 6, 2)"
+                  >
+                    B. Applicants are Ready to Open their main Savings Account
+                    with bank and ready to submit Debit Standing Instructions or
+                    Post-dated Cheques towards monthly installments.
+                  </td>
+                  <!-- <td>2</td> -->
+                </tr>
+                <tr>
+                  <td></td>
+                  <td
+                    colspan="2"
+                    [class]="'selectable ' + f3"
+                    (click)="handleUpdate(1, 6, 3)"
+                  >
+                    C. Applicants are Not Ready to Open their main Savings
+                    Account with the bank but ready to submit Post-dated Cheques
+                    towards monthly installments.
+                  </td>
+                  <!-- <td>1</td> -->
+                </tr>
+                <tr>
+                  <td></td>
+                  <td
+                    colspan="2"
+                    [class]="'selectable ' + f4"
+                    (click)="handleUpdate(0, 6, 4)"
+                  >
+                    D. Please see excel sheet and Add.
+                  </td>
+                  <!-- <td>1</td> -->
+                </tr>
+                <!-- <tr>
+                  <td colspan="4" style="text-align: center">Total Score</td>
+                  <td colspan="2" style="text-align: right">50</td>
+                  <td colspan="2" style="text-align: right">{{ mws_total }}</td>
+                </tr> -->
+              </table>
+            </div>
+            <!-- <div class="row mx-2 my-1" style="align-items: center">
+              <div class="col-1 mb-3">
+                <label for="inputNanme4" class="form-label">Sr No.</label>
+              </div>
+              <div class="col-3 mb-3">
+                <label for="inputNanme4" class="form-label">Parameter</label>
+              </div>
+              <div class="col-3 mb-3">
+                <label for="inputNanme4" class="form-label">Particulars</label>
+              </div>
+              <div class="col-1 mb-3">
+                <label for="inputNanme4" class="form-label"
+                  >Score Options</label
+                >
+              </div>
+              <div class="col-1 mb-3">
+                <label for="inputNanme4" class="form-label"
+                  >Assigned Weight</label
+                >
+              </div>
+              <div class="col-1 mb-3">
+                <label for="inputNanme4" class="form-label"
+                  >Max. Weignted Score</label
+                >
+              </div>
+              <div class="col-1 mb-3">
+                <label for="inputNanme4" class="form-label"
+                  >Assigned Score</label
+                >
+              </div>
+              <div class="col-1 mb-3">
+                <label for="inputNanme4" class="form-label"
+                  >Assigned Weigted Score</label
+                >
+              </div>
+
+              <div class="col-1 mb-3">
+                <label for="inputNanme4" class="form-label">1</label>
+              </div>
+              <div class="col-11 mb-3">
+                <h6 style="font-weight: bold">Applicant's Monthly Income</h6>
+              </div>
+              <div class="col-1 mb-3"></div>
+              <div class="col-3 mb-3"></div>
+              <div class="col-4 mb-3">
+                <div class="row">
+                  <div
+                    [class]="'col-12 mb-2 pointer ' + a1"
+                    (click)="handleUpdate(4, 1, 1)"
+                  >
+                    <div class="row" style="align-items: center">
+                      <div class="col-10">
+                        A. Applicant's estimated Monthly Income is more than 3
+                        times of Monthly Installment.
+                      </div>
+                      <div class="col-2">4</div>
+                    </div>
+                  </div>
+                  <div
+                    [class]="'col-12 mb-2 pointer ' + a2"
+                    (click)="handleUpdate(3, 1, 2)"
+                  >
+                    <div class="row" style="align-items: center">
+                      <div class="col-10">
+                        B. Applicant's estimated Monthly Income is between 2 to
+                        3 times of Monthly Installment.
+                      </div>
+                      <div class="col-2">3</div>
+                    </div>
+                  </div>
+                  <div
+                    [class]="'col-12 mb-2 pointer ' + a3"
+                    (click)="handleUpdate(2, 1, 3)"
+                  >
+                    <div class="row" style="align-items: center">
+                      <div class="col-10">
+                        C. Applicant's estimated Monthly Income is between 1 to
+                        2 times of Monthly Installment.
+                      </div>
+                      <div class="col-2">2</div>
+                    </div>
+                  </div>
+                  <div
+                    [class]="'col-12 mb-2 pointer ' + a4"
+                    (click)="handleUpdate(-1, 1, 4)"
+                  >
+                    <div class="row" style="align-items: center">
+                      <div class="col-10">
+                        D. Applicant's estimated Monthly Income is Less than 1
+                        time of Monthly Installment.
+                      </div>
+                      <div class="col-2">-1</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-1 mb-3">3</div>
+              <div class="col-1 mb-3">{{ mws1 }}</div>
+              <div class="col-1 mb-3">3</div>
+              <div class="col-1 mb-3">9</div>
+
+              <div class="col-1 mb-3">
+                <label for="inputNanme4" class="form-label">2</label>
+              </div>
+              <div class="col-11 mb-3">
+                <h6 style="font-weight: bold">
+                  Family's Combined Monthly Income
+                </h6>
+              </div>
+              <div class="col-1 mb-3"></div>
+              <div class="col-3 mb-3"></div>
+              <div class="col-4 mb-3">
+                <div class="row">
+                  <div
+                    [class]="'col-12 mb-2 pointer ' + b1"
+                    (click)="handleUpdate(4, 2, 1)"
+                  >
+                    <div class="row" style="align-items: center">
+                      <div class="col-10">
+                        A. Estimated combined Family Income is more than 4 times
+                        of Monthly Installment.
+                      </div>
+                      <div class="col-2">4</div>
+                    </div>
+                  </div>
+                  <div
+                    [class]="'col-12 mb-2 pointer ' + b2"
+                    (click)="handleUpdate(3, 2, 2)"
+                  >
+                    <div class="row" style="align-items: center">
+                      <div class="col-10">
+                        B. Estimated combined Family Income is between 3 to 4
+                        times of Monthly Installment.
+                      </div>
+                      <div class="col-2">3</div>
+                    </div>
+                  </div>
+                  <div
+                    [class]="'col-12 mb-2 pointer ' + b3"
+                    (click)="handleUpdate(1.5, 2, 3)"
+                  >
+                    <div class="row" style="align-items: center">
+                      <div class="col-10">
+                        C. Estimated combined Family Income is between 2 to 3
+                        times of Monthly Installment.
+                      </div>
+                      <div class="col-2">1.5</div>
+                    </div>
+                  </div>
+                  <div
+                    [class]="'col-12 mb-2 pointer ' + b4"
+                    (click)="handleUpdate(-1, 2, 4)"
+                  >
+                    <div class="row" style="align-items: center">
+                      <div class="col-10">
+                        D. Estimated combined Family Income is Less than 2 times
+                        of Monthly Installment.
+                      </div>
+                      <div class="col-2">-1</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-1 mb-3">1</div>
+              <div class="col-1 mb-3">{{ mws2 }}</div>
+              <div class="col-1 mb-3">3</div>
+              <div class="col-1 mb-3">3</div>
+
+              <div class="col-1 mb-3">
+                <label for="inputNanme4" class="form-label">3</label>
+              </div>
+              <div class="col-11 mb-3">
+                <h6 style="font-weight: bold">
+                  Applicant's Saving and other deposit accounts
+                </h6>
+              </div>
+              <div class="col-1 mb-3"></div>
+              <div class="col-3 mb-3"></div>
+              <div class="col-4 mb-3">
+                <div class="row">
+                  <div
+                    [class]="'col-12 mb-2 pointer ' + c1"
+                    (click)="handleUpdate(4, 3, 1)"
+                  >
+                    <div class="row" style="align-items: center">
+                      <div class="col-10">
+                        A. Applicant/s have Saving and Other Deposit accounts
+                        with Banks and maintaining HIGH level of balances.
+                        (Equivalent to > 6 Installments).
+                      </div>
+                      <div class="col-2">4</div>
+                    </div>
+                  </div>
+                  <div
+                    [class]="'col-12 mb-2 pointer ' + c2"
+                    (click)="handleUpdate(3, 3, 2)"
+                  >
+                    <div class="row" style="align-items: center">
+                      <div class="col-10">
+                        B. Applicant/s have Saving and Other Deposit accounts
+                        with Banks and maintaining Moderate level of balances
+                        (Equivalent to 3 To 6 MIs).
+                      </div>
+                      <div class="col-2">3</div>
+                    </div>
+                  </div>
+                  <div
+                    [class]="'col-12 mb-2 pointer ' + c3"
+                    (click)="handleUpdate(2, 3, 3)"
+                  >
+                    <div class="row" style="align-items: center">
+                      <div class="col-10">
+                        C. Applicant/s have Saving and Other Deposit accounts
+                        with Banks and maintaining LOW level of balances
+                        (Equivalent to < 3 Installments).
+                      </div>
+                      <div class="col-2">2</div>
+                    </div>
+                  </div>
+                  <div
+                    [class]="'col-12 mb-2 pointer ' + c4"
+                    (click)="handleUpdate(-3, 3, 4)"
+                  >
+                    <div class="row" style="align-items: center">
+                      <div class="col-10">
+                        D. Applicant/s is Not Maintaining any Saving and Other
+                        Deposit accounts with Banks.
+                      </div>
+                      <div class="col-2">-3</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-1 mb-3">1</div>
+              <div class="col-1 mb-3">{{ mws3 }}</div>
+              <div class="col-1 mb-3">3</div>
+              <div class="col-1 mb-3">3</div>
+
+              <div class="col-1 mb-3">
+                <label for="inputNanme4" class="form-label">4</label>
+              </div>
+              <div class="col-11 mb-3">
+                <h6 style="font-weight: bold">
+                  Applicant's Margin Contribution
+                </h6>
+              </div>
+              <div class="col-1 mb-3"></div>
+              <div class="col-3 mb-3"></div>
+              <div class="col-4 mb-3">
+                <div class="row">
+                  <div
+                    [class]="'col-12 mb-2 pointer ' + d1"
+                    (click)="handleUpdate(-5, 4, 1)"
+                  >
+                    <div class="row" style="align-items: center">
+                      <div class="col-10">
+                        A. Applicant's Margin Contribution is Less than 10 %
+                      </div>
+                      <div class="col-2">-5</div>
+                    </div>
+                  </div>
+                  <div
+                    [class]="'col-12 mb-2 pointer ' + d2"
+                    (click)="handleUpdate(3, 4, 2)"
+                  >
+                    <div class="row" style="align-items: center">
+                      <div class="col-10">
+                        B. Applicant's Margin Contribution is 10 % and more but
+                        Less than 15 %
+                      </div>
+                      <div class="col-2">-3</div>
+                    </div>
+                  </div>
+                  <div
+                    [class]="'col-12 mb-2 pointer ' + d3"
+                    (click)="handleUpdate(-2, 4, 3)"
+                  >
+                    <div class="row" style="align-items: center">
+                      <div class="col-10">
+                        C. Applicant's Margin Contribution is 15 % and more but
+                        Less than 20 %
+                      </div>
+                      <div class="col-2">-2</div>
+                    </div>
+                  </div>
+                  <div
+                    [class]="'col-12 mb-2 pointer ' + d4"
+                    (click)="handleUpdate(2, 4, 4)"
+                  >
+                    <div class="row" style="align-items: center">
+                      <div class="col-10">
+                        D. Applicant's Margin Contribution is 20 % and more but
+                        Less than 25 %
+                      </div>
+                      <div class="col-2">2</div>
+                    </div>
+                  </div>
+                  <div
+                    [class]="'col-12 mb-2 pointer ' + d5"
+                    (click)="handleUpdate(3, 4, 5)"
+                  >
+                    <div class="row" style="align-items: center">
+                      <div class="col-10">
+                        E. Applicant's Margin Contribution is 25 % and more but
+                        Less than 30 %
+                      </div>
+                      <div class="col-2">3</div>
+                    </div>
+                  </div>
+                  <div
+                    [class]="'col-12 mb-2 pointer ' + d6"
+                    (click)="handleUpdate(4, 4, 6)"
+                  >
+                    <div class="row" style="align-items: center">
+                      <div class="col-10">
+                        F. Applicant's Margin Contribution is 30 % and more but
+                        Less than 35 %
+                      </div>
+                      <div class="col-2">4</div>
+                    </div>
+                  </div>
+                  <div
+                    [class]="'col-12 mb-2 pointer ' + d7"
+                    (click)="handleUpdate(5, 4, 7)"
+                  >
+                    <div class="row" style="align-items: center">
+                      <div class="col-10">
+                        G. Applicant's Margin Contribution is 35 % and more but
+                        Less than 40 %
+                      </div>
+                      <div class="col-2">5</div>
+                    </div>
+                  </div>
+                  <div
+                    [class]="'col-12 mb-2 pointer ' + d8"
+                    (click)="handleUpdate(6, 4, 8)"
+                  >
+                    <div class="row" style="align-items: center">
+                      <div class="col-10">
+                        H. Applicant's Margin Contribution is 40 % and more.
+                      </div>
+                      <div class="col-2">6</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-1 mb-3">3</div>
+              <div class="col-1 mb-3">{{ mws4 }}</div>
+              <div class="col-1 mb-3">2</div>
+              <div class="col-1 mb-3">6</div>
+
+              <div class="col-1 mb-3">
+                <label for="inputNanme4" class="form-label">5</label>
+              </div>
+              <div class="col-11 mb-3">
+                <h6 style="font-weight: bold">Source of Margin Contribution</h6>
+              </div>
+              <div class="col-1 mb-3"></div>
+              <div class="col-3 mb-3"></div>
+              <div class="col-4 mb-3">
+                <div class="row">
+                  <div
+                    [class]="'col-12 mb-2 pointer ' + e1"
+                    (click)="handleUpdate(3, 5, 1)"
+                  >
+                    <div class="row" style="align-items: center">
+                      <div class="col-10">
+                        A. Margin money is coming from applicant's own personal
+                        savings.
+                      </div>
+                      <div class="col-2">3</div>
+                    </div>
+                  </div>
+                  <div
+                    [class]="'col-12 mb-2 pointer ' + e2"
+                    (click)="handleUpdate(2, 5, 2)"
+                  >
+                    <div class="row" style="align-items: center">
+                      <div class="col-10">
+                        B. Margin money is coming from applicant's own savings
+                        and also from family member's savings.
+                      </div>
+                      <div class="col-2">2</div>
+                    </div>
+                  </div>
+                  <div
+                    [class]="'col-12 mb-2 pointer ' + e3"
+                    (click)="handleUpdate(-2, 5, 3)"
+                  >
+                    <div class="row" style="align-items: center">
+                      <div class="col-10">
+                        C. Margin money is partly coming from applicant's own
+                        and family savings and partly from short term loans from
+                        friends and relatives.
+                      </div>
+                      <div class="col-2">-2</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-1 mb-3">2</div>
+              <div class="col-1 mb-3">{{ mws5 }}</div>
+              <div class="col-1 mb-3">3</div>
+              <div class="col-1 mb-3">6</div>
+
+              <div class="col-1 mb-3">
+                <label for="inputNanme4" class="form-label">6</label>
+              </div>
+              <div class="col-11 mb-3">
+                <h6 style="font-weight: bold">Debit Standing Instructions</h6>
+              </div>
+              <div class="col-1 mb-3"></div>
+              <div class="col-3 mb-3"></div>
+              <div class="col-4 mb-3">
+                <div class="row">
+                  <div
+                    [class]="'col-12 mb-2 pointer ' + f1"
+                    (click)="handleUpdate(3, 6, 1)"
+                  >
+                    <div class="row" style="align-items: center">
+                      <div class="col-10">
+                        A. Applicants have their main Savings Account with the
+                        bank and ready to submit Debit Standing Instructions or
+                        Post-dated Cheques towards monthly installments.
+                      </div>
+                      <div class="col-2">3</div>
+                    </div>
+                  </div>
+                  <div
+                    [class]="'col-12 mb-2 pointer ' + f2"
+                    (click)="handleUpdate(2, 6, 2)"
+                  >
+                    <div class="row" style="align-items: center">
+                      <div class="col-10">
+                        B. Applicants are Ready to Open their main Savings
+                        Account with bank and ready to submit Debit Standing
+                        Instructions or Post-dated Cheques towards monthly
+                        installments.
+                      </div>
+                      <div class="col-2">2</div>
+                    </div>
+                  </div>
+                  <div
+                    [class]="'col-12 mb-2 pointer ' + f3"
+                    (click)="handleUpdate(1, 6, 3)"
+                  >
+                    <div class="row" style="align-items: center">
+                      <div class="col-10">
+                        C. Applicants are Not Ready to Open their main Savings
+                        Account with the bank but ready to submit Post-dated
+                        Cheques towards monthly installments.
+                      </div>
+                      <div class="col-2">1</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-1 mb-3">2</div>
+              <div class="col-1 mb-3">{{ mws6 }}</div>
+              <div class="col-1 mb-3">3</div>
+              <div class="col-1 mb-3">6</div>
+
+              <div class="col-8 mb-3">Total Score</div>
+              <div class="col-2 mb-3">{{ mws_total }}</div>
+              <div class="col-2 mb-3">33</div>
+
+              <div class="col-12 my-5">
+                <div class="row">
+                  <div class="col-6 mt-3"></div>
+                  <div class="col-3 mt-3 mt-3">Max</div>
+                  <div class="col-3 mt-3">Min</div>
+
+                  <div class="col-6 mt-3">Personal Credentials Score</div>
+                  <div class="col-3 mt-3 mt-3">{{ mws_total_old }}</div>
+                  <div class="col-3 mt-3">29</div>
+
+                  <div class="col-6 mt-3">Credit Credentials Score</div>
+                  <div class="col-3 mt-3 mt-3">{{ mws_total }}</div>
+                  <div class="col-3 mt-3">33</div>
+
+                  <div class="col-6 mt-3">Management Assessment Score</div>
+                  <div class="col-3 mt-3 mt-3">20</div>
+                  <div class="col-3 mt-3">13</div>
+
+                  <div class="col-6 mt-3">Total Score</div>
+                  <div class="col-3 mt-3 mt-3">{{ total_score_end }}</div>
+                  <div class="col-3 mt-3">75</div>
+                </div>
+              </div>
+
+              <div class="col-12 mt-3">
+                <button
+                  type="submit"
+                  class="btn btn-primary"
+                  (click)="goBack()"
+                >
+                  Back
+                </button>
+                <button
+                  type="submit"
+                  class="btn btn-primary mx-3"
+                  (click)="handleSubmit()"
+                >
+                  Save & Next
+                </button>
+              </div>
+            </div> -->
+            <div class="col-12 mt-3">
+              <button type="submit" class="btn btn-primary" (click)="goBack()">
+                Back
+              </button>
+              <button
+                type="submit"
+                class="btn btn-primary mx-3"
+                (click)="handleSubmit()"
+              >
+                Save & Next
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<!-- End #main -->
+<ngx-spinner type="ball-scale-multiple"></ngx-spinner>

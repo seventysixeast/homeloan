@@ -1,0 +1,248 @@
+<main id="main" class="main">
+  <div class="pagetitle">
+    <h1>Income and Net Worth</h1>
+    <!-- <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+        <li class="breadcrumb-item active">Income and Net Worth</li>
+      </ol>
+    </nav> -->
+  </div>
+  <!-- End Page Title -->
+
+  <section class="section">
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title" style="text-align: center">
+              Calculation of Equated Monthly Installment (EMI)
+            </h5>
+            <div class="row mx-2 my-1">
+              <div class="col-6 mb-3">Loan Amount</div>
+              <div class="col-6 mb-3">
+                <input
+                  autocomplete="nope"
+                  type="text"
+                  class="form-control"
+                  id="inputNanme4"
+                  [(ngModel)]="c_loanAmount"
+                  (change)="updateTotal()"
+                  disabled
+                />
+              </div>
+              <div class="col-6 mb-3">Interest Rate</div>
+              <div class="col-6 mb-3">
+                <input
+                  autocomplete="nope"
+                  type="number"
+                  class="form-control"
+                  id="inputNanme4"
+                  [(ngModel)]="c_intrestRate"
+                  (keyup)="updateTotal()"
+                />
+              </div>
+              <div class="col-6 mb-3">Loan Tenure (months)</div>
+              <div class="col-6 mb-3">
+                <input
+                  autocomplete="nope"
+                  type="number"
+                  class="form-control"
+                  id="inputNanme4"
+                  [(ngModel)]="c_months"
+                  (keyup)="updateTotal()"
+                />
+              </div>
+              <div class="col-6 mb-3">EMI</div>
+              <div class="col-6 mb-3">
+                <input
+                  autocomplete="nope"
+                  type="text"
+                  class="form-control"
+                  id="inputNanme4"
+                  [(ngModel)]="c_emi"
+                  (change)="updateTotal()"
+                  disabled
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title" style="text-align: center">
+              Applicant's Net Worth and Repayment Capacity
+            </h5>
+            <div class="row mx-2 my-1">
+              <div class="col-6 mb-3">
+                <label for="inputNanme4" class="form-label"
+                  >Amount of proposed EMI (Kyats)</label
+                >
+              </div>
+              <div class="col-6 mb-3">
+                <input
+                  autocomplete="nope"
+                  type="text"
+                  class="form-control"
+                  id="inputNanme4"
+                  [(ngModel)]="c_emi"
+                  (change)="updateTotal()"
+                  disabled
+                />
+              </div>
+              <div class="col-6 mb-3"></div>
+              <div class="col-6 mb-3">
+                <div class="row">
+                  <div class="col-6">Applicant's Total Personal Income *</div>
+                  <div class="col-6">Applicant's Total Family Income **</div>
+                </div>
+              </div>
+              <div class="col-6 mb-3">Estimated Monthly Income</div>
+              <div class="col-6 mb-3">
+                <div class="row">
+                  <div class="col-6">
+                    <input
+                      autocomplete="nope"
+                      [(ngModel)]="EMI1"
+                      (change)="updateTotal()"
+                      type="number"
+                      class="form-control"
+                      id="inputNanme4"
+                    />
+                  </div>
+                  <div class="col-6">
+                    <input
+                      autocomplete="nope"
+                      [(ngModel)]="EMI2"
+                      (change)="updateTotal()"
+                      type="number"
+                      class="form-control"
+                      id="inputNanme4"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="col-6 mb-3">Income : Installment Ratio</div>
+              <div class="col-6 mb-3">
+                <div class="row">
+                  <div class="col-6">
+                    <input
+                      autocomplete="nope"
+                      [(ngModel)]="IIR1"
+                      (change)="updateTotal()"
+                      disabled
+                      type="text"
+                      class="form-control"
+                      id="inputNanme4"
+                    />
+                  </div>
+                  <div class="col-6">
+                    <input
+                      autocomplete="nope"
+                      [(ngModel)]="IIR2"
+                      (change)="updateTotal()"
+                      disabled
+                      type="text"
+                      class="form-control"
+                      id="inputNanme4"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="col-1 mb-3 mt-3">*</div>
+              <div class="col-11 mb-3 mt-3">
+                In case of Joint Borrowers, combined income to be mentioned.
+              </div>
+              <div class="col-1 mb-3">**</div>
+              <div class="col-11 mb-3">
+                Total Monthly Family Income including income of close family
+                members i.e. Spouse, Parents, Brothers and Sisters.
+              </div>
+              <div class="col-3 mb-3 mt-3">Applicant's Net Worth</div>
+              <div class="col-3 mb-3 mt-3">1st Applicant</div>
+              <div class="col-3 mb-3 mt-3">2nd Applicant</div>
+              <div class="col-3 mb-3 mt-3">Combined (Total ) Net Worth</div>
+              <div class="col-3 mb-3">Net Worth</div>
+              <div class="col-3 mb-3">
+                <input
+                  autocomplete="nope"
+                  [(ngModel)]="netWorth1"
+                  (change)="updateTotal()"
+                  type="number"
+                  class="form-control"
+                  id="inputNanme4"
+                />
+              </div>
+              <div class="col-3 mb-3">
+                <input
+                  autocomplete="nope"
+                  [(ngModel)]="netWorth2"
+                  (change)="updateTotal()"
+                  type="number"
+                  class="form-control"
+                  id="inputNanme4"
+                />
+              </div>
+              <div class="col-3 mb-3">
+                <input
+                  autocomplete="nope"
+                  [(ngModel)]="totalNetWorth"
+                  (change)="updateTotal()"
+                  disabled
+                  type="text"
+                  class="form-control"
+                  id="inputNanme4"
+                />
+              </div>
+              <div class="col-3 mb-3" style="display: none">Loan Amount</div>
+              <div class="col-3 mb-3" style="display: none">
+                <input
+                  autocomplete="nope"
+                  [(ngModel)]="loanAmmount"
+                  (change)="updateTotal()"
+                  disabled
+                  type="text"
+                  class="form-control"
+                  id="inputNanme4"
+                />
+              </div>
+              <div class="col-9 mb-3">Net Worth / Loan Amount Ratio</div>
+              <div class="col-3 mb-3">
+                <input
+                  autocomplete="nope"
+                  [(ngModel)]="loanAmountRatio"
+                  (change)="updateTotal()"
+                  disabled
+                  type="text"
+                  class="form-control"
+                  id="inputNanme4"
+                />
+              </div>
+              <div class="col-12 mt-3">
+                <button
+                  type="submit"
+                  class="btn btn-primary"
+                  (click)="goBack()"
+                >
+                  Back
+                </button>
+                <button
+                  type="submit"
+                  class="btn btn-primary mx-3"
+                  (click)="handleSubmit()"
+                >
+                  Save & Next
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<!-- End #main -->
+
+<ngx-spinner type="ball-scale-multiple"></ngx-spinner>

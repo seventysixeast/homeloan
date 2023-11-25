@@ -46,6 +46,9 @@ export class GuarantorData2Component {
   a2_photo_data: any;
 
   app_date = '';
+  logedInUser : any;
+  userId = "";
+  status = "";
 
   ngOnInit(): void {
     this.route.params.subscribe((params: any) => {
@@ -55,9 +58,12 @@ export class GuarantorData2Component {
       }
       if (this.openId && this.openId != 0) {
         this.getSingleData();
+        this.getSingleAppData()
       }
       console.log('this.openId',this.openId)
     });
+    this.logedInUser = this.ds.userLoggedIn()
+    console.log('this.logedInUser',this.logedInUser)
   }
 
   getSingleData() {
@@ -89,6 +95,20 @@ export class GuarantorData2Component {
         this.a2_photo = this.ds.mediaUrl + response[0].a2_photo;
   
         this.app_date = response[0].app_date;
+      }
+    });
+  }
+
+  getSingleAppData() {
+    let data = new FormData();
+
+    data.append('id', this.openId);
+    data.append('action', 'getSingleData');
+
+    this.ds.submitAppData(data).subscribe((response: any) => {
+      if (response != null) {
+        this.status = response[0].status;
+        this.userId = response[0].userId;
       }
     });
   }
@@ -129,6 +149,20 @@ export class GuarantorData2Component {
     // return;
     this.spinner.show();
     let data = new FormData();
+
+
+    if(this.logedInUser.type == "Credit-Analyst"){
+      data.append('status', "Processing by Credit Analyst("+this.logedInUser.f_name +")");
+    }else if(this.logedInUser.type == "Credit-Underwriter"){
+      data.append('status', "Reveiwing by Credit Underwriter("+this.logedInUser.f_name  +")");
+    }else if(this.logedInUser.type == "Credit-Approver"){
+      data.append('status', "Reveiwing by Credit Approver("+this.logedInUser.f_name +")");
+    }else if(this.logedInUser.type == "Admin" && (this.status.indexOf("Reveiwing by Admin") > -1)){
+      data.append('status', "Reveiwing by Admin");
+    }else if(this.logedInUser.type == "Admin" && ((this.status.indexOf("Processing by Admin") > -1))){
+      data.append('status', "Processing by Admin");
+    }
+    // data.append('status', this.ds.addStatus(this.logedInUser, this.userId));
     data.append('ref_id', this.openId);
     data.append('a1_name', this.a1_name);
     data.append('a1_fName', this.a1_fName);

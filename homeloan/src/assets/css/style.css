@@ -1263,3 +1263,7 @@ h6 {
 td.selectable {
   text-align: justify;
 }
+
+.notShowEdit{
+  display: none;
+}

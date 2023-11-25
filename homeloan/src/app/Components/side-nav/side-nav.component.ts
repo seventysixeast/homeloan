@@ -1,23 +1,47 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, AfterViewInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { DataService } from 'src/app/data.service';
 
 @Component({
   selector: 'app-side-nav',
   templateUrl: './side-nav.component.html',
   styleUrls: ['./side-nav.component.css'],
 })
-export class SideNavComponent implements OnInit {
-  constructor(private router: Router, private route: ActivatedRoute) {}
+export class SideNavComponent implements OnInit, AfterViewInit {
+  constructor(private router: Router, private route: ActivatedRoute, private ds: DataService, private cdr: ChangeDetectorRef) {}
 
   activeId: any = 0;
   demochange: boolean = true;
+  logedInUser : any;
 
   ngOnInit(): void {
+    // alert()
     this.activeId = localStorage.getItem('activeId');
     let id1 = localStorage.getItem('mId');
     let id2 = localStorage.getItem('smId');
-    this.openPage(Number(id1), Number(id2));
+    console.log("id1",id1)
+    console.log("id2",id2)
+    console.log("activeId",this.activeId)
+    console.log("his.ds.loggedInUser======",this.ds.loggedInUser)
+    console.log('this.ds.userLoggedIn()',this.ds.userLoggedIn())
+    this.logedInUser = this.ds.userLoggedIn()
+    // this.ds.loggedInUser.subscribe(resp =>{
+    //   console.log('resp',resp)
+    //   this.logedInUser =  resp;
+   
+    // })
+    // if(id1 !=  null && id2 !=  null){
+      this.openPage(Number(id1), Number(id2));
+    // }
+   
   }
+
+  ngAfterViewInit(): void {
+    console.log('ngAfterViewInit - wrapper');
+    this.cdr.detectChanges();
+  }
+
+  // ngonview
 
   menuLinks: any = [
     {
@@ -116,7 +140,6 @@ export class SideNavComponent implements OnInit {
         {
           id: 6,
           name: 'Risk Assessment Report',
-          //name: 'Risk Assessment',
           link: 'score',
           status: false,
         },
@@ -162,60 +185,69 @@ export class SideNavComponent implements OnInit {
         });
       }
     });
-    let link: any = document.getElementById(`link${mId}${smId}`);
-    link.click();
     let applicant1Id = localStorage.getItem('applicant1Id')
     console.log('applicant1Id',applicant1Id)
-    if(mId == 1 && smId == 1){
-      if(applicant1Id){
-        this.router.navigateByUrl('applicant-data/' + applicant1Id);
-      }else{
-        this.router.navigateByUrl('applicant-data');
+    if(applicant1Id != null){
+      let link: any = document.getElementById(`link${mId}${smId}`);
+      link.click();
+      this.ds.loggedInUser.subscribe(resp =>{
+        console.log('resp 2',resp)
+        this.logedInUser =  resp;
+     
+      })
+      if(mId == 1 && smId == 1){
+        if(applicant1Id){
+          this.router.navigateByUrl('applicant-data/' + applicant1Id);
+        }else{
+          this.router.navigateByUrl('applicant-data');
+        }
+      }
+      if(mId == 1 && smId == 11){
+        this.router.navigateByUrl('applicant-data2/' + applicant1Id);
+      }
+  
+      if(mId == 1 && smId == 2){
+        this.router.navigateByUrl('guarantor-data/' + applicant1Id);
+      }
+  
+      if(mId == 1 && smId == 12){
+        this.router.navigateByUrl('guarantor-data2/' + applicant1Id);
+      }
+  
+      if(mId == 1 && smId == 3){
+        this.router.navigateByUrl('loan-request/' + applicant1Id);
+      }
+      if(mId == 2 && smId == 1){
+        this.router.navigateByUrl('net-worth/' + applicant1Id);
+      }
+  
+      if(mId == 2 && smId == 2){
+        this.router.navigateByUrl('client-vist/' + applicant1Id);
+      }
+  
+      if(mId == 2 && smId == 3){
+        // this.router.navigateByUrl('client-vist/' + applicant1Id);
+        this.router.navigateByUrl('site-vist/' + applicant1Id);
+      }
+  
+      if(mId == 2 && smId == 4){
+        this.router.navigateByUrl('risk-1/' + applicant1Id);
+      }
+  
+      if(mId == 2 && smId == 5){
+        this.router.navigateByUrl('risk-2/' + applicant1Id);
+      }
+  
+      if(mId == 2 && smId == 7){
+        this.router.navigateByUrl('add-info/' + applicant1Id);
+      }
+  
+      if(mId == 2 && smId == 8){
+        this.router.navigateByUrl('media-upload/' + applicant1Id);
       }
     }
-    if(mId == 1 && smId == 11){
-      this.router.navigateByUrl('applicant-data2/' + applicant1Id);
-    }
 
-    if(mId == 1 && smId == 2){
-      this.router.navigateByUrl('guarantor-data/' + applicant1Id);
-    }
-
-    if(mId == 1 && smId == 12){
-      this.router.navigateByUrl('guarantor-data2/' + applicant1Id);
-    }
-
-    if(mId == 1 && smId == 3){
-      this.router.navigateByUrl('loan-request/' + applicant1Id);
-    }
-    if(mId == 2 && smId == 1){
-      this.router.navigateByUrl('net-worth/' + applicant1Id);
-    }
-
-    if(mId == 2 && smId == 2){
-      this.router.navigateByUrl('client-vist/' + applicant1Id);
-    }
-
-    if(mId == 2 && smId == 3){
-      // this.router.navigateByUrl('client-vist/' + applicant1Id);
-      this.router.navigateByUrl('site-vist/' + applicant1Id);
-    }
-
-    if(mId == 2 && smId == 4){
-      this.router.navigateByUrl('risk-1/' + applicant1Id);
-    }
-
-    if(mId == 2 && smId == 5){
-      this.router.navigateByUrl('risk-2/' + applicant1Id);
-    }
-
-    if(mId == 2 && smId == 7){
-      this.router.navigateByUrl('add-info/' + applicant1Id);
-    }
-
-    if(mId == 2 && smId == 8){
-      this.router.navigateByUrl('media-upload/' + applicant1Id);
-    }
+    
 
 
 

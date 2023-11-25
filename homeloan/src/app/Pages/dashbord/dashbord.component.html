@@ -14,6 +14,7 @@
         type="button"
         class="btn btn-primary"
         routerLink="/applicant-data"
+        *ngIf="logedInUser.type == 'Admin' || logedInUser.type == 'Credit-Analyst'"
       >
         Add New Client
       </button>
@@ -66,12 +67,18 @@
                       <td>{{ i.a1_name }}</td>
                       <td>{{ i.a1_fName }}</td>
                       <!-- <td>{{ i.a1_phone }}</td> -->
-                      <td><span class="badge bg-warning">Pending</span></td>
+                      <!-- <td>{{displayStatus(i.status)}}</td> -->
+                      <td><span [class]="displayStatus(i.status)">{{i.status}}</span></td>
                       <td>
                         <i
-                          class="bx bxs-show"
+                          [class]="notShowingViewOption(i.status)"
                           style="font-size: 25px; cursor: pointer; color: green"
                           (click)="openData(i.id)"
+                        ></i>
+                        <i
+                          [class]="notShowingEditoption(i.status)"
+                          style="font-size: 25px; cursor: pointer; color: blue"
+                          (click)="editData(i.id)"
                         ></i>
                         <i
                           class="bx bxs-trash-alt mx-2"

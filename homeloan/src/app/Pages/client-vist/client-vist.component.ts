@@ -39,6 +39,10 @@ export class ClientVistComponent implements OnInit {
   gur_1 = '';
   gur_2 = '';
 
+  logedInUser : any;
+  userId = "";
+  status = "";
+
   ngOnInit(): void {
     this.route.params.subscribe((params: any) => {
       if(params.id != null){
@@ -46,9 +50,13 @@ export class ClientVistComponent implements OnInit {
         localStorage.setItem("applicant1Id",params.id)
         if (this.openId != 0) {
           this.getSingleData();
+          this.getSingleAppData()
         }
       }
     });
+
+    this.logedInUser = this.ds.userLoggedIn()
+    console.log('this.logedInUser',this.logedInUser)
   }
 
   getSingleData() {
@@ -90,11 +98,28 @@ export class ClientVistComponent implements OnInit {
     });
   }
 
+  getSingleAppData() {
+    let data = new FormData();
+
+    data.append('id', this.openId);
+    data.append('action', 'getSingleData');
+
+    this.ds.submitAppData(data).subscribe((response: any) => {
+      if (response != null) {
+        this.status = response[0].status;
+        this.userId = response[0].userId;
+      }
+    });
+  }
+
   handleSubmit() {
     this.spinner.show();
     let data: any = new FormData();
 
     data.append('action', 'submit-client-visit');
+    // console.log('this.ds.addStatus(this.logedInUser, this.userId)',this.ds.addStatus(this.logedInUser, this.userId))
+    // this.ds.addStatus(this.logedInUser, this.userId)
+    data.append('status', this.ds.addStatus(this.logedInUser, this.userId, this.status));
 
     data.append('ref_id', this.openId);
     data.append('name1', this.name1);
@@ -108,7 +133,7 @@ export class ClientVistComponent implements OnInit {
     data.append('comment3', this.comment3);
     data.append('comment4', this.comment4);
     data.append('g_visitDate', this.g_visitDate);
-    data.append('status', "client-visit");
+    // data.append('status', "client-visit");
 
     this.ds.submitAppData(data).subscribe((response: any) => {
       this.spinner.hide();

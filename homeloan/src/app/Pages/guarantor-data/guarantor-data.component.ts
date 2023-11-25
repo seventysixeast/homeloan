@@ -46,6 +46,9 @@ export class GuarantorDataComponent implements OnInit {
   a2_photo_data: any;
 
   app_date = '';
+  logedInUser : any;
+  userId = "";
+  status = "";
 
   ngOnInit(): void {
     this.route.params.subscribe((params: any) => {
@@ -54,9 +57,13 @@ export class GuarantorDataComponent implements OnInit {
         localStorage.setItem("applicant1Id",params.id)
         if (this.openId != 0) {
           this.getSingleData();
+          this.getSingleAppData()
+
         }
       }
     });
+    this.logedInUser = this.ds.userLoggedIn()
+    console.log('this.logedInUser',this.logedInUser)
   }
 
   getSingleData() {
@@ -88,6 +95,20 @@ export class GuarantorDataComponent implements OnInit {
         this.a2_photo = this.ds.mediaUrl + response[0].a2_photo;
   
         this.app_date = response[0].app_date;
+      }
+    });
+  }
+
+  getSingleAppData() {
+    let data = new FormData();
+
+    data.append('id', this.openId);
+    data.append('action', 'getSingleData');
+
+    this.ds.submitAppData(data).subscribe((response: any) => {
+      if (response != null) {
+        this.status = response[0].status;
+        this.userId = response[0].userId;
       }
     });
   }
@@ -129,7 +150,24 @@ export class GuarantorDataComponent implements OnInit {
     // return;
     this.spinner.show();
     let data = new FormData();
+
+    // this.ds.addStatus(this.logedInUser, this.userId)
+    // console.log('this.ds.addStatus(this.logedInUser, this.userId)',this.ds.addStatus(this.logedInUser, this.userId))
+    if(this.logedInUser.type == "Credit-Analyst"){
+      data.append('status', "Processing by Credit Analyst("+this.logedInUser.f_name +")");
+    }else if(this.logedInUser.type == "Credit-Underwriter"){
+      data.append('status', "Reveiwing by Credit Underwriter("+this.logedInUser.f_name  +")");
+    }else if(this.logedInUser.type == "Credit-Approver"){
+      data.append('status', "Reveiwing by Credit Approver("+this.logedInUser.f_name +")");
+    }else if(this.logedInUser.type == "Admin" && (this.status.indexOf("Reveiwing by Admin") > -1)){
+      data.append('status', "Reveiwing by Admin");
+    }else if(this.logedInUser.type == "Admin" && this.status.indexOf("Processing by Admin") > -1){
+      data.append('status', "Processing by Admin");
+    }
+
     data.append('ref_id', this.openId);
+    // data.append('status', this.ds.addStatus(this.logedInUser, this.userId));
+
     data.append('a1_name', this.a1_name);
     data.append('a1_fName', this.a1_fName);
     data.append('a1_activity', this.a1_activity);
@@ -152,7 +190,8 @@ export class GuarantorDataComponent implements OnInit {
 
     data.append('app_date', this.app_date);
     data.append('action', 'submit-guar-data');
-    data.append('status', "guarantor1");
+    // data.append('status', "guarantor1");
+    // data.append('status', this.ds.addStatus(this.logedInUser, this.userId));
 
     this.ds.submitAppData(data).subscribe((response: any) => {
       window.scroll({
