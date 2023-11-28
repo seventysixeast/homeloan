@@ -18,7 +18,7 @@ export class RiskOneComponent implements OnInit {
     private router: Router,
     private spiner: NgxSpinnerService,
     private sideNav: SideNavComponent
-  ) {}
+  ) { }
 
   openId: any = 0;
 
@@ -58,6 +58,7 @@ export class RiskOneComponent implements OnInit {
   c3 = '';
   c4 = '';
   c5 = '';
+  c6 = '';
 
   d1 = '';
   d2 = '';
@@ -72,7 +73,7 @@ export class RiskOneComponent implements OnInit {
   f2 = '';
   f3 = '';
 
-  logedInUser : any;
+  logedInUser: any;
   userId = "";
   status = "";
   viewOnly: any = false;
@@ -80,23 +81,55 @@ export class RiskOneComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe((params: any) => {
-      if(params.id != null){
-        localStorage.setItem("applicant1Id",params.id)
+      if (params.id != null) {
+        localStorage.setItem("applicant1Id", params.id)
         this.openId = params.id;
         if (this.openId != 0) {
           this.getSingleData();
           this.getSingleAppData()
+          this.getNetWorth()
         }
       }
     });
     this.logedInUser = this.ds.userLoggedIn()
     let checkView = localStorage.getItem("viewOnly")
-    if(checkView === 'true'){
-      this.viewOnly =  true;
+    if (checkView === 'true') {
+      this.viewOnly = true;
       this.nextButtonText = "Next"
-    }else{
+    } else {
       this.nextButtonText = "Save And Next"
     }
+  }
+
+  getNetWorth() {
+    let data = new FormData();
+    data.append('id', this.openId);
+    data.append('action', 'getSingleNetWorth');
+    this.ds.submitAppData(data).subscribe((response: any) => {
+      let newWorth = response[response.length - 1];
+      let loanAmountRatio = newWorth.loanAmountRatio;
+      console.log('loanAmountRatio', loanAmountRatio)
+      if (loanAmountRatio >= 1.5) {
+        this.handleUpdate(2, 3, 1);
+      }
+      if (loanAmountRatio >= 1 && loanAmountRatio < 1.5) {
+        this.handleUpdate(1.75, 3, 2);
+      }
+      if (loanAmountRatio >= 0.75 && loanAmountRatio < 1) {
+        this.handleUpdate(1.5, 3, 3);
+      }
+      if (loanAmountRatio >= 0.5 && loanAmountRatio < 0.75) {
+        this.handleUpdate(1.25, 3, 4);
+      }
+      if (loanAmountRatio >= 0.25 && loanAmountRatio < 0.5) {
+        this.handleUpdate(1, 3, 4);
+      }
+      if (loanAmountRatio < 0.25) {
+        this.handleUpdate(0.5, 1, 4);
+      }
+
+
+    });
   }
 
   handleUpdate(value: number, type: number, no: number) {
@@ -239,6 +272,7 @@ export class RiskOneComponent implements OnInit {
         this.c3 = '';
         this.c4 = '';
         this.c5 = '';
+        this.c6 = '';
       }
       if (no == 2) {
         this.c1 = '';
@@ -246,6 +280,7 @@ export class RiskOneComponent implements OnInit {
         this.c3 = '';
         this.c4 = '';
         this.c5 = '';
+        this.c6 = '';
       }
       if (no == 3) {
         this.c1 = '';
@@ -253,6 +288,7 @@ export class RiskOneComponent implements OnInit {
         this.c3 = 'activeOpt';
         this.c4 = '';
         this.c5 = '';
+        this.c6 = '';
       }
       if (no == 4) {
         this.c1 = '';
@@ -260,6 +296,7 @@ export class RiskOneComponent implements OnInit {
         this.c3 = '';
         this.c4 = 'activeOpt';
         this.c5 = '';
+        this.c6 = '';
       }
       if (no == 5) {
         this.c1 = '';
@@ -267,6 +304,15 @@ export class RiskOneComponent implements OnInit {
         this.c3 = '';
         this.c4 = '';
         this.c5 = 'activeOpt';
+        this.c6 = '';
+      }
+      if (no == 6) {
+        this.c1 = '';
+        this.c2 = '';
+        this.c3 = '';
+        this.c4 = '';
+        this.c5 = '';
+        this.c6 = 'activeOpt';
       }
       this.mws3 = value * 1;
       this.s_mws3 = value;
@@ -370,50 +416,53 @@ export class RiskOneComponent implements OnInit {
     data.append('id', this.openId);
     data.append('action', 'getSinglerisk-1');
     this.ds.submitAppData(data).subscribe((response: any) => {
-      let result = response[response.length - 1];
-      result = JSON.parse(result.JsonData);
-      this.mws1 = result.mws1;
-      this.mws2 = result.mws2;
-      this.mws3 = result.mws3;
-      this.mws4 = result.mws4;
-      this.mws5 = result.mws5;
-      this.mws6 = result.mws6;
-      this.s_mws1 = result.s_mws1;
-      this.s_mws2 = result.s_mws2;
-      this.s_mws3 = result.s_mws3;
-      this.s_mws4 = result.s_mws4;
-      this.s_mws5 = result.s_mws5;
-      this.s_mws6 = result.s_mws6;
-      this.mws_total = result.mws_total;
-      this.s_mws_total = result.s_mws_total;
-      this.a1 = result.a1;
-      this.a2 = result.a2;
-      this.a3 = result.a3;
-      this.a4 = result.a4;
-      this.a5 = result.a5;
-      this.a6 = result.a6;
-      this.a7 = result.a7;
-      this.a8 = result.a8;
-      this.a9 = result.a9;
-      this.b1 = result.b1;
-      this.b2 = result.b2;
-      this.b3 = result.b3;
-      this.b4 = result.b4;
-      this.c1 = result.c1;
-      this.c2 = result.c2;
-      this.c3 = result.c3;
-      this.c4 = result.c4;
-      this.c5 = result.c5;
-      this.d1 = result.d1;
-      this.d2 = result.d2;
-      this.d3 = result.d3;
-      this.d4 = result.d4;
-      this.e1 = result.e1;
-      this.e2 = result.e2;
-      this.e3 = result.e3;
-      this.f1 = result.f1;
-      this.f2 = result.f2;
-      this.f3 = result.f3;
+      if (response && response.length > 0) {
+        let result = response[response.length - 1];
+        result = JSON.parse(result.JsonData);
+        this.mws1 = result.mws1;
+        this.mws2 = result.mws2;
+        this.mws3 = result.mws3;
+        this.mws4 = result.mws4;
+        this.mws5 = result.mws5;
+        this.mws6 = result.mws6;
+        this.s_mws1 = result.s_mws1;
+        this.s_mws2 = result.s_mws2;
+        this.s_mws3 = result.s_mws3;
+        this.s_mws4 = result.s_mws4;
+        this.s_mws5 = result.s_mws5;
+        this.s_mws6 = result.s_mws6;
+        this.mws_total = result.mws_total;
+        this.s_mws_total = result.s_mws_total;
+        this.a1 = result.a1;
+        this.a2 = result.a2;
+        this.a3 = result.a3;
+        this.a4 = result.a4;
+        this.a5 = result.a5;
+        this.a6 = result.a6;
+        this.a7 = result.a7;
+        this.a8 = result.a8;
+        this.a9 = result.a9;
+        this.b1 = result.b1;
+        this.b2 = result.b2;
+        this.b3 = result.b3;
+        this.b4 = result.b4;
+        this.c1 = result.c1;
+        this.c2 = result.c2;
+        this.c3 = result.c3;
+        this.c4 = result.c4;
+        this.c5 = result.c5;
+        this.c6 = result.c6;
+        this.d1 = result.d1;
+        this.d2 = result.d2;
+        this.d3 = result.d3;
+        this.d4 = result.d4;
+        this.e1 = result.e1;
+        this.e2 = result.e2;
+        this.e3 = result.e3;
+        this.f1 = result.f1;
+        this.f2 = result.f2;
+        this.f3 = result.f3;
+      }
     });
   }
 
@@ -432,8 +481,33 @@ export class RiskOneComponent implements OnInit {
   }
 
   handleSubmit() {
-    if(this.viewOnly){
+    if (this.viewOnly) {
       this.goNext();
+      return;
+    }
+
+    if (this.a1 == "" && this.a2 == "" && this.a3 == "" && this.a4 == "" && this.a5 == "" && this.a6 == "" && this.a7 == "" && this.a8 == "" && this.a9 == "") {
+      alert("Please Select any option of Applicant's Age")
+      return;
+    }
+
+    if (this.b1 == "" && this.b2 == "" && this.b3 == "" && this.b4 == "") {
+      alert("Please Select any option of Education Level")
+      return;
+    }
+
+    if (this.d1 == "" && this.d2 == "" && this.d3 == "" && this.d4 == "") {
+      alert("Please Select any option of 	Applicant's borrowing history.")
+      return;
+    }
+
+    if (this.e1 == "" && this.e2 == "" && this.e3 == "") {
+      alert("Please Select any option of Applicant's Market reports.")
+      return;
+    }
+
+    if (this.f1 == "" && this.f2 == "" && this.f3 == "") {
+      alert("Please Select any option of	Guarantor's Credentials.")
       return;
     }
     this.spiner.show();
@@ -470,6 +544,7 @@ export class RiskOneComponent implements OnInit {
       c3: this.c3,
       c4: this.c4,
       c5: this.c5,
+      c6: this.c6,
       d1: this.d1,
       d2: this.d2,
       d3: this.d3,

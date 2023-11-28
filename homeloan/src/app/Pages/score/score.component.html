@@ -31,33 +31,21 @@
                   <tr>
                     <td>Personal Credentials Score :</td>
                     <td class="myRyt">30</td>
-                    <td
-                      class="myRyt"
-                      style="font-weight: bold; font-size: 15px"
-                      colspan="6"
-                    >
-                      {{ mws_total_old }}
+                    <td class="myRyt" style="font-weight: bold; font-size: 15px" colspan="6">
+                      {{ mws_total_old.toFixed(2) }}
                     </td>
                   </tr>
                   <tr>
                     <td>Credit Credentials Score :</td>
                     <td class="myRyt">50</td>
-                    <td
-                      class="myRyt"
-                      style="font-weight: bold; font-size: 15px"
-                      colspan="6"
-                    >
-                      {{ mws_total }}
+                    <td class="myRyt" style="font-weight: bold; font-size: 15px" colspan="6">
+                      {{ mws_total.toFixed(2) }}
                     </td>
                   </tr>
                   <tr>
                     <td>Management Assessment Score :</td>
                     <td class="myRyt">20</td>
-                    <td
-                      class="myRyt"
-                      style="font-weight: bold; font-size: 15px"
-                      colspan="6"
-                    >
+                    <td class="myRyt" style="font-weight: bold; font-size: 15px" colspan="6">
                       <!-- <input
                         type="number"
                         [(ngModel)]="m_score"
@@ -92,12 +80,8 @@
                   <tr>
                     <td>Total Score</td>
                     <td class="myRyt">100</td>
-                    <td
-                      class="myRyt"
-                      style="font-weight: bold; font-size: 15px"
-                      colspan="6"
-                    >
-                      {{ total_score_end2 }}
+                    <td class="myRyt" style="font-weight: bold; font-size: 15px" colspan="6">
+                      {{ total_score_end2.toFixed(2) }}
                     </td>
                   </tr>
                   <tr>
@@ -245,11 +229,7 @@
               <button type="submit" class="btn btn-primary" (click)="goBack()">
                 Back
               </button>
-              <button
-                type="submit"
-                class="btn btn-primary mx-3"
-                (click)="handleSubmit()"
-              >
+              <button type="submit" class="btn btn-primary mx-3" (click)="handleSubmit()">
                 {{nextButtonText}}
               </button>
             </div>

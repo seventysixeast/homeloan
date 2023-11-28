@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { SideNavComponent } from 'src/app/Components/side-nav/side-nav.component';
 import { DataService } from 'src/app/data.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-users',
@@ -14,10 +15,10 @@ export class UsersComponent {
     private ds: DataService,
     private router: Router,
     private sideNav: SideNavComponent
-  ) {}
+  ) { }
 
   dataList: any = [];
-  logedInUser : any;
+  logedInUser: any;
 
   ngOnInit(): void {
     localStorage.removeItem("mId");
@@ -28,7 +29,7 @@ export class UsersComponent {
     localStorage.removeItem("viewOnly");
     this.getData();
     this.logedInUser = this.ds.userLoggedIn()
-    console.log('this.logedInUser',this.logedInUser)
+    console.log('this.logedInUser', this.logedInUser)
   }
 
   getData() {
@@ -57,7 +58,24 @@ export class UsersComponent {
     data.append('id', id);
     this.ds.getAppDataList(data).subscribe((response: any) => {
       console.log(response);
-      this.getData();
+      if (response == 1) {
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'User Is Deleted Successfully',
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        this.getData();
+      } else {
+        Swal.fire({
+          position: 'top-end',
+          icon: 'warning',
+          title: 'Something went wrong',
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
     });
   }
 }

@@ -10,43 +10,29 @@
     <!-- End Dashboard Nav -->
 
     <li class="nav-item" *ngFor="let x of menuLinks">
-      <a
-        class="nav-link collapsed"
-        [attr.data-bs-target]="'#' + x.trigerName"
-        data-bs-toggle="collapse"
-        href="#"
-      >
-        <i class="bi bi-menu-button-wide"></i><span>{{ x.name }}</span
-        ><i class="bi bi-chevron-down ms-auto"></i>
+      <a class="nav-link collapsed" [attr.data-bs-target]="'#' + x.trigerName" data-bs-toggle="collapse" href="#">
+        <i class="bi bi-menu-button-wide"></i><span>{{ x.name }}</span><i class="bi bi-chevron-down ms-auto"></i>
       </a>
-      <ul
-        [id]="x.trigerName"
-        [class]="
+      <ul [id]="x.trigerName" [class]="
           x.status == true
             ? 'nav-content collapse show'
             : 'nav-content collapse'
-        "
-        data-bs-parent="#sidebar-nav"
-      >
+        " data-bs-parent="#sidebar-nav">
         <li *ngFor="let y of x.subMenuLinks" [class]="
         activeId == null
           ? 'disableMouse'
           : ''
       ">
-          <a
-            [routerLink]="y.link + '/' + activeId"
-            [class]="y.status == true ? 'active' : null"
-            (click)="openPage(x.id, y.id)"
-            [id]="'link' + x.id + y.id"
-          >
+          <a [routerLink]="y.link + '/' + activeId" [class]="y.status == true ? 'active' : null"
+            (click)="openPage(x.id, y.id)" [id]="'link' + x.id + y.id">
             <i class="bi bi-circle"></i><span>{{ y.name }}</span>
           </a>
         </li>
       </ul>
     </li>
 
-    <li class="nav-item" *ngIf = "logedInUser && logedInUser.type == 'Admin'">
-      <a class="nav-link" routerLink="/users">
+    <li class="nav-item" *ngIf="logedInUser && logedInUser.type == 'Admin'">
+      <a class="nav-link" (click)="goingToUsers()" routerLink="/users">
         <i class="bi bi-grid"></i>
         <span>Users</span>
       </a>

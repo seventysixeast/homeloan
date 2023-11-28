@@ -14,10 +14,10 @@ export class DashbordComponent implements OnInit {
     private ds: DataService,
     private router: Router,
     private sideNav: SideNavComponent
-  ) {}
+  ) { }
 
   dataList: any = [];
-  logedInUser : any;
+  logedInUser: any;
 
   ngOnInit(): void {
     localStorage.removeItem("mId");
@@ -28,23 +28,23 @@ export class DashbordComponent implements OnInit {
     localStorage.removeItem("viewOnly");
     this.logedInUser = this.ds.userLoggedIn()
     this.getData();
-    console.log('this.logedInUser',this.logedInUser)
-    
+    console.log('this.logedInUser', this.logedInUser)
+
   }
 
   getData() {
     let data = new FormData();
     data.append('action', 'getAppDataList');
-    if(this.logedInUser.type == "Credit-Analyst" ){
+    if (this.logedInUser.type == "Credit-Analyst") {
       data.append('userId', this.logedInUser.id);
       data.append('type', "Credit-Analyst");
-    }else if(this.logedInUser.type == "Credit-Underwriter"){
+    } else if (this.logedInUser.type == "Credit-Underwriter") {
       data.append('userId', "0");
       data.append('type', "Credit-Underwriter");
-    }else if(this.logedInUser.type == "Credit-Approver"){
+    } else if (this.logedInUser.type == "Credit-Approver") {
       data.append('userId', "0");
       data.append('type', "Credit-Approver");
-    }else if(this.logedInUser.type == "Admin"){
+    } else if (this.logedInUser.type == "Admin") {
       data.append('userId', "0");
       data.append('type', "Admin");
     }
@@ -58,12 +58,12 @@ export class DashbordComponent implements OnInit {
 
   openData(id: any, status: any) {
     localStorage.setItem('activeId', id);
-    localStorage.setItem('viewOnly',"true")
-    if(this.logedInUser.type == "Credit-Approver" && status.indexOf("Approved by Credit Approver") == -1 && status.indexOf("Approved by Credit Approver") == -1){
+    localStorage.setItem('viewOnly', "true")
+    if (this.logedInUser.type == "Credit-Approver" && status.indexOf("Approved by Credit Approver") == -1 && status.indexOf("Approved by Credit Approver") == -1) {
       let data = new FormData();
       data.append('action', 'submit-all-forms');
       data.append('ref_id', id);
-      data.append('status', "Reveiwing by Credit Approver("+this.logedInUser.f_name  +")");
+      data.append('status', "Reveiwing by Credit Approver(" + this.logedInUser.f_name + ")");
       this.ds.submitAppData(data).subscribe((response: any) => {
       });
       // return  "Reveiwing by Credit Approver("+this.logedInUser.f_name +")";
@@ -80,22 +80,22 @@ export class DashbordComponent implements OnInit {
 
     data.append('action', 'submit-all-forms');
     data.append('ref_id', id);
-    if(this.logedInUser.type == "Credit-Analyst"){
-      data.append('status', "Processing by Credit Analyst("+this.logedInUser.f_name +")");
-    }else if(this.logedInUser.type == "Credit-Underwriter"){
-      data.append('status', "Reveiwing by Credit Underwriter("+this.logedInUser.f_name  +")");
-    }else if(this.logedInUser.type == "Credit-Approver"){
+    if (this.logedInUser.type == "Credit-Analyst") {
+      data.append('status', "Processing by Credit Analyst(" + this.logedInUser.f_name + ")");
+    } else if (this.logedInUser.type == "Credit-Underwriter") {
+      data.append('status', "Reveiwing by Credit Underwriter(" + this.logedInUser.f_name + ")");
+    } else if (this.logedInUser.type == "Credit-Approver") {
       // data.append('action', 'submit-all-forms');
       // data.append('ref_id', this.openId);
-      data.append('status', "Reveiwing by Credit Approver("+this.logedInUser.f_name  +")");
-      
+      data.append('status', "Reveiwing by Credit Approver(" + this.logedInUser.f_name + ")");
+
       // return  "Reveiwing by Credit Approver("+this.logedInUser.f_name +")";
-    }else if(this.logedInUser.type == "Admin"){
+    } else if (this.logedInUser.type == "Admin") {
       // return "Reveiwing by Admin";
       data.append('status', "Reveiwing by Admin");
     }
     this.ds.submitAppData(data).subscribe((response: any) => {
-      
+
       // console.log(response);
     });
 
@@ -115,23 +115,23 @@ export class DashbordComponent implements OnInit {
     });
   }
 
-  displayStatus(status: any){
-    if(status.indexOf("Approved by Credit Approver") > -1){
+  displayStatus(status: any) {
+    if (status.indexOf("Approved by Credit Approver") > -1) {
       // console.log('htti')
       return "badge bg-success";
-    }else if(status.indexOf("Approved by Credit Approver") > -1){
+    } else if (status.indexOf("Approved by Credit Approver") > -1) {
       return "badge bg-danger";
     }
-    if(this.logedInUser.type == "Credit-Underwriter"){
-      if(status.indexOf("Submitted by Credit Analyst") > -1){
+    if (this.logedInUser.type == "Credit-Underwriter") {
+      if (status.indexOf("Submitted by Credit Analyst") > -1) {
         // console.log('htti')
         return "badge bg-success";
-      }else if(status.indexOf("Processing by Credit Analyst") > -1 || status.indexOf("Reveiwing by Credit Underwriter") > -1){
+      } else if (status.indexOf("Processing by Credit Analyst") > -1 || status.indexOf("Reveiwing by Credit Underwriter") > -1) {
         return "badge bg-warning";
       }
     }
-    if(this.logedInUser.type == "Credit-Analyst"){
-      if(status.indexOf("Approved by Credit Approver") > -1){
+    if (this.logedInUser.type == "Credit-Analyst") {
+      if (status.indexOf("Approved by Credit Approver") > -1) {
         // console.log('htti')
         return "badge bg-success";
       }
@@ -140,23 +140,23 @@ export class DashbordComponent implements OnInit {
       // }
     }
 
-    if(this.logedInUser.type == "Admin"){
+    if (this.logedInUser.type == "Admin") {
       // if(){
-        return "badge bg-warning";
+      return "badge bg-warning";
       // }
     }
 
-    if(this.logedInUser.type == "Credit-Approver"){
+    if (this.logedInUser.type == "Credit-Approver") {
       // if(){
-        return "badge bg-warning";
+      return "badge bg-warning";
       // }
     }
     return "badge bg-warning";
   }
 
-  notShowingEditoption(status: any){
-    if(this.logedInUser.type == "Credit-Underwriter"){
-      if((status.indexOf("Submitted by Credit Analyst") > -1) || status.indexOf("Reveiwing by Credit Underwriter") > -1){
+  notShowingEditoption(status: any) {
+    if (this.logedInUser.type == "Credit-Underwriter") {
+      if ((status.indexOf("Submitted by Credit Analyst") > -1) || status.indexOf("Reveiwing by Credit Underwriter") > -1) {
         // console.log('htti')
         return "bx bxs-edit-alt";
       }
@@ -164,27 +164,27 @@ export class DashbordComponent implements OnInit {
       // if(status.indexOf("Processing by Credit Analyst") > -1){
       //   return "bx bxs-edit-alt notShowEdit";
       // }
-    }else if(this.logedInUser.type == "Credit-Analyst"){
+    } else if (this.logedInUser.type == "Credit-Analyst") {
       // if(status.indexOf("Submitted by Credit Analyst") > -1 || status.indexOf("Reveiwing by Credit Underwriter") > -1){
       //   console.log('htti')
       //   return "bx bxs-edit-alt notShowEdit";
       // }
       // else 
-      if(status.indexOf("Processing by Credit Analyst") > -1 ){
+      if (status.indexOf("Processing by Credit Analyst") > -1) {
         return "bx bxs-edit-alt";
       }
 
-    }else if(this.logedInUser.type == "Admin"){
+    } else if (this.logedInUser.type == "Admin") {
       // if(status.indexOf("Submitted by Credit Analyst") > -1 || status.indexOf("Reveiwing by Credit Underwriter") > -1 || status.indexOf("Processing by Credit Analyst") > -1){
       //   console.log('htti')
       //   return "bx bxs-edit-alt notShowEdit";
       // }
       // else 
-      if(status.indexOf("Submitted by Credit Underwriter") > -1 || (status.indexOf("Reveiwing by Admin")) > -1 ){
+      if (status.indexOf("Submitted by Credit Underwriter") > -1 || (status.indexOf("Reveiwing by Admin")) > -1) {
         return "bx bxs-edit-alt";
       }
 
-    }else if(this.logedInUser.type == "Credit-Approver"){
+    } else if (this.logedInUser.type == "Credit-Approver") {
       // if(status.indexOf("Submitted by Credit Analyst") > -1 || status.indexOf("Reveiwing by Credit Underwriter") > -1 || status.indexOf("Processing by Credit Analyst") > -1){
       //   console.log('htti')
       //   return "bx bxs-edit-alt notShowEdit";
@@ -198,24 +198,24 @@ export class DashbordComponent implements OnInit {
     return "bx bxs-edit-alt notShowEdit";
   }
 
-  notShowingViewOption(status: any){
+  notShowingViewOption(status: any) {
     // console.log('status',status)
-    if(this.logedInUser.type == "Credit-Underwriter"){
+    if (this.logedInUser.type == "Credit-Underwriter") {
       // if(status.indexOf("Submitted by Credit Analyst") > -1){
       //   console.log('htti')
       //   return "bx bxs-show notShowEdit";
       // }else 
-      if(status.indexOf("Reveiwing by Credit Underwriter") > -1 || status.indexOf("Submitted by Credit Analyst") > -1){
+      if (status.indexOf("Reveiwing by Credit Underwriter") > -1 || status.indexOf("Submitted by Credit Analyst") > -1) {
         return "bx bxs-show notShowEdit";
-      }else{
+      } else {
         return "bx bxs-show";
       }
     }
-    if(this.logedInUser.type == "Credit-Analyst"){
-      if(status.indexOf("Processing by Credit Analyst") > -1 ){
+    if (this.logedInUser.type == "Credit-Analyst") {
+      if (status.indexOf("Processing by Credit Analyst") > -1) {
         // console.log('htti')
         return "bx bxs-show notShowEdit";
-      }else{
+      } else {
         return "bx bxs-show";
       }
       // else if(status.indexOf("Processing by Credit Analyst") > -1 ){
@@ -223,22 +223,22 @@ export class DashbordComponent implements OnInit {
       // }
     }
 
-    if(this.logedInUser.type == "Admin"){
+    if (this.logedInUser.type == "Admin") {
 
       // if(status.indexOf("Submitted by Credit Analyst") > -1 || status.indexOf("Reveiwing by Credit Underwriter") > -1 || status.indexOf("Processing by Credit Analyst") > -1){
       //   console.log('htti')
       //   return "bx bxs-show";
       // }
       // else 
-      if(status.indexOf("Processing by Admin") > -1 || (status.indexOf("Reveiwing by Admin") > -1) || (status.indexOf("Submitted by Credit Underwriter") > -1)){
+      if (status.indexOf("Processing by Admin") > -1 || (status.indexOf("Reveiwing by Admin") > -1) || (status.indexOf("Submitted by Credit Underwriter") > -1)) {
         return "bx bxs-show notShowEdit";
-      }else{
+      } else {
         return "bx bxs-show";
       }
 
     }
 
-    if(this.logedInUser.type == "Credit-Approver"){
+    if (this.logedInUser.type == "Credit-Approver") {
       // if(status.indexOf("Submitted by Admin") > -1 || status.indexOf("Reveiwing by Credit Approver") > -1 ) {
       //   console.log('htti')
       //   return "bx bxs-show notShowEdit";
@@ -254,5 +254,5 @@ export class DashbordComponent implements OnInit {
     return "bx bxs-show notShowEdit";
   }
 
-  
+
 }

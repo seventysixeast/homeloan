@@ -18,7 +18,7 @@ export class RiskTwoComponent implements OnInit {
     private router: Router,
     private spiner: NgxSpinnerService,
     private sideNav: SideNavComponent
-  ) {}
+  ) { }
 
   openId: any = 0;
 
@@ -73,7 +73,7 @@ export class RiskTwoComponent implements OnInit {
   f3 = '';
   f4 = '';
 
-  logedInUser : any;
+  logedInUser: any;
   userId = "";
   status = "";
   viewOnly: any = false;
@@ -81,8 +81,8 @@ export class RiskTwoComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe((params: any) => {
-      if(params.id != null){
-        localStorage.setItem("applicant1Id",params.id)
+      if (params.id != null) {
+        localStorage.setItem("applicant1Id", params.id)
         this.openId = params.id;
         if (this.openId != 0) {
           this.getSingleData();
@@ -92,10 +92,10 @@ export class RiskTwoComponent implements OnInit {
     });
     this.logedInUser = this.ds.userLoggedIn()
     let checkView = localStorage.getItem("viewOnly")
-    if(checkView === 'true'){
-      this.viewOnly =  true;
+    if (checkView === 'true') {
+      this.viewOnly = true;
       this.nextButtonText = "Next"
-    }else{
+    } else {
       this.nextButtonText = "Save And Next"
     }
   }
@@ -482,8 +482,23 @@ export class RiskTwoComponent implements OnInit {
   }
 
   handleSubmit() {
-    if(this.viewOnly){
+    if (this.viewOnly) {
       this.goNext();
+      return;
+    }
+
+    if (this.c1 == "" && this.c2 == "" && this.c3 == "" && this.c4 == "") {
+      alert("Please Select any option of Applicant's Saving and other deposit accounts ")
+      return;
+    }
+
+    if (this.e1 == "" && this.e2 == "" && this.e3 == "") {
+      alert("Please Select any option of Source of Margin Contribution")
+      return;
+    }
+
+    if (this.f1 == "" && this.f2 == "" && this.f3 == "" && this.f4 == "") {
+      alert("Please Select any option of Debit Standing Instructions")
       return;
     }
     this.spiner.show();
@@ -539,7 +554,7 @@ export class RiskTwoComponent implements OnInit {
     data.append('ref_id', this.openId);
     data.append('JsonData', JSON.stringify(JsonData));
     // data.append('status', "risk-2");
-    data.append('status', this.ds.addStatus(this.logedInUser, this.userId,this.status));
+    data.append('status', this.ds.addStatus(this.logedInUser, this.userId, this.status));
 
     this.ds.submitAppData(data).subscribe((response: any) => {
       this.spiner.hide();

@@ -37,11 +37,7 @@
                 </tr>
                 <tr>
                   <td></td>
-                  <td
-                    [class]="'selectable ' + a1"
-                    (click)="handleUpdate(-3, 1, 1)"
-                    colspan="2"
-                  >
+                  <td [class]="'selectable ' + a1" (click)="handleUpdate(-3, 1, 1)" colspan="2">
                     A. Less than 20 Years
                   </td>
                   <!-- <td>-3</td>
@@ -52,33 +48,21 @@
                 </tr>
                 <tr>
                   <td></td>
-                  <td
-                    colspan="2"
-                    [class]="'selectable ' + a2"
-                    (click)="handleUpdate(2, 1, 2)"
-                  >
+                  <td colspan="2" [class]="'selectable ' + a2" (click)="handleUpdate(2, 1, 2)">
                     B. 20 and more but less than 25
                   </td>
                   <!-- <td>2</td> -->
                 </tr>
                 <tr>
                   <td></td>
-                  <td
-                    colspan="2"
-                    [class]="'selectable ' + a3"
-                    (click)="handleUpdate(3, 1, 3)"
-                  >
+                  <td colspan="2" [class]="'selectable ' + a3" (click)="handleUpdate(3, 1, 3)">
                     C. 25 and more but less than 30
                   </td>
                   <!-- <td>3</td> -->
                 </tr>
                 <tr>
                   <td></td>
-                  <td
-                    colspan="2"
-                    [class]="'selectable ' + a4"
-                    (click)="handleUpdate(5, 1, 4)"
-                  >
+                  <td colspan="2" [class]="'selectable ' + a4" (click)="handleUpdate(5, 1, 4)">
                     D. 30 and more but less than 35
                   </td>
                   <!-- <td>5</td> -->
@@ -86,55 +70,35 @@
                 <tr>
                   <td></td>
 
-                  <td
-                    colspan="2"
-                    [class]="'selectable ' + a5"
-                    (click)="handleUpdate(5, 1, 5)"
-                  >
+                  <td colspan="2" [class]="'selectable ' + a5" (click)="handleUpdate(5, 1, 5)">
                     E. 35 and more but less than 40
                   </td>
                   <!-- <td>5</td> -->
                 </tr>
                 <tr>
                   <td></td>
-                  <td
-                    colspan="2"
-                    [class]="'selectable ' + a6"
-                    (click)="handleUpdate(3, 1, 6)"
-                  >
+                  <td colspan="2" [class]="'selectable ' + a6" (click)="handleUpdate(3, 1, 6)">
                     F. 40 and more but less than 45
                   </td>
                   <!-- <td>3</td> -->
                 </tr>
                 <tr>
                   <td></td>
-                  <td
-                    colspan="2"
-                    [class]="'selectable ' + a7"
-                    (click)="handleUpdate(2, 1, 7)"
-                  >
+                  <td colspan="2" [class]="'selectable ' + a7" (click)="handleUpdate(2, 1, 7)">
                     G. 45 and more but less than 50.
                   </td>
                   <!-- <td>2</td> -->
                 </tr>
                 <tr>
                   <td></td>
-                  <td
-                    colspan="2"
-                    [class]="'selectable ' + a8"
-                    (click)="handleUpdate(1, 1, 8)"
-                  >
+                  <td colspan="2" [class]="'selectable ' + a8" (click)="handleUpdate(1, 1, 8)">
                     H. 50 and more but less than 55
                   </td>
                   <!-- <td>1</td> -->
                 </tr>
                 <tr>
                   <td></td>
-                  <td
-                    colspan="2"
-                    [class]="'selectable ' + a9"
-                    (click)="handleUpdate(-3, 1, 9)"
-                  >
+                  <td colspan="2" [class]="'selectable ' + a9" (click)="handleUpdate(-3, 1, 9)">
                     I. 55 and above
                   </td>
                   <!-- <td>-3</td> -->
@@ -148,11 +112,7 @@
                 </tr>
                 <tr>
                   <td></td>
-                  <td
-                    colspan="2"
-                    [class]="'selectable ' + b1"
-                    (click)="handleUpdate(3, 2, 1)"
-                  >
+                  <td colspan="2" [class]="'selectable ' + b1" (click)="handleUpdate(3, 2, 1)">
                     A. Post-Graduation
                   </td>
                   <!-- <td>3</td>
@@ -163,33 +123,21 @@
                 </tr>
                 <tr>
                   <td></td>
-                  <td
-                    colspan="2"
-                    [class]="'selectable ' + b2"
-                    (click)="handleUpdate(2, 2, 2)"
-                  >
+                  <td colspan="2" [class]="'selectable ' + b2" (click)="handleUpdate(2, 2, 2)">
                     B. Graduation
                   </td>
                   <!-- <td>2</td> -->
                 </tr>
                 <tr>
                   <td></td>
-                  <td
-                    colspan="2"
-                    [class]="'selectable ' + b3"
-                    (click)="handleUpdate(1, 2, 3)"
-                  >
+                  <td colspan="2" [class]="'selectable ' + b3" (click)="handleUpdate(1, 2, 3)">
                     C. High School (10th Standard)
                   </td>
                   <!-- <td>1</td> -->
                 </tr>
                 <tr>
                   <td></td>
-                  <td
-                    colspan="2"
-                    [class]="'selectable ' + b4"
-                    (click)="handleUpdate(-2, 2, 4)"
-                  >
+                  <td colspan="2" [class]="'selectable ' + b4" (click)="handleUpdate(-2, 2, 4)">
                     D. Primary School (5th Standard)
                   </td>
                   <!-- <td>-2</td> -->
@@ -231,8 +179,8 @@
                 <tr>
                   <td></td>
                   <td colspan="2" [class]="c4">
-                    D. Applicant's present combined worth is estimated at 0.25
-                    and More but Less than 0.50 time of the proposed loan
+                    D. Applicant's present combined worth is estimated at 0.5
+                    and More but Less than 0.75 time of the proposed loan
                     amount.
                   </td>
                   <!-- <td>1.25</td> -->
@@ -240,7 +188,16 @@
                 <tr>
                   <td></td>
                   <td colspan="2" [class]="c5">
-                    E. Applicant's present combined worth is estimated at Less
+                    E. Applicant's present combined worth is estimated at 0.25
+                    and More but Less than 0.50 time of the proposed loan
+                    amount.
+                  </td>
+                  <!-- <td>1.25</td> -->
+                </tr>
+                <tr>
+                  <td></td>
+                  <td colspan="2" [class]="c6">
+                    F. Applicant's present combined worth is estimated at Less
                     than 0.25 time of the proposed loan amount.
                   </td>
                   <!-- <td>0.5</td> -->
@@ -253,11 +210,7 @@
                 </tr>
                 <tr>
                   <td></td>
-                  <td
-                    colspan="2"
-                    [class]="'selectable ' + d1"
-                    (click)="handleUpdate(3, 4, 1)"
-                  >
+                  <td colspan="2" [class]="'selectable ' + d1" (click)="handleUpdate(3, 4, 1)">
                     A. Applicant/s has Never Taken any Loan from any financial
                     institution so far.
                   </td>
@@ -269,11 +222,7 @@
                 </tr>
                 <tr>
                   <td></td>
-                  <td
-                    colspan="2"
-                    [class]="'selectable ' + d2"
-                    (click)="handleUpdate(3, 4, 2)"
-                  >
+                  <td colspan="2" [class]="'selectable ' + d2" (click)="handleUpdate(3, 4, 2)">
                     B. The applicant has Availed Loan from financial institution
                     and paid off fully on time.
                   </td>
@@ -281,11 +230,7 @@
                 </tr>
                 <tr>
                   <td></td>
-                  <td
-                    colspan="2"
-                    [class]="'selectable ' + d3"
-                    (click)="handleUpdate(2, 4, 3)"
-                  >
+                  <td colspan="2" [class]="'selectable ' + d3" (click)="handleUpdate(2, 4, 3)">
                     C. The applicant has Availed Loan from financial institution
                     and paying regular installments.
                   </td>
@@ -293,11 +238,7 @@
                 </tr>
                 <tr>
                   <td></td>
-                  <td
-                    colspan="2"
-                    [class]="'selectable ' + d4"
-                    (click)="handleUpdate(-5, 4, 4)"
-                  >
+                  <td colspan="2" [class]="'selectable ' + d4" (click)="handleUpdate(-5, 4, 4)">
                     D. The applicant has Availed Loan from financial institution
                     and have defaulted the repayment or have problem in paying
                     installments on time.
@@ -312,11 +253,7 @@
                 </tr>
                 <tr>
                   <td></td>
-                  <td
-                    colspan="2"
-                    [class]="'selectable ' + e1"
-                    (click)="handleUpdate(3, 5, 1)"
-                  >
+                  <td colspan="2" [class]="'selectable ' + e1" (click)="handleUpdate(3, 5, 1)">
                     A. The applicant is reported to be very honest and
                     creditworthy.
                   </td>
@@ -328,11 +265,7 @@
                 </tr>
                 <tr>
                   <td></td>
-                  <td
-                    colspan="2"
-                    [class]="'selectable ' + e2"
-                    (click)="handleUpdate(2, 5, 2)"
-                  >
+                  <td colspan="2" [class]="'selectable ' + e2" (click)="handleUpdate(2, 5, 2)">
                     B. The applicant is reported to be generally honest and we
                     do not have any negative market reports about her / him /
                     them.
@@ -341,11 +274,7 @@
                 </tr>
                 <tr>
                   <td></td>
-                  <td
-                    colspan="2"
-                    [class]="'selectable ' + e3"
-                    (click)="handleUpdate(-5, 5, 3)"
-                  >
+                  <td colspan="2" [class]="'selectable ' + e3" (click)="handleUpdate(-5, 5, 3)">
                     C. We have some Negative Reports about applicant which may
                     adversely affect the recovery of loan.
                   </td>
@@ -359,11 +288,7 @@
                 </tr>
                 <tr>
                   <td></td>
-                  <td
-                    colspan="2"
-                    [class]="'selectable ' + f1"
-                    (click)="handleUpdate(3, 6, 1)"
-                  >
+                  <td colspan="2" [class]="'selectable ' + f1" (click)="handleUpdate(3, 6, 1)">
                     A. Guarantors are reported to be HIGHLY respectable and
                     honest persons.
                   </td>
@@ -375,11 +300,7 @@
                 </tr>
                 <tr>
                   <td></td>
-                  <td
-                    colspan="2"
-                    [class]="'selectable ' + f2"
-                    (click)="handleUpdate(2, 6, 2)"
-                  >
+                  <td colspan="2" [class]="'selectable ' + f2" (click)="handleUpdate(2, 6, 2)">
                     B. Guarantors are reported to be GENERALLY respectable and
                     honest persons.
                   </td>
@@ -387,11 +308,7 @@
                 </tr>
                 <tr>
                   <td></td>
-                  <td
-                    colspan="2"
-                    [class]="'selectable ' + f3"
-                    (click)="handleUpdate(1, 6, 3)"
-                  >
+                  <td colspan="2" [class]="'selectable ' + f3" (click)="handleUpdate(1, 6, 3)">
                     C. The applicant has offered No Guarantor.
                   </td>
                   <!-- <td>1</td> -->
@@ -408,12 +325,8 @@
               <button type="submit" class="btn btn-primary" (click)="goBack()">
                 Back
               </button>
-              <button
-                type="submit"
-                class="btn btn-primary mx-3"
-                (click)="handleSubmit()"
-              >
-              {{nextButtonText}}
+              <button type="submit" class="btn btn-primary mx-3" (click)="handleSubmit()">
+                {{nextButtonText}}
               </button>
             </div>
           </div>

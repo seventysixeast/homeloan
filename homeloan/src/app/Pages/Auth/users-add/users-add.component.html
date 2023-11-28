@@ -9,66 +9,33 @@
         <div class="card">
           <div class="card-body">
             <div class="row g-3 mx-2 my-1">
-              <form  method="post" ngNativeValidate (ngSubmit) = "handleSubmit()">   
+              <form method="post" ngNativeValidate (ngSubmit)="handleSubmit()">
                 <div class="col-12">
                   <label for="inputNanme4" class="form-label">First Name</label>
-                  <input
-                    autocomplete="nope"
-                    [(ngModel)]="f_name"
-                    type="text"
-                    class="form-control"
-                    id="inputNanme4"
-                    required
-                    [ngModelOptions]="{standalone: true}"
-                  />
+                  <input autocomplete="nope" [(ngModel)]="f_name" type="text" class="form-control" id="inputNanme4"
+                    required [ngModelOptions]="{standalone: true}" />
                 </div>
                 <div class="col-12">
                   <label for="inputEmail4" class="form-label">Last Name</label>
-                  <input
-                    autocomplete="nope"
-                    [(ngModel)]="l_name"
-                    type="text"
-                    class="form-control"
-                    id="inputEmail4"
-                    [ngModelOptions]="{standalone: true}"
-                  />
+                  <input autocomplete="nope" [(ngModel)]="l_name" type="text" class="form-control" id="inputEmail4"
+                    [ngModelOptions]="{standalone: true}" />
                 </div>
                 <div class="col-12">
                   <label for="inputPassword4" class="form-label">Email</label>
-                  <input
-                    autocomplete="nope"
-                    [(ngModel)]="email"
-                    type="text"
-                    class="{{edit ? 'form-control edit-email' : 'form-control'}}"
-                    id="inputPassword4"
-                    required
-                    [readonly]="edit"
-                    [ngModelOptions]="{standalone: true}"
-                  />
+                  <input autocomplete="nope" [(ngModel)]="email" type="text"
+                    class="{{edit ? 'form-control edit-email' : 'form-control'}}" id="inputPassword4" required
+                    [readonly]="edit" [ngModelOptions]="{standalone: true}" />
                 </div>
                 <div class="col-12">
                   <label for="inputAddress" class="form-label">Password</label>
-                  <input
-                    autocomplete="nope"
-                    [(ngModel)]="password"
-                    type="text"
-                    class="form-control"
-                    id="inputAddress"
-                    required
-                    [ngModelOptions]="{standalone: true}"
-                  />
+                  <input autocomplete="nope" [(ngModel)]="password" type="text" class="form-control" id="inputAddress"
+                    required [ngModelOptions]="{standalone: true}" />
                 </div>
                 <div class="col-12">
                   <label for="inputAddress" class="form-label">Type</label>
-  
-                  <select
-                    class="form-select"
-                    aria-label="Default select example"
-                    [(ngModel)]="type"
-                    placeholder="Select Role"
-                    required  
-                    [ngModelOptions]="{standalone: true}"
-                  >
+
+                  <select class="form-select" aria-label="Default select example" [(ngModel)]="type"
+                    placeholder="Select Role" required [ngModelOptions]="{standalone: true}">
                     <option value="">Select Role</option>
                     <!-- <option value="Admin">Admin</option> -->
                     <option value="Credit-Analyst">Credit Analyst</option>
@@ -77,22 +44,17 @@
                     <!-- <option value="Management">Management</option> -->
                   </select>
                 </div>
-                <div class="col-12">
+                <div class="col-6">
                   <label for="inputPhoto" class="form-label">Photo</label>
-                  <input
-                    type="file"
-                    (change)="handlePhotoUpload($event)"
-                    accept="image/*"
-                    class="form-control"
-                    id="inputPhoto"
-                  />
+                  <input type="file" (change)="handlePhotoUpload($event)" accept="image/*" class="form-control"
+                    id="inputPhoto" />
                 </div>
-                
+                <div class="col-6 image-margin" *ngIf="(image_show !=null)" style="text-align: center">
+                  <img [src]="image_show" style="width: 200px" />
+                </div>
+
                 <div class="col-12 mt-3">
-                  <button
-                    type="submit"
-                    class="btn btn-primary"
-                  >
+                  <button type="submit" class="btn btn-primary">
                     Save New User
                   </button>
                 </div>

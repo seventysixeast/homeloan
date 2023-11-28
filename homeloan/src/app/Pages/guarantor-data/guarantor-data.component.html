@@ -51,268 +51,118 @@
               </li>
             </ul> -->
             <div class="tab-content pt-2" id="myTabContent">
-              <div
-                class="tab-pane fade show active"
-                id="home"
-                role="tabpanel"
-                aria-labelledby="home-tab"
-              >
+              <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                 <div class="row g-3 mx-2 my-1">
                   <div class="col-12">
-                    <label for="inputNanme4" class="form-label"
-                      >Guarantor's Full Name</label
-                    >
-                    <input
-                      autocomplete="nope"
-                      [(ngModel)]="a1_name"
-                      type="text"
-                      class="form-control"
-                      id="inputNanme4"
-                      [readonly]="viewOnly"
-                    />
+                    <label for="inputNanme4" class="form-label">Guarantor's Full Name</label>
+                    <input autocomplete="nope" [(ngModel)]="a1_name" type="text" class="form-control" id="inputNanme4"
+                      [readonly]="viewOnly" />
                   </div>
                   <div class="col-12">
-                    <label for="inputEmail4" class="form-label"
-                      >Father's / Husband's Name</label
-                    >
-                    <input
-                      autocomplete="nope"
-                      [(ngModel)]="a1_fName"
-                      type="text"
-                      class="form-control"
-                      id="inputEmail4"
-                      [readonly]="viewOnly"
-                    />
+                    <label for="inputEmail4" class="form-label">Father's / Husband's Name</label>
+                    <input autocomplete="nope" [(ngModel)]="a1_fName" type="text" class="form-control" id="inputEmail4"
+                      [readonly]="viewOnly" />
                   </div>
                   <div class="col-12">
-                    <label for="inputPassword4" class="form-label"
-                      >Activity</label
-                    >
-                    <input
-                      autocomplete="nope"
-                      [(ngModel)]="a1_activity"
-                      type="text"
-                      class="form-control"
-                      id="inputPassword4"
-                      [readonly]="viewOnly"
-                    />
+                    <label for="inputPassword4" class="form-label">Activity</label>
+                    <input autocomplete="nope" [(ngModel)]="a1_activity" type="text" class="form-control"
+                      id="inputPassword4" [readonly]="viewOnly" />
                   </div>
                   <div class="col-12">
-                    <label for="inputAddress" class="form-label"
-                      >Present Address</label
-                    >
-                    <input
-                      autocomplete="nope"
-                      [(ngModel)]="a1_paddress"
-                      type="text"
-                      class="form-control"
-                      id="inputAddress"
-                      [readonly]="viewOnly"
-                    />
+                    <label for="inputAddress" class="form-label">Present Address</label>
+                    <input autocomplete="nope" [(ngModel)]="a1_paddress" type="text" class="form-control"
+                      id="inputAddress" [readonly]="viewOnly" />
                   </div>
                   <div class="col-12">
-                    <label for="inputAddress" class="form-label"
-                      >Guarantor's Age</label
-                    >
-                    <input
-                      autocomplete="nope"
-                      [(ngModel)]="a1_age"
-                      type="text"
-                      class="form-control"
-                      id="inputAddress"
-                      [readonly]="viewOnly"
-                    />
+                    <label for="inputAddress" class="form-label">Guarantor's Age</label>
+                    <input autocomplete="nope" [(ngModel)]="a1_age" type="text" class="form-control" id="inputAddress"
+                      [readonly]="viewOnly" />
                   </div>
                   <div class="col-12">
                     <label for="inputAddress" class="form-label">NRC No</label>
-                    <input
-                      autocomplete="nope"
-                      [(ngModel)]="a1_nrc"
-                      type="text"
-                      class="form-control"
-                      id="inputAddress"
-                      [readonly]="viewOnly"
-                    />
+                    <input autocomplete="nope" [(ngModel)]="a1_nrc" type="text" class="form-control" id="inputAddress"
+                      [readonly]="viewOnly" />
                   </div>
                   <div class="col-12">
-                    <label for="inputAddress" class="form-label"
-                      >Mobile No</label
-                    >
-                    <input
-                      autocomplete="nope"
-                      [(ngModel)]="a1_phone"
-                      type="text"
-                      class="form-control"
-                      id="inputAddress"
-                      [readonly]="viewOnly"
-                    />
+                    <label for="inputAddress" class="form-label">Mobile No</label>
+                    <input autocomplete="nope" [(ngModel)]="a1_phone" type="text" class="form-control" id="inputAddress"
+                      [readonly]="viewOnly" />
                   </div>
                   <div class="col-12">
-                    <label for="inputAddress" class="form-label"
-                      >Passport No</label
-                    >
-                    <input
-                      autocomplete="nope"
-                      [(ngModel)]="a1_passport"
-                      type="text"
-                      class="form-control"
-                      id="inputAddress"
-                      [readonly]="viewOnly"
-                    />
+                    <label for="inputAddress" class="form-label">Passport No</label>
+                    <input autocomplete="nope" [(ngModel)]="a1_passport" type="text" class="form-control"
+                      id="inputAddress" [readonly]="viewOnly" />
                   </div>
-                  <div class="col-6">
-                    <label for="inputAddress" class="form-label"
-                      >Guarantor's Photo</label
-                    >
-                    <input
-                      type="file"
-                      class="form-control"
-                      id="inputAddress"
-                      (change)="handleFileInput($event.target, 1)"
-                    />
+                  <div [class]="viewOnly ? 'col-6 onlyViewClass':'col-6'">
+                    <label for="inputAddress" class="form-label">Guarantor's Photo </label>
+                    <input type="file" class="form-control" id="inputAddress"
+                      (change)="handleFileInput($event.target, 1)" />
                   </div>
                   <div class="col-6" style="text-align: center">
                     <img [src]="a1_photo" style="width: 200px" />
                   </div>
                   <div class="col-12">
-                    <button
-                      type="submit"
-                      class="btn btn-primary mx-3"
-                      (click)="goBack()"
-                    >
+                    <button type="submit" class="btn btn-primary mx-3" (click)="goBack()">
                       Back
                     </button>
-                    <button
-                      type="submit"
-                      class="btn btn-primary"
-                      (click)="handleSubmit(1)"
-                    >
-                    {{ nextButtonText }}
+                    <button type="submit" class="btn btn-primary" (click)="handleSubmit(1)">
+                      {{ nextButtonText }}
                     </button>
                   </div>
                 </div>
               </div>
-              <div
-                class="tab-pane fade"
-                id="profile"
-                role="tabpanel"
-                aria-labelledby="profile-tab"
-              >
+              <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                 <div class="row g-3 mx-2 my-1">
                   <div class="col-12">
-                    <label for="inputNanme4" class="form-label"
-                      >Guarantor's Full Name</label
-                    >
-                    <input
-                      autocomplete="nope"
-                      [(ngModel)]="a2_name"
-                      type="text"
-                      class="form-control"
-                      id="inputNanme4"
-                    />
+                    <label for="inputNanme4" class="form-label">Guarantor's Full Name</label>
+                    <input autocomplete="nope" [(ngModel)]="a2_name" type="text" class="form-control"
+                      id="inputNanme4" />
                   </div>
                   <div class="col-12">
-                    <label for="inputEmail4" class="form-label"
-                      >Father's / Husband's Name</label
-                    >
-                    <input
-                      autocomplete="nope"
-                      [(ngModel)]="a2_fName"
-                      type="text"
-                      class="form-control"
-                      id="inputEmail4"
-                    />
+                    <label for="inputEmail4" class="form-label">Father's / Husband's Name</label>
+                    <input autocomplete="nope" [(ngModel)]="a2_fName" type="text" class="form-control"
+                      id="inputEmail4" />
                   </div>
                   <div class="col-12">
-                    <label for="inputPassword4" class="form-label"
-                      >Activity</label
-                    >
-                    <input
-                      autocomplete="nope"
-                      [(ngModel)]="a2_activity"
-                      type="text"
-                      class="form-control"
-                      id="inputPassword4"
-                    />
+                    <label for="inputPassword4" class="form-label">Activity</label>
+                    <input autocomplete="nope" [(ngModel)]="a2_activity" type="text" class="form-control"
+                      id="inputPassword4" />
                   </div>
                   <div class="col-12">
-                    <label for="inputAddress" class="form-label"
-                      >Present Address</label
-                    >
-                    <input
-                      autocomplete="nope"
-                      [(ngModel)]="a2_paddress"
-                      type="text"
-                      class="form-control"
-                      id="inputAddress"
-                    />
+                    <label for="inputAddress" class="form-label">Present Address</label>
+                    <input autocomplete="nope" [(ngModel)]="a2_paddress" type="text" class="form-control"
+                      id="inputAddress" />
                   </div>
                   <div class="col-12">
-                    <label for="inputAddress" class="form-label"
-                      >Guarantor's Age</label
-                    >
-                    <input
-                      autocomplete="nope"
-                      [(ngModel)]="a2_age"
-                      type="text"
-                      class="form-control"
-                      id="inputAddress"
-                    />
+                    <label for="inputAddress" class="form-label">Guarantor's Age</label>
+                    <input autocomplete="nope" [(ngModel)]="a2_age" type="text" class="form-control"
+                      id="inputAddress" />
                   </div>
                   <div class="col-12">
                     <label for="inputAddress" class="form-label">NRC No</label>
-                    <input
-                      autocomplete="nope"
-                      [(ngModel)]="a2_nrc"
-                      type="text"
-                      class="form-control"
-                      id="inputAddress"
-                    />
+                    <input autocomplete="nope" [(ngModel)]="a2_nrc" type="text" class="form-control"
+                      id="inputAddress" />
                   </div>
                   <div class="col-12">
-                    <label for="inputAddress" class="form-label"
-                      >Mobile No</label
-                    >
-                    <input
-                      autocomplete="nope"
-                      [(ngModel)]="a2_phone"
-                      type="text"
-                      class="form-control"
-                      id="inputAddress"
-                    />
+                    <label for="inputAddress" class="form-label">Mobile No</label>
+                    <input autocomplete="nope" [(ngModel)]="a2_phone" type="text" class="form-control"
+                      id="inputAddress" />
                   </div>
                   <div class="col-12">
-                    <label for="inputAddress" class="form-label"
-                      >Passport No</label
-                    >
-                    <input
-                      autocomplete="nope"
-                      [(ngModel)]="a2_passport"
-                      type="text"
-                      class="form-control"
-                      id="inputAddress"
-                    />
+                    <label for="inputAddress" class="form-label">Passport No</label>
+                    <input autocomplete="nope" [(ngModel)]="a2_passport" type="text" class="form-control"
+                      id="inputAddress" />
                   </div>
                   <div class="col-6">
-                    <label for="inputAddress" class="form-label"
-                      >Guarantor's Photo</label
-                    >
-                    <input
-                      (change)="handleFileInput($event.target, 2)"
-                      type="file"
-                      class="form-control"
-                      id="inputAddress"
-                    />
+                    <label for="inputAddress" class="form-label">Guarantor's Photo</label>
+                    <input (change)="handleFileInput($event.target, 2)" type="file" class="form-control"
+                      id="inputAddress" />
                   </div>
                   <div class="col-6" style="text-align: center">
                     <img [src]="a2_photo" style="width: 200px" />
                   </div>
                   <div class="col-12">
-                    <button
-                      type="submit"
-                      class="btn btn-primary"
-                      (click)="handleSubmit(2)"
-                    >
+                    <button type="submit" class="btn btn-primary" (click)="handleSubmit(2)">
                       Save Guarantor 2
                     </button>
                   </div>

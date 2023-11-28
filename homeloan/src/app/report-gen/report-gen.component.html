@@ -28,35 +28,27 @@
                 </button>
               </div>
 
-              <div *ngIf="showUploadButton" class="col-12 my-3">
+              <div *ngIf="showUploadButton && !showDownloadButton" class="col-12 my-3">
                 <button type="submit" class="btn btn-primary" (click)="doc2()">
                   Download Loan Proposal
                 </button>
               </div>
               <div class="col-12 mt-3">
-                <button
-                  type="submit"
-                  class="btn btn-primary"
-                  (click)="goBack()"
-                >
+                <button type="submit" class="btn btn-primary" (click)="goBack()">
                   Back
                 </button>
-                <button
-                  type="submit"
-                  class="btn btn-primary mx-3"
-                  (click)="handleSubmit()"
-                >
+                <button type="submit" class="btn btn-primary mx-3" (click)="handleSubmit()">
                   Dashboard
                 </button>
               </div>
-              <div [class]="showUploadButton ? 'col-12 mt-3' : 'col-12 mt-3 notShowEdit'" >
+              <div [class]="showUploadButton ? 'col-12 mt-3' : 'col-12 mt-3 notShowEdit'">
                 <!-- File Upload Option 1 for PDF -->
                 <input type="file" (change)="handlePdfUpload($event, 'application')" accept=".pdf" />
                 <button type="submit" class="btn btn-primary" (click)="uploadPdf('application')">
                   Upload Application PDF
                 </button>
               </div>
-        
+
               <div [class]="showUploadButton ? 'col-12 mt-3' : 'col-12 mt-3 notShowEdit'">
                 <!-- File Upload Option 2 for PDF -->
                 <input type="file" (change)="handlePdfUpload($event, 'proposal')" accept=".pdf" />
@@ -64,46 +56,31 @@
                   Upload Proposal PDF
                 </button>
               </div>
-              <div [class]="showDownloadButton ? 'col-12 mt-3' : 'col-12 mt-3 notShowEdit'"   *ngFor="let pdfFile of pdfFiles">
+              <div [class]="showDownloadButton ? 'col-12 mt-3' : 'col-12 mt-3 notShowEdit'"
+                *ngFor="let pdfFile of pdfFiles">
                 <button (click)="downloadPdf(pdfFile.filename)">
                   Download {{ pdfFile.type | titlecase }} PDF
                 </button>
               </div>
-              <div  *ngIf="submitButtonForAdmin" class="col-12 mt-3">
-                <button
-                  type="submit"
-                  class="btn btn-primary"
-                  (click)="submitStatus('Submitted by Admin')"
-                >
+              <div *ngIf="submitButtonForAdmin" class="col-12 mt-3">
+                <button type="submit" class="btn btn-primary" (click)="submitStatus('Submitted by Admin')">
                   Submit
                 </button>
               </div>
-              <div *ngIf="showButtonForApprover" class="col-12 mt-3">
-                <button
-                  type="submit"
-                  class="btn btn-primary"
-                  (click)="submitStatus('Approved')"
-                >
+              <div *ngIf="showButtonForApprover && !showStatusButton" class="col-12 mt-3">
+                <button type="submit" class="btn btn-primary" (click)="submitStatus('Approved')">
                   Approve
                 </button>
-                <button
-                  type="submit"
-                  class="btn btn-primary mx-3"
-                  (click)="submitStatus('Rejected')"
-                >
+                <button type="submit" class="btn btn-primary mx-3" (click)="submitStatus('Rejected')">
                   Reject
                 </button>
               </div>
 
               <div *ngIf="showStatusButton" class="col-12 mt-3">
-                <button
-                  type="submit"
-                  class="btn btn-primary"
-                  (click)="submitStatus('Approved')"
-                >
-                  Status : {{status}}
+                <button type="submit" class="btn btn-primary">
+                  Status : {{status | titlecase}}
                 </button>
-                
+
               </div>
 
             </div>

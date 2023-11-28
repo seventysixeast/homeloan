@@ -56,23 +56,13 @@
                       <td>{{ i.email }}</td>
                       <!-- <td>{{ i.a1_phone }}</td> -->
                       <td>
-                        <span
-                          class="badge bg-success"
-                          style="padding: 0.5rem; width: 100px"
-                          >{{ i.type }}</span
-                        >
+                        <span class="badge bg-success" style="padding: 0.5rem; width: 114px">{{ i.type }}</span>
                       </td>
                       <td>
-                        <i
-                          class="bx bxs-show"
-                          style="font-size: 25px; cursor: pointer; color: green"
-                          (click)="openData(i.id)"
-                        ></i>
-                        <i
-                          class="bx bxs-trash-alt mx-2"
-                          style="font-size: 25px; cursor: pointer; color: red"
-                          (click)="deleteAcc(i.id)"
-                        ></i>
+                        <i class="bx bxs-show" style="font-size: 25px; cursor: pointer; color: green"
+                          (click)="openData(i.id)"></i>
+                        <i class="bx bxs-trash-alt mx-2" style="font-size: 25px; cursor: pointer; color: red"
+                          (click)="deleteAcc(i.id)"></i>
                       </td>
                     </tr>
                   </tbody>
