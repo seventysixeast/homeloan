@@ -28,6 +28,7 @@ export class UsersAddComponent {
   edit = false;
   id = "0";
   photo: File | null = null;
+  imagePreviewUrl: string | ArrayBuffer | null = null;
 
 
   ngOnInit(): void {
@@ -52,6 +53,7 @@ export class UsersAddComponent {
         this.email = response2[0].email
         this.password = response2[0].password
         this.type = response2[0].type
+        this.imagePreviewUrl = this.ds.mediaUrl + (response2[0].photo || ''); // Ensure that response2[0].photo is not undefined
         this.edit =  true;
       }else{
         this.edit =  false;
@@ -65,9 +67,22 @@ export class UsersAddComponent {
     const file = event.target.files[0];
     if (file && file.type.startsWith('image/')) {
       this.photo = file;
+      this.previewImage();
     } else {
       console.log('Invalid file type. Please upload an image.');
     }
+  }
+
+  previewImage() {
+    const reader = new FileReader();
+    reader.readAsDataURL(this.photo as Blob);
+    reader.onload = () => {
+      this.imagePreviewUrl = reader.result;
+    };
+  }
+
+  getImagePreview(): string | ArrayBuffer | null {
+    return this.imagePreviewUrl || ''; // Ensure that imagePreviewUrl is not null
   }
 
   handleSubmit() {

@@ -93,7 +93,7 @@ export class GuarantorDataComponent implements OnInit {
         this.a1_nrc = response[0].a1_nrc;
         this.a1_phone = response[0].a1_phone;
         this.a1_passport = response[0].a1_passport;
-        this.a1_photo = this.ds.mediaUrl + response[0].a1_photo;
+        this.a1_photo = response[0].a1_photo == '' ? '' : this.ds.mediaUrl + response[0].a1_photo;
   
         this.a2_name = response[0].a2_name;
         this.a2_fName = response[0].a2_fName;

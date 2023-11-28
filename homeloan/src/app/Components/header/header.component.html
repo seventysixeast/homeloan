@@ -48,7 +48,8 @@
           href="#"
           data-bs-toggle="dropdown"
         >
-          <img src="{{ mediaUrl + logedInUser.photo }}" alt="Profile" class="rounded-circle" />
+        <img *ngIf="logedInUser.photo" src="{{ mediaUrl + logedInUser.photo }}" alt="Profile" class="rounded-circle" />
+        <img *ngIf="!logedInUser.photo" src="{{ mediaUrl + 'no-user-image.png' }}" alt="Default Profile" class="rounded-circle" />
           <span class="d-none d-md-block dropdown-toggle ps-2">
             {{ logedInUser.f_name }}
             <ng-container *ngIf="logedInUser.l_name">

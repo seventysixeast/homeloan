@@ -77,7 +77,8 @@
                     <!-- <option value="Management">Management</option> -->
                   </select>
                 </div>
-                <div class="col-12">
+                <div class="row">
+                <div class="col-6">
                   <label for="inputPhoto" class="form-label">Photo</label>
                   <input
                     type="file"
@@ -87,6 +88,11 @@
                     id="inputPhoto"
                   />
                 </div>
+              
+                <div class="col-6 mt-2" style="text-align: center;">
+                  <img [src]="getImagePreview()" alt="User Photo" class="uploaded-photo" *ngIf="imagePreviewUrl" style="width: 200px;" />
+                </div>
+              </div>
                 
                 <div class="col-12 mt-3">
                   <button
