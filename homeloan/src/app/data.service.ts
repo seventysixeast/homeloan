@@ -22,14 +22,14 @@ export class DataService {
 
   // console.log()
 
-   //baseurl = 'http://localhost/homeloan/admin/Api.php';
-   //mediaUrl = 'http://localhost/homeloan/admin/uploads/';
+  baseurl = 'http://localhost/homeloan/admin/Api.php';
+  mediaUrl = 'http://localhost/homeloan/admin/uploads/';
 
   // baseurl = 'http://localhost/28nov/homeloan/admin/Api.php';
   // mediaUrl = 'http://localhost/28nov/homeloan/admin/uploads/';
 
-  baseurl = 'https://76east.com/homeloan_server/admin/Api.php';
-  mediaUrl = 'https://76east.com/homeloan_server/admin/uploads/'; 
+  //baseurl = 'https://76east.com/homeloan_server/admin/Api.php';
+  //mediaUrl = 'https://76east.com/homeloan_server/admin/uploads/'; 
 
 
   userLoggedIn() {

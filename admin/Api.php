@@ -822,23 +822,25 @@ if($_POST['action']  == 'deleteUser'){
     echo $result;
 }
 
-if($_POST['action']  == 'loginUser'){
-    // echo "<pre>"; print_r($_POST); die;
-    $email =  $_POST['email'];
-    $password =  $_POST['password'];
+if ($_POST['action'] == 'loginUser') {
+    $email = $_POST['email'];
+    $password = $_POST['password'];
 
-    $quarry = "SELECT * FROM users Where email='$email' AND password='$password'";
-
+    $quarry = "SELECT * FROM users WHERE email='$email' AND password='$password'";
     $result = mysqli_query($conn, $quarry);
- 
-    while ($row_header = mysqli_fetch_assoc($result)) {
-        $response[] = $row_header;
-    
+
+    $response = [];
+
+    if ($result !== false) {
+        while ($row_header = mysqli_fetch_assoc($result)) {
+            $response[] = $row_header;
+        }
     }
-    if(count($response) > 0){
-        echo (json_encode(base64_encode(json_encode($response[0]))));
-    }else{
-        echo json_encode($response);
+
+    if (count($response) > 0) {
+        echo json_encode(base64_encode(json_encode($response[0])));
+    } else {
+        echo json_encode(null);
     }
 }
 
