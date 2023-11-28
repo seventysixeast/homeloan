@@ -103,7 +103,7 @@ export class GuarantorData2Component {
         this.a2_nrc = response[0].a2_nrc;
         this.a2_phone = response[0].a2_phone;
         this.a2_passport = response[0].a2_passport;
-        this.a2_photo = this.ds.mediaUrl + response[0].a2_photo;
+        this.a2_photo = response[0].a2_photo == '' ? '' :this.ds.mediaUrl + response[0].a2_photo;
   
         this.app_date = response[0].app_date;
       }
