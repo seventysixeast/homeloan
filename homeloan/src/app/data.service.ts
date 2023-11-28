@@ -29,7 +29,7 @@ export class DataService {
   // mediaUrl = 'http://localhost/28nov/homeloan/admin/uploads/';
 
   baseurl = 'https://76east.com/homeloan_server/admin/Api.php';
-  mediaUrl = 'https://76east.com/homeloan_server/admin/uploads/';
+  mediaUrl = 'https://76east.com/homeloan_server/admin/uploads/'; 
 
 
   userLoggedIn() {
