@@ -29,6 +29,8 @@ export class UsersAddComponent {
   id = "0";
   photo: File | null = null;
   image_show: any = null;
+  titleText : any = 'New User';
+  buttonText : any = "Save New User";
 
 
   ngOnInit(): void {
@@ -55,8 +57,12 @@ export class UsersAddComponent {
         this.type = response2[0].type;
         this.image_show = this.ds.mediaUrl + response2[0].photo
         this.edit = true;
+        this.titleText = "Update User"
+        this.buttonText = "Update"
       } else {
         this.edit = false;
+        this.titleText = "New User"
+        this.buttonText = "Save New User"
       }
     });
 
@@ -103,7 +109,7 @@ export class UsersAddComponent {
     this.ds.submitAppData(data).subscribe((response: any) => {
       this.spinner.hide();
       console.log(response);
-      if (response == 1) {
+      if (response == 1 && response != "email found") {
         if (this.edit) {
           Swal.fire({
             position: 'top-end',
@@ -123,7 +129,16 @@ export class UsersAddComponent {
           });
         }
         this.router.navigateByUrl('/users');
-      } else {
+      }else if(response == "email found"){
+        Swal.fire({
+          position: 'top-end',
+          icon: 'warning',
+          title: 'Email Already Exists',
+          showConfirmButton: false,
+          timer: 1500,
+        });
+
+      }else {
         Swal.fire({
           position: 'top-end',
           icon: 'warning',

@@ -2,6 +2,7 @@ import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DataService } from 'src/app/data.service';
 import { SideNavComponent } from '../../Components/side-nav/side-nav.component';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-dashbord',
@@ -50,6 +51,7 @@ export class DashbordComponent implements OnInit {
     }
     // data.append('viewByAdmin', "Admin");
     this.ds.getAppDataList(data).subscribe((response: any) => {
+      console.log('response', response)
       this.dataList = response;
     });
     // console.log('check123')
@@ -106,13 +108,52 @@ export class DashbordComponent implements OnInit {
   }
 
   deleteAcc(id: any) {
-    let data = new FormData();
-    data.append('action', 'deleteAppDataList');
-    data.append('id', id);
-    this.ds.getAppDataList(data).subscribe((response: any) => {
-      // console.log(response);
-      this.getData();
-    });
+
+    Swal.fire({
+      title: 'Do you want to delete the Application ?',
+      showDenyButton: true,
+      // showCancelButton: true,
+      confirmButtonText: 'Ok',
+      denyButtonText: 'Cancel',
+      customClass: {
+        actions: 'my-actions',
+        // cancelButton: 'order-1 right-gap',
+        confirmButton: 'order-2',
+        denyButton: 'order-3',
+      },
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Swal.fire('Saved!', '', 'success')
+        // return;
+
+        let data = new FormData();
+        data.append('action', 'deleteAppDataList');
+        data.append('id', id);
+        this.ds.getAppDataList(data).subscribe((response: any) => {
+          console.log("response",response);
+          if(response == 1){
+            Swal.fire({
+              position: 'top-end',
+              icon: 'success',
+              title: 'Application Is Deleted Successfully',
+              showConfirmButton: false,
+              timer: 1500,
+            });
+            this.getData();
+          }else{
+            Swal.fire({
+              position: 'top-end',
+              icon: 'warning',
+              title: 'Something went wrong',
+              showConfirmButton: false,
+              timer: 1500,
+            });
+          }
+        });
+      } else if (result.isDenied) {
+      }
+    })
+    
   }
 
   displayStatus(status: any) {
@@ -244,11 +285,14 @@ export class DashbordComponent implements OnInit {
       //   return "bx bxs-show notShowEdit";
       // }else{
       // }
-      return "bx bxs-show";
+      // return "bx bxs-show";
 
-      // else if(status.indexOf("Submitted by Credit Underwriter" || status.indexOf("Reveiwing by Admin")) > -1 ){
-      //   return "bx bxs-show notShowEdit";
-      // }
+      // else 
+      if(status.indexOf("Submitted by Credit Underwriter" || status.indexOf("Reveiwing by Admin")) > -1 ){
+        return "bx bxs-show notShowEdit";
+      }else{
+        return "bx bxs-show";
+      }
 
     }
     return "bx bxs-show notShowEdit";

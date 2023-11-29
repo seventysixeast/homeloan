@@ -53,29 +53,51 @@ export class UsersComponent {
 
   deleteAcc(id: any) {
     console.log(id);
-    let data = new FormData();
-    data.append('action', 'deleteUser');
-    data.append('id', id);
-    this.ds.getAppDataList(data).subscribe((response: any) => {
-      console.log(response);
-      if (response == 1) {
-        Swal.fire({
-          position: 'top-end',
-          icon: 'success',
-          title: 'User Is Deleted Successfully',
-          showConfirmButton: false,
-          timer: 1500,
+
+    Swal.fire({
+      title: 'Do you want to delete the user?',
+      showDenyButton: true,
+      // showCancelButton: true,
+      confirmButtonText: 'Ok',
+      denyButtonText: 'Cancel',
+      customClass: {
+        actions: 'my-actions',
+        // cancelButton: 'order-1 right-gap',
+        confirmButton: 'order-2',
+        denyButton: 'order-3',
+      },
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Swal.fire('Saved!', '', 'success')
+        // return;
+        let data = new FormData();
+        data.append('action', 'deleteUser');
+        data.append('id', id);
+    
+        this.ds.getAppDataList(data).subscribe((response: any) => {
+          console.log(response);
+          if (response == 1) {
+            Swal.fire({
+              position: 'top-end',
+              icon: 'success',
+              title: 'User Is Deleted Successfully',
+              showConfirmButton: false,
+              timer: 1500,
+            });
+            this.getData();
+          } else {
+            Swal.fire({
+              position: 'top-end',
+              icon: 'warning',
+              title: 'Something went wrong',
+              showConfirmButton: false,
+              timer: 1500,
+            });
+          }
         });
-        this.getData();
-      } else {
-        Swal.fire({
-          position: 'top-end',
-          icon: 'warning',
-          title: 'Something went wrong',
-          showConfirmButton: false,
-          timer: 1500,
-        });
+      } else if (result.isDenied) {
+        // Swal.fire('Changes are not saved', '', 'info')
       }
-    });
+    })
   }
 }

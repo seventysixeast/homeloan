@@ -91,9 +91,9 @@ if($_POST['action'] == 'submit-app-data')
 if($_POST['action'] == 'getAppDataList'){
 
     $userId = $_POST['userId'];
-    ini_set('display_errors', 1);
-    ini_set('display_startup_errors', 1);
-    error_reporting(E_ALL);
+    // ini_set('display_errors', 1);
+    // ini_set('display_startup_errors', 1);
+    // error_reporting(E_ALL);
     if($userId == "0"){
         $query = "SELECT * FROM app_data";
     }else{
@@ -534,6 +534,9 @@ if($_POST['action'] == 'getMediaFile'){
 
 
 if ($_POST['action'] == 'savePdfFile') {
+    // ini_set('display_errors', 1);
+    // ini_set('display_startup_errors', 1);
+    // error_reporting(E_ALL);
     $response = array("success" => false, "message" => "");
     $target_dir = "uploads/";
 
@@ -718,9 +721,26 @@ if($_POST['action'] == 'addUser'){
     $email = $_POST['email'];
     $password = $_POST['password'];
     $type = $_POST['type'];
+    // ini_set('display_errors', 1);
+    // ini_set('display_startup_errors', 1);
+    // error_reporting(E_ALL);
 
+    $quarry = "SELECT * FROM users WHERE email='$email'";
+    $result = mysqli_query($conn, $quarry);
+
+    $response = [];
+
+    if ($result !== false) {
+        while ($row_header = mysqli_fetch_assoc($result)) {
+            $response[] = $row_header;
+        }
+    }
+
+    if (count($response) > 0) {
+        echo json_encode("email found");
+        die;
+    }
      /****************send mail****************** */
-    // echo "<pre>"; print_r($_POST); die;
     $to = $email;
     // $to = "somebody@example.com, somebodyelse@example.com";
     $subject = "HTML email";
@@ -825,6 +845,22 @@ if($_POST['action']  == 'deleteUser'){
 if ($_POST['action'] == 'loginUser') {
     $email = $_POST['email'];
     $password = $_POST['password'];
+
+    $quarry1 = "SELECT * FROM users WHERE email='$email'";
+    $result1 = mysqli_query($conn, $quarry1);
+    $response1 = [];
+    if ($result1 !== false) {
+        while ($row_header1 = mysqli_fetch_assoc($result1)) {
+            $response1[] = $row_header1;
+        }
+    }
+
+    if (count($response1) == 0) {
+        echo json_encode("email not found");
+        die;
+    }
+
+    // echo "<pre>"; print_r(mysqli_fetch_assoc($result1)); die;
 
     $quarry = "SELECT * FROM users WHERE email='$email' AND password='$password'";
     $result = mysqli_query($conn, $quarry);

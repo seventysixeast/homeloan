@@ -19,11 +19,11 @@ export class SideNavComponent implements OnInit, AfterViewInit {
     this.activeId = localStorage.getItem('activeId');
     let id1 = localStorage.getItem('mId');
     let id2 = localStorage.getItem('smId');
-    console.log("id1", id1)
-    console.log("id2", id2)
-    console.log("activeId", this.activeId)
-    console.log("his.ds.loggedInUser======", this.ds.loggedInUser)
-    console.log('this.ds.userLoggedIn()', this.ds.userLoggedIn())
+    // console.log("id1", id1)
+    // console.log("id2", id2)
+    // console.log("activeId", this.activeId)
+    // console.log("his.ds.loggedInUser======", this.ds.loggedInUser)
+    // console.log('this.ds.userLoggedIn()', this.ds.userLoggedIn())
     this.logedInUser = this.ds.userLoggedIn()
     // this.ds.loggedInUser.subscribe(resp =>{
     //   console.log('resp',resp)
@@ -37,7 +37,7 @@ export class SideNavComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    console.log('ngAfterViewInit - wrapper');
+    // console.log('ngAfterViewInit - wrapper');
     this.cdr.detectChanges();
   }
 
@@ -190,12 +190,12 @@ export class SideNavComponent implements OnInit, AfterViewInit {
       }
     });
     let applicant1Id = localStorage.getItem('applicant1Id')
-    console.log('applicant1Id', applicant1Id)
+    // console.log('applicant1Id', applicant1Id)
     if (applicant1Id != null) {
       let link: any = document.getElementById(`link${mId}${smId}`);
       link.click();
       this.ds.loggedInUser.subscribe(resp => {
-        console.log('resp 2', resp)
+        // console.log('resp 2', resp)
         this.logedInUser = resp;
 
       })
@@ -253,8 +253,8 @@ export class SideNavComponent implements OnInit, AfterViewInit {
       if (mId == 2 && smId == 6) {
         this.router.navigateByUrl('score/' + applicant1Id);
       }
-      console.log('mId', mId)
-      console.log('smId', smId)
+      // console.log('mId', mId)
+      // console.log('smId', smId)
 
       if (mId == 2 && smId == 9) {
         this.router.navigateByUrl('report/' + applicant1Id);
