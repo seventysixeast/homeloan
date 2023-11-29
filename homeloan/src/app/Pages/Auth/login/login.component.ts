@@ -23,7 +23,7 @@ export class LoginComponent {
     this.spinner.show();
     let data = new FormData();
 
-    console.log('this.email',this.email)
+    // console.log('this.email',this.email)
 
     data.append('action', 'loginUser');
     data.append('email', this.email);
@@ -34,10 +34,10 @@ export class LoginComponent {
 
       // let data = response;
 
-      console.log((response));
+      // console.log((response));
 
-      if (response != null) {
-        console.log('response',response)
+      if (response != null && response != "email not found") {
+        // console.log('response',response)
         Swal.fire({
           position: 'top-end',
           icon: 'success',
@@ -47,7 +47,7 @@ export class LoginComponent {
         });
 
         let user = JSON.parse(atob(response));
-        console.log('user',user)
+        // console.log('user',user)
         // return;
         this.ds.userLogin(user)
         // localStorage.setItem('admin',response)
@@ -64,11 +64,20 @@ export class LoginComponent {
         // this.router.navigateByUrl('/users');
         // this.router.navigateByUrl('/dashboard');
         this.router.navigateByUrl('/retail-loan');
-      } else {
+      } else if(response == "email not found"){
         Swal.fire({
           position: 'top-end',
           icon: 'error',
           title: 'Invalid User',
+          showConfirmButton: false,
+          timer: 1500,
+        });
+
+      }else {
+        Swal.fire({
+          position: 'top-end',
+          icon: 'error',
+          title: 'Incorrect Password',
           showConfirmButton: false,
           timer: 1500,
         });

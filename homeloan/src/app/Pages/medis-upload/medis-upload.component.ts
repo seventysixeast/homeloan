@@ -70,14 +70,19 @@ export class MedisUploadComponent implements OnInit {
     data.append('id', this.openId);
 
     this.ds.submitAppData(data).subscribe((response: any) => {
-      response.map((x: any) => {
-        this.typeList.map((y: any) => {
-          if (x.type == y.id) {
-            x.typeName = y.name;
-          }
+      if(response != null){
+        response.map((x: any) => {
+          this.typeList.map((y: any) => {
+            if (x.type == y.id) {
+              x.typeName = y.name;
+            }
+          });
         });
-      });
-      this.medialist = response;
+        console.log('response',response)
+        this.medialist = response;
+      }else{
+        this.medialist = [];
+      }
     });
   }
 
@@ -120,8 +125,24 @@ export class MedisUploadComponent implements OnInit {
   }
 
   handleFileInput(files: any) {
-    this.spiner.show();
     this.fileToUpload = files.files.item(0);
+
+    console.log('fileToUpload',this.fileToUpload)
+    console.log('this.type',this.type)
+
+    if(this.type == 0){
+      alert('Please Any options of Select Purpose')
+      return;
+    }
+    
+    var size = parseFloat(files.files.item(0).size);
+    const fileSize = Math.round((size / 1024));
+    if (fileSize > 16384) {
+      alert('File size exceeds 16 mb');
+      return;
+    } 
+   
+    this.spiner.show();
 
     let data = new FormData();
 
@@ -298,15 +319,57 @@ export class MedisUploadComponent implements OnInit {
   }
 
   deleteImg(MediaItem: any) {
-    let data = new FormData();
 
-    data.append('action', 'deleteMediaFile');
-    data.append('id', MediaItem.id);
+    Swal.fire({
+      title: 'Do you want to delete the image?',
+      showDenyButton: true,
+      // showCancelButton: true,
+      confirmButtonText: 'Ok',
+      denyButtonText: 'Cancel',
+      customClass: {
+        actions: 'my-actions',
+        // cancelButton: 'order-1 right-gap',
+        confirmButton: 'order-2',
+        denyButton: 'order-3',
+      },
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Swal.fire('Saved!', '', 'success')
+        // return;
+        let data = new FormData();
 
-    this.ds.submitAppData(data).subscribe((response: any) => {
-      this.showImageLink = '';
-      this.getData();
-    });
+        data.append('action', 'deleteMediaFile');
+        data.append('id', MediaItem.id);
+
+        this.ds.submitAppData(data).subscribe((response: any) => {
+          if (response == 1) {
+            Swal.fire({
+              position: 'top-end',
+              icon: 'success',
+              title: 'Image Is Deleted Successfully',
+              showConfirmButton: false,
+              timer: 1500,
+            });
+            // this.getData();
+            this.showImageLink = '';
+            this.getData();
+          } else {
+            Swal.fire({
+              position: 'top-end',
+              icon: 'warning',
+              title: 'Something went wrong',
+              showConfirmButton: false,
+              timer: 1500,
+            });
+          }
+          
+        });
+        
+      } else if (result.isDenied) {
+        // Swal.fire('Changes are not saved', '', 'info')
+      }
+    })
+    
   }
 
   goNext() {

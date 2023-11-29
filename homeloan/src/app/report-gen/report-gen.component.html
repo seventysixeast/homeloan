@@ -19,7 +19,7 @@
               Generate Report
             </h5>
             <div class="row mx-2 my-3" style="align-items: center">
-              <div *ngIf="!showUploadButton " class="col-12 mt-5">
+              <div *ngIf="!showUploadButton && !showDownloadButton" class="col-12 mt-5">
                 No Report
               </div>
               <div *ngIf="showUploadButton" class="col-12 mt-5">
@@ -28,7 +28,7 @@
                 </button>
               </div>
 
-              <div *ngIf="showUploadButton && !showDownloadButton" class="col-12 my-3">
+              <div *ngIf="showUploadButton" class="col-12 my-3">
                 <button type="submit" class="btn btn-primary" (click)="doc2()">
                   Download Loan Proposal
                 </button>
