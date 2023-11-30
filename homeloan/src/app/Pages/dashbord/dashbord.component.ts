@@ -61,7 +61,10 @@ export class DashbordComponent implements OnInit {
   openData(id: any, status: any) {
     localStorage.setItem('activeId', id);
     localStorage.setItem('viewOnly', "true")
-    if (this.logedInUser.type == "Credit-Approver" && status.indexOf("Approved by Credit Approver") == -1 && status.indexOf("Approved by Credit Approver") == -1) {
+    // if (this.logedInUser.type == "Credit-Approver" && status.indexOf("Approved by Credit Approver") == -1 && status.indexOf("Approved by Credit Approver") == -1 ) {
+    if (this.logedInUser.type == "Credit-Approver" && status.indexOf("Submitted by Admin") > -1  ) {
+      console.log('status',status)
+      // return;
       let data = new FormData();
       data.append('action', 'submit-all-forms');
       data.append('ref_id', id);

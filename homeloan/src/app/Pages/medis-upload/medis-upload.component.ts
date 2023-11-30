@@ -197,6 +197,7 @@ export class MedisUploadComponent implements OnInit {
           timer: 1500,
         });
         this.router.navigateByUrl('dashboard');
+        window.location.href = 'dashboard';
         // this.goNext();
         // console.log(response);
       });

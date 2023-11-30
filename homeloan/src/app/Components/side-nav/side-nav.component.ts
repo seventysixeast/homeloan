@@ -45,6 +45,10 @@ export class SideNavComponent implements OnInit, AfterViewInit {
     window.location.href = 'users';
   }
 
+  goingToDashboard() {
+    window.location.href = 'dashboard';
+  }
+
   // ngonview
 
   menuLinks: any = [

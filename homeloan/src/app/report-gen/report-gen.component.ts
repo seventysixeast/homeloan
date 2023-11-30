@@ -171,7 +171,8 @@ export class ReportGenComponent implements OnInit {
 
   handleSubmit() {
     this.goNext();
-    console.log(this.fileToUpload);
+    window.location.href = 'dashboard';
+    // console.log(this.fileToUpload);
   }
 
   handlePdfUpload(event: any, type: 'application' | 'proposal') {
