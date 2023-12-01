@@ -63,7 +63,7 @@ export class LoginComponent {
         // users
         // this.router.navigateByUrl('/users');
         // this.router.navigateByUrl('/dashboard');
-        this.router.navigateByUrl('/retail-loan');
+        this.router.navigateByUrl('/retailloan');
       } else if(response == "email not found"){
         Swal.fire({
           position: 'top-end',

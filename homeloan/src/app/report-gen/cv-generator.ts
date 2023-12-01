@@ -8,12 +8,41 @@ import {
   WidthType,
   AlignmentType,
   HeadingLevel,
+  ImageRun
 } from 'docx';
 
-export class DocumentCreator {
-  public create(data: any): Document {
-    let dataJson1 = JSON.parse(data.loan_request.dataJson);
 
+export class DocumentCreator {
+
+  async getBlob(){
+    const blo = await fetch(
+        "https://raw.githubusercontent.com/dolanmiu/docx/master/demo/images/cat.jpg"
+      ).then(r => r.blob());
+  }
+
+   fetchBlobApi(data:any){
+    let dataOfapp = (data.app_data);
+     return new Promise(async (resolve,reject)=>{
+      const blob = await fetch(
+        data.mediaUrl + dataOfapp.a1_photo
+      ).then(r => 
+        resolve(r.blob())
+      ); 
+    })
+  }
+  
+  public create(data: any): Document {
+    console.log('data',data)
+    let dataJson1 = JSON.parse(data.loan_request.dataJson);
+    let dataOfBank = JSON.parse(data.addinfo.JsonData);
+    let dataOfapp = (data.app_data);
+    console.log('dataOfapp' ,dataOfapp)
+    // let data
+    // let blob = await this.getBlob()
+
+    // console.log('blob',blob)
+    // let blob =  this.fetchBlobApi(data);
+    // console.log('blob======',blob)
     const document = new Document({
       styles: {
         default: {
@@ -117,7 +146,7 @@ export class DocumentCreator {
                     new TableCell({
                       children: [
                         new Paragraph({
-                          text: 'Branch',
+                          text: 'Bank',
                           heading: HeadingLevel.HEADING_1,
                         }),
                       ],
@@ -153,11 +182,20 @@ export class DocumentCreator {
                     new TableCell({
                       children: [
                         new Paragraph({
-                          text: '',
-                          heading: HeadingLevel.HEADING_1,
+                          text: dataOfBank.bankName,
+                          heading: HeadingLevel.HEADING_1
                         }),
                       ],
-                      columnSpan: 4,
+                    }),
+                    new TableCell({
+                      children: [
+                        new Paragraph({
+                          text: "",
+                          heading: HeadingLevel.HEADING_1,
+                          
+                        }),
+                      ],
+                      columnSpan: 3,
                     }),
                   ],
                 }),
@@ -1502,6 +1540,46 @@ export class DocumentCreator {
                     }),
                   ],
                 }),
+                // new TableRow({
+                //   children: [
+                //     new TableCell({
+                //       children: [
+                //         new Paragraph({
+                //           text: '',
+                //           heading: HeadingLevel.HEADING_1,
+                //         }),
+                //       ],
+                //       columnSpan: 1,
+                //     }),
+                //     new TableCell({
+                //       children: [
+                //         new Paragraph({
+                //           children: [
+                //             new ImageRun({
+                //               data: Buffer.from(blob),
+                //               transformation: {
+                //                 width: 200,
+                //                 height: 100
+                //               }
+                //             })
+                //             // new Paragraph({
+                //             //   text: 'Photograph',
+                //             //   heading: HeadingLevel.HEADING_1,
+                //             // }),
+                //           ]
+                //         })
+                //       ]
+                //     }),
+                //     new TableCell({
+                //       children: [
+                //         new Paragraph({
+                //           text: 'Photograph',
+                //           heading: HeadingLevel.HEADING_1,
+                //         }),
+                //       ],
+                //     }),
+                //   ],
+                // }),
               ],
               indent: {
                 size: -1000,
