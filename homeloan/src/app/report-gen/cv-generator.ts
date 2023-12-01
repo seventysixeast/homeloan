@@ -36,7 +36,8 @@ export class DocumentCreator {
     let dataJson1 = JSON.parse(data.loan_request.dataJson);
     let dataOfBank = JSON.parse(data.addinfo.JsonData);
     let dataOfapp = (data.app_data);
-    console.log('dataOfapp' ,dataOfapp)
+    // console.log('dataOfBank' ,dataOfBank)
+    // console.log('dataOfapp' ,dataOfapp)
     // let data
     // let blob = await this.getBlob()
 
@@ -190,7 +191,7 @@ export class DocumentCreator {
                     new TableCell({
                       children: [
                         new Paragraph({
-                          text: "",
+                          text: dataOfBank.branchName,
                           heading: HeadingLevel.HEADING_1,
                           
                         }),
