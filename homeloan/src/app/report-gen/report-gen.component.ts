@@ -292,6 +292,9 @@ export class ReportGenComponent implements OnInit {
 
     this.ds.submitAppData(data).subscribe((response: any) => {
       const documentCreator = new DocumentCreator();
+      // console.log('response',response)
+      response.mediaUrl = this.ds.mediaUrl;
+      // return;
       const doc = documentCreator.create(response);
 
       Packer.toBlob(doc).then((blob) => {

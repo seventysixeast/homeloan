@@ -49,10 +49,10 @@ const routes: Routes = [
         path: 'dashboard',
         component: DashbordComponent,
       },
-      {
-        path: 'retail-loan',
-        component: RetailLoanComponent,
-      },
+      // {
+      //   path: 'retailloan',
+      //   component: RetailLoanComponent,
+      // },
       {
         path: 'applicant-data',
         component: ApplicantDataComponent,
@@ -151,6 +151,11 @@ const routes: Routes = [
   //     },
   //   ],
   // },
+  {
+    path: 'retailloan',
+    canActivate: [AdminGuard],
+    component: RetailLoanComponent,
+  },
 ];
 
 @NgModule({

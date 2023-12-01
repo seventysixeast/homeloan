@@ -5,7 +5,7 @@ import { SideNavComponent } from '../../Components/side-nav/side-nav.component';
   selector: 'app-retail-loan',
   templateUrl: './retail-loan.component.html',
   styleUrls: ['./retail-loan.component.css'],
-  providers: [SideNavComponent],
+  // providers: [SideNavComponent],
 })
 export class RetailLoanComponent {
   constructor(
@@ -13,7 +13,7 @@ export class RetailLoanComponent {
     // private route: ActivatedRoute,
     // private router: Router,
     // private spiner: NgxSpinnerService,
-    private sideNav: SideNavComponent
+    // private sideNav: SideNavComponent
   ) {}
 
 }

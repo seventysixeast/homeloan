@@ -29,7 +29,7 @@ export class DashbordComponent implements OnInit {
     localStorage.removeItem("viewOnly");
     this.logedInUser = this.ds.userLoggedIn()
     this.getData();
-    console.log('this.logedInUser', this.logedInUser)
+    // console.log('this.logedInUser', this.logedInUser)
 
   }
 
@@ -51,7 +51,7 @@ export class DashbordComponent implements OnInit {
     }
     // data.append('viewByAdmin', "Admin");
     this.ds.getAppDataList(data).subscribe((response: any) => {
-      console.log('response', response)
+      // console.log('response', response)
       this.dataList = response;
     });
     // console.log('check123')
@@ -63,7 +63,7 @@ export class DashbordComponent implements OnInit {
     localStorage.setItem('viewOnly', "true")
     // if (this.logedInUser.type == "Credit-Approver" && status.indexOf("Approved by Credit Approver") == -1 && status.indexOf("Approved by Credit Approver") == -1 ) {
     if (this.logedInUser.type == "Credit-Approver" && status.indexOf("Submitted by Admin") > -1  ) {
-      console.log('status',status)
+      // console.log('status',status)
       // return;
       let data = new FormData();
       data.append('action', 'submit-all-forms');
@@ -133,7 +133,7 @@ export class DashbordComponent implements OnInit {
         data.append('action', 'deleteAppDataList');
         data.append('id', id);
         this.ds.getAppDataList(data).subscribe((response: any) => {
-          console.log("response",response);
+          // console.log("response",response);
           if(response == 1){
             Swal.fire({
               position: 'top-end',
@@ -291,11 +291,11 @@ export class DashbordComponent implements OnInit {
       // return "bx bxs-show";
 
       // else 
-      if(status.indexOf("Submitted by Credit Underwriter" || status.indexOf("Reveiwing by Admin")) > -1 ){
-        return "bx bxs-show notShowEdit";
-      }else{
-        return "bx bxs-show";
-      }
+      // if(status.indexOf("Submitted by Credit Underwriter" || status.indexOf("Reveiwing by Admin")) > -1 ){
+      //   return "bx bxs-show notShowEdit";
+      // }else{
+      // }
+      return "bx bxs-show";
 
     }
     return "bx bxs-show notShowEdit";

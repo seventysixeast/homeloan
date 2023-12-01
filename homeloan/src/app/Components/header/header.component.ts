@@ -15,12 +15,20 @@ export class HeaderComponent implements OnInit {
   ) {}
 
   logedInUser : any;
-  mediaUrl: string = '';;
+  mediaUrl: string = '';
+  imageShow: boolean =  false;
 
   ngOnInit(): void {
     this.logedInUser = this.ds.userLoggedIn();
     console.log('this.logedInUser',this.logedInUser);
     this.mediaUrl = this.ds.mediaUrl;
+
+    // console.log('if (this.router.url) {',this.router.url)
+    if(this.router.url.includes('/retailloan')){
+      this.imageShow = true;
+    }else{
+      this.imageShow = false;
+    }
   }
 
   logout(){
