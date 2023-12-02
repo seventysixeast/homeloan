@@ -61,6 +61,9 @@
                 <button (click)="downloadPdf(pdfFile.filename)">
                   Download {{ pdfFile.type | titlecase }} PDF
                 </button>
+                <!-- <div ng-controller="docxController">
+                  <button ng-click="generateDocx()">Call Helper Function</button>
+                </div> -->
               </div>
               <div *ngIf="submitButtonForAdmin" class="col-12 mt-3">
                 <button type="submit" class="btn btn-primary" (click)="submitStatus('Submitted by Admin')">
