@@ -1,5 +1,10 @@
 <?php
 include('config.php');    
+header('Access-Control-Allow-Origin: *');
+    // header('Access-Control-Allow-Origin: *');
+    header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS');
+    // header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');
+    header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
 // echo "<pre>"; print_r($request->input()); die;
 // ini_set('display_errors', 1);
 // ini_set('display_startup_errors', 1);

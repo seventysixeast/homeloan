@@ -31,7 +31,7 @@ export class DocumentCreator {
     })
   }
   
-  public create(data: any): Document {
+  public create(data: any, imageBlob1: any, imageBlob2: any): Document {
     console.log('data',data)
     let dataJson1 = JSON.parse(data.loan_request.dataJson);
     let dataOfBank = JSON.parse(data.addinfo.JsonData);
@@ -44,6 +44,40 @@ export class DocumentCreator {
     // console.log('blob',blob)
     // let blob =  this.fetchBlobApi(data);
     // console.log('blob======',blob)
+
+    let imageObj1:any = ''
+    let imageObj2:any = ''
+
+    if(imageBlob1 != ''){
+      imageObj1 = new ImageRun({
+        data: imageBlob1,
+        transformation: {
+          width: 200,
+          height: 100
+        }
+      })
+    }else{
+      imageObj2 = new Paragraph({
+        text: '',
+        heading: HeadingLevel.HEADING_1,
+      })
+    }
+
+    if(imageBlob2 != ''){
+      imageObj2 = new ImageRun({
+        data: imageBlob2,
+        transformation: {
+          width: 200,
+          height: 100
+        }
+      })
+    }else{
+      imageObj2 = new Paragraph({
+        text: '',
+        heading: HeadingLevel.HEADING_1,
+      })
+    }
+
     const document = new Document({
       styles: {
         default: {
@@ -1541,46 +1575,37 @@ export class DocumentCreator {
                     }),
                   ],
                 }),
-                // new TableRow({
-                //   children: [
-                //     new TableCell({
-                //       children: [
-                //         new Paragraph({
-                //           text: '',
-                //           heading: HeadingLevel.HEADING_1,
-                //         }),
-                //       ],
-                //       columnSpan: 1,
-                //     }),
-                //     new TableCell({
-                //       children: [
-                //         new Paragraph({
-                //           children: [
-                //             new ImageRun({
-                //               data: Buffer.from(blob),
-                //               transformation: {
-                //                 width: 200,
-                //                 height: 100
-                //               }
-                //             })
-                //             // new Paragraph({
-                //             //   text: 'Photograph',
-                //             //   heading: HeadingLevel.HEADING_1,
-                //             // }),
-                //           ]
-                //         })
-                //       ]
-                //     }),
-                //     new TableCell({
-                //       children: [
-                //         new Paragraph({
-                //           text: 'Photograph',
-                //           heading: HeadingLevel.HEADING_1,
-                //         }),
-                //       ],
-                //     }),
-                //   ],
-                // }),
+                new TableRow({
+                  children: [
+                    new TableCell({
+                      children: [
+                        new Paragraph({
+                          text: '',
+                          heading: HeadingLevel.HEADING_1,
+                        }),
+                      ],
+                      columnSpan: 1,
+                    }),
+                    new TableCell({
+                      children: [
+                        new Paragraph({
+                          children: [
+                            imageObj1
+                          ]
+                        })
+                      ]
+                    }),
+                    new TableCell({
+                      children: [
+                        new Paragraph({
+                          children: [
+                            imageObj2
+                          ]
+                        })
+                      ],
+                    }),
+                  ],
+                }),
               ],
               indent: {
                 size: -1000,

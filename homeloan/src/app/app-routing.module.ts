@@ -40,7 +40,7 @@ const routes: Routes = [
   //   component: RetailLoanComponent,
   // },
   {
-    path: '',
+    path: 'homeloan',
     component: LayoutMainComponent,
 		// canActivate: [UserGuard],
     canActivate: [AdminGuard],

@@ -2,7 +2,7 @@
 <aside id="sidebar" class="sidebar">
   <ul class="sidebar-nav" id="sidebar-nav">
     <li class="nav-item">
-      <a class="nav-link" (click)="goingToDashboard()" routerLink="/dashboard">
+      <a class="nav-link" (click)="goingToDashboard()" routerLink="/homeloan/dashboard">
         <i class="bi bi-grid"></i>
         <span>Dashboard</span>
       </a>
@@ -32,7 +32,7 @@
     </li>
 
     <li class="nav-item" *ngIf="logedInUser && logedInUser.type == 'Admin'">
-      <a class="nav-link" (click)="goingToUsers()" routerLink="/users">
+      <a class="nav-link" (click)="goingToUsers()" routerLink="/homeloan/users">
         <i class="bi bi-grid"></i>
         <span>Users</span>
       </a>

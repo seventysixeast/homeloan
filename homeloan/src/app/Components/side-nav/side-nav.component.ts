@@ -42,11 +42,11 @@ export class SideNavComponent implements OnInit, AfterViewInit {
   }
 
   goingToUsers() {
-    window.location.href = 'users';
+    window.location.href = 'homeloan/users';
   }
 
   goingToDashboard() {
-    window.location.href = 'dashboard';
+    window.location.href = 'homeloan/dashboard';
   }
 
   // ngonview
@@ -205,63 +205,63 @@ export class SideNavComponent implements OnInit, AfterViewInit {
       })
       if (mId == 1 && smId == 1) {
         if (applicant1Id) {
-          this.router.navigateByUrl('applicant-data/' + applicant1Id);
+          this.router.navigateByUrl('homeloan/applicant-data/' + applicant1Id);
         } else {
-          this.router.navigateByUrl('applicant-data');
+          this.router.navigateByUrl('homeloan/applicant-data');
         }
       }
       if (mId == 1 && smId == 11) {
-        this.router.navigateByUrl('applicant-data2/' + applicant1Id);
+        this.router.navigateByUrl('homeloan/applicant-data2/' + applicant1Id);
       }
 
       if (mId == 1 && smId == 2) {
-        this.router.navigateByUrl('guarantor-data/' + applicant1Id);
+        this.router.navigateByUrl('homeloan/guarantor-data/' + applicant1Id);
       }
 
       if (mId == 1 && smId == 12) {
-        this.router.navigateByUrl('guarantor-data2/' + applicant1Id);
+        this.router.navigateByUrl('homeloan/guarantor-data2/' + applicant1Id);
       }
 
       if (mId == 1 && smId == 3) {
-        this.router.navigateByUrl('loan-request/' + applicant1Id);
+        this.router.navigateByUrl('homeloan/loan-request/' + applicant1Id);
       }
       if (mId == 2 && smId == 1) {
-        this.router.navigateByUrl('net-worth/' + applicant1Id);
+        this.router.navigateByUrl('homeloan/net-worth/' + applicant1Id);
       }
 
       if (mId == 2 && smId == 2) {
-        this.router.navigateByUrl('client-vist/' + applicant1Id);
+        this.router.navigateByUrl('homeloan/client-vist/' + applicant1Id);
       }
 
       if (mId == 2 && smId == 3) {
         // this.router.navigateByUrl('client-vist/' + applicant1Id);
-        this.router.navigateByUrl('site-vist/' + applicant1Id);
+        this.router.navigateByUrl('homeloan/site-vist/' + applicant1Id);
       }
 
       if (mId == 2 && smId == 4) {
-        this.router.navigateByUrl('risk-1/' + applicant1Id);
+        this.router.navigateByUrl('homeloan/risk-1/' + applicant1Id);
       }
 
       if (mId == 2 && smId == 5) {
-        this.router.navigateByUrl('risk-2/' + applicant1Id);
+        this.router.navigateByUrl('homeloan/risk-2/' + applicant1Id);
       }
 
       if (mId == 2 && smId == 7) {
-        this.router.navigateByUrl('add-info/' + applicant1Id);
+        this.router.navigateByUrl('homeloan/add-info/' + applicant1Id);
       }
 
       if (mId == 2 && smId == 8) {
-        this.router.navigateByUrl('media-upload/' + applicant1Id);
+        this.router.navigateByUrl('homeloan/media-upload/' + applicant1Id);
       }
 
       if (mId == 2 && smId == 6) {
-        this.router.navigateByUrl('score/' + applicant1Id);
+        this.router.navigateByUrl('homeloan/score/' + applicant1Id);
       }
       // console.log('mId', mId)
       // console.log('smId', smId)
 
       if (mId == 2 && smId == 9) {
-        this.router.navigateByUrl('report/' + applicant1Id);
+        this.router.navigateByUrl('homeloan/report/' + applicant1Id);
       }
     }
 
