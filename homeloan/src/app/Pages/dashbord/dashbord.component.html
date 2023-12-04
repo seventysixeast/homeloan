@@ -81,7 +81,7 @@
                           (click)="editData(i.id)"
                         ></i>
                         <i
-                          class="bx bxs-trash-alt mx-2"
+                          [class]="notShowingDeleteOption(i.status)"
                           style="font-size: 25px; cursor: pointer; color: red"
                           (click)="deleteAcc(i.id)"
                         ></i>

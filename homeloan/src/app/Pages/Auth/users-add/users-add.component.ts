@@ -31,6 +31,7 @@ export class UsersAddComponent {
   image_show: any = null;
   titleText : any = 'New User';
   buttonText : any = "Save New User";
+  username: any = '';
 
 
   ngOnInit(): void {
@@ -55,6 +56,7 @@ export class UsersAddComponent {
         this.email = response2[0].email
         this.password = response2[0].password
         this.type = response2[0].type;
+        this.username = response2[0].username;
         this.image_show = this.ds.mediaUrl + response2[0].photo
         this.edit = true;
         this.titleText = "Update User"
@@ -95,6 +97,7 @@ export class UsersAddComponent {
     data.append('email', this.email);
     data.append('password', this.password);
     data.append('type', this.type);
+    data.append('username', this.username);
     if (this.photo) {
       data.append('photo', this.photo);
     }

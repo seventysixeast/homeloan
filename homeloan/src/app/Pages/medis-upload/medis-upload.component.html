@@ -51,7 +51,7 @@
                   autocomplete="off"
                 />
               </div>
-              <div class="col-4 mb-3" [class]="viewOnly ? 'onlyViewClass':''">
+              <div *ngIf="type == 1 || type == 0" class="col-4 mb-3" [class]="viewOnly ? 'onlyViewClass':''">
                 <input
                   autocomplete="nope"
                   class="form-control"
@@ -59,6 +59,19 @@
                   id="formFile"
                   [(ngModel)]="filename"
                   (change)="handleFileInput($event.target)"
+                  accept="image/*"
+                />
+                <span style="color: red;position: absolute;margin-top: 8px !important;" class="mt-1">*Maximum size of file is 16Mb</span>
+              </div>
+              <div *ngIf="type == 2" class="col-4 mb-3" [class]="viewOnly ? 'onlyViewClass':''">
+                <input
+                  autocomplete="nope"
+                  class="form-control"
+                  type="file"
+                  id="formFile"
+                  [(ngModel)]="filename"
+                  (change)="handleFileInput($event.target)"
+                  accept="video/mp4,video/x-m4v,video/*"
                 />
                 <span style="color: red;position: absolute;margin-top: 8px !important;" class="mt-1">*Maximum size of file is 16Mb</span>
               </div>

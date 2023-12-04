@@ -16,7 +16,8 @@ export class LoginComponent {
     private router: Router
   ) {}
 
-  email = '';
+  // email = '';
+  username = '';
   password = '';
 
   handleLoginSubmit() {
@@ -26,7 +27,8 @@ export class LoginComponent {
     // console.log('this.email',this.email)
 
     data.append('action', 'loginUser');
-    data.append('email', this.email);
+    // data.append('email', this.email);
+    data.append('username', this.username);
     data.append('password', this.password);
 
     this.ds.submitAppData(data).subscribe((response: any) => {
@@ -36,7 +38,7 @@ export class LoginComponent {
 
       // console.log((response));
 
-      if (response != null && response != "email not found") {
+      if (response != null && response != "username not found") {
         // console.log('response',response)
         Swal.fire({
           position: 'top-end',
@@ -64,7 +66,7 @@ export class LoginComponent {
         // this.router.navigateByUrl('/users');
         // this.router.navigateByUrl('/dashboard');
         this.router.navigateByUrl('/retailloan');
-      } else if(response == "email not found"){
+      } else if(response == "username not found"){
         Swal.fire({
           position: 'top-end',
           icon: 'error',

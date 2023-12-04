@@ -301,5 +301,36 @@ export class DashbordComponent implements OnInit {
     return "bx bxs-show notShowEdit";
   }
 
+  notShowingDeleteOption(status: any) {
+    // console.log('status',status)
+    if (this.logedInUser.type == "Credit-Underwriter" || this.logedInUser.type == "Credit-Analyst" || this.logedInUser.type == "Credit-Approver") {
+      // if(status.indexOf("Submitted by Credit Analyst") > -1){
+      //   console.log('htti')
+      //   return "bx bxs-show notShowEdit";
+      // }else 
+      if (status.indexOf("Approved by Credit Approver") > -1 ) {
+        return "bx bxs-trash-alt mx-2 notShowEdit";
+      } else {
+        return "bx bxs-trash-alt mx-2";
+      }
+    }
+
+    if (this.logedInUser.type == "Admin") {
+
+      // if(status.indexOf("Submitted by Credit Analyst") > -1 || status.indexOf("Reveiwing by Credit Underwriter") > -1 || status.indexOf("Processing by Credit Analyst") > -1){
+      //   console.log('htti')
+      //   return "bx bxs-show";
+      // }
+      // else 
+      // if (status.indexOf("Processing by Admin") > -1 || (status.indexOf("Reveiwing by Admin") > -1) || (status.indexOf("Submitted by Credit Underwriter") > -1)) {
+      //   return "bx bxs-show notShowEdit";
+      // } else {
+        return "bx bxs-trash-alt mx-2";
+      // }
+
+    }
+    return "bx bxs-trash-alt mx-2 notShowEdit";
+  }
+
 
 }

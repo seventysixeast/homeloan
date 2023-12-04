@@ -32,6 +32,15 @@
                     required [ngModelOptions]="{standalone: true}" autocomplete="off" />
                 </div>
                 <div class="col-12 mt-3">
+                  <label for="inputPassword4" class="form-label">User Name</label>
+                  <!-- <input autocomplete="nope" [(ngModel)]="username" type="text"
+                    class="{{edit ? 'form-control edit-email' : 'form-control'}}" id="inputPassword4" required
+                    [readonly]="edit" [ngModelOptions]="{standalone: true}" autocomplete="off" /> -->
+                    <input autocomplete="nope" [(ngModel)]="username" type="text"
+                    class="{{edit ? 'form-control' : 'form-control'}}" id="inputPassword4" required
+                    [ngModelOptions]="{standalone: true}" autocomplete="off" />
+                </div>
+                <div class="col-12 mt-3">
                   <label for="inputAddress" class="form-label">Type</label>
 
                   <select class="form-select" aria-label="Default select example" [(ngModel)]="type"

@@ -163,10 +163,10 @@
                   <input
                     autocomplete="nope"
                     [(ngModel)]="irdm"
-                    type="number"
+                    type="text"
                     class="form-control"
                     id="inputNanme4"
-                    onkeydown="return ((event.keyCode === 8) || (event.charCode >= 48 && event.charCode <= 57) || (event.target.value+Number(event.key) < 100))"
+                    
                     [readonly]="viewOnly"
                     autocomplete="off"
                   />

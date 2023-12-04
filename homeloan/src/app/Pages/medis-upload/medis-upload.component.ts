@@ -196,8 +196,8 @@ export class MedisUploadComponent implements OnInit {
           showConfirmButton: false,
           timer: 1500,
         });
-        this.router.navigateByUrl('dashboard');
-        window.location.href = 'dashboard';
+        this.router.navigateByUrl('homeloan/dashboard');
+        window.location.href = 'homeloan/dashboard';
         // this.goNext();
         // console.log(response);
       });
@@ -320,9 +320,15 @@ export class MedisUploadComponent implements OnInit {
   }
 
   deleteImg(MediaItem: any) {
-
+    console.log('MediaItem',MediaItem)
+    let t = ''
+    if(MediaItem.typeName == "Property Photo"){
+      t = "Image"
+    }else{
+      t = 'Video'
+    }
     Swal.fire({
-      title: 'Do you want to delete the image?',
+      title: 'Do you want to delete the '+t+'?',
       showDenyButton: true,
       // showCancelButton: true,
       confirmButtonText: 'Ok',
@@ -347,7 +353,7 @@ export class MedisUploadComponent implements OnInit {
             Swal.fire({
               position: 'top-end',
               icon: 'success',
-              title: 'Image Is Deleted Successfully',
+              title: t+' Is Deleted Successfully',
               showConfirmButton: false,
               timer: 1500,
             });

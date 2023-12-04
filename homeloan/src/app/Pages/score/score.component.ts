@@ -196,8 +196,8 @@ export class ScoreComponent implements OnInit {
           showConfirmButton: false,
           timer: 1500,
         });
-        this.router.navigateByUrl('dashboard');
-        window.location.href = 'dashboard';
+        this.router.navigateByUrl('homeloan/dashboard');
+        window.location.href = 'homeloan/dashboard';
         // this.goNext();
         // console.log(response);
       });

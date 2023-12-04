@@ -726,6 +726,7 @@ if($_POST['action'] == 'addUser'){
     $email = $_POST['email'];
     $password = $_POST['password'];
     $type = $_POST['type'];
+    $username = $_POST['username'];
     // ini_set('display_errors', 1);
     // ini_set('display_startup_errors', 1);
     // error_reporting(E_ALL);
@@ -743,6 +744,22 @@ if($_POST['action'] == 'addUser'){
 
     if (count($response) > 0) {
         echo json_encode("email found");
+        die;
+    }
+
+    $quarry1 = "SELECT * FROM users WHERE username='$username'";
+    $result1 = mysqli_query($conn, $quarry1);
+
+    $response1 = [];
+
+    if ($result1 !== false) {
+        while ($row_header1 = mysqli_fetch_assoc($result1)) {
+            $response1[] = $row_header1;
+        }
+    }
+
+    if (count($response1) > 0) {
+        echo json_encode("Username found");
         die;
     }
      /****************send mail****************** */
@@ -794,14 +811,14 @@ if($_POST['action'] == 'addUser'){
 
         // Check if the file was moved successfully
         if ($result) {
-            $querry = "INSERT INTO users(f_name, l_name, email, password, type, photo) VALUES ('$f_name', '$l_name', '$email', '$password', '$type', '$target_file')";
+            $querry = "INSERT INTO users(f_name, l_name, email, password, username, type, photo) VALUES ('$f_name', '$l_name', '$email', '$password','$username', '$type', '$target_file')";
             $result = mysqli_query($conn, $querry);
             echo $result;
         } else {
             echo "Upload failed";
         }
     } else {
-        $querry = "INSERT INTO users(f_name, l_name, email, password, type) VALUES ('$f_name', '$l_name', '$email', '$password', '$type')";
+        $querry = "INSERT INTO users(f_name, l_name, email, password,username, type) VALUES ('$f_name', '$l_name', '$email', '$password','$username', '$type')";
         $result = mysqli_query($conn, $querry);
         echo $result;
     }
@@ -815,6 +832,7 @@ if ($_POST['action'] == 'updateUser') {
     $email = $_POST['email'];
     $password = $_POST['password'];
     $type = $_POST['type'];
+    $username = $_POST['username'];
 
     // Check if a file was uploaded
     if (isset($_FILES['photo']) && $_FILES['photo']['error'] == UPLOAD_ERR_OK) {
@@ -827,7 +845,7 @@ if ($_POST['action'] == 'updateUser') {
         // Check if the file was moved successfully
         if ($result) {
             // Update the user with the new photo filename
-            $querry = "UPDATE users SET f_name='$f_name', l_name='$l_name', email='$email', password='$password', type='$type', photo='$target_file' WHERE id=".$id;
+            $querry = "UPDATE users SET f_name='$f_name', l_name='$l_name', email='$email', password='$password', username='$username', type='$type', photo='$target_file' WHERE id=".$id;
             $result = mysqli_query($conn, $querry);
             echo $result;
         } else {
@@ -835,7 +853,7 @@ if ($_POST['action'] == 'updateUser') {
         }
     } else {
         // If no photo was uploaded, update without changing the existing photo filename
-        $querry = "UPDATE users SET f_name='$f_name', l_name='$l_name', email='$email', password='$password', type='$type' WHERE id=".$id;
+        $querry = "UPDATE users SET f_name='$f_name', l_name='$l_name', email='$email', password='$password', username='$username', type='$type' WHERE id=".$id;
         $result = mysqli_query($conn, $querry);
         echo $result;
     }
@@ -848,10 +866,12 @@ if($_POST['action']  == 'deleteUser'){
 }
 
 if ($_POST['action'] == 'loginUser') {
-    $email = $_POST['email'];
+    // $email = $_POST['email'];
+    $username = $_POST['username'];
     $password = $_POST['password'];
 
-    $quarry1 = "SELECT * FROM users WHERE email='$email'";
+    // $quarry1 = "SELECT * FROM users WHERE email='$email'";
+    $quarry1 = "SELECT * FROM users WHERE username='$username'";
     $result1 = mysqli_query($conn, $quarry1);
     $response1 = [];
     if ($result1 !== false) {
@@ -861,13 +881,13 @@ if ($_POST['action'] == 'loginUser') {
     }
 
     if (count($response1) == 0) {
-        echo json_encode("email not found");
+        echo json_encode("username not found");
         die;
     }
 
     // echo "<pre>"; print_r(mysqli_fetch_assoc($result1)); die;
 
-    $quarry = "SELECT * FROM users WHERE email='$email' AND password='$password'";
+    $quarry = "SELECT * FROM users WHERE username='$username' AND password='$password'";
     $result = mysqli_query($conn, $quarry);
 
     $response = [];

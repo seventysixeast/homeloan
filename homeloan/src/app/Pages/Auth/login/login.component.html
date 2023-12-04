@@ -17,16 +17,21 @@
 
                 <p>Please login to your account</p>
                 <form method="post" ngNativeValidate (ngSubmit)="handleLoginSubmit()">
-                  <div class="form-outline mb-4">
+                  <!-- <div class="form-outline mb-4">
                     <label class="form-label" for="form2Example11">Email</label>
                     <input [(ngModel)]="email" autocomplete="off" type="email" id="form2Example11" class="form-control"
                       placeholder="email address" [ngModelOptions]="{standalone: true}" required autocomplete="off" />
+                  </div> -->
+                  <div class="form-outline mb-4">
+                    <label class="form-label" for="form2Example11">Username</label>
+                    <input [(ngModel)]="username" autocomplete="off" type="text" id="form2Example11" class="form-control"
+                      placeholder="Username" [ngModelOptions]="{standalone: true}" required autocomplete="off" />
                   </div>
 
                   <div class="form-outline mb-4">
                     <label class="form-label" for="form2Example22">Password</label>
                     <input [(ngModel)]="password" type="password" id="form2Example22" class="form-control"
-                      placeholder="password" [ngModelOptions]="{standalone: true}" required  autocomplete="off"/>
+                      placeholder="Password" [ngModelOptions]="{standalone: true}" required  autocomplete="off"/>
                   </div>
 
                   <div class="text-center pt-1 mb-5 pb-1">

@@ -175,7 +175,7 @@ export class ReportGenComponent implements OnInit {
 
   handleSubmit() {
     this.goNext();
-    window.location.href = 'dashboard';
+    window.location.href = 'homeloan/dashboard';
     // console.log(this.fileToUpload);
   }
 
@@ -274,7 +274,7 @@ export class ReportGenComponent implements OnInit {
   }
 
   goNext() {
-    this.router.navigateByUrl('/dashboard');
+    this.router.navigateByUrl('homeloan/dashboard');
   }
 
   goBack() {
@@ -467,6 +467,6 @@ export class ReportGenComponent implements OnInit {
         // console.log(response);
       });
     }
-    this.router.navigateByUrl('dashboard');
+    this.router.navigateByUrl('homeloan/dashboard');
   }
 }

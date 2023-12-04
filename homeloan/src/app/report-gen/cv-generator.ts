@@ -120,7 +120,7 @@ export class DocumentCreator {
                     new TableCell({
                       children: [
                         new Paragraph({
-                          text: 'MODERN NATIONAL BANK LTD',
+                          text: dataOfBank.bankName,
                           heading: HeadingLevel.HEADING_2,
                         }),
                       ],
@@ -401,7 +401,7 @@ export class DocumentCreator {
                     new TableCell({
                       children: [
                         new Paragraph({
-                          text: JSON.stringify(dataJson1[0].cost),
+                          text: dataJson1[0].cost != ''? JSON.stringify(dataJson1[0].cost): dataJson1[0].cost,
                           heading: HeadingLevel.HEADING_1,
                           alignment: AlignmentType.END,
                         }),
@@ -438,7 +438,7 @@ export class DocumentCreator {
                     new TableCell({
                       children: [
                         new Paragraph({
-                          text: JSON.stringify(dataJson1[1].cost),
+                          text: dataJson1[1].cost != ''? JSON.stringify(dataJson1[1].cost): dataJson1[1].cost,
                           heading: HeadingLevel.HEADING_1,
                           alignment: AlignmentType.END,
                         }),
@@ -475,7 +475,7 @@ export class DocumentCreator {
                     new TableCell({
                       children: [
                         new Paragraph({
-                          text: JSON.stringify(dataJson1[2].cost),
+                          text: dataJson1[2].cost != ''? JSON.stringify(dataJson1[2].cost): dataJson1[2].cost,
                           heading: HeadingLevel.HEADING_1,
                           alignment: AlignmentType.END,
                         }),
@@ -512,7 +512,7 @@ export class DocumentCreator {
                     new TableCell({
                       children: [
                         new Paragraph({
-                          text: JSON.stringify(dataJson1[3].cost),
+                          text:dataJson1[3].cost != ''? JSON.stringify(dataJson1[3].cost): dataJson1[3].cost,
                           heading: HeadingLevel.HEADING_1,
                           alignment: AlignmentType.END,
                         }),
@@ -549,7 +549,7 @@ export class DocumentCreator {
                     new TableCell({
                       children: [
                         new Paragraph({
-                          text: JSON.stringify(dataJson1[4].cost),
+                          text:dataJson1[4].cost != ''? JSON.stringify(dataJson1[4].cost): dataJson1[4].cost,
                           heading: HeadingLevel.HEADING_1,
                           alignment: AlignmentType.END,
                         }),
@@ -558,7 +558,7 @@ export class DocumentCreator {
                     new TableCell({
                       children: [
                         new Paragraph({
-                          text: dataJson1[0].detail,
+                          text: dataJson1[4].detail,
                           heading: HeadingLevel.HEADING_1,
                         }),
                       ],
@@ -586,7 +586,7 @@ export class DocumentCreator {
                     new TableCell({
                       children: [
                         new Paragraph({
-                          text: JSON.stringify(dataJson1[5].cost),
+                          text: dataJson1[5].cost != ''? JSON.stringify(dataJson1[5].cost): dataJson1[5].cost,
                           heading: HeadingLevel.HEADING_1,
                           alignment: AlignmentType.END,
                         }),
@@ -623,7 +623,7 @@ export class DocumentCreator {
                     new TableCell({
                       children: [
                         new Paragraph({
-                          text: JSON.stringify(dataJson1[6].cost),
+                          text: dataJson1[6].cost != ''? JSON.stringify(dataJson1[6].cost): dataJson1[6].cost,
                           heading: HeadingLevel.HEADING_1,
                           alignment: AlignmentType.END,
                         }),

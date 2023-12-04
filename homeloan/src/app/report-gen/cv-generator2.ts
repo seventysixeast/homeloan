@@ -16,6 +16,8 @@ export class DocumentCreator2 {
     let dataJson2 = JSON.parse(data.risk_one.JsonData);
     let dataJson3 = JSON.parse(data.risk_two.JsonData);
     let dataJson4 = JSON.parse(data.addinfo.JsonData);
+    console.log('dataJson4',dataJson4)
+    // return null;
     // console.log(dataJson2.mws_total);
     const document = new Document({
       styles: {
@@ -76,7 +78,7 @@ export class DocumentCreator2 {
                     new TableCell({
                       children: [
                         new Paragraph({
-                          text: 'NAME OF FINANCIAL INSTITUTION',
+                          text: dataJson4.bankName,
                           heading: HeadingLevel.HEADING_2,
                         }),
                       ],
@@ -117,7 +119,7 @@ export class DocumentCreator2 {
                     new TableCell({
                       children: [
                         new Paragraph({
-                          text: 'Branch',
+                          text:  dataJson4.branchName,
                           heading: HeadingLevel.HEADING_1,
                         }),
                       ],
@@ -736,7 +738,7 @@ export class DocumentCreator2 {
                     new TableCell({
                       children: [
                         new Paragraph({
-                          text: JSON.stringify(dataJson1[0].cost),
+                          text:dataJson1[0].cost != ''? JSON.stringify(dataJson1[0].cost): dataJson1[0].cost,
                           heading: HeadingLevel.HEADING_3,
                           alignment: AlignmentType.END,
                         }),
@@ -777,7 +779,7 @@ export class DocumentCreator2 {
                     new TableCell({
                       children: [
                         new Paragraph({
-                          text: JSON.stringify(dataJson1[1].cost),
+                          text: dataJson1[1].cost != ''? JSON.stringify(dataJson1[1].cost): dataJson1[1].cost ,
                           heading: HeadingLevel.HEADING_3,
                           alignment: AlignmentType.END,
                         }),
@@ -818,7 +820,7 @@ export class DocumentCreator2 {
                     new TableCell({
                       children: [
                         new Paragraph({
-                          text: JSON.stringify(dataJson1[2].cost),
+                          text:dataJson1[2].cost != ''? JSON.stringify(dataJson1[2].cost): dataJson1[2].cost,
                           heading: HeadingLevel.HEADING_3,
                           alignment: AlignmentType.END,
                         }),
@@ -859,7 +861,7 @@ export class DocumentCreator2 {
                     new TableCell({
                       children: [
                         new Paragraph({
-                          text: JSON.stringify(dataJson1[3].cost),
+                          text: dataJson1[3].cost != ''? JSON.stringify(dataJson1[3].cost): dataJson1[3].cost,
                           heading: HeadingLevel.HEADING_3,
                           alignment: AlignmentType.END,
                         }),
@@ -900,7 +902,7 @@ export class DocumentCreator2 {
                     new TableCell({
                       children: [
                         new Paragraph({
-                          text: JSON.stringify(dataJson1[4].cost),
+                          text: dataJson1[4].cost != ''? JSON.stringify(dataJson1[4].cost): dataJson1[4].cost,
                           heading: HeadingLevel.HEADING_3,
                           alignment: AlignmentType.END,
                         }),
@@ -941,7 +943,7 @@ export class DocumentCreator2 {
                     new TableCell({
                       children: [
                         new Paragraph({
-                          text: JSON.stringify(dataJson1[5].cost),
+                          text:dataJson1[5].cost != ''? JSON.stringify(dataJson1[5].cost): dataJson1[5].cost,
                           heading: HeadingLevel.HEADING_3,
                           alignment: AlignmentType.END,
                         }),
@@ -982,7 +984,7 @@ export class DocumentCreator2 {
                     new TableCell({
                       children: [
                         new Paragraph({
-                          text: JSON.stringify(dataJson1[6].cost),
+                          text:dataJson1[6].cost != ''? JSON.stringify(dataJson1[6].cost): dataJson1[6].cost,
                           heading: HeadingLevel.HEADING_3,
                           alignment: AlignmentType.END,
                         }),
@@ -2265,7 +2267,7 @@ export class DocumentCreator2 {
                     new TableCell({
                       children: [
                         new Paragraph({
-                          text: 'Applicants Total Close Family Income *',
+                          text: 'Applicants Total Close Family Income **',
                           heading: HeadingLevel.HEADING_3,
                         }),
                       ],
@@ -2349,6 +2351,19 @@ export class DocumentCreator2 {
                       children: [
                         new Paragraph({
                           text: '*In case of joint borrowers, combined Income to be mentioned.',
+                          heading: HeadingLevel.HEADING_3,
+                        }),
+                      ],
+                      columnSpan: 6,
+                    }),
+                  ],
+                }),
+                new TableRow({
+                  children: [
+                    new TableCell({
+                      children: [
+                        new Paragraph({
+                          text: '**Total Monthly Family Income including income of close family members i.e. Spouse, Parents, Brothers and Sisters.',
                           heading: HeadingLevel.HEADING_3,
                         }),
                       ],
@@ -2987,7 +3002,7 @@ export class DocumentCreator2 {
                     new TableCell({
                       children: [
                         new Paragraph({
-                          text: 'SANCTIONED',
+                          text: 'RECOMMENDED',
                           heading: HeadingLevel.HEADING_3,
                         }),
                       ],
@@ -3034,7 +3049,7 @@ export class DocumentCreator2 {
                     new TableCell({
                       children: [
                         new Paragraph({
-                          text: 'Name',
+                          text: dataJson4.name1,
                           heading: HeadingLevel.HEADING_1,
                         }),
                       ],
@@ -3043,7 +3058,7 @@ export class DocumentCreator2 {
                     new TableCell({
                       children: [
                         new Paragraph({
-                          text: 'Name',
+                          text: dataJson4.name2,
                           heading: HeadingLevel.HEADING_1,
                         }),
                       ],
@@ -3052,7 +3067,7 @@ export class DocumentCreator2 {
                     new TableCell({
                       children: [
                         new Paragraph({
-                          text: 'Name',
+                          text: dataJson4.name3,
                           heading: HeadingLevel.HEADING_1,
                         }),
                       ],
@@ -3065,7 +3080,7 @@ export class DocumentCreator2 {
                     new TableCell({
                       children: [
                         new Paragraph({
-                          text: 'Designation',
+                          text: dataJson4.designation1,
                           heading: HeadingLevel.HEADING_1,
                         }),
                       ],
@@ -3074,7 +3089,7 @@ export class DocumentCreator2 {
                     new TableCell({
                       children: [
                         new Paragraph({
-                          text: 'Designation',
+                          text: dataJson4.designation2,
                           heading: HeadingLevel.HEADING_1,
                         }),
                       ],
@@ -3083,7 +3098,7 @@ export class DocumentCreator2 {
                     new TableCell({
                       children: [
                         new Paragraph({
-                          text: 'Designation',
+                          text: dataJson4.designation3,
                           heading: HeadingLevel.HEADING_1,
                         }),
                       ],
@@ -3105,7 +3120,7 @@ export class DocumentCreator2 {
                     new TableCell({
                       children: [
                         new Paragraph({
-                          text: 'Date',
+                          text: dataJson4.loandate,
                           heading: HeadingLevel.HEADING_1,
                         }),
                       ],
