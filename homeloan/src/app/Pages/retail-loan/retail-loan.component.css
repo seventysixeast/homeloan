@@ -1,8 +1,8 @@
 .card-retailloan {
-    width: 22rem;
+    width: 18rem;
     border: 1px solid #dbdbdb;
     box-shadow: 0px 0 30px rgba(1, 41, 112, 0.1) !important;
-    
+    max-height: 266px;
 }
 
 .disable-card{

@@ -330,7 +330,7 @@ export class ReportGenComponent implements OnInit {
         // });
         // "https://raw.githubusercontent.com/dolanmiu/docx/master/demo/images/cat.jpg"
         const blob1 = await fetch(
-          url1
+          "https://raw.githubusercontent.com/dolanmiu/docx/master/demo/images/cat.jpg"
         ).then(r => 
           (r.blob())
         ); 

@@ -40,7 +40,7 @@ if($_POST['action'] == 'submit-app-data')
     $userId = $_POST['userId'];
 
     // echo "<pre>"; print_r($_POST); die;
-    // echo "<pre>"; print_r($_FILES); die;
+    // echo "<pre>"; print_r(basename($_FILES["a1_photo"]["type"])); die;
 //     ini_set('display_errors', 1);
 // ini_set('display_startup_errors', 1);
 // error_reporting(E_ALL);
@@ -50,7 +50,10 @@ if($_POST['action'] == 'submit-app-data')
     if($_FILES["a1_photo"] != ''){
 
         $target_dir = "uploads/";
-        $target_file_one = time().basename($_FILES["a1_photo"]["name"]);
+        // $target_file_one = time().basename($_FILES["a1_photo"]["name"]);
+        $target_file_one = time().basename($_FILES["a1_photo"]["type"]);
+
+
         move_uploaded_file($_FILES["a1_photo"]["tmp_name"], $target_dir .$target_file_one);
     }
 
@@ -58,7 +61,7 @@ if($_POST['action'] == 'submit-app-data')
 
     if($_FILES && $_FILES["a2_photo"] != ''){        
         $target_dir = "uploads/";
-        $target_file_two = time().basename($_FILES["a2_photo"]["name"]);
+        $target_file_two = time().basename($_FILES["a2_photo"]["type"]);
         move_uploaded_file($_FILES["a2_photo"]["tmp_name"], $target_dir .$target_file_two);   
     }
 

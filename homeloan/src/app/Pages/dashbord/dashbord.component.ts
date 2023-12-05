@@ -76,7 +76,8 @@ export class DashbordComponent implements OnInit {
     // console.log('check')
     this.sideNav.openPage(1, 1);
     // this.router.navigateByUrl('applicant-data/' + id);
-    window.location.href = 'homeloan/applicant-data/' + id;
+    // window.location.href = 'homeloan/applicant-data/' + id;
+    window.location.href = 'homeloan/homeloan/applicant-data/' + id;
   }
 
   editData(id: any) {
