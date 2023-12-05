@@ -61,6 +61,7 @@ export class DashbordComponent implements OnInit {
   openData(id: any, status: any) {
     localStorage.setItem('activeId', id);
     localStorage.setItem('viewOnly', "true")
+    localStorage.setItem('applicant1Id', id)
     // if (this.logedInUser.type == "Credit-Approver" && status.indexOf("Approved by Credit Approver") == -1 && status.indexOf("Approved by Credit Approver") == -1 ) {
     if (this.logedInUser.type == "Credit-Approver" && status.indexOf("Submitted by Admin") > -1  ) {
       // console.log('status',status)
@@ -77,7 +78,7 @@ export class DashbordComponent implements OnInit {
     this.sideNav.openPage(1, 1);
     // this.router.navigateByUrl('applicant-data/' + id);
     // window.location.href = 'homeloan/applicant-data/' + id;
-    window.location.href = 'homeloan/homeloan/applicant-data/' + id;
+    // window.location.href = 'homeloan/homeloan/applicant-data/' + id;
   }
 
   editData(id: any) {

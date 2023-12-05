@@ -194,7 +194,7 @@ export class SideNavComponent implements OnInit, AfterViewInit {
       }
     });
     let applicant1Id = localStorage.getItem('applicant1Id')
-    // console.log('applicant1Id', applicant1Id)
+    console.log('applicant1Id', applicant1Id)
     if (applicant1Id != null) {
       let link: any = document.getElementById(`link${mId}${smId}`);
       link.click();
@@ -205,6 +205,7 @@ export class SideNavComponent implements OnInit, AfterViewInit {
       })
       if (mId == 1 && smId == 1) {
         if (applicant1Id) {
+          console.log('htting 2354')
           this.router.navigateByUrl('homeloan/applicant-data/' + applicant1Id);
         } else {
           this.router.navigateByUrl('homeloan/applicant-data');
