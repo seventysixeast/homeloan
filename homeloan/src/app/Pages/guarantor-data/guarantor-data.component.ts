@@ -65,7 +65,7 @@ export class GuarantorDataComponent implements OnInit {
       }
     });
     this.logedInUser = this.ds.userLoggedIn()
-    console.log('this.logedInUser',this.logedInUser)
+    // console.log('this.logedInUser',this.logedInUser)
     let checkView = localStorage.getItem("viewOnly")
     // checkView =  JSON.parse(checkView)
     // console.log('checkView',checkView)
@@ -152,17 +152,17 @@ export class GuarantorDataComponent implements OnInit {
   }
 
   handleSubmit(no: number) {
-    console.log('this.a1_name',this.a1_name)
-    console.log('this.openId',this.openId)
-    console.log('this.viewOnly',this.viewOnly)
+    // console.log('this.a1_name',this.a1_name)
+    // console.log('this.openId',this.openId)
+    // console.log('this.viewOnly',this.viewOnly)
     if(this.viewOnly){
       this.goNext();
       return;
     }
-    if(this.a1_name == ''){
-      alert('Applicant Full Name Is Required')
-      return;
-    }
+    // if(this.a1_name == ''){
+    //   alert('Applicant Full Name Is Required')
+    //   return;
+    // }
     // return;
     this.spinner.show();
     let data = new FormData();
@@ -234,7 +234,7 @@ export class GuarantorDataComponent implements OnInit {
   }
 
   goNext() {
-    console.log('this.openId',this.openId)
+    // console.log('this.openId',this.openId)
     // this.router.navigateByUrl('guarantor-data2/' + this.openId);
     this.sideNav.openPage(1, 12);
   }

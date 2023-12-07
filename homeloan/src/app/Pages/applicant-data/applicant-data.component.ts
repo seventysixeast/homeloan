@@ -60,7 +60,7 @@ export class ApplicantDataComponent implements OnInit {
     this.route.params.subscribe((params: any) => {
       // this.sideNav.openPage(1, 1);
       if(params.id && params.id != null){
-        console.log('params.id',params.id)
+        // console.log('params.id',params.id)
         this.openId = params.id;
         if (this.openId !== null && this.openId != 0) {
           this.getSingleData();
@@ -90,7 +90,7 @@ export class ApplicantDataComponent implements OnInit {
 
     this.ds.submitAppData(data).subscribe((response: any) => {
       if (response != null) {
-        console.log('hitignng')
+        // console.log('hitignng')
         this.a1_name = response[0].a1_name;
         this.a1_fName = response[0].a1_fName;
         this.a1_activity = response[0].a1_activity;
@@ -153,7 +153,7 @@ export class ApplicantDataComponent implements OnInit {
 
   handleSubmit(no: number) {
 
-    console.log('this.viewOnly',this.viewOnly)
+    // console.log('this.viewOnly',this.viewOnly)
     if(this.viewOnly){
       this.goNext();
       return;
@@ -170,7 +170,7 @@ export class ApplicantDataComponent implements OnInit {
       // return;
       this.spinner.show();
       let data = new FormData();
-      console.log('this.a1_name',this.a1_name)
+      // console.log('this.a1_name',this.a1_name)
       data.append('id', this.openId == undefined ? 0 : this.openId);
       data.append('application_no', variableNumer);
       localStorage.setItem('application_no', variableNumer)

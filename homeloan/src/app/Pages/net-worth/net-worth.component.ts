@@ -46,7 +46,7 @@ export class NetWorthComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe((params: any) => {
-      console.log('params.id',params.id)
+      // console.log('params.id',params.id)
       this.openId = params.id;
       localStorage.setItem("applicant1Id",params.id)
       if (this.openId != 0) {
@@ -56,7 +56,7 @@ export class NetWorthComponent implements OnInit {
     });
     // console.log('this.openId',this.openId)
     this.logedInUser = this.ds.userLoggedIn()
-    console.log('this.logedInUser',this.logedInUser)
+    // console.log('this.logedInUser',this.logedInUser)
     let checkView = localStorage.getItem("viewOnly")
     // checkView =  JSON.parse(checkView)
     // console.log('checkView',checkView)
@@ -169,7 +169,7 @@ export class NetWorthComponent implements OnInit {
         timer: 1500,
       });
       this.goNext();
-      console.log(response);
+      // console.log(response);
     });
   }
 
@@ -195,7 +195,6 @@ export class NetWorthComponent implements OnInit {
   }
 
   updateTotal() {
-    console.log('ok');
     let result: any = this.pmt(
       this.c_intrestRate / 12 / 100,
       this.c_months,

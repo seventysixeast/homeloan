@@ -32,7 +32,7 @@ export class DocumentCreator {
   }
   
   public create(data: any, imageBlob1: any, imageBlob2: any): Document {
-    console.log('data',data)
+    // console.log('data',data)
     let dataJson1 = JSON.parse(data.loan_request.dataJson);
     let dataOfBank = JSON.parse(data.addinfo.JsonData);
     let dataOfapp = (data.app_data);

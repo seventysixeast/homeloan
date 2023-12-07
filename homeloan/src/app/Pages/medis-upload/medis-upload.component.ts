@@ -78,7 +78,7 @@ export class MedisUploadComponent implements OnInit {
             }
           });
         });
-        console.log('response',response)
+        // console.log('response',response)
         this.medialist = response;
       }else{
         this.medialist = [];
@@ -99,7 +99,7 @@ export class MedisUploadComponent implements OnInit {
 
         this.logedInUser = this.ds.userLoggedIn()
         let checkView = localStorage.getItem("viewOnly")
-        console.log('this.status',this.status)
+        // console.log('this.status',this.status)
         if(checkView === 'true'){
           this.viewOnly =  true;
           this.nextButtonText = "Next"
@@ -127,8 +127,8 @@ export class MedisUploadComponent implements OnInit {
   handleFileInput(files: any) {
     this.fileToUpload = files.files.item(0);
 
-    console.log('fileToUpload',this.fileToUpload)
-    console.log('this.type',this.type)
+    // console.log('fileToUpload',this.fileToUpload)
+    // console.log('this.type',this.type)
 
     if(this.type == 0){
       alert('Please Any options of Select Purpose')
@@ -359,6 +359,7 @@ export class MedisUploadComponent implements OnInit {
             });
             // this.getData();
             this.showImageLink = '';
+            this.showVideoLink = '';
             this.getData();
           } else {
             Swal.fire({

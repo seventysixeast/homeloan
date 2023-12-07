@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="homeloan">
   <head>
+    
     <meta charset="utf-8" />
-    <title>HomeLoan</title>
-    <base href="https://76east.com/homeloan/">
+    <title id="title"></title>
+    <!-- <base href="/retailloan/"> -->
+    <base href="/">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <!-- start -->
@@ -55,6 +57,14 @@
       class="back-to-top d-flex align-items-center justify-content-center"
       ><i class="bi bi-arrow-up-short"></i
     ></a>
+    <script>
+      var title = ''
+      document.getElementById('title').innerHTML = 'Home Loan';
+      // console.log('location',window.location.pathname)
+      if((window.location.pathname.indexOf('/login') > -1) || window.location.pathname.indexOf('/retailloan-products') > -1){
+        document.getElementById('title').innerHTML = 'Retail Loan';
+      }
+    </script>
 
     <!-- Vendor JS Files -->
     <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>

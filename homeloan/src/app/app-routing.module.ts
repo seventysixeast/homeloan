@@ -153,7 +153,7 @@ const routes: Routes = [
   //   ],
   // },
   {
-    path: 'retailloan',
+    path: 'retailloan-products',
     canActivate: [AdminGuard],
     component: RetailLoanComponent,
   },

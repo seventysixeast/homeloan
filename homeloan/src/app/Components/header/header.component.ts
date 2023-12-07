@@ -20,11 +20,11 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.logedInUser = this.ds.userLoggedIn();
-    console.log('this.logedInUser',this.logedInUser);
+    // console.log('this.logedInUser',this.logedInUser);
     this.mediaUrl = this.ds.mediaUrl;
 
     // console.log('if (this.router.url) {',this.router.url)
-    if(this.router.url.includes('/retailloan')){
+    if(this.router.url.includes('/retailloan-products')){
       this.imageShow = true;
     }else{
       this.imageShow = false;
@@ -33,7 +33,8 @@ export class HeaderComponent implements OnInit {
 
   logout(){
     localStorage.clear()
-    this.router.navigateByUrl('/login');
+    // this.router.navigateByUrl('/login');
+    window.location.href = "/login"
 
   }
 

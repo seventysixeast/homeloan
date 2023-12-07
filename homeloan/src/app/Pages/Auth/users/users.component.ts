@@ -29,7 +29,7 @@ export class UsersComponent {
     localStorage.removeItem("viewOnly");
     this.getData();
     this.logedInUser = this.ds.userLoggedIn()
-    console.log('this.logedInUser', this.logedInUser)
+    // console.log('this.logedInUser', this.logedInUser)
   }
 
   getData() {
@@ -38,12 +38,11 @@ export class UsersComponent {
     // data.append('userId', this.logedInUser.id);
     this.ds.getAppDataList(data).subscribe((response: any) => {
       this.dataList = response;
-      console.log(response);
     });
   }
 
   openData(id: any) {
-    console.log(id);
+    // console.log(id);
     this.router.navigateByUrl('homeloan/user-update/' + id);
     // localStorage.setItem('activeId', id);
     // this.sideNav.openPage(1, 1);
@@ -52,7 +51,7 @@ export class UsersComponent {
   }
 
   deleteAcc(id: any) {
-    console.log(id);
+    // console.log(id);
 
     Swal.fire({
       title: 'Do you want to delete the user?',
@@ -75,7 +74,7 @@ export class UsersComponent {
         data.append('id', id);
     
         this.ds.getAppDataList(data).subscribe((response: any) => {
-          console.log(response);
+          // console.log(response);
           if (response == 1) {
             Swal.fire({
               position: 'top-end',

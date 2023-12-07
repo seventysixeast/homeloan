@@ -49,7 +49,7 @@ export class UsersAddComponent {
     data2.append('id', id);
     data2.append('action', 'getUser');
     this.ds.submitAppData(data2).subscribe((response2: any) => {
-      console.log('response2', response2[0].type)
+      // console.log('response2', response2[0].type)
       if (response2 && response2.length != 0) {
         this.f_name = response2[0].f_name
         this.l_name = response2[0].l_name
@@ -68,7 +68,7 @@ export class UsersAddComponent {
       }
     });
 
-    console.log('this.type', this.type)
+    // console.log('this.type', this.type)
   }
 
   handlePhotoUpload(event: any) {
@@ -111,7 +111,7 @@ export class UsersAddComponent {
 
     this.ds.submitAppData(data).subscribe((response: any) => {
       this.spinner.hide();
-      console.log(response);
+      // console.log(response);
       if (response == 1 && response != "email found") {
         if (this.edit) {
           Swal.fire({
@@ -131,7 +131,7 @@ export class UsersAddComponent {
             timer: 1500,
           });
         }
-        this.router.navigateByUrl('/users');
+        this.router.navigateByUrl('/homeloan/users');
       }else if(response == "email found"){
         Swal.fire({
           position: 'top-end',

@@ -24,11 +24,11 @@ export class DataService {
 
   // baseurl = 'http://localhost/homeloan/admin/Api.php';
   // mediaUrl = 'http://localhost/homeloan/admin/uploads/';
-  // baseurl = 'http://localhost/29nov/homeloan/admin/Api.php';
-  // mediaUrl = 'http://localhost/29nov/homeloan/admin/uploads/';
+  baseurl = 'http://localhost/29nov/homeloan/admin/Api.php';
+  mediaUrl = 'http://localhost/29nov/homeloan/admin/uploads/';
 
-  baseurl = 'https://76east.com/homeloan/admin/Api.php';
-  mediaUrl = 'https://76east.com/homeloan/admin/uploads/'; 
+  // baseurl = 'https://76east.com/retailloan/admin/Api.php';
+  // mediaUrl = 'https://76east.com/retailloan/admin/uploads/'; 
 
   // baseurl = 'http://localhost/28nov/homeloan/admin/Api.php';
   // mediaUrl = 'http://localhost/28nov/homeloan/admin/uploads/';
@@ -41,7 +41,7 @@ export class DataService {
     let user: any;
     if (localStorage.getItem('admin')) {
       user = localStorage.getItem('admin')
-      console.log('user', atob(user))
+      // console.log('user', atob(user))
       // localStorage.setItem('admin',response)
     } else if (localStorage.getItem('creditApprover')) {
       user = localStorage.getItem('creditApprover')
@@ -53,7 +53,10 @@ export class DataService {
     } else if (localStorage.getItem('creditUnderwriter')) {
       user = localStorage.getItem('creditUnderwriter')
     }
-    user = JSON.parse(atob(user));
+    // console.log('user',user)
+    if(user){
+      user = JSON.parse(atob(user));
+    }
     return user;
   }
 
@@ -74,7 +77,7 @@ export class DataService {
   }
   addStatus(logedInUser: any, userId: any, status: any) {
     // let data = new FormData();
-    console.log('logedInUser.type', logedInUser.type)
+    // console.log('logedInUser.type', logedInUser.type)
     if (logedInUser.type == "Credit-Analyst") {
       return ("Processing by Credit Analyst(" + logedInUser.f_name + ")");
     } else if (logedInUser.type == "Credit-Underwriter") {

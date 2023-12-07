@@ -149,7 +149,7 @@ export class SiteVistComponent implements OnInit {
         timer: 1500,
       });
       this.goNext();
-      console.log(response);
+      // console.log(response);
     });
   }
 

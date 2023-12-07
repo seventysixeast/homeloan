@@ -16,4 +16,8 @@ export class RetailLoanComponent {
     // private sideNav: SideNavComponent
   ) {}
 
+  gotodashboard(){
+    window.location.href = "/homeloan/dashboard"
+  }
+
 }

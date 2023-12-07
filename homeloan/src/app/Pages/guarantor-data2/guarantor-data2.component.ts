@@ -62,10 +62,10 @@ export class GuarantorData2Component {
         this.getSingleData();
         this.getSingleAppData()
       }
-      console.log('this.openId',this.openId)
+      // console.log('this.openId',this.openId)
     });
     this.logedInUser = this.ds.userLoggedIn()
-    console.log('this.logedInUser',this.logedInUser)
+    // console.log('this.logedInUser',this.logedInUser)
     let checkView = localStorage.getItem("viewOnly")
     // checkView =  JSON.parse(checkView)
     // console.log('checkView',checkView)
@@ -152,15 +152,15 @@ export class GuarantorData2Component {
   }
 
   handleSubmit(no: number) {
-    console.log('a2_name',this.a2_name)
+    // console.log('a2_name',this.a2_name)
     if(this.viewOnly){
       this.goNext();
       return;
     }
-    if(this.a2_name == ''){
-      alert('Applicant Full Name Is Required')
-      return;
-    }
+    // if(this.a2_name == ''){
+    //   alert('Applicant Full Name Is Required')
+    //   return;
+    // }
 
     // return;
     this.spinner.show();

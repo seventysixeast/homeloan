@@ -152,10 +152,10 @@ export class ApplicantData2Component {
     }
     // return;
     if(!this.viewOnly){
-      if(this.a2_name == ''){
-        alert('Applicant Full Name Is Required')
-        return;
-      }
+      // if(this.a2_name == ''){
+      //   alert('Applicant Full Name Is Required')
+      //   return;
+      // }
       this.spinner.show();
       let data = new FormData();
       data.append('id', this.openId == undefined ? 0 : this.openId);

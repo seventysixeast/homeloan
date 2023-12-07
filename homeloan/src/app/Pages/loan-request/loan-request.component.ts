@@ -67,10 +67,8 @@ export class LoanRequestComponent implements OnInit {
       }
     });
     this.logedInUser = this.ds.userLoggedIn()
-    console.log('this.logedInUser',this.logedInUser)
     let checkView = localStorage.getItem("viewOnly")
     // checkView =  JSON.parse(checkView)
-    console.log('checkView',checkView)
     if(checkView === 'true'){
       this.viewOnly =  true;
       this.nextButtonText = "Next"
@@ -79,7 +77,6 @@ export class LoanRequestComponent implements OnInit {
     }
 
     this.updateTotal();
-    console.log('viewOnly',this.viewOnly)
   }
 
   getSingleData() {
@@ -89,11 +86,9 @@ export class LoanRequestComponent implements OnInit {
     data.append('action', 'getSingleDataLoan');
 
     this.ds.submitAppData(data).subscribe((response: any) => {
-      console.log('response',response)
       if (response != null) {
         let data = response[response.length - 1];
         let dataJson = JSON.parse(data.dataJson);
-        console.log('dataJson',typeof dataJson[0].cost)
         this.am1 = dataJson[0].cost;
         this.d1 = dataJson[0].detail;
 
@@ -152,7 +147,7 @@ export class LoanRequestComponent implements OnInit {
       (this.am6 == '' ? 0 : this.am6) +
       (this.am7 == '' ? 0 : this.am7);
 
-    console.log(this.total);
+    // console.log(this.total);
 
     this.marginAge = ((this.appMargin / this.total) * 100).toFixed(2);
 
@@ -203,7 +198,7 @@ export class LoanRequestComponent implements OnInit {
       },
     ];
 
-    console.log('this.marginAge',typeof this.marginAge)
+    // console.log('this.marginAge',typeof this.marginAge)
     // return;
     let data: any = new FormData();
 

@@ -108,7 +108,7 @@ export class RiskOneComponent implements OnInit {
     this.ds.submitAppData(data).subscribe((response: any) => {
       let newWorth = response[response.length - 1];
       let loanAmountRatio = newWorth.loanAmountRatio;
-      console.log('loanAmountRatio', loanAmountRatio)
+      // console.log('loanAmountRatio', loanAmountRatio)
       if (loanAmountRatio >= 1.5) {
         this.handleUpdate(2, 3, 1);
       }
@@ -556,7 +556,7 @@ export class RiskOneComponent implements OnInit {
       f2: this.f2,
       f3: this.f3,
     };
-    console.log(JsonData);
+    // console.log(JsonData);
     let data: any = new FormData();
 
     data.append('action', 'submit-risk-1');
@@ -576,7 +576,7 @@ export class RiskOneComponent implements OnInit {
         timer: 1500,
       });
       this.goNext();
-      console.log(response);
+      // console.log(response);
     });
   }
 

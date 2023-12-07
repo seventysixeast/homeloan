@@ -3,6 +3,8 @@
   background: #de0025;
 }
 
+.loan{text-align: center;}
+
 @media (min-width: 768px) {
   .gradient-form {
     height: 100vh !important;

@@ -16,7 +16,23 @@ export class DocumentCreator2 {
     let dataJson2 = JSON.parse(data.risk_one.JsonData);
     let dataJson3 = JSON.parse(data.risk_two.JsonData);
     let dataJson4 = JSON.parse(data.addinfo.JsonData);
+    let dataJson5 = (data.score);
     console.log('dataJson4',dataJson4)
+
+    let score = dataJson2.mws_total + dataJson3.mws_total + JSON.parse(dataJson5.m_score)
+    console.log('score',score)
+    let safetyScore = '';
+    if (score >= 80) {
+      safetyScore = 'High';
+    } else if (score >= 70 && score < 80) {
+      safetyScore = 'Good';
+    } else if (score >= 60 && score < 70) {
+      safetyScore = 'Moderate';
+    } else if (score >= 50 && score < 60) {
+      safetyScore = 'Average';
+    } else {
+      safetyScore = 'Poor';
+    }
     // return null;
     // console.log(dataJson2.mws_total);
     const document = new Document({
@@ -135,7 +151,7 @@ export class DocumentCreator2 {
                     new TableCell({
                       children: [
                         new Paragraph({
-                          text: '123',
+                          text: dataJson4.loanNo,
                           heading: HeadingLevel.HEADING_1,
                         }),
                       ],
@@ -151,7 +167,7 @@ export class DocumentCreator2 {
                     new TableCell({
                       children: [
                         new Paragraph({
-                          text: '10.12.2022',
+                          text: dataJson4.loandate,
                           heading: HeadingLevel.HEADING_1,
                         }),
                       ],
@@ -2011,7 +2027,8 @@ export class DocumentCreator2 {
                     new TableCell({
                       children: [
                         new Paragraph({
-                          text: JSON.stringify(dataJson2.mws_total),
+                          // text: JSON.stringify(dataJson2.mws_total),
+                          text: '30',
                           heading: HeadingLevel.HEADING_1,
                           alignment:AlignmentType.END
                         }),
@@ -2021,7 +2038,8 @@ export class DocumentCreator2 {
                     new TableCell({
                       children: [
                         new Paragraph({
-                          text: '29',
+                          // text: '29',
+                          text: JSON.stringify(dataJson2.mws_total),
                           heading: HeadingLevel.HEADING_1,
                           alignment:AlignmentType.END
 
@@ -2053,7 +2071,8 @@ export class DocumentCreator2 {
                     new TableCell({
                       children: [
                         new Paragraph({
-                          text: JSON.stringify(dataJson3.mws_total),
+                          // text: JSON.stringify(dataJson3.mws_total),
+                          text: '50',
                           heading: HeadingLevel.HEADING_1,
                           alignment:AlignmentType.END
                           
@@ -2064,7 +2083,8 @@ export class DocumentCreator2 {
                     new TableCell({
                       children: [
                         new Paragraph({
-                          text: '33',
+                          // text: '33',
+                          text: JSON.stringify(dataJson3.mws_total),
                           heading: HeadingLevel.HEADING_1,
                           alignment:AlignmentType.END
                         }),
@@ -2107,7 +2127,8 @@ export class DocumentCreator2 {
                     new TableCell({
                       children: [
                         new Paragraph({
-                          text: '13',
+                          // text: '13',
+                          text: (dataJson5.m_score),
                           heading: HeadingLevel.HEADING_1,
                           alignment:AlignmentType.END
 
@@ -2151,7 +2172,8 @@ export class DocumentCreator2 {
                     new TableCell({
                       children: [
                         new Paragraph({
-                          text: '75',
+                          // text: '75',
+                          text: (dataJson5.total2),
                           heading: HeadingLevel.HEADING_1,
                           alignment:AlignmentType.END
 
@@ -2184,7 +2206,7 @@ export class DocumentCreator2 {
                     new TableCell({
                       children: [
                         new Paragraph({
-                          text: 'Good',
+                          text: (safetyScore),
                           heading: HeadingLevel.HEADING_1,
                           alignment: AlignmentType.CENTER,
                         }),

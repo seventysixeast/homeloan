@@ -20,6 +20,16 @@ export class LoginComponent {
   username = '';
   password = '';
 
+  logedInUser: any;
+
+  ngOnInit(): void {
+    this.logedInUser = this.ds.userLoggedIn()
+    // console.log('this.logedInUser', this.logedInUser)
+    if(this.logedInUser){
+      this.router.navigateByUrl('retailloan-products');
+    }
+  }
+
   handleLoginSubmit() {
     this.spinner.show();
     let data = new FormData();
@@ -65,7 +75,9 @@ export class LoginComponent {
         // users
         // this.router.navigateByUrl('/users');
         // this.router.navigateByUrl('/dashboard');
-        this.router.navigateByUrl('/retailloan');
+        // this.router.navigateByUrl('/retailloan');
+        // this.router.navigateByUrl('/retailloan-products');
+        window.location.href = 'retailloan-products';
       } else if(response == "username not found"){
         Swal.fire({
           position: 'top-end',

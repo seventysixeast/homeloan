@@ -155,7 +155,7 @@ export class ScoreComponent implements OnInit {
   updateTotal() {
     this.total_score_end2 =
       this.mws_total_old + this.mws_total + JSON.parse(this.m_score);
-    console.log(this.mws_total_old, this.mws_total, this.m_score);
+    // console.log(this.mws_total_old, this.mws_total, this.m_score);
     this.getSeaftySorce();
   }
 
@@ -214,7 +214,7 @@ export class ScoreComponent implements OnInit {
           timer: 1500,
         });
         this.goNext();
-        console.log(response);
+        // console.log(response);
       });
     }else if(this.logedInUser.type == "Admin"){
       data.append('ref_id', this.openId);
@@ -229,7 +229,7 @@ export class ScoreComponent implements OnInit {
           timer: 1500,
         });
         this.goNext();
-        console.log(response);
+        // console.log(response);
       });
     }
 

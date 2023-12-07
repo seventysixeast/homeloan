@@ -100,7 +100,7 @@ export class AddInfoComponent implements OnInit {
       0
     );
     this.EMI = Math.round(result);
-    console.log(this.EMI);
+    // console.log(this.EMI);
     // this.IIR1 = this.EMI1 / this.c_emi;
     // this.IIR1 = this.IIR1.toFixed(2);
     // this.IIR2 = this.EMI2 / this.c_emi;

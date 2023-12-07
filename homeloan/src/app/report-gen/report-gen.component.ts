@@ -109,7 +109,7 @@ export class ReportGenComponent implements OnInit {
       if (response != null) {
         this.status = response[0].status;
         this.userId = response[0].userId;
-        console.log('this.status',this.status)
+        // console.log('this.status',this.status)
         this.logedInUser = this.ds.userLoggedIn()
         let checkView = localStorage.getItem("viewOnly")
         if(checkView === 'true'){
@@ -200,11 +200,11 @@ export class ReportGenComponent implements OnInit {
         data.append('file', file);
 
         this.ds.submitAppData(data).subscribe((response: any) => {
-            console.log(response);
+            // console.log(response);
 
             // Handle the response message
             if (response.success) {
-                console.log("File saved successfully");
+                // console.log("File saved successfully");
                 this.getPdfFiles();
                 Swal.fire({
                      position: 'top-end',
@@ -257,7 +257,7 @@ export class ReportGenComponent implements OnInit {
   
 
   showImg(data: any) {
-    console.log(data.filename);
+    // console.log(data.filename);
     this.showImageLink = this.ds.mediaUrl + data.filename;
   }
 
@@ -291,8 +291,8 @@ export class ReportGenComponent implements OnInit {
       // const documentCreator = new DocumentCreator();
       // console.log('response',response)
       // response.mediaUrl = this.ds.mediaUrl;
-      console.log('response',response)
-      console.log('this.ds.mediaUrl + response.app_data.a1_photo',this.ds.mediaUrl + response.app_data.a1_photo)
+      // console.log('response',response)
+      // console.log('this.ds.mediaUrl + response.app_data.a1_photo',this.ds.mediaUrl + response.app_data.a1_photo)
       let url1 = this.ds.mediaUrl + response.app_data.a1_photo
       let url2 = this.ds.mediaUrl + response.app_data.a2_photo
       try {
@@ -330,11 +330,11 @@ export class ReportGenComponent implements OnInit {
         // });
         // "https://raw.githubusercontent.com/dolanmiu/docx/master/demo/images/cat.jpg"
         const blob1 = await fetch(
-          "https://raw.githubusercontent.com/dolanmiu/docx/master/demo/images/cat.jpg"
+          url1
         ).then(r => 
           (r.blob())
         ); 
-        console.log('blob1',blob1)
+        // console.log('blob1',blob1)
         if(blob1.size > 0){
           this.imageBlob1 = blob1
         }
@@ -344,7 +344,7 @@ export class ReportGenComponent implements OnInit {
         ).then(r => 
           (r.blob())
         ); 
-        console.log('blob2',blob2)
+        // console.log('blob2',blob2)
         if(blob2.size > 0){
           this.imageBlob2 = blob2
         }

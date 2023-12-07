@@ -58,7 +58,7 @@ export class ClientVistComponent implements OnInit {
     });
 
     this.logedInUser = this.ds.userLoggedIn()
-    console.log('this.logedInUser',this.logedInUser)
+    // console.log('this.logedInUser',this.logedInUser)
     let checkView = localStorage.getItem("viewOnly")
     if(checkView === 'true'){
       this.viewOnly =  true;
@@ -98,7 +98,7 @@ export class ClientVistComponent implements OnInit {
 
     this.ds.submitAppData(data2).subscribe((response2: any) => {
       if (response2 != null) {
-        console.log(response2.guar_data);
+        // console.log(response2.guar_data);
         this.app_1 = response2.app_data.a1_name;
         this.app_2 = response2.app_data.a2_name;
         this.gur_1 = response2.guar_data.a1_name;
@@ -158,7 +158,7 @@ export class ClientVistComponent implements OnInit {
         timer: 1500,
       });
       this.goNext();
-      console.log(response);
+      // console.log(response);
     });
   }
 
@@ -168,7 +168,7 @@ export class ClientVistComponent implements OnInit {
   }
 
   updateTotal() {
-    console.log('ok');
+    // console.log('ok');
   }
 
   goBack() {

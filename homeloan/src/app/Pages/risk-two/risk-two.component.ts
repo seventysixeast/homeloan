@@ -547,7 +547,7 @@ export class RiskTwoComponent implements OnInit {
       f3: this.f3,
       f4: this.f4
     };
-    console.log(JsonData);
+    // console.log(JsonData);
     let data: any = new FormData();
 
     data.append('action', 'submit-risk-2');
@@ -566,7 +566,7 @@ export class RiskTwoComponent implements OnInit {
         timer: 1500,
       });
       this.goNext();
-      console.log(response);
+      // console.log(response);
     });
   }
 

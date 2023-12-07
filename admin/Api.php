@@ -51,7 +51,7 @@ if($_POST['action'] == 'submit-app-data')
 
         $target_dir = "uploads/";
         // $target_file_one = time().basename($_FILES["a1_photo"]["name"]);
-        $target_file_one = time().basename($_FILES["a1_photo"]["type"]);
+        $target_file_one = time().'.'.basename($_FILES["a1_photo"]["type"]);
 
 
         move_uploaded_file($_FILES["a1_photo"]["tmp_name"], $target_dir .$target_file_one);
@@ -61,7 +61,7 @@ if($_POST['action'] == 'submit-app-data')
 
     if($_FILES && $_FILES["a2_photo"] != ''){        
         $target_dir = "uploads/";
-        $target_file_two = time().basename($_FILES["a2_photo"]["type"]);
+        $target_file_two = time().'.'.basename($_FILES["a2_photo"]["type"]);
         move_uploaded_file($_FILES["a2_photo"]["tmp_name"], $target_dir .$target_file_two);   
     }
 
@@ -159,13 +159,15 @@ if($_POST['action'] == 'submit-guar-data')
 
      if($_FILES["a1_photo"] != ''){
         $target_dir = "uploads/";
-        $target_file_one = time().basename($_FILES["a1_photo"]["name"]);
+        // $target_file_one = time().basename($_FILES["a1_photo"]["name"]);
+        $target_file_one = time().'.'.basename($_FILES["a1_photo"]["type"]);
         move_uploaded_file($_FILES["a1_photo"]["tmp_name"], $target_dir .$target_file_one);
     }
 
     if($_FILES["a2_photo"] != ''){        
         $target_dir = "uploads/";
-        $target_file_two = time().basename($_FILES["a2_photo"]["name"]);
+        // $target_file_two = time().basename($_FILES["a2_photo"]["name"]);
+        $target_file_two = time().'.'.basename($_FILES["a2_photo"]["type"]);
         move_uploaded_file($_FILES["a2_photo"]["tmp_name"], $target_dir .$target_file_two);   
     }
 
@@ -515,7 +517,8 @@ if($_POST['action'] == 'saveMediaFile'){
     ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);
     $target_dir = "uploads/";
-    $target_file = time().basename($_FILES["file"]["name"]);
+    // $target_file = time().basename($_FILES["file"]["name"]);
+    $target_file = time().'.'.basename($_FILES["file"]["type"]);
     $result = move_uploaded_file($_FILES["file"]["tmp_name"], $target_dir .$target_file);
 
     $ref_id =  $_POST['ref_id'];
@@ -548,7 +551,9 @@ if ($_POST['action'] == 'savePdfFile') {
     $response = array("success" => false, "message" => "");
     $target_dir = "uploads/";
 
-    $target_file = time() . basename($_FILES["file"]["name"]);
+    // $target_file = time() . basename($_FILES["file"]["name"]);
+
+    $target_file = time().'.'.basename($_FILES["file"]["type"]);
 
     if (move_uploaded_file($_FILES["file"]["tmp_name"], $target_dir . $target_file)) {
         $ref_id = $_POST['ref_id'];
@@ -657,6 +662,10 @@ if($_POST['action'] == 'getDoc1Data'){
     $res_header = mysqli_query($conn, "SELECT * FROM addinfo Where ref_id=".$_POST['id']);
     while ($row_header = mysqli_fetch_assoc($res_header)) {
         $response['addinfo'] = $row_header;
+    }
+    $res_header = mysqli_query($conn, "SELECT * FROM score Where ref_id=".$_POST['id']);
+    while ($row_header = mysqli_fetch_assoc($res_header)) {
+        $response['score'] = $row_header;
     }
     echo json_encode($response);
 }
@@ -807,7 +816,8 @@ if($_POST['action'] == 'addUser'){
     // Check if a file was uploaded
     if (isset($_FILES['photo']) && $_FILES['photo']['error'] == UPLOAD_ERR_OK) {
         $target_dir = "uploads/";
-        $target_file = time() . basename($_FILES["photo"]["name"]);
+        // $target_file = time() . basename($_FILES["photo"]["name"]);
+        $target_file = time().'.'.basename($_FILES["photo"]["type"]);
 
         // Move the uploaded file to the target directory
         $result = move_uploaded_file($_FILES["photo"]["tmp_name"], $target_dir . $target_file);
@@ -840,7 +850,9 @@ if ($_POST['action'] == 'updateUser') {
     // Check if a file was uploaded
     if (isset($_FILES['photo']) && $_FILES['photo']['error'] == UPLOAD_ERR_OK) {
         $target_dir = "uploads/";
-        $target_file = time() . basename($_FILES["photo"]["name"]);
+        // $target_file = time() . basename($_FILES["photo"]["name"]);
+        $target_file = time().'.'.basename($_FILES["photo"]["type"]);
+        
 
         // Move the uploaded file to the target directory
         $result = move_uploaded_file($_FILES["photo"]["tmp_name"], $target_dir . $target_file);
