@@ -62,6 +62,9 @@ export class ReportGenComponent implements OnInit {
   showStatusButton =  false;
   imageBlob1: any = '';
   imageBlob2: any = '';
+  imageBlob3: any = '';
+  imageBlob4: any = '';
+  imageMediaBlob: any = [];
 
   ngOnInit(): void {
     this.route.params.subscribe((params: any) => {
@@ -291,10 +294,13 @@ export class ReportGenComponent implements OnInit {
       // const documentCreator = new DocumentCreator();
       // console.log('response',response)
       // response.mediaUrl = this.ds.mediaUrl;
-      // console.log('response',response)
+      console.log('response',response)
       // console.log('this.ds.mediaUrl + response.app_data.a1_photo',this.ds.mediaUrl + response.app_data.a1_photo)
       let url1 = this.ds.mediaUrl + response.app_data.a1_photo
       let url2 = this.ds.mediaUrl + response.app_data.a2_photo
+      let url3 = this.ds.mediaUrl + response.guar_data.a1_photo
+      let url4 = this.ds.mediaUrl + response.guar_data.a2_photo
+      let mediaUrls = response.media
       try {
         // let blob1 = await fetch(
         //   url1, { mode: 'no-cors'}
@@ -348,6 +354,42 @@ export class ReportGenComponent implements OnInit {
         if(blob2.size > 0){
           this.imageBlob2 = blob2
         }
+
+        const blob3 = await fetch(
+          url3
+        ).then(r => 
+          (r.blob())
+        ); 
+        // console.log('blob2',blob2)
+        if(blob3.size > 0){
+          this.imageBlob3 = blob3
+        }
+
+        const blob4 = await fetch(
+          url4
+        ).then(r => 
+          (r.blob())
+        ); 
+        // console.log('blob2',blob2)
+        if(blob4.size > 0){
+          this.imageBlob4 = blob4
+        }
+
+        for(let i = 0; i < mediaUrls.length; i++){
+          let medUrl = this.ds.mediaUrl + mediaUrls[i].filename
+          let blobMedia = await fetch(
+            medUrl
+          ).then(r => 
+            (r.blob())
+          ); 
+          // console.log('blob2',blob2)
+          if(blobMedia.size > 0){
+            // this.imageBlob4 = blob4
+            this.imageMediaBlob.push({filename: blobMedia, comment: mediaUrls[i].comment})
+          }
+        }
+
+
       }catch (error) {
         console.error('Error:', error);
       }
@@ -399,7 +441,7 @@ export class ReportGenComponent implements OnInit {
 
     this.ds.submitAppData(data).subscribe((response: any) => {
       const documentCreator = new DocumentCreator2();
-      const doc = documentCreator.create(response);
+      const doc = documentCreator.create(response, this.imageBlob3, this.imageBlob4, this.imageMediaBlob);
 
       Packer.toBlob(doc).then((blob) => {
         this.saveAsBlob(blob, 'Loan_Proposal.docx');

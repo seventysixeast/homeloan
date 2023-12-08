@@ -34,7 +34,7 @@ export class HeaderComponent implements OnInit {
   logout(){
     localStorage.clear()
     // this.router.navigateByUrl('/login');
-    window.location.href = "/login"
+    window.location.href = "/retailloan/login"
 
   }
 

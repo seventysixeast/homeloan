@@ -627,6 +627,9 @@ if($_POST['action'] == 'deleteMediaFile'){
 }
 
 if($_POST['action'] == 'getDoc1Data'){
+    // ini_set('display_errors', 1);
+    // ini_set('display_startup_errors', 1);
+    // error_reporting(E_ALL);
     $res_header = mysqli_query($conn, "SELECT * FROM loan_request Where ref_id=".$_POST['id']);
     while ($row_header = mysqli_fetch_assoc($res_header)) {
         $response['loan_request'] = $row_header;
@@ -666,6 +669,12 @@ if($_POST['action'] == 'getDoc1Data'){
     $res_header = mysqli_query($conn, "SELECT * FROM score Where ref_id=".$_POST['id']);
     while ($row_header = mysqli_fetch_assoc($res_header)) {
         $response['score'] = $row_header;
+    }
+
+    $ref_id = $_POST['id'];
+    $res_header = mysqli_query($conn, "SELECT * FROM media WHERE ref_id = '$ref_id' AND type = '1'");
+    while ($row_header = mysqli_fetch_assoc($res_header)) {
+        $response['media'][] = $row_header;
     }
     echo json_encode($response);
 }

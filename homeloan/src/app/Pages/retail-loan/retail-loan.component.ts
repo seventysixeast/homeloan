@@ -17,7 +17,8 @@ export class RetailLoanComponent {
   ) {}
 
   gotodashboard(){
-    window.location.href = "/homeloan/dashboard"
+    // window.location.href = "/homeloan/dashboard"
+    window.location.href = "/retailloan/homeloan/dashboard"
   }
 
 }

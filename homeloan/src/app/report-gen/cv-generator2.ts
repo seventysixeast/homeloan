@@ -8,10 +8,11 @@ import {
   WidthType,
   AlignmentType,
   HeadingLevel,
+  ImageRun
 } from 'docx';
 
 export class DocumentCreator2 {
-  public create(data: any): Document {
+  public create(data: any, imageBlob3: any, imageBlob4: any, imageMediaBlob: any): Document {
     let dataJson1 = JSON.parse(data.loan_request.dataJson);
     let dataJson2 = JSON.parse(data.risk_one.JsonData);
     let dataJson3 = JSON.parse(data.risk_two.JsonData);
@@ -33,6 +34,253 @@ export class DocumentCreator2 {
     } else {
       safetyScore = 'Poor';
     }
+
+    let imageObj3:any = ''
+    let imageObj4:any = ''
+    let imageMedia:any = [];
+    let imageMediaText:any = [];
+    // 1014400
+    if(imageBlob3 != ''){
+      imageObj3 = new ImageRun({
+        data: imageBlob3,
+        transformation: {
+          width: 200,
+          height: 100
+        },
+        // floating: {
+        //   horizontalPosition: {
+        //       offset: 614400, // relative: HorizontalPositionRelativeFrom.PAGE by default
+        //   },
+        //   verticalPosition: {
+        //       offset: 100000, // relative: VerticalPositionRelativeFrom.PAGE by default
+        //   },
+        //   // margins: {
+        //   //   top: 1010000,
+        //   //   bottom: 1014400,
+        //   // },
+        // },
+      })
+    }else{
+      imageObj3 = new Paragraph({
+        text: 'Photograph',
+        heading: HeadingLevel.HEADING_1,
+        alignment: AlignmentType.CENTER,
+      })
+    }
+
+    if(imageBlob4 != ''){
+      imageObj4 = new ImageRun({
+        data: imageBlob4,
+        transformation: {
+          width: 200,
+          height: 100
+        }
+      })
+    }else{
+      imageObj4 = new Paragraph({
+        text: 'Photograph',
+        heading: HeadingLevel.HEADING_1,
+        alignment: AlignmentType.CENTER,
+      })
+    }
+
+    let netArray = []
+
+    let firstRow = new TableRow({
+      children: [
+        new TableCell({
+          children: [
+            new Paragraph({
+              text: 'PHOTOS',
+              heading: HeadingLevel.HEADING_3,
+              alignment: AlignmentType.CENTER,
+            }),
+          ],
+          columnSpan: 6,
+          shading: {
+            fill: 'D9E2F3',
+          },
+        }),
+      ],
+    })
+
+    // imageMedia.push(firstRow)
+
+    // for(var i =0; i < imageMediaBlob.length; i++){
+
+      // new TableRow({
+      //   children: imageMedia,
+      // })
+      // if(i != 0 && i%2 != 0){
+      //   netArray = []
+      // }
+
+    //   let arr =  new TableCell({
+    //     children: [
+    //       new Paragraph({
+    //         children: [
+    //           new ImageRun({
+    //             data: imageMediaBlob[i].filename,
+    //             transformation: {
+    //               width: 200,
+    //               height: 100
+    //             }
+    //           })
+    //         ]
+    //       }), 
+    //       new Paragraph({
+    //         text: imageMediaBlob[i].comment,
+    //         heading: HeadingLevel.HEADING_1,
+    //         alignment: AlignmentType.CENTER,
+    //       })
+    //     ],
+    //     columnSpan: 6,
+    //   })
+
+    //   netArray.push(arr)
+    //   if(i != 0 && i%2 != 0){
+    //     let row1 = new TableRow({
+    //       children: netArray,
+    //     })
+    //     imageMedia.push(row1)
+    //     netArray = []
+    //   }
+    // }
+
+    for(var i =0; i < 4; i++){
+
+      // new TableRow({
+      //   children: imageMedia,
+      // })
+      // if(i != 0 && i%2 != 0){
+      //   netArray = []
+      // }
+
+      let arr:any;
+      let arr1:any;
+      if(imageMediaBlob[i]){
+
+        arr = [
+          new Paragraph({
+              children: [
+                new ImageRun({
+                  data: imageMediaBlob[i].filename,
+                  transformation: {
+                    width: 200,
+                    height: 100
+                  }
+                })
+              ]
+            })
+        ]
+
+        arr1 = [
+            new Paragraph({
+              text: imageMediaBlob[i].comment,
+              heading: HeadingLevel.HEADING_1,
+              // alignment: AlignmentType.CENTER,
+            })
+        ]
+      }else{
+        arr = [
+          new Paragraph({
+              children: [
+                new Paragraph({
+                  text: 'Photograph',
+                  heading: HeadingLevel.HEADING_1,
+                  alignment: AlignmentType.CENTER,
+                })
+              ]
+            }), 
+            
+        ]
+
+        arr1 = [
+          new Paragraph({
+            text: '',
+            heading: HeadingLevel.HEADING_1,
+            alignment: AlignmentType.CENTER,
+          })
+      ]
+      }
+
+
+      // let arr =  new TableCell({
+      //   children: [
+      //     new Paragraph({
+      //       children: [
+      //         new ImageRun({
+      //           data: imageMediaBlob[i].filename,
+      //           transformation: {
+      //             width: 200,
+      //             height: 100
+      //           }
+      //         })
+      //       ]
+      //     }), 
+      //     new Paragraph({
+      //       text: imageMediaBlob[i].comment,
+      //       heading: HeadingLevel.HEADING_1,
+      //       alignment: AlignmentType.CENTER,
+      //     })
+      //   ],
+      //   columnSpan: 6,
+      // })
+
+      imageMedia.push(arr)
+      imageMediaText.push(arr1)
+      // if(i != 0 && i%2 != 0){
+      //   let row1 = new TableRow({
+      //     children: netArray,
+      //   })
+      //   imageMedia.push(row1)
+      //   netArray = []
+      // }
+    }
+
+    console.log('imageMedia',imageMedia)
+
+    // imageMedia.push(new TableRow({
+    //   children: [
+    //     new TableCell({
+    //       children: [
+    //         new Paragraph({
+    //           children: [
+    //             imageObj3
+    //           ]
+    //         }),
+    //         new Paragraph({
+    //           text: 'Guarantor',
+    //           heading: HeadingLevel.HEADING_1,
+    //           alignment: AlignmentType.CENTER,
+    //         })
+    //       ]
+    //     }),
+    //     new TableCell({
+    //       children: [
+    //         new Paragraph({
+    //           children: [
+    //             imageObj4
+    //           ]
+    //         }),
+    //         new Paragraph({
+    //           text: 'Guarantor',
+    //           heading: HeadingLevel.HEADING_1,
+    //           alignment: AlignmentType.CENTER,
+    //         })
+    //       ],
+    //     }),
+    //   ],
+    // }))
+
+    // let netArray = []
+
+    // for(var i =0; i < imageMedia.length; i++){
+    //   new TableRow({
+    //     children: imageMedia,
+    //   })
+    // }
+
     // return null;
     // console.log(dataJson2.mws_total);
     const document = new Document({
@@ -3156,6 +3404,156 @@ export class DocumentCreator2 {
                         }),
                       ],
                       columnSpan: 2,
+                    }),
+                  ],
+                }),
+              ],
+              indent: {
+                size: -1000,
+                type: WidthType.DXA,
+              },
+              width: { size: 122, type: WidthType.PERCENTAGE },
+            }),
+            new Paragraph({
+              children: [new TextRun('')],
+            }),
+            // new Table({
+            //   rows: imageMedia,
+            //   indent: {
+            //     size: -1000,
+            //     type: WidthType.DXA,
+            //   },
+            //   width: { size: 122, type: WidthType.PERCENTAGE },
+            // }),
+            // new Paragraph({
+            //   children: [new TextRun('')],
+            // }),
+            new Table({
+              rows: [
+                new TableRow({
+                  children: [
+                    new TableCell({
+                      children: [
+                        new Paragraph({
+                          text: 'PHOTOS',
+                          heading: HeadingLevel.HEADING_3,
+                        }),
+                      ],
+                      columnSpan: 6,
+                      shading: {
+                        fill: 'D9E2F3',
+                      },
+                    }),
+                  ],
+                }),
+
+
+                new TableRow({
+                  children: [
+                    new TableCell({
+                      children: imageMedia[0]
+                    }),
+                    new TableCell({
+                      children: imageMedia[1],
+                    }),
+                  ],
+                }),
+
+                new TableRow({
+                  children: [
+                    new TableCell({
+                      children: imageMediaText[0]
+                    }),
+                    new TableCell({
+                      children: imageMediaText[1],
+                    }),
+                  ],
+                }),
+
+                new TableRow({
+                  children: [
+                    new TableCell({
+                      children: imageMedia[2]
+                    }),
+                    new TableCell({
+                      children: imageMedia[3],
+                    }),
+                  ],
+                }),
+
+                new TableRow({
+                  children: [
+                    new TableCell({
+                      children: imageMediaText[2]
+                    }),
+                    new TableCell({
+                      children: imageMediaText[3],
+                    }),
+                  ],
+                }),
+
+
+                new TableRow({
+                  children: [
+                    new TableCell({
+                      children: [
+                        new Paragraph({
+                          children: [
+                            imageObj3
+                          ]
+                        }),
+                        // new Paragraph({
+                        //   text: 'Guarantor',
+                        //   heading: HeadingLevel.HEADING_1,
+                        //   alignment: AlignmentType.CENTER,
+                        // })
+                      ]
+                    }),
+                    new TableCell({
+                      children: [
+                        new Paragraph({
+                          children: [
+                            imageObj4
+                          ]
+                        }),
+                        // new Paragraph({
+                        //   text: 'Guarantor',
+                        //   heading: HeadingLevel.HEADING_1,
+                        // })
+                      ],
+                    }),
+                  ]
+                }),
+
+                new TableRow({
+                  children: [
+                    new TableCell({
+                      children: [
+                        // new Paragraph({
+                        //   children: [
+                        //     imageObj3
+                        //   ]
+                        // }),
+                        new Paragraph({
+                          text: 'Guarantor',
+                          heading: HeadingLevel.HEADING_1,
+                          // alignment: AlignmentType.CENTER,
+                        })
+                      ]
+                    }),
+                    new TableCell({
+                      children: [
+                        // new Paragraph({
+                        //   children: [
+                        //     imageObj4
+                        //   ]
+                        // }),
+                        new Paragraph({
+                          text: 'Guarantor',
+                          heading: HeadingLevel.HEADING_1,
+                          // alignment: AlignmentType.CENTER,
+                        })
+                      ],
                     }),
                   ],
                 }),
