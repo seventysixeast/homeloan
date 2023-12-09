@@ -11,7 +11,7 @@ export class DataService {
   constructor(private http: HttpClient) {
     // let user = JSON.parse(atob(localStorage.getItem('admin')));
     // this.loggedInUser.next(user)
-  } 
+  }
 
   // baseurl = 'https://www.acramm.com/homeloan/admin/Api.php';
   // mediaUrl = 'https://www.acramm.com/homeloan/admin/uploads/';
@@ -22,34 +22,37 @@ export class DataService {
 
   // console.log()
 
-  baseurl = 'http://localhost/20/homeloan/admin/Api.php';
-  mediaUrl = 'http://localhost/20/homeloan/admin/uploads/';
+  // baseurl = 'http://localhost/20/homeloan/admin/Api.php';
+  // mediaUrl = 'http://localhost/20/homeloan/admin/uploads/';
+
+  baseurl = 'http://localhost/homeloan/admin/Api.php';
+  mediaUrl = 'http://localhost/homeloan/admin/uploads/';
 
   // baseurl = 'https://76east.com/homeloan_server/admin/Api.php';
   // mediaUrl = 'https://76east.com/homeloan_server/admin/uploads/';
 
 
-  userLoggedIn(){
+  userLoggedIn() {
     let user: any;
-    if(localStorage.getItem('admin')){
+    if (localStorage.getItem('admin')) {
       user = localStorage.getItem('admin')
-      console.log('user',atob(user))
+      console.log('user', atob(user))
       // localStorage.setItem('admin',response)
-    }else if(localStorage.getItem('creditApprover')){
+    } else if (localStorage.getItem('creditApprover')) {
       user = localStorage.getItem('creditApprover')
       // user = JSON.parse(atob(user));
       // return user;
 
-    }else if(localStorage.getItem('creditAnalyst')){
+    } else if (localStorage.getItem('creditAnalyst')) {
       user = localStorage.getItem('creditAnalyst')
-    }else if(localStorage.getItem('creditUnderwriter')){
+    } else if (localStorage.getItem('creditUnderwriter')) {
       user = localStorage.getItem('creditUnderwriter')
     }
     user = JSON.parse(atob(user));
     return user;
   }
 
-  userLogin(data: any){
+  userLogin(data: any) {
     this.loggedInUser.next(data)
   }
 
@@ -61,24 +64,24 @@ export class DataService {
     return this.http.post(this.baseurl, data);
   }
 
-  getUser(data: any){
+  getUser(data: any) {
     return this.http.post(this.baseurl, data);
   }
-  addStatus(logedInUser: any, userId: any, status: any){
+  addStatus(logedInUser: any, userId: any, status: any) {
     // let data = new FormData();
-    console.log('logedInUser.type',logedInUser.type)
-    if(logedInUser.type == "Credit-Analyst"){
-      return ("Processing by Credit Analyst("+logedInUser.f_name +")");
-    }else if(logedInUser.type == "Credit-Underwriter"){
-      return ("Reveiwing by Credit Underwriter("+logedInUser.f_name  +")");
-    }else if(logedInUser.type == "Credit-Approver"){
-      return  "Reveiwing by Credit Approver("+logedInUser.f_name +")";
-    }else if(logedInUser.type == "Admin" && (status.indexOf("Reveiwing by Admin") > -1)){
+    console.log('logedInUser.type', logedInUser.type)
+    if (logedInUser.type == "Credit-Analyst") {
+      return ("Processing by Credit Analyst(" + logedInUser.f_name + ")");
+    } else if (logedInUser.type == "Credit-Underwriter") {
+      return ("Reveiwing by Credit Underwriter(" + logedInUser.f_name + ")");
+    } else if (logedInUser.type == "Credit-Approver") {
+      return "Reveiwing by Credit Approver(" + logedInUser.f_name + ")";
+    } else if (logedInUser.type == "Admin" && (status.indexOf("Reveiwing by Admin") > -1)) {
       return "Reveiwing by Admin";
-    }else if(logedInUser.type == "Admin" && ((status.indexOf("Processing by Admin") > -1))){
+    } else if (logedInUser.type == "Admin" && ((status.indexOf("Processing by Admin") > -1))) {
       return "Processing by Admin";
     }
-    
+
     // else if(logedInUser.type == "Admin" && userId != '' && parseInt(logedInUser.id) != parseInt(userId)){
     //   return "Reveiwing by Admin";
     // }else if(logedInUser.type == "Admin" && userId == ''){

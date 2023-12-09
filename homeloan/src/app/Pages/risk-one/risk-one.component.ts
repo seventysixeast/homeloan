@@ -18,7 +18,7 @@ export class RiskOneComponent implements OnInit {
     private router: Router,
     private spiner: NgxSpinnerService,
     private sideNav: SideNavComponent
-  ) {}
+  ) { }
 
   openId: any = 0;
 
@@ -73,7 +73,7 @@ export class RiskOneComponent implements OnInit {
   f2 = '';
   f3 = '';
 
-  logedInUser : any;
+  logedInUser: any;
   userId = "";
   status = "";
   viewOnly: any = false;
@@ -81,21 +81,22 @@ export class RiskOneComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe((params: any) => {
-      if(params.id != null){
-        localStorage.setItem("applicant1Id",params.id)
+      if (params.id != null) {
+        localStorage.setItem("applicant1Id", params.id)
         this.openId = params.id;
         if (this.openId != 0) {
           this.getSingleData();
           this.getSingleAppData()
+          this.getNetWorth()
         }
       }
     });
     this.logedInUser = this.ds.userLoggedIn()
     let checkView = localStorage.getItem("viewOnly")
-    if(checkView === 'true'){
-      this.viewOnly =  true;
+    if (checkView === 'true') {
+      this.viewOnly = true;
       this.nextButtonText = "Next"
-    }else{
+    } else {
       this.nextButtonText = "Save And Next"
     }
   }
@@ -107,7 +108,7 @@ export class RiskOneComponent implements OnInit {
     this.ds.submitAppData(data).subscribe((response: any) => {
       let newWorth = response[response.length - 1];
       let loanAmountRatio = newWorth.loanAmountRatio;
-
+      console.log('loanAmountRatio', loanAmountRatio)
       if (loanAmountRatio >= 1.5) {
         this.handleUpdate(2, 3, 1);
       }
@@ -127,7 +128,7 @@ export class RiskOneComponent implements OnInit {
         this.handleUpdate(0.5, 1, 4);
       }
 
-      
+
     });
   }
 
@@ -477,8 +478,13 @@ export class RiskOneComponent implements OnInit {
   }
 
   handleSubmit() {
-    if(this.viewOnly){
+    if (this.viewOnly) {
       this.goNext();
+      return;
+    }
+
+    if (this.a1 == "" && this.a2 == "" && this.a3 == "" && this.a4 == "" && this.a5 == "" && this.a6 == "" && this.a7 == "" && this.a8 == "" && this.a9 == "") {
+      alert("Please Select any option of Applicant's Age")
       return;
     }
     this.spiner.show();
