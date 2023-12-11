@@ -18,10 +18,10 @@ export class DocumentCreator2 {
     let dataJson3 = JSON.parse(data.risk_two.JsonData);
     let dataJson4 = JSON.parse(data.addinfo.JsonData);
     let dataJson5 = (data.score);
-    console.log('dataJson4',dataJson4)
+    console.log('dataJson4', dataJson4)
 
     let score = dataJson2.mws_total + dataJson3.mws_total + JSON.parse(dataJson5.m_score)
-    console.log('score',score)
+    console.log('score', score)
     let safetyScore = '';
     if (score >= 80) {
       safetyScore = 'High';
@@ -35,12 +35,12 @@ export class DocumentCreator2 {
       safetyScore = 'Poor';
     }
 
-    let imageObj3:any = ''
-    let imageObj4:any = ''
-    let imageMedia:any = [];
-    let imageMediaText:any = [];
+    let imageObj3: any = ''
+    let imageObj4: any = ''
+    let imageMedia: any = [];
+    let imageMediaText: any = [];
     // 1014400
-    if(imageBlob3 != ''){
+    if (imageBlob3 != '') {
       imageObj3 = new ImageRun({
         data: imageBlob3,
         transformation: {
@@ -60,15 +60,15 @@ export class DocumentCreator2 {
         //   // },
         // },
       })
-    }else{
-      imageObj3 = new Paragraph({
-        text: 'Photograph',
-        heading: HeadingLevel.HEADING_1,
-        alignment: AlignmentType.CENTER,
-      })
+    } else {
+      // imageObj3 = new Paragraph({
+      //   text: 'Photograph',
+      //   heading: HeadingLevel.HEADING_1,
+      //   alignment: AlignmentType.CENTER,
+      // })
     }
 
-    if(imageBlob4 != ''){
+    if (imageBlob4 != '') {
       imageObj4 = new ImageRun({
         data: imageBlob4,
         transformation: {
@@ -76,12 +76,12 @@ export class DocumentCreator2 {
           height: 100
         }
       })
-    }else{
-      imageObj4 = new Paragraph({
-        text: 'Photograph',
-        heading: HeadingLevel.HEADING_1,
-        alignment: AlignmentType.CENTER,
-      })
+    } else {
+      // imageObj4 = new Paragraph({
+      //   text: 'Photograph',
+      //   heading: HeadingLevel.HEADING_1,
+      //   alignment: AlignmentType.CENTER,
+      // })
     }
 
     let netArray = []
@@ -108,12 +108,12 @@ export class DocumentCreator2 {
 
     // for(var i =0; i < imageMediaBlob.length; i++){
 
-      // new TableRow({
-      //   children: imageMedia,
-      // })
-      // if(i != 0 && i%2 != 0){
-      //   netArray = []
-      // }
+    // new TableRow({
+    //   children: imageMedia,
+    // })
+    // if(i != 0 && i%2 != 0){
+    //   netArray = []
+    // }
 
     //   let arr =  new TableCell({
     //     children: [
@@ -147,7 +147,7 @@ export class DocumentCreator2 {
     //   }
     // }
 
-    for(var i =0; i < 4; i++){
+    for (var i = 0; i < 4; i++) {
 
       // new TableRow({
       //   children: imageMedia,
@@ -155,53 +155,61 @@ export class DocumentCreator2 {
       // if(i != 0 && i%2 != 0){
       //   netArray = []
       // }
-
-      let arr:any;
-      let arr1:any;
-      if(imageMediaBlob[i]){
+      console.log('imageMediaBlob[i]', imageMediaBlob[i])
+      let arr: any;
+      let arr1: any;
+      if (typeof imageMediaBlob[i] !== 'undefined') {
 
         arr = [
           new Paragraph({
-              children: [
-                new ImageRun({
-                  data: imageMediaBlob[i].filename,
-                  transformation: {
-                    width: 200,
-                    height: 100
-                  }
-                })
-              ]
-            })
+            children: [
+              new ImageRun({
+                data: imageMediaBlob[i].filename,
+                transformation: {
+                  width: 200,
+                  height: 100
+                }
+              })
+            ]
+          })
         ]
 
         arr1 = [
-            new Paragraph({
-              text: imageMediaBlob[i].comment,
-              heading: HeadingLevel.HEADING_1,
-              // alignment: AlignmentType.CENTER,
-            })
+          new Paragraph({
+            text: imageMediaBlob[i].comment,
+            heading: HeadingLevel.HEADING_1,
+            // alignment: AlignmentType.CENTER,
+          })
         ]
-      }else{
+      } else {
+        // arr = [
+        //   new Paragraph({
+        //     children: [
+        //       new Paragraph({
+        //         text: 'Photograph',
+        //         heading: HeadingLevel.HEADING_1,
+        //         alignment: AlignmentType.CENTER,
+        //       })
+        //     ]
+        //   }),
+
+        // ]
+
         arr = [
           new Paragraph({
-              children: [
-                new Paragraph({
-                  text: 'Photograph',
-                  heading: HeadingLevel.HEADING_1,
-                  alignment: AlignmentType.CENTER,
-                })
-              ]
-            }), 
-            
+            text: '',
+            heading: HeadingLevel.HEADING_1,
+          }),
+
         ]
 
         arr1 = [
           new Paragraph({
             text: '',
             heading: HeadingLevel.HEADING_1,
-            alignment: AlignmentType.CENTER,
+            // alignment: AlignmentType.CENTER,
           })
-      ]
+        ]
       }
 
 
@@ -238,7 +246,7 @@ export class DocumentCreator2 {
       // }
     }
 
-    console.log('imageMedia',imageMedia)
+    console.log('imageMedia', imageMedia)
 
     // imageMedia.push(new TableRow({
     //   children: [
@@ -383,7 +391,7 @@ export class DocumentCreator2 {
                     new TableCell({
                       children: [
                         new Paragraph({
-                          text:  dataJson4.branchName,
+                          text: dataJson4.branchName,
                           heading: HeadingLevel.HEADING_1,
                         }),
                       ],
@@ -1002,7 +1010,7 @@ export class DocumentCreator2 {
                     new TableCell({
                       children: [
                         new Paragraph({
-                          text:dataJson1[0].cost != ''? JSON.stringify(dataJson1[0].cost): dataJson1[0].cost,
+                          text: dataJson1[0].cost != '' ? JSON.stringify(dataJson1[0].cost) : dataJson1[0].cost,
                           heading: HeadingLevel.HEADING_3,
                           alignment: AlignmentType.END,
                         }),
@@ -1043,7 +1051,7 @@ export class DocumentCreator2 {
                     new TableCell({
                       children: [
                         new Paragraph({
-                          text: dataJson1[1].cost != ''? JSON.stringify(dataJson1[1].cost): dataJson1[1].cost ,
+                          text: dataJson1[1].cost != '' ? JSON.stringify(dataJson1[1].cost) : dataJson1[1].cost,
                           heading: HeadingLevel.HEADING_3,
                           alignment: AlignmentType.END,
                         }),
@@ -1084,7 +1092,7 @@ export class DocumentCreator2 {
                     new TableCell({
                       children: [
                         new Paragraph({
-                          text:dataJson1[2].cost != ''? JSON.stringify(dataJson1[2].cost): dataJson1[2].cost,
+                          text: dataJson1[2].cost != '' ? JSON.stringify(dataJson1[2].cost) : dataJson1[2].cost,
                           heading: HeadingLevel.HEADING_3,
                           alignment: AlignmentType.END,
                         }),
@@ -1125,7 +1133,7 @@ export class DocumentCreator2 {
                     new TableCell({
                       children: [
                         new Paragraph({
-                          text: dataJson1[3].cost != ''? JSON.stringify(dataJson1[3].cost): dataJson1[3].cost,
+                          text: dataJson1[3].cost != '' ? JSON.stringify(dataJson1[3].cost) : dataJson1[3].cost,
                           heading: HeadingLevel.HEADING_3,
                           alignment: AlignmentType.END,
                         }),
@@ -1166,7 +1174,7 @@ export class DocumentCreator2 {
                     new TableCell({
                       children: [
                         new Paragraph({
-                          text: dataJson1[4].cost != ''? JSON.stringify(dataJson1[4].cost): dataJson1[4].cost,
+                          text: dataJson1[4].cost != '' ? JSON.stringify(dataJson1[4].cost) : dataJson1[4].cost,
                           heading: HeadingLevel.HEADING_3,
                           alignment: AlignmentType.END,
                         }),
@@ -1207,7 +1215,7 @@ export class DocumentCreator2 {
                     new TableCell({
                       children: [
                         new Paragraph({
-                          text:dataJson1[5].cost != ''? JSON.stringify(dataJson1[5].cost): dataJson1[5].cost,
+                          text: dataJson1[5].cost != '' ? JSON.stringify(dataJson1[5].cost) : dataJson1[5].cost,
                           heading: HeadingLevel.HEADING_3,
                           alignment: AlignmentType.END,
                         }),
@@ -1248,7 +1256,7 @@ export class DocumentCreator2 {
                     new TableCell({
                       children: [
                         new Paragraph({
-                          text:dataJson1[6].cost != ''? JSON.stringify(dataJson1[6].cost): dataJson1[6].cost,
+                          text: dataJson1[6].cost != '' ? JSON.stringify(dataJson1[6].cost) : dataJson1[6].cost,
                           heading: HeadingLevel.HEADING_3,
                           alignment: AlignmentType.END,
                         }),
@@ -1985,7 +1993,7 @@ export class DocumentCreator2 {
                         new Paragraph({
                           text: data.site_visit.mValue,
                           heading: HeadingLevel.HEADING_1,
-                          alignment:AlignmentType.END
+                          alignment: AlignmentType.END
                         }),
                       ],
                       columnSpan: 2,
@@ -2008,7 +2016,7 @@ export class DocumentCreator2 {
                         new Paragraph({
                           text: data.site_visit.dsValue,
                           heading: HeadingLevel.HEADING_1,
-                          alignment:AlignmentType.END
+                          alignment: AlignmentType.END
                         }),
                       ],
                       columnSpan: 2,
@@ -2278,7 +2286,7 @@ export class DocumentCreator2 {
                           // text: JSON.stringify(dataJson2.mws_total),
                           text: '30',
                           heading: HeadingLevel.HEADING_1,
-                          alignment:AlignmentType.END
+                          alignment: AlignmentType.END
                         }),
                       ],
                       columnSpan: 1,
@@ -2289,7 +2297,7 @@ export class DocumentCreator2 {
                           // text: '29',
                           text: JSON.stringify(dataJson2.mws_total),
                           heading: HeadingLevel.HEADING_1,
-                          alignment:AlignmentType.END
+                          alignment: AlignmentType.END
 
                         }),
                       ],
@@ -2322,8 +2330,8 @@ export class DocumentCreator2 {
                           // text: JSON.stringify(dataJson3.mws_total),
                           text: '50',
                           heading: HeadingLevel.HEADING_1,
-                          alignment:AlignmentType.END
-                          
+                          alignment: AlignmentType.END
+
                         }),
                       ],
                       columnSpan: 1,
@@ -2334,7 +2342,7 @@ export class DocumentCreator2 {
                           // text: '33',
                           text: JSON.stringify(dataJson3.mws_total),
                           heading: HeadingLevel.HEADING_1,
-                          alignment:AlignmentType.END
+                          alignment: AlignmentType.END
                         }),
                       ],
                       columnSpan: 1,
@@ -2366,7 +2374,7 @@ export class DocumentCreator2 {
                         new Paragraph({
                           text: '20',
                           heading: HeadingLevel.HEADING_1,
-                          alignment:AlignmentType.END
+                          alignment: AlignmentType.END
 
                         }),
                       ],
@@ -2378,7 +2386,7 @@ export class DocumentCreator2 {
                           // text: '13',
                           text: (dataJson5.m_score),
                           heading: HeadingLevel.HEADING_1,
-                          alignment:AlignmentType.END
+                          alignment: AlignmentType.END
 
                         }),
                       ],
@@ -2411,7 +2419,7 @@ export class DocumentCreator2 {
                         new Paragraph({
                           text: '100',
                           heading: HeadingLevel.HEADING_1,
-                          alignment:AlignmentType.END
+                          alignment: AlignmentType.END
 
                         }),
                       ],
@@ -2423,7 +2431,7 @@ export class DocumentCreator2 {
                           // text: '75',
                           text: (dataJson5.total2),
                           heading: HeadingLevel.HEADING_1,
-                          alignment:AlignmentType.END
+                          alignment: AlignmentType.END
 
                         }),
                       ],
@@ -2561,7 +2569,7 @@ export class DocumentCreator2 {
                         new Paragraph({
                           text: data.net_worth.EMI1,
                           heading: HeadingLevel.HEADING_3,
-                          alignment:AlignmentType.END
+                          alignment: AlignmentType.END
 
                         }),
                       ],
@@ -2572,7 +2580,7 @@ export class DocumentCreator2 {
                         new Paragraph({
                           text: data.net_worth.EMI2,
                           heading: HeadingLevel.HEADING_3,
-                          alignment:AlignmentType.END
+                          alignment: AlignmentType.END
 
                         }),
                       ],
@@ -2596,7 +2604,7 @@ export class DocumentCreator2 {
                         new Paragraph({
                           text: data.net_worth.IIR1,
                           heading: HeadingLevel.HEADING_3,
-                          alignment:AlignmentType.END
+                          alignment: AlignmentType.END
 
                         }),
                       ],
@@ -2607,7 +2615,7 @@ export class DocumentCreator2 {
                         new Paragraph({
                           text: data.net_worth.IIR2,
                           heading: HeadingLevel.HEADING_3,
-                          alignment:AlignmentType.END
+                          alignment: AlignmentType.END
 
                         }),
                       ],
@@ -2723,7 +2731,7 @@ export class DocumentCreator2 {
                         new Paragraph({
                           text: data.net_worth.netWorth1,
                           heading: HeadingLevel.HEADING_3,
-                          alignment:AlignmentType.END
+                          alignment: AlignmentType.END
 
                         }),
                       ],
@@ -2734,7 +2742,7 @@ export class DocumentCreator2 {
                         new Paragraph({
                           text: data.net_worth.netWorth2,
                           heading: HeadingLevel.HEADING_3,
-                          alignment:AlignmentType.END
+                          alignment: AlignmentType.END
 
                         }),
                       ],
@@ -2745,7 +2753,7 @@ export class DocumentCreator2 {
                         new Paragraph({
                           text: data.net_worth.totalNetWorth,
                           heading: HeadingLevel.HEADING_3,
-                          alignment:AlignmentType.END
+                          alignment: AlignmentType.END
 
                         }),
                       ],
@@ -2769,7 +2777,7 @@ export class DocumentCreator2 {
                         new Paragraph({
                           text: data.net_worth.loanAmountRatio,
                           heading: HeadingLevel.HEADING_3,
-                          alignment:AlignmentType.END
+                          alignment: AlignmentType.END
 
                         }),
                       ],
@@ -2933,7 +2941,7 @@ export class DocumentCreator2 {
                         new Paragraph({
                           text: dataJson4.roi,
                           heading: HeadingLevel.HEADING_1,
-                          alignment:AlignmentType.END
+                          alignment: AlignmentType.END
                         }),
                       ],
                       columnSpan: 1,
@@ -2974,7 +2982,7 @@ export class DocumentCreator2 {
                         new Paragraph({
                           text: dataJson4.roia,
                           heading: HeadingLevel.HEADING_1,
-                          alignment:AlignmentType.END
+                          alignment: AlignmentType.END
 
                         }),
                       ],
@@ -3120,7 +3128,7 @@ export class DocumentCreator2 {
                         new Paragraph({
                           text: dataJson4.EMI,
                           heading: HeadingLevel.HEADING_1,
-                          alignment:AlignmentType.END
+                          alignment: AlignmentType.END
 
                         }),
                       ],
@@ -3254,7 +3262,7 @@ export class DocumentCreator2 {
                       columnSpan: 2,
                     }),
                   ],
-                }),                
+                }),
               ],
               indent: {
                 size: -1000,
@@ -3564,7 +3572,7 @@ export class DocumentCreator2 {
               },
               width: { size: 122, type: WidthType.PERCENTAGE },
             })
-              
+
           ],
         },
       ],

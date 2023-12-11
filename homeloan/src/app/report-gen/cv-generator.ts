@@ -14,23 +14,23 @@ import {
 
 export class DocumentCreator {
 
-  async getBlob(){
+  async getBlob() {
     const blo = await fetch(
-        "https://raw.githubusercontent.com/dolanmiu/docx/master/demo/images/cat.jpg"
-      ).then(r => r.blob());
+      "https://raw.githubusercontent.com/dolanmiu/docx/master/demo/images/cat.jpg"
+    ).then(r => r.blob());
   }
 
-   fetchBlobApi(data:any){
+  fetchBlobApi(data: any) {
     let dataOfapp = (data.app_data);
-     return new Promise(async (resolve,reject)=>{
+    return new Promise(async (resolve, reject) => {
       const blob = await fetch(
         data.mediaUrl + dataOfapp.a1_photo
-      ).then(r => 
+      ).then(r =>
         resolve(r.blob())
-      ); 
+      );
     })
   }
-  
+
   public create(data: any, imageBlob1: any, imageBlob2: any): Document {
     // console.log('data',data)
     let dataJson1 = JSON.parse(data.loan_request.dataJson);
@@ -45,10 +45,10 @@ export class DocumentCreator {
     // let blob =  this.fetchBlobApi(data);
     // console.log('blob======',blob)
 
-    let imageObj1:any = ''
-    let imageObj2:any = ''
+    let imageObj1: any = ''
+    let imageObj2: any = ''
 
-    if(imageBlob1 != ''){
+    if (imageBlob1 != '') {
       imageObj1 = new ImageRun({
         data: imageBlob1,
         transformation: {
@@ -56,14 +56,15 @@ export class DocumentCreator {
           height: 100
         }
       })
-    }else{
-      imageObj2 = new Paragraph({
-        text: '',
-        heading: HeadingLevel.HEADING_1,
-      })
+    } else {
+      // imageObj1 = new Paragraph({
+      //   text: '',
+      //   heading: HeadingLevel.HEADING_1,
+      // })
+
     }
 
-    if(imageBlob2 != ''){
+    if (imageBlob2 != '') {
       imageObj2 = new ImageRun({
         data: imageBlob2,
         transformation: {
@@ -71,11 +72,11 @@ export class DocumentCreator {
           height: 100
         }
       })
-    }else{
-      imageObj2 = new Paragraph({
-        text: '',
-        heading: HeadingLevel.HEADING_1,
-      })
+    } else {
+      // imageObj2 = new Paragraph({
+      //   text: '',
+      //   heading: HeadingLevel.HEADING_1,
+      // })
     }
 
     const document = new Document({
@@ -227,7 +228,7 @@ export class DocumentCreator {
                         new Paragraph({
                           text: dataOfBank.branchName,
                           heading: HeadingLevel.HEADING_1,
-                          
+
                         }),
                       ],
                       columnSpan: 3,
@@ -401,7 +402,7 @@ export class DocumentCreator {
                     new TableCell({
                       children: [
                         new Paragraph({
-                          text: dataJson1[0].cost != ''? JSON.stringify(dataJson1[0].cost): dataJson1[0].cost,
+                          text: dataJson1[0].cost != '' ? JSON.stringify(dataJson1[0].cost) : dataJson1[0].cost,
                           heading: HeadingLevel.HEADING_1,
                           alignment: AlignmentType.END,
                         }),
@@ -438,7 +439,7 @@ export class DocumentCreator {
                     new TableCell({
                       children: [
                         new Paragraph({
-                          text: dataJson1[1].cost != ''? JSON.stringify(dataJson1[1].cost): dataJson1[1].cost,
+                          text: dataJson1[1].cost != '' ? JSON.stringify(dataJson1[1].cost) : dataJson1[1].cost,
                           heading: HeadingLevel.HEADING_1,
                           alignment: AlignmentType.END,
                         }),
@@ -475,7 +476,7 @@ export class DocumentCreator {
                     new TableCell({
                       children: [
                         new Paragraph({
-                          text: dataJson1[2].cost != ''? JSON.stringify(dataJson1[2].cost): dataJson1[2].cost,
+                          text: dataJson1[2].cost != '' ? JSON.stringify(dataJson1[2].cost) : dataJson1[2].cost,
                           heading: HeadingLevel.HEADING_1,
                           alignment: AlignmentType.END,
                         }),
@@ -512,7 +513,7 @@ export class DocumentCreator {
                     new TableCell({
                       children: [
                         new Paragraph({
-                          text:dataJson1[3].cost != ''? JSON.stringify(dataJson1[3].cost): dataJson1[3].cost,
+                          text: dataJson1[3].cost != '' ? JSON.stringify(dataJson1[3].cost) : dataJson1[3].cost,
                           heading: HeadingLevel.HEADING_1,
                           alignment: AlignmentType.END,
                         }),
@@ -549,7 +550,7 @@ export class DocumentCreator {
                     new TableCell({
                       children: [
                         new Paragraph({
-                          text:dataJson1[4].cost != ''? JSON.stringify(dataJson1[4].cost): dataJson1[4].cost,
+                          text: dataJson1[4].cost != '' ? JSON.stringify(dataJson1[4].cost) : dataJson1[4].cost,
                           heading: HeadingLevel.HEADING_1,
                           alignment: AlignmentType.END,
                         }),
@@ -586,7 +587,7 @@ export class DocumentCreator {
                     new TableCell({
                       children: [
                         new Paragraph({
-                          text: dataJson1[5].cost != ''? JSON.stringify(dataJson1[5].cost): dataJson1[5].cost,
+                          text: dataJson1[5].cost != '' ? JSON.stringify(dataJson1[5].cost) : dataJson1[5].cost,
                           heading: HeadingLevel.HEADING_1,
                           alignment: AlignmentType.END,
                         }),
@@ -623,7 +624,7 @@ export class DocumentCreator {
                     new TableCell({
                       children: [
                         new Paragraph({
-                          text: dataJson1[6].cost != ''? JSON.stringify(dataJson1[6].cost): dataJson1[6].cost,
+                          text: dataJson1[6].cost != '' ? JSON.stringify(dataJson1[6].cost) : dataJson1[6].cost,
                           heading: HeadingLevel.HEADING_1,
                           alignment: AlignmentType.END,
                         }),

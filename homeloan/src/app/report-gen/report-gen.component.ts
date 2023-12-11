@@ -25,7 +25,7 @@ export class ReportGenComponent implements OnInit {
     private Http: HttpClient,
     private sideNav: SideNavComponent,
     private spiner: NgxSpinnerService,
-  ) {}
+  ) { }
 
   filename: any = '';
   fileToUpload: any;
@@ -50,16 +50,16 @@ export class ReportGenComponent implements OnInit {
   application: File | null = null;
   proposal: File | null = null;
 
-  logedInUser : any;
+  logedInUser: any;
   userId = "";
   status = "";
   viewOnly: any = false;
   nextButtonText: any = "";
-  showUploadButton: any =  false;
-  submitButtonForAdmin =  false;
+  showUploadButton: any = false;
+  submitButtonForAdmin = false;
   showButtonForApprover = false;
-  showDownloadButton =  false;
-  showStatusButton =  false;
+  showDownloadButton = false;
+  showStatusButton = false;
   imageBlob1: any = '';
   imageBlob2: any = '';
   imageBlob3: any = '';
@@ -68,8 +68,8 @@ export class ReportGenComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe((params: any) => {
-      if(params.id != null){
-        localStorage.setItem("applicant1Id",params.id)
+      if (params.id != null) {
+        localStorage.setItem("applicant1Id", params.id)
         this.openId = params.id;
         if (this.openId != 0) {
           this.getData();
@@ -80,7 +80,7 @@ export class ReportGenComponent implements OnInit {
       }
       // this.openId = params.id;
     });
-   
+
     // this.getData();
     // this.getPdfFiles();
   }
@@ -115,29 +115,29 @@ export class ReportGenComponent implements OnInit {
         // console.log('this.status',this.status)
         this.logedInUser = this.ds.userLoggedIn()
         let checkView = localStorage.getItem("viewOnly")
-        if(checkView === 'true'){
-          this.viewOnly =  true;
+        if (checkView === 'true') {
+          this.viewOnly = true;
           this.nextButtonText = "Next"
-          if(this.logedInUser.type == "Credit-Approver" && (this.status.indexOf("Reveiwing by Credit Approver") > -1)){
+          if (this.logedInUser.type == "Credit-Approver" && (this.status.indexOf("Reveiwing by Credit Approver") > -1)) {
             this.showButtonForApprover = true;
             // return  "Reveiwing by Credit Approver("+this.logedInUser.f_name +")";
             // this.nextButtonText = "Save & Next"
           }
 
           // this.showUploadButton = true;
-        }else{
+        } else {
           // this.nextButtonText = "Save And Next"
-          if(this.logedInUser.type == "Credit-Analyst"){
-      
+          if (this.logedInUser.type == "Credit-Analyst") {
+
             this.nextButtonText = "Submit"
-           
-          }else if(this.logedInUser.type == "Credit-Underwriter"){
+
+          } else if (this.logedInUser.type == "Credit-Underwriter") {
             this.nextButtonText = "Save & Next"
-          }else if(this.logedInUser.type == "Credit-Approver"){
+          } else if (this.logedInUser.type == "Credit-Approver") {
             this.showButtonForApprover = true;
             // return  "Reveiwing by Credit Approver("+this.logedInUser.f_name +")";
             // this.nextButtonText = "Save & Next"
-          }else if(this.logedInUser.type == "Admin" && (this.status.indexOf("Reveiwing by Admin") > -1)){
+          } else if (this.logedInUser.type == "Admin" && (this.status.indexOf("Reveiwing by Admin") > -1)) {
             // this.nextButtonText = "Save & Next"
             this.submitButtonForAdmin = true;
             this.showUploadButton = true;
@@ -145,12 +145,12 @@ export class ReportGenComponent implements OnInit {
           }
         }
 
-        if((this.status.indexOf("Submitted by Admin") > -1) || this.status.indexOf("Reveiwing by Admin") > -1 || this.status.indexOf("Reveiwing by Credit Approver") > -1 || this.status.indexOf("Approved by Credit Approver") > -1 || this.status.indexOf("Rejected by Credit Approver") > -1){
+        if ((this.status.indexOf("Submitted by Admin") > -1) || this.status.indexOf("Reveiwing by Admin") > -1 || this.status.indexOf("Reveiwing by Credit Approver") > -1 || this.status.indexOf("Approved by Credit Approver") > -1 || this.status.indexOf("Rejected by Credit Approver") > -1) {
 
-          this.showDownloadButton =  true;
+          this.showDownloadButton = true;
         }
 
-        if(this.status.indexOf("Approved by Credit Approver") > -1 || this.status.indexOf("Rejected by Credit Approver") > -1){
+        if (this.status.indexOf("Approved by Credit Approver") > -1 || this.status.indexOf("Rejected by Credit Approver") > -1) {
           this.showStatusButton = true
         }
       }
@@ -195,48 +195,48 @@ export class ReportGenComponent implements OnInit {
     const file = this[type];
 
     if (file) {
-        const data = new FormData();
+      const data = new FormData();
 
-        data.append('action', 'savePdfFile');
-        data.append('ref_id', this.openId);
-        data.append('type', type);
-        data.append('file', file);
+      data.append('action', 'savePdfFile');
+      data.append('ref_id', this.openId);
+      data.append('type', type);
+      data.append('file', file);
 
-        this.ds.submitAppData(data).subscribe((response: any) => {
-            // console.log(response);
+      this.ds.submitAppData(data).subscribe((response: any) => {
+        // console.log(response);
 
-            // Handle the response message
-            if (response.success) {
-                // console.log("File saved successfully");
-                this.getPdfFiles();
-                Swal.fire({
-                     position: 'top-end',
-                     icon: 'success',
-                     title: 'File Saved',
-                     showConfirmButton: false,
-                     timer: 1500,
-                });
-            } else {
-                console.error("File save failed:", response.message);
-                Swal.fire({
-                     icon: 'error',
-                     title: 'Oops...',
-                     text: 'File save failed',
-                });
-            }
+        // Handle the response message
+        if (response.success) {
+          // console.log("File saved successfully");
+          this.getPdfFiles();
+          Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'File Saved',
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        } else {
+          console.error("File save failed:", response.message);
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'File save failed',
+          });
+        }
 
-            // Clear the selected file and perform any other necessary actions
-            this[type] = null;
-            this.getData();
-        });
+        // Clear the selected file and perform any other necessary actions
+        this[type] = null;
+        this.getData();
+      });
     } else {
       Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: 'No file selected. Please choose a PDF file to upload.',
+        icon: 'error',
+        title: 'Oops...',
+        text: 'No file selected. Please choose a PDF file to upload.',
       });
     }
-}
+  }
 
 
   getPdfFiles() {
@@ -257,7 +257,7 @@ export class ReportGenComponent implements OnInit {
     anchor.download = pdfFile;
     anchor.click();
   }
-  
+
 
   showImg(data: any) {
     // console.log(data.filename);
@@ -285,16 +285,16 @@ export class ReportGenComponent implements OnInit {
     this.sideNav.openPage(2, 6);
   }
 
-  getImageBefore(){
+  getImageBefore() {
     let data = new FormData();
     data.append('action', 'getDoc1Data');
     data.append('id', this.openId);
 
-    this.ds.submitAppData(data).subscribe(async(response: any) => {
+    this.ds.submitAppData(data).subscribe(async (response: any) => {
       // const documentCreator = new DocumentCreator();
       // console.log('response',response)
       // response.mediaUrl = this.ds.mediaUrl;
-      console.log('response',response)
+      console.log('response', response)
       // console.log('this.ds.mediaUrl + response.app_data.a1_photo',this.ds.mediaUrl + response.app_data.a1_photo)
       let url1 = this.ds.mediaUrl + response.app_data.a1_photo
       let url2 = this.ds.mediaUrl + response.app_data.a2_photo
@@ -337,60 +337,68 @@ export class ReportGenComponent implements OnInit {
         // "https://raw.githubusercontent.com/dolanmiu/docx/master/demo/images/cat.jpg"
         const blob1 = await fetch(
           url1
-        ).then(r => 
+        ).then(r =>
           (r.blob())
-        ); 
+        );
         // console.log('blob1',blob1)
-        if(blob1.size > 0){
+        if (blob1.size > 0 && blob1.type != 'text/html') {
           this.imageBlob1 = blob1
         }
 
+        console.log('this.imageBlob1', this.imageBlob1)
+
         const blob2 = await fetch(
           url2
-        ).then(r => 
+        ).then(r =>
           (r.blob())
-        ); 
+        );
         // console.log('blob2',blob2)
-        if(blob2.size > 0){
+        if (blob2.size > 0 && blob2.type != 'text/html') {
           this.imageBlob2 = blob2
         }
 
+        console.log('this.imageBlob2', this.imageBlob2)
+
         const blob3 = await fetch(
           url3
-        ).then(r => 
+        ).then(r =>
           (r.blob())
-        ); 
+        );
         // console.log('blob2',blob2)
-        if(blob3.size > 0){
+        if (blob3.size > 0 && blob3.type != 'text/html') {
           this.imageBlob3 = blob3
         }
 
+        console.log('this.imageBlob3', this.imageBlob3)
+
         const blob4 = await fetch(
           url4
-        ).then(r => 
+        ).then(r =>
           (r.blob())
-        ); 
+        );
         // console.log('blob2',blob2)
-        if(blob4.size > 0){
+        if (blob4.size > 0 && blob4.type != 'text/html') {
           this.imageBlob4 = blob4
         }
 
-        for(let i = 0; i < mediaUrls.length; i++){
+        console.log('this.imageBlob4', this.imageBlob4)
+
+        for (let i = 0; i < mediaUrls.length; i++) {
           let medUrl = this.ds.mediaUrl + mediaUrls[i].filename
           let blobMedia = await fetch(
             medUrl
-          ).then(r => 
+          ).then(r =>
             (r.blob())
-          ); 
+          );
           // console.log('blob2',blob2)
-          if(blobMedia.size > 0){
+          if (blobMedia.size > 0 && blobMedia.type != 'text/html') {
             // this.imageBlob4 = blob4
-            this.imageMediaBlob.push({filename: blobMedia, comment: mediaUrls[i].comment})
+            this.imageMediaBlob.push({ filename: blobMedia, comment: mediaUrls[i].comment })
           }
         }
 
 
-      }catch (error) {
+      } catch (error) {
         console.error('Error:', error);
       }
       // return;
@@ -406,7 +414,7 @@ export class ReportGenComponent implements OnInit {
   doc1() {
 
     // console.log('sta',this.status)
-    if(this.status.indexOf('Processing by Credit Analyst') > -1){
+    if (this.status.indexOf('Processing by Credit Analyst') > -1) {
       alert('Being Filled by Credit Analyst')
       return;
     }
@@ -430,7 +438,7 @@ export class ReportGenComponent implements OnInit {
   }
 
   doc2() {
-    if(this.status.indexOf('Processing by Credit Analyst') > -1){
+    if (this.status.indexOf('Processing by Credit Analyst') > -1) {
       alert('Being Filled by Credit Analyst')
       return;
     }
@@ -457,17 +465,17 @@ export class ReportGenComponent implements OnInit {
     anchor.click();
   }
 
-  submitStatus(status: any){
+  submitStatus(status: any) {
     this.spiner.show();
     let data = new FormData();
-    if(this.logedInUser.type == "Admin"){
-      if(this.pdfFiles.length < 2){
+    if (this.logedInUser.type == "Admin") {
+      if (this.pdfFiles.length < 2) {
         Swal.fire({
           icon: 'error',
           title: 'failed...',
           text: 'Both pdf files need to be uploaded before submit',
-      });
-      return;
+        });
+        return;
       }
       data.append('action', 'submit-all-forms');
       data.append('ref_id', this.openId);
@@ -487,13 +495,13 @@ export class ReportGenComponent implements OnInit {
         // console.log(response);
       });
     }
-    if(this.logedInUser.type == "Credit-Approver"){
+    if (this.logedInUser.type == "Credit-Approver") {
       data.append('action', 'submit-all-forms');
       data.append('ref_id', this.openId);
-      if(status == "Approved"){
-        data.append('status', "Approved by Credit Approver ("+this.logedInUser.f_name  +")");
-      }else if(status == "Rejected"){
-        data.append('status', "Rejected by Credit Approver ("+this.logedInUser.f_name  +")");
+      if (status == "Approved") {
+        data.append('status', "Approved by Credit Approver (" + this.logedInUser.f_name + ")");
+      } else if (status == "Rejected") {
+        data.append('status', "Rejected by Credit Approver (" + this.logedInUser.f_name + ")");
       }
       this.ds.submitAppData(data).subscribe((response: any) => {
         this.spiner.hide();
