@@ -1072,7 +1072,7 @@ export class DocumentCreator {
                     new TableCell({
                       children: [
                         new Paragraph({
-                          text: '1st Guarantor’s Name',
+                          text: data.guar_data.a1_name,
                           heading: HeadingLevel.HEADING_1,
                         }),
                       ],
@@ -1080,7 +1080,7 @@ export class DocumentCreator {
                     new TableCell({
                       children: [
                         new Paragraph({
-                          text: data.guar_data.a1_name,
+                          text: data.guar_data.a1_fName,
                           heading: HeadingLevel.HEADING_1,
                         }),
                       ],
@@ -1150,7 +1150,7 @@ export class DocumentCreator {
                     new TableCell({
                       children: [
                         new Paragraph({
-                          text: '2nd Guarantor’s Name',
+                          text: data.guar_data.a2_name,
                           heading: HeadingLevel.HEADING_1,
                         }),
                       ],
@@ -1158,7 +1158,7 @@ export class DocumentCreator {
                     new TableCell({
                       children: [
                         new Paragraph({
-                          text: data.guar_data.a1_name,
+                          text: data.guar_data.a2_fName,
                           heading: HeadingLevel.HEADING_1,
                         }),
                       ],

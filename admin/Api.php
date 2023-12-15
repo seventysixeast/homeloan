@@ -478,6 +478,7 @@ if($_POST['action'] == 'submit-add-info'){
 
     $noi =  $_POST['noi'];
     $EMI =  $_POST['EMI'];
+    $terms =  $_POST['terms'];
     // echo "<pre>"; print_r($_POST); die;
     
     //$querry = "INSERT INTO addinfo(ref_id, JsonData) VALUES ('$ref_id', '$JsonData')";
@@ -485,10 +486,10 @@ if($_POST['action'] == 'submit-add-info'){
 
     if ($res_addinfo->num_rows == 0) {
         // No record found, perform INSERT operation
-        $querry = "INSERT INTO addinfo(ref_id, JsonData) VALUES ('$ref_id', '$JsonData')";
+        $querry = "INSERT INTO addinfo(ref_id, JsonData, terms) VALUES ('$ref_id', '$JsonData','$terms')";
     } else {
         // Record found, perform UPDATE operation
-        $querry = "UPDATE addinfo SET JsonData='$JsonData' WHERE ref_id=" . $ref_id;
+        $querry = "UPDATE addinfo SET JsonData='$JsonData',terms='$terms'  WHERE ref_id=" . $ref_id;
     }
 
     $result = mysqli_query($conn,$querry); 
@@ -622,6 +623,26 @@ if ($_POST['action'] === 'getPdfFiles') {
 }
 
 if($_POST['action'] == 'deleteMediaFile'){
+
+    // ini_set('display_errors', 1);
+    // ini_set('display_startup_errors', 1);
+    // error_reporting(E_ALL);
+
+    // $res_header = mysqli_query($conn, "SELECT * FROM media Where id=".$_POST['id']);
+    // while ($row_header = mysqli_fetch_assoc($res_header)) {
+    //     $response[] = $row_header;
+    
+    // }
+
+    // if (count($response) > 0) {
+    // //     // echo json_encode("email found");
+    // // $status = unlink("/opt/lampp/htdocs/29nov/homeloan/admin/uploads/".$response[0]['filename'])
+    //     if(is_file(getcwd()."/"."uploads"."/".$response[0]['filename'])){
+
+    //         $status = unlink(getcwd()."/"."uploads"."/".$response[0]['filename']);
+    //     }
+    // }
+
     $result = mysqli_query($conn, "DELETE FROM media Where id=".$_POST['id']);
     echo $result;
 }
@@ -680,6 +701,72 @@ if($_POST['action'] == 'getDoc1Data'){
 }
 
 if($_POST['action']  == 'deleteAppDataList'){
+
+    // ini_set('display_errors', 1);
+    // ini_set('display_startup_errors', 1);
+    // error_reporting(E_ALL);
+
+    // $res_header = mysqli_query($conn, "SELECT * FROM app_data Where id=".$_POST['id']);
+    // while ($row_header = mysqli_fetch_assoc($res_header)) {
+    //     $response[] = $row_header;
+    
+    // }
+
+    // if (count($response) > 0) {
+    //     if(is_file(getcwd()."/"."uploads"."/".$response[0]['a1_photo'])){
+    //         $status = unlink(getcwd()."/"."uploads"."/".$response[0]['a1_photo']);
+    //     }
+    //     if(is_file(getcwd()."/"."uploads"."/".$response[0]['a2_photo'])){
+    //         $status1 = unlink(getcwd()."/"."uploads"."/".$response[0]['a2_photo']);
+    //     }
+    // }
+
+    // $res_header1 = mysqli_query($conn, "SELECT * FROM guar_data Where ref_id=".$_POST['id']);
+    // while ($res_header1 = mysqli_fetch_assoc($res_header1)) {
+    //     $response1[] = $res_header1;
+    // }
+
+    // if (count($response1) > 0) {
+    //     if(is_file(getcwd()."/"."uploads"."/".$response1[0]['a1_photo'])){
+    //         $status2 = unlink(getcwd()."/"."uploads"."/".$response1[0]['a1_photo']);
+    //     }
+    //     if(is_file(getcwd()."/"."uploads"."/".$response1[0]['a2_photo'])){
+    //         $status3 = unlink(getcwd()."/"."uploads"."/".$response1[0]['a2_photo']);
+    //     }
+    // }
+
+    // $res_header2 = mysqli_query($conn, "SELECT * FROM media Where ref_id=".$_POST['id']);
+
+    // while ($row2 = mysqli_fetch_array($res_header2)) {
+    //     if(is_file(getcwd()."/"."uploads"."/".$row2['filename'])){
+    //         $status2 = unlink(getcwd()."/"."uploads"."/".$row2['filename']);
+    //     }
+    //     $result2 = mysqli_query($conn, "DELETE FROM media WHERE id=".$row2['id']." LIMIT 1");
+    //     // unlink($image_url);
+    //     if($result2){
+    //         // header('Location: ' . $_SERVER['HTTP_REFERER']);
+    //     } else {
+    //         echo "Failed to delete of media files";
+    //     }
+    // }
+
+    // // $query = "SELECT filename, type FROM pdf_files WHERE ref_id = '$ref_id'";
+    // $res_header3 = mysqli_query($conn, "SELECT * FROM pdf_files Where ref_id=".$_POST['id']);
+    // while ($row3 = mysqli_fetch_array($res_header3)) {
+    //     if(is_file(getcwd()."/"."uploads"."/".$row3['filename'])){
+    //         $status3 = unlink(getcwd()."/"."uploads"."/".$row3['filename']);
+    //     }
+    //     $result3 = mysqli_query($conn, "DELETE FROM pdf_files WHERE id=".$row3['id']." LIMIT 1");
+    //     // unlink($image_url);
+    //     if($result3){
+    //         // header('Location: ' . $_SERVER['HTTP_REFERER']);
+    //     } else {
+    //         echo "Failed to delete of PDF files";
+    //     }
+    // }
+   
+
+
     $result = mysqli_query($conn, "DELETE FROM app_data Where id=".$_POST['id']);
     echo $result;
 }

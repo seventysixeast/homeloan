@@ -142,10 +142,10 @@ export class MedisUploadComponent implements OnInit {
       return;
     } 
 
-    if(this.type == 2 && fileSize > 1024){
-      alert('File size exceeds 1 mb');
-      return;
-    }
+    // if(this.type == 2 && fileSize > 1024){
+    //   alert('File size exceeds 1 mb');
+    //   return;
+    // }
    
     this.spiner.show();
 

@@ -72,6 +72,10 @@ export class DashbordComponent implements OnInit {
       data.append('status', "Reveiwing by Credit Approver(" + this.logedInUser.f_name + ")");
       this.ds.submitAppData(data).subscribe((response: any) => {
       });
+      this.sideNav.openPage(2, 8);
+      window.location.href = 'homeloan/media-upload/' + id;
+
+      return;
       // return  "Reveiwing by Credit Approver("+this.logedInUser.f_name +")";
     }
     // console.log('check')

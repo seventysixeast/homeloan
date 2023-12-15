@@ -17,6 +17,7 @@ export class DocumentCreator2 {
     let dataJson2 = JSON.parse(data.risk_one.JsonData);
     let dataJson3 = JSON.parse(data.risk_two.JsonData);
     let dataJson4 = JSON.parse(data.addinfo.JsonData);
+    let dataJson4ForAddInfo = (data.addinfo);
     let dataJson5 = (data.score);
     console.log('dataJson4', dataJson4)
 
@@ -3223,7 +3224,7 @@ export class DocumentCreator2 {
                     new TableCell({
                       children: [
                         new Paragraph({
-                          text: dataJson4.terms,
+                          text: dataJson4ForAddInfo.terms,
                           heading: HeadingLevel.HEADING_1,
                         }),
                       ],

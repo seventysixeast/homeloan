@@ -113,11 +113,11 @@ export class AddInfoComponent implements OnInit {
     let data2 = new FormData();
     data2.append('id', this.openId);
     data2.append('action', 'getSingleDataLoan');
-    this.ds.submitAppData(data2).subscribe((response2: any) => {
-      if (response2.length != 0) {
-        this.purposeLoan = response2[0].propertyD;
-      }
-    });
+    // this.ds.submitAppData(data2).subscribe((response2: any) => {
+    //   if (response2.length != 0) {
+    //     this.purposeLoan = response2[0].propertyD;
+    //   }
+    // });
 
     let data = new FormData();
     data.append('id', this.openId);
@@ -127,26 +127,33 @@ export class AddInfoComponent implements OnInit {
       data2.append('id', this.openId);
       data2.append('action', 'getaddinfo');
       this.ds.submitAppData(data2).subscribe((response2: any) => {
-        let result = response2[response2.length - 1];
-        result = JSON.parse(result.JsonData);
-        this.bankName = result.bankName;
-        this.branchName = result.branchName;
-        this.irdm = result.irdm;
-        this.loanNo = result.loanNo;
-        this.loandate = result.loandate;
-        this.purposeLoan = result.purposeLoan;
-        // this.roi = result.roi;
-        this.roia = result.roia;
-        this.moratorium = result.moratorium;
-        this.emiStatingMonth = result.emiStatingMonth;
-        this.terms = result.terms;
-        this.name1 = result.name1;
-        this.designation1 = result.designation1;
-        this.name2 = result.name2;
-        this.designation2 = result.designation2;
-        this.name3 = result.name3;
-        this.designation3 = result.designation3;
-        this.guarantor = result.guarantor;
+        console.log('response2',response2)
+        if(response2){
+          console.log('hott')
+          let result1 = response2[response2.length - 1];
+          console.log('result1',result1)
+          this.terms = result1.terms;
+          let result = JSON.parse(result1.JsonData);
+          console.log('result',result)
+          this.bankName = result.bankName;
+          this.branchName = result.branchName;
+          this.irdm = result.irdm;
+          this.loanNo = result.loanNo;
+          this.loandate = result.loandate;
+          // this.purposeLoan = result.purposeLoan;
+          // this.roi = result.roi;
+          this.roia = result.roia;
+          this.moratorium = result.moratorium;
+          this.emiStatingMonth = result.emiStatingMonth;
+          // this.terms = result.terms;
+          this.name1 = result.name1;
+          this.designation1 = result.designation1;
+          this.name2 = result.name2;
+          this.designation2 = result.designation2;
+          this.name3 = result.name3;
+          this.designation3 = result.designation3;
+          this.guarantor = result.guarantor;
+        }
       });
 
       this.EMI = response[0].ammountPEMI;
@@ -172,6 +179,7 @@ export class AddInfoComponent implements OnInit {
   }
 
   handleSubmit() {
+    console.log('this.terms',this.terms)
     if(this.viewOnly){
       this.goNext();
       return;
@@ -183,14 +191,14 @@ export class AddInfoComponent implements OnInit {
       irdm: this.irdm,
       loanNo: this.loanNo,
       loandate: this.loandate,
-      purposeLoan: this.purposeLoan,
+      // purposeLoan: JSON.stringify(this.purposeLoan),
       roi: this.roi,
       roia: this.roia,
       moratorium: this.moratorium,
       noi: this.c_months,
       EMI: this.EMI,
       emiStatingMonth: this.emiStatingMonth,
-      terms: this.terms,
+      // terms: JSON.stringify(this.terms),
       name1: this.name1,
       designation1: this.designation1,
       name2: this.name2,
@@ -207,6 +215,7 @@ export class AddInfoComponent implements OnInit {
     data.append('noi', this.c_months);
     data.append('EMI', this.EMI);
     data.append('JsonData', JSON.stringify(JsonData));
+    data.append('terms', (this.terms));
     // data.append('status', "add-info");
     data.append('status', this.ds.addStatus(this.logedInUser, this.userId, this.status));
 
