@@ -37,7 +37,7 @@
                 </tr>
                 <tr>
                   <td></td>
-                  <td [class]="'selectable ' + a1" (click)="handleUpdate(-3, 1, 1)" colspan="2">
+                  <td [class]="'selectable ' + a1" (click)="url== 'homeloan'? handleUpdate(-3, 1, 1) : handleUpdate(-5, 1, 1)" colspan="2" >
                     A. Less than 20 Years
                   </td>
                   <!-- <td>-3</td>
@@ -62,7 +62,7 @@
                 </tr>
                 <tr>
                   <td></td>
-                  <td colspan="2" [class]="'selectable ' + a4" (click)="handleUpdate(5, 1, 4)">
+                  <td colspan="2" [class]="'selectable ' + a4" (click)="url== 'homeloan'? handleUpdate(5, 1, 4): handleUpdate(4, 1, 4)">
                     D. 30 and more but less than 35
                   </td>
                   <!-- <td>5</td> -->
@@ -70,7 +70,7 @@
                 <tr>
                   <td></td>
 
-                  <td colspan="2" [class]="'selectable ' + a5" (click)="handleUpdate(5, 1, 5)">
+                  <td colspan="2" [class]="'selectable ' + a5" (click)="url== 'homeloan'? handleUpdate(5, 1, 5): handleUpdate(4, 1, 5)">
                     E. 35 and more but less than 40
                   </td>
                   <!-- <td>5</td> -->
@@ -92,14 +92,14 @@
                 <tr>
                   <td></td>
                   <td colspan="2" [class]="'selectable ' + a8" (click)="handleUpdate(1, 1, 8)">
-                    H. 50 and more but less than 55
+                    {{ques1H}}
                   </td>
                   <!-- <td>1</td> -->
                 </tr>
                 <tr>
                   <td></td>
                   <td colspan="2" [class]="'selectable ' + a9" (click)="handleUpdate(-3, 1, 9)">
-                    I. 55 and above
+                    {{ques1I}}
                   </td>
                   <!-- <td>-3</td> -->
                 </tr>
@@ -151,8 +151,7 @@
                 <tr>
                   <td></td>
                   <td colspan="2" [class]="c1">
-                    A. Applicant's present combined worth is estimated at More
-                    than 1.50 times of the proposed loan amount.
+                    {{ques3A}}
                   </td>
                   <!-- <td>2</td>
                   <td rowspan="5">1</td>
@@ -163,47 +162,74 @@
                 <tr>
                   <td></td>
                   <td colspan="2" [class]="c2">
-                    B. Applicant's present combined worth is estimated at 1 and
-                    More But Less than 1.50 times of the proposed loan amount.
+                    {{ques3B}}
                   </td>
                   <!-- <td>1.75</td> -->
                 </tr>
                 <tr>
                   <td></td>
                   <td colspan="2" [class]="c3">
-                    C. Applicant's present combined worth is estimated at 0.75
-                    and More but Less than 1 of the proposed loan amount.
+                    {{ques3C}}
                   </td>
                   <!-- <td>1.5</td> -->
                 </tr>
                 <tr>
                   <td></td>
                   <td colspan="2" [class]="c4">
-                    D. Applicant's present combined worth is estimated at 0.5
-                    and More but Less than 0.75 time of the proposed loan
-                    amount.
+                    {{ques3D}}
                   </td>
                   <!-- <td>1.25</td> -->
                 </tr>
                 <tr>
                   <td></td>
                   <td colspan="2" [class]="c5">
-                    E. Applicant's present combined worth is estimated at 0.25
-                    and More but Less than 0.50 time of the proposed loan
-                    amount.
+                    {{ques3E}}
                   </td>
                   <!-- <td>1.25</td> -->
                 </tr>
                 <tr>
                   <td></td>
-                  <td colspan="2" [class]="c6">
-                    F. Applicant's present combined worth is estimated at Less
-                    than 0.25 time of the proposed loan amount.
+                  <td colspan="2" [class]="c6" *ngIf='ques3F != ""'>
+                    {{ques3F}}
                   </td>
                   <!-- <td>0.5</td> -->
                 </tr>
-                <tr>
+                <!-- newly added field -->
+                <tr *ngIf="url == 'personal-vehicle-loan'">
                   <td>4</td>
+                  <td style="font-weight: bold; font-size: 15px">
+                    Applicant's Source of Income :
+                  </td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td colspan="2" [class]="'selectable ' + g1" (click)="handleUpdate(2, 7, 1)">
+                    A. Applicant has  VERY REGULAR monthly income . 
+                  </td>
+                  <!-- <td>3</td>
+                  <td rowspan="3">1</td>
+                  <td rowspan="3">3</td>
+                  <td rowspan="3" class="finAnaIptTd">{{ s_mws6 }}</td>
+                  <td rowspan="3">{{ mws6 }}</td> -->
+                </tr>
+                <tr>
+                  <td></td>
+                  <td colspan="2" [class]="'selectable ' + g2" (click)="handleUpdate(1.1, 7, 2)">
+                    B. Applicant has REGULAR monthly income for most of time but may get disturbed during some months.
+                  </td>
+                  <!-- <td>2</td> -->
+                </tr>
+                <tr>
+                  <td></td>
+                  <td colspan="2" [class]="'selectable ' + g3" (click)="handleUpdate(0.5, 7, 3)">
+                    C. Applicant's monthly Income is NOT REGULAR.
+                  </td>
+                  <!-- <td>1</td> -->
+                </tr>
+                <!-- newly added field -->
+                <tr>
+                  <td *ngIf="url == 'homeloan'">4</td>
+                  <td *ngIf="url == 'personal-vehicle-loan'">5</td>
                   <td style="font-weight: bold; font-size: 15px">
                     Applicant's borrowing history.
                   </td>
@@ -246,7 +272,8 @@
                   <!-- <td>-5</td> -->
                 </tr>
                 <tr>
-                  <td>5</td>
+                  <td *ngIf="url == 'homeloan'">5</td>
+                  <td *ngIf="url == 'personal-vehicle-loan'">6</td>
                   <td style="font-weight: bold; font-size: 15px">
                     Applicant's Market reports :
                   </td>
@@ -281,7 +308,8 @@
                   <!-- <td>-5</td> -->
                 </tr>
                 <tr>
-                  <td>6</td>
+                  <td *ngIf="url == 'homeloan'">6</td>
+                  <td *ngIf="url == 'personal-vehicle-loan'">7</td>
                   <td style="font-weight: bold; font-size: 15px">
                     Guarantor's Credentials
                   </td>

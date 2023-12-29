@@ -33,6 +33,7 @@ import { UsersComponent } from './Pages/Auth/users/users.component';
 import { UsersAddComponent } from './Pages/Auth/users-add/users-add.component';
 import { UploadReportComponent } from './Pages/upload-report/upload-report.component';
 import { RetailLoanComponent } from './Pages/retail-loan/retail-loan.component';
+import { GuarantorData3Component } from './Pages/guarantor-data3/guarantor-data3.component';
 
 @NgModule({
   declarations: [
@@ -62,6 +63,7 @@ import { RetailLoanComponent } from './Pages/retail-loan/retail-loan.component';
     UsersAddComponent,
     UploadReportComponent,
     RetailLoanComponent,
+    GuarantorData3Component,
   ],
   imports: [
     BrowserModule,

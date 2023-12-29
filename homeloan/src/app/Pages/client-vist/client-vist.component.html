@@ -100,7 +100,7 @@
               </div>
               <div class="col-12 mb-3">
                 <label for="inputNanme4" class="form-label"
-                  >A. Applicant/s Visit Details</label
+                  >{{comment1Heading}}</label
                 >
               </div>
               <div class="col-3 mt-3">
@@ -109,7 +109,7 @@
                   <div class="col-12" style="font-weight: bold">
                     {{ app_1 }}
                   </div>
-                  <div class="col-12">1st Applicant</div>
+                  <div class="col-12" *ngIf="url== 'homeloan'">1st Applicant</div>
                 </div>
               </div>
               <div class="col-9 mt-3">
@@ -124,13 +124,18 @@
                   autocomplete="off"
                 ></textarea>
               </div>
+              <div class="col-12 mb-3">
+                <label for="inputNanme4" class="form-label"
+                  >{{comment2Heading}}</label
+                >
+              </div>
               <div class="col-3 mt-3">
                 <div class="row">
                   <div class="col-12">Comments / Findings</div>
                   <div class="col-12" style="font-weight: bold">
                     {{ app_2 }}
                   </div>
-                  <div class="col-12">2nd Applicant</div>
+                  <div class="col-12" *ngIf="url== 'homeloan'">2nd Applicant</div>
                 </div>
               </div>
               <div class="col-9 mt-3">
@@ -159,13 +164,18 @@
                   id="inputNanme4"
                 />
               </div> -->
+              <div class="col-12 mb-3">
+                <label for="inputNanme4" class="form-label"
+                  >{{comment3Heading}}</label
+                >
+              </div>
               <div class="col-3 mt-3">
                 <div class="row">
                   <div class="col-12">Comments / Findings</div>
                   <div class="col-12" style="font-weight: bold">
                     {{ gur_1 }}
                   </div>
-                  <div class="col-12">1st Guarantor</div>
+                  <div class="col-12" *ngIf="url== 'homeloan'">1st Guarantor</div>
                 </div>
               </div>
               <div class="col-9 mt-3">
@@ -180,7 +190,7 @@
                   autocomplete="off"
                 ></textarea>
               </div>
-              <div class="col-3 mt-3">
+              <div class="col-3 mt-3" *ngIf="url== 'homeloan'">
                 <div class="row">
                   <div class="col-12">Comments / Findings</div>
                   <div class="col-12" style="font-weight: bold">
@@ -189,7 +199,7 @@
                   <div class="col-12">2nd Guarantor</div>
                 </div>
               </div>
-              <div class="col-9 mt-3">
+              <div class="col-9 mt-3" *ngIf="url== 'homeloan'">
                 <textarea
                   rows="6"
                   type="text"

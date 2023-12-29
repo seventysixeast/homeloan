@@ -21,6 +21,7 @@ export class LoanRequestComponent implements OnInit {
   ) {}
 
   openId: any = 0;
+  pageTitle:any = "";
 
   am1: any = '';
   am2: any = '';
@@ -56,6 +57,14 @@ export class LoanRequestComponent implements OnInit {
   status = "";
   viewOnly: any = false;
   nextButtonText: any = "";
+  url:any = "";
+  TitleDisplay:any = "";
+  field1:any = "";
+  field2:any = "";
+  field3:any = "";
+  field4:any = "";
+  field5:any = "";
+  loanTypeDisplay:any = "";
 
   ngOnInit(): void {
     this.route.params.subscribe((params: any) => {
@@ -66,7 +75,25 @@ export class LoanRequestComponent implements OnInit {
         this.getSingleAppData()
       }
     });
-    this.logedInUser = this.ds.userLoggedIn()
+    this.logedInUser = this.ds.userLoggedIn();
+    this.url = this.ds.commonUrl(this.router);
+    if(this.url == 'personal-vehicle-loan'){
+      this.TitleDisplay = "Total Cost and Loan Amount";
+      this.field1 = "Purchase of New Vehicle";
+      this.field2 = "Purchase of Used Vehicle";
+      this.field3 = "Cost of accessories, if any :";
+      this.field4 = "Registration Cost :";
+      this.field5 = "Cost of Insurance (One Year) :";
+      this.loanTypeDisplay = "Vehicle Details";
+    }else{
+      this.TitleDisplay = "Project Cost and Loan Request";
+      this.field1 = "Purchase of Flat / Apartment";
+      this.field2 = "Purchase of House";
+      this.field3 = "Purchase of Land";
+      this.field4 = "Registration Fee / Stamp Duty";
+      this.field5 = "Construction / Additional Construction";
+      this.loanTypeDisplay = "Property Details";
+    }
     let checkView = localStorage.getItem("viewOnly")
     // checkView =  JSON.parse(checkView)
     if(checkView === 'true'){
@@ -247,11 +274,23 @@ export class LoanRequestComponent implements OnInit {
 
   goNext() {
     // this.router.navigateByUrl('net-worth/' + this.openId);
-    this.sideNav.openPage(2, 1);
+    if(this.url == "personal-vehicle-loan"){
+      this.sideNav.openPage(1, 4);
+    }else{
+      // this.sideNav.openPage(1, 2);
+      this.sideNav.openPage(2, 1);
+    }
   }
 
   goBack() {
-    this.sideNav.openPage(1, 12);
+    if(this.url == "personal-vehicle-loan"){
+      // this.sideNav.openPage(1, 4);
+      this.sideNav.openPage(1, 13);
+    }else{
+      // this.sideNav.openPage(1, 2);
+      // this.sideNav.openPage(2, 1);
+      this.sideNav.openPage(1, 12);
+    }
     // this.router.navigateByUrl('guarantor-data2/' + this.openId);
   }
 }

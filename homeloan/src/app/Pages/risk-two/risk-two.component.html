@@ -83,8 +83,7 @@
                 <tr>
                   <td></td>
                   <td [class]="a1" colspan="2">
-                    A. Applicant's estimated Monthly Income is at 3 times and
-                    more of Monthly Installment.
+                    {{ques1A}}
                   </td>
                   <!-- <td>5</td>
                   <td rowspan="4">3</td>
@@ -95,24 +94,35 @@
                 <tr>
                   <td></td>
                   <td colspan="2" [class]="a2">
-                    B. Applicant's estimated Monthly Income is at 2 time and
-                    more but Less than 3 times of Monthly Installment.
+                    {{ques1B}}
                   </td>
                   <!-- <td>3</td> -->
                 </tr>
                 <tr>
                   <td></td>
                   <td colspan="2" [class]="a3">
-                    C. Applicant's estimated Monthly Income is at 1 time and
-                    more but Less than 2 times of Monthly Installment.
+                    {{ques1C}}
                   </td>
                   <!-- <td>2</td> -->
                 </tr>
                 <tr>
                   <td></td>
                   <td colspan="2" [class]="a4">
-                    D. Applicant's estimated Monthly Income is Less than 1 time
-                    of Monthly Installment.
+                    {{ques1D}}
+                  </td>
+                  <!-- <td>-1</td> -->
+                </tr>
+                <tr *ngIf="ques1E != ''">
+                  <td></td>
+                  <td colspan="2" [class]="a5">
+                    {{ques1E}}
+                  </td>
+                  <!-- <td>-1</td> -->
+                </tr>
+                <tr *ngIf="ques1F != ''">
+                  <td></td>
+                  <td colspan="2" [class]="a6">
+                    {{ques1F}}
                   </td>
                   <!-- <td>-1</td> -->
                 </tr>
@@ -126,8 +136,7 @@
                 <tr>
                   <td></td>
                   <td colspan="2" [class]="b1">
-                    A. Estimated combined Family Income is more than 4 times of
-                    Monthly Installment.
+                    {{ques2A}}
                   </td>
                   <!-- <td>4</td>
                   <td rowspan="4">1</td>
@@ -138,24 +147,21 @@
                 <tr>
                   <td></td>
                   <td colspan="2" [class]="b2">
-                    B. Estimated combined Family Income is at 3 times and more
-                    but less than 4 times of Monthly Installment.
+                    {{ques2B}}
                   </td>
                   <!-- <td>3</td> -->
                 </tr>
                 <tr>
                   <td></td>
                   <td colspan="2" [class]="b3">
-                    C. Estimated combined Family Income is at 2 times and more
-                    but less than 3 times of Monthly Installment.
+                    {{ques2C}}
                   </td>
                   <!-- <td>1.5</td> -->
                 </tr>
                 <tr>
                   <td></td>
                   <td colspan="2" [class]="b4">
-                    D. Estimated combined Family Income is Less than 2 times of
-                    Monthly Installment.
+                   {{ques2D}}
                   </td>
                   <!-- <td>-1</td> -->
                 </tr>
@@ -226,11 +232,16 @@
                   <td style="font-weight: bold; font-size: 15px">
                     Applicant's Margin Contribution :
                   </td>
+                  <td *ngIf="url == 'personal-vehicle-loan'">
+                    <input name="options" ng-control="options" type="radio" value="new-vehicle"  [(ngModel)]="vehicleType" (ngModelChange)="onChangeVehicleType()" class="mr-2">New Vehicle
+
+                    <input name="options" ng-control="options" type="radio" value="used-vehicle" [(ngModel)]="vehicleType"  (ngModelChange)="onChangeVehicleType()">Used Vehicle<br/> 
+                  </td>
                 </tr>
                 <tr>
                   <td></td>
                   <td colspan="2" [class]="d1">
-                    A. Applicant's Margin Contribution is Less than 10 %
+                    {{ques4A}}
                   </td>
                   <!-- <td>-5</td>
                   <td rowspan="8">3</td>
@@ -241,55 +252,49 @@
                 <tr>
                   <td></td>
                   <td colspan="2" [class]="d2">
-                    B. Applicant's Margin Contribution is 10 % and more but Less
-                    than 15 %
+                   {{ques4B}}
                   </td>
                   <!-- <td>-1</td> -->
                 </tr>
                 <tr>
                   <td></td>
                   <td colspan="2" [class]="d3">
-                    C. Applicant's Margin Contribution is 15 % and more but Less
-                    than 20 %
+                    {{ques4C}}
                   </td>
                   <!-- <td>2</td> -->
                 </tr>
                 <tr>
                   <td></td>
                   <td colspan="2" [class]="d4">
-                    D. Applicant's Margin Contribution is 20 % and more but Less
-                    than 25 %
+                    {{ques4D}}
                   </td>
                   <!-- <td>3</td> -->
                 </tr>
                 <tr>
                   <td></td>
                   <td colspan="2" [class]="d5">
-                    E. Applicant's Margin Contribution is 25 % and more but Less
-                    than 30 %
+                    {{ques4E}}
                   </td>
                   <!-- <td>3.5</td> -->
                 </tr>
                 <tr>
                   <td></td>
                   <td colspan="2" [class]="d6">
-                    F. Applicant's Margin Contribution is 30 % and more but Less
-                    than 35 %
+                    {{ques4F}}
                   </td>
                   <!-- <td>4</td> -->
                 </tr>
                 <tr>
                   <td></td>
                   <td colspan="2" [class]="d7">
-                    G. Applicant's Margin Contribution is 35 % and more but Less
-                    than 40 %
+                    {{ques4G}}
                   </td>
                   <!-- <td>4.5</td> -->
                 </tr>
                 <tr>
                   <td></td>
                   <td colspan="2" [class]="d8">
-                    H. Applicant's Margin Contribution is 40 % and more.
+                    {{ques4H}}
                   </td>
                   <!-- <td>5</td> -->
                 </tr>

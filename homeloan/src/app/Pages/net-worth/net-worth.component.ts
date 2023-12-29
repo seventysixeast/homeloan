@@ -43,7 +43,9 @@ export class NetWorthComponent implements OnInit {
   status = "";
   viewOnly: any = false;
   nextButtonText: any = "";
-
+  url:any = "";
+  applicant1Text:any = "";
+  applicant2Text:any = "";
   ngOnInit(): void {
     this.route.params.subscribe((params: any) => {
       // console.log('params.id',params.id)
@@ -56,6 +58,14 @@ export class NetWorthComponent implements OnInit {
     });
     // console.log('this.openId',this.openId)
     this.logedInUser = this.ds.userLoggedIn()
+    this.url = this.ds.commonUrl(this.router);
+    if(this.url == 'personal-vehicle-loan'){
+      this.applicant1Text = "Applicant's Net Worth";
+      this.applicant2Text = "Guarantor's Net Worth";
+    }else{
+      this.applicant1Text = "1st Applicant";
+      this.applicant2Text = "2nd Applicant";
+    }
     // console.log('this.logedInUser',this.logedInUser)
     let checkView = localStorage.getItem("viewOnly")
     // checkView =  JSON.parse(checkView)

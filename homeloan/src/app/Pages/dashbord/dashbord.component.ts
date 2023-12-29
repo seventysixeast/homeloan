@@ -19,7 +19,8 @@ export class DashbordComponent implements OnInit {
 
   dataList: any = [];
   logedInUser: any;
-
+  addNewApplicationLink:any = "";
+  url:any = ""; 
   ngOnInit(): void {
     localStorage.removeItem("mId");
     localStorage.removeItem("smId");
@@ -36,6 +37,9 @@ export class DashbordComponent implements OnInit {
   getData() {
     let data = new FormData();
     data.append('action', 'getAppDataList');
+    this.url = this.ds.commonUrl(this.router);
+   
+    this.addNewApplicationLink = "/"+ this.url+"/applicant-data";
     if (this.logedInUser.type == "Credit-Analyst") {
       data.append('userId', this.logedInUser.id);
       data.append('type', "Credit-Analyst");
@@ -49,9 +53,10 @@ export class DashbordComponent implements OnInit {
       data.append('userId', "0");
       data.append('type', "Admin");
     }
+    data.append('loan_type', this.url);
     // data.append('viewByAdmin', "Admin");
     this.ds.getAppDataList(data).subscribe((response: any) => {
-      // console.log('response', response)
+      console.log('response', response)
       this.dataList = response;
     });
     // console.log('check123')
@@ -113,7 +118,8 @@ export class DashbordComponent implements OnInit {
     // console.log('check')
     this.sideNav.openPage(1, 1);
     // this.router.navigateByUrl('applicant-data/' + id);
-    window.location.href = 'homeloan/applicant-data/' + id;
+    // window.location.href = 'homeloan/applicant-data/' + id;
+    window.location.href = this.url+'/applicant-data/' + id;
   }
 
   deleteAcc(id: any) {

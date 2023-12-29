@@ -38,6 +38,7 @@ if($_POST['action'] == 'submit-app-data')
     $status = $_POST['status'];
     $submittedBy = $_POST['submittedBy'];
     $userId = $_POST['userId'];
+    $loan_type = $_POST['loan_type'];
 
     // echo "<pre>"; print_r($_POST); die;
     // echo "<pre>"; print_r(basename($_FILES["a1_photo"]["type"])); die;
@@ -68,21 +69,21 @@ if($_POST['action'] == 'submit-app-data')
     // echo "<pre>"; print_r($target_file_one); die;
 
     if($id == 0 || $id ==  null){
-        $querry = "INSERT INTO app_data(a1_name, a1_fName, a1_activity , a1_paddress, a1_age, a1_nrc, a1_phone, a1_passport, a1_photo, a2_name, a2_fName, a2_activity, a2_paddress, a2_age, a2_nrc, a2_phone, a2_passport, a2_photo, app_date, application_no, applicant_type, status, submittedBy, userId) VALUES('$a1_name', '$a1_fName', '$a1_activity','$a1_paddress' ,  '$a1_age', '$a1_nrc', '$a1_phone', '$a1_passport', '$target_file_one', '$a2_name', '$a2_fName', '$a2_activity', '$a2_paddress', '$a2_age', '$a2_nrc', '$a2_phone', '$a2_passport', '$target_file_two', '$app_date', '$application_no', '$applicant_type', '$status', '$submittedBy','$userId')";
+        $querry = "INSERT INTO app_data(a1_name, a1_fName, a1_activity , a1_paddress, a1_age, a1_nrc, a1_phone, a1_passport, a1_photo, a2_name, a2_fName, a2_activity, a2_paddress, a2_age, a2_nrc, a2_phone, a2_passport, a2_photo, app_date, application_no, applicant_type, status, submittedBy, userId,loan_type) VALUES('$a1_name', '$a1_fName', '$a1_activity','$a1_paddress' ,  '$a1_age', '$a1_nrc', '$a1_phone', '$a1_passport', '$target_file_one', '$a2_name', '$a2_fName', '$a2_activity', '$a2_paddress', '$a2_age', '$a2_nrc', '$a2_phone', '$a2_passport', '$target_file_two', '$app_date', '$application_no', '$applicant_type', '$status', '$submittedBy','$userId','$loan_type')";
     }else{
         if($_FILES["a1_photo"] != ''){
-            $querry = "UPDATE app_data SET a1_name='$a1_name',a1_fName='$a1_fName',a1_activity='$a1_activity',a1_paddress='$a1_paddress',a1_age='$a1_age',a1_nrc='$a1_nrc',a1_phone='$a1_phone',a1_passport='$a1_passport',a1_photo='$target_file_one',a2_name='$a2_name',a2_fName='$a2_fName',a2_activity='$a2_activity',a2_paddress='$a2_paddress',a2_age='$a2_age',a2_nrc='$a2_nrc',a2_phone='$a2_phone',a2_passport='$a2_passport',app_date='$app_date',applicant_type='$applicant_type',status='$status', submittedBy='$submittedBy', userId='$userId' WHERE id=".$id;
+            $querry = "UPDATE app_data SET a1_name='$a1_name',a1_fName='$a1_fName',a1_activity='$a1_activity',a1_paddress='$a1_paddress',a1_age='$a1_age',a1_nrc='$a1_nrc',a1_phone='$a1_phone',a1_passport='$a1_passport',a1_photo='$target_file_one',a2_name='$a2_name',a2_fName='$a2_fName',a2_activity='$a2_activity',a2_paddress='$a2_paddress',a2_age='$a2_age',a2_nrc='$a2_nrc',a2_phone='$a2_phone',a2_passport='$a2_passport',app_date='$app_date',applicant_type='$applicant_type',status='$status', submittedBy='$submittedBy', userId='$userId', loan_type='$loan_type' WHERE id=".$id;
         }
         if($_FILES["a2_photo"] != ''){
-           $querry = "UPDATE app_data SET a1_name='$a1_name',a1_fName='$a1_fName',a1_activity='$a1_activity',a1_paddress='$a1_paddress',a1_age='$a1_age',a1_nrc='$a1_nrc',a1_phone='$a1_phone',a1_passport='$a1_passport',a2_name='$a2_name',a2_fName='$a2_fName',a2_activity='$a2_activity',a2_paddress='$a2_paddress',a2_age='$a2_age',a2_nrc='$a2_nrc',a2_phone='$a2_phone',a2_passport='$a2_passport',a2_photo='$target_file_two',app_date='$app_date',applicant_type='$applicant_type',status='$status',submittedBy='$submittedBy', userId='$userId' WHERE id=".$id;
+           $querry = "UPDATE app_data SET a1_name='$a1_name',a1_fName='$a1_fName',a1_activity='$a1_activity',a1_paddress='$a1_paddress',a1_age='$a1_age',a1_nrc='$a1_nrc',a1_phone='$a1_phone',a1_passport='$a1_passport',a2_name='$a2_name',a2_fName='$a2_fName',a2_activity='$a2_activity',a2_paddress='$a2_paddress',a2_age='$a2_age',a2_nrc='$a2_nrc',a2_phone='$a2_phone',a2_passport='$a2_passport',a2_photo='$target_file_two',app_date='$app_date',applicant_type='$applicant_type',status='$status',submittedBy='$submittedBy', userId='$userId', loan_type='$loan_type' WHERE id=".$id;
         }
 
         if($_FILES["a1_photo"] == '' && $_FILES["a2_photo"] == ''){
-           $querry = "UPDATE app_data SET a1_name='$a1_name',a1_fName='$a1_fName',a1_activity='$a1_activity',a1_paddress='$a1_paddress',a1_age='$a1_age',a1_nrc='$a1_nrc',a1_phone='$a1_phone',a1_passport='$a1_passport',a2_name='$a2_name',a2_fName='$a2_fName',a2_activity='$a2_activity',a2_paddress='$a2_paddress',a2_age='$a2_age',a2_nrc='$a2_nrc',a2_phone='$a2_phone',a2_passport='$a2_passport',app_date='$app_date',applicant_type='$applicant_type',status='$status',submittedBy='$submittedBy', userId='$userId' WHERE id=".$id;
+           $querry = "UPDATE app_data SET a1_name='$a1_name',a1_fName='$a1_fName',a1_activity='$a1_activity',a1_paddress='$a1_paddress',a1_age='$a1_age',a1_nrc='$a1_nrc',a1_phone='$a1_phone',a1_passport='$a1_passport',a2_name='$a2_name',a2_fName='$a2_fName',a2_activity='$a2_activity',a2_paddress='$a2_paddress',a2_age='$a2_age',a2_nrc='$a2_nrc',a2_phone='$a2_phone',a2_passport='$a2_passport',app_date='$app_date',applicant_type='$applicant_type',status='$status',submittedBy='$submittedBy', userId='$userId', loan_type='$loan_type' WHERE id=".$id;
         }
 
         if($_FILES["a1_photo"] != '' && $_FILES["a2_photo"] != ''){
-           $querry = "UPDATE app_data SET a1_name='$a1_name',a1_fName='$a1_fName',a1_activity='$a1_activity',a1_paddress='$a1_paddress',a1_age='$a1_age',a1_nrc='$a1_nrc',a1_phone='$a1_phone',a1_passport='$a1_passport',a2_name='$a2_name',a2_fName='$a2_fName',a2_activity='$a2_activity',a2_paddress='$a2_paddress',a2_age='$a2_age',a2_nrc='$a2_nrc',a2_phone='$a2_phone',a2_passport='$a2_passport',app_date='$app_date' ,a1_photo='$target_file_one',a2_photo='$target_file_two',applicant_type='$applicant_type',status='$status',submittedBy='$submittedBy', userId='$userId' WHERE id=".$id;
+           $querry = "UPDATE app_data SET a1_name='$a1_name',a1_fName='$a1_fName',a1_activity='$a1_activity',a1_paddress='$a1_paddress',a1_age='$a1_age',a1_nrc='$a1_nrc',a1_phone='$a1_phone',a1_passport='$a1_passport',a2_name='$a2_name',a2_fName='$a2_fName',a2_activity='$a2_activity',a2_paddress='$a2_paddress',a2_age='$a2_age',a2_nrc='$a2_nrc',a2_phone='$a2_phone',a2_passport='$a2_passport',app_date='$app_date' ,a1_photo='$target_file_one',a2_photo='$target_file_two',applicant_type='$applicant_type',status='$status',submittedBy='$submittedBy', userId='$userId', loan_type='$loan_type' WHERE id=".$id;
         }
     }
 
@@ -99,15 +100,19 @@ if($_POST['action'] == 'submit-app-data')
 if($_POST['action'] == 'getAppDataList'){
 
     $userId = $_POST['userId'];
-    // ini_set('display_errors', 1);
-    // ini_set('display_startup_errors', 1);
-    // error_reporting(E_ALL);
+    $loan_type = $_POST['loan_type'];
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
+    // echo "<pre>"; print_r($loan_type); die;
+    // "SELECT * FROM media WHERE ref_id = '$ref_id' AND type = '1'"
     if($userId == "0"){
-        $query = "SELECT * FROM app_data";
+        $query = "SELECT * FROM app_data where loan_type= '$loan_type'";
     }else{
-        $query = "SELECT * FROM app_data where userId=".$userId;
+        $query = "SELECT * FROM app_data where userId='$userId'AND loan_type ='$loan_type'";
     }
 
+    $response = [];
     $res_header = mysqli_query($conn, $query);
     while ($row_header = mysqli_fetch_assoc($res_header)) {
         $response[] = $row_header;
@@ -149,6 +154,16 @@ if($_POST['action'] == 'submit-guar-data')
     $a2_passport = $_POST['a2_passport'];
     $a2_photo = $_POST['a2_photo'];
 
+    $a3_name = $_POST['a3_name'];
+    $a3_fName = $_POST['a3_fName'];
+    $a3_activity = $_POST['a3_activity'];
+    $a3_paddress = $_POST['a3_paddress'];
+    $a3_age = $_POST['a3_age'];
+    $a3_nrc = $_POST['a3_nrc'];
+    $a3_phone = $_POST['a3_phone'];
+    $a3_passport = $_POST['a3_passport'];
+    $a3_photo = $_POST['a3_photo'];
+
     $app_date = $_POST['app_date'];
     $status = $_POST['status'];
     // echo "<pre>"; print_r($_POST); die;
@@ -171,27 +186,38 @@ if($_POST['action'] == 'submit-guar-data')
         move_uploaded_file($_FILES["a2_photo"]["tmp_name"], $target_dir .$target_file_two);   
     }
 
+    if($_FILES["a3_photo"] != ''){        
+        $target_dir = "uploads/";
+        // $target_file_two = time().basename($_FILES["a2_photo"]["name"]);
+        $target_file_three = time().'.'.basename($_FILES["a3_photo"]["type"]);
+        move_uploaded_file($_FILES["a3_photo"]["tmp_name"], $target_dir .$target_file_three);   
+    }
+
     $res_header = mysqli_query($conn, "SELECT * FROM guar_data Where ref_id=".$ref_id);
 
     
     // echo "<pre>"; print_r($res_header->num_rows); die;
     if($res_header->num_rows == 0){
-        $querry = "INSERT INTO guar_data(ref_id,a1_name, a1_fName, a1_activity,a1_paddress, a1_age, a1_nrc, a1_phone, a1_passport, a1_photo, a2_name, a2_fName, a2_activity, a2_paddress, a2_age, a2_nrc, a2_phone, a2_passport, a2_photo, app_date) VALUES('$ref_id','$a1_name', '$a1_fName', '$a1_activity','$a1_paddress', '$a1_age', '$a1_nrc', '$a1_phone', '$a1_passport', '$target_file_one', '$a2_name', '$a2_fName', '$a2_activity', '$a2_paddress', '$a2_age', '$a2_nrc', '$a2_phone', '$a2_passport', '$target_file_two', '$app_date')";
+        $querry = "INSERT INTO guar_data(ref_id,a1_name, a1_fName, a1_activity,a1_paddress, a1_age, a1_nrc, a1_phone, a1_passport, a1_photo, a2_name, a2_fName, a2_activity, a2_paddress, a2_age, a2_nrc, a2_phone, a2_passport, a2_photo,a3_name, a3_fName, a3_activity, a3_paddress, a3_age, a3_nrc, a3_phone, a3_passport, a3_photo, app_date) VALUES('$ref_id','$a1_name', '$a1_fName', '$a1_activity','$a1_paddress', '$a1_age', '$a1_nrc', '$a1_phone', '$a1_passport', '$target_file_one', '$a2_name', '$a2_fName', '$a2_activity', '$a2_paddress', '$a2_age', '$a2_nrc', '$a2_phone', '$a2_passport', '$target_file_two','$a3_name', '$a3_fName', '$a3_activity', '$a3_paddress', '$a3_age', '$a3_nrc', '$a3_phone', '$a3_passport', '$target_file_three', '$app_date')";
     }else{
 
         if($_FILES["a1_photo"] != ''){
-            $querry = "UPDATE guar_data SET ref_id='$ref_id',a1_name='$a1_name',a1_fName='$a1_fName',a1_activity='$a1_activity',a1_paddress='$a1_paddress',a1_age='$a1_age',a1_nrc='$a1_nrc',a1_phone='$a1_phone',a1_passport='$a1_passport',a1_photo='$target_file_one',a2_name='$a2_name',a2_fName='$a2_fName',a2_activity='$a2_activity',a2_paddress='$a2_paddress',a2_age='$a2_age',a2_nrc='$a2_nrc',a2_phone='$a2_phone',a2_passport='$a2_passport' WHERE ref_id=".$ref_id;
+            $querry = "UPDATE guar_data SET ref_id='$ref_id',a1_name='$a1_name',a1_fName='$a1_fName',a1_activity='$a1_activity',a1_paddress='$a1_paddress',a1_age='$a1_age',a1_nrc='$a1_nrc',a1_phone='$a1_phone',a1_passport='$a1_passport',a1_photo='$target_file_one',a2_name='$a2_name',a2_fName='$a2_fName',a2_activity='$a2_activity',a2_paddress='$a2_paddress',a2_age='$a2_age',a2_nrc='$a2_nrc',a2_phone='$a2_phone',a2_passport='$a2_passport',a3_name='$a3_name',a3_fName='$a3_fName',a3_activity='$a3_activity',a3_paddress='$a3_paddress',a3_age='$a3_age',a3_nrc='$a3_nrc',a3_phone='$a3_phone',a3_passport='$a3_passport' WHERE ref_id=".$ref_id;
         }
         if($_FILES["a2_photo"] != ''){
-            $querry = "UPDATE guar_data SET ref_id='$ref_id',a1_name='$a1_name',a1_fName='$a1_fName',a1_activity='$a1_activity',a1_paddress='$a1_paddress',a1_age='$a1_age',a1_nrc='$a1_nrc',a1_phone='$a1_phone',a1_passport='$a1_passport',a2_name='$a2_name',a2_fName='$a2_fName',a2_activity='$a2_activity',a2_paddress='$a2_paddress',a2_age='$a2_age',a2_nrc='$a2_nrc',a2_phone='$a2_phone',a2_passport='$a2_passport',a2_photo='$target_file_two' WHERE ref_id=".$ref_id;
+            $querry = "UPDATE guar_data SET ref_id='$ref_id',a1_name='$a1_name',a1_fName='$a1_fName',a1_activity='$a1_activity',a1_paddress='$a1_paddress',a1_age='$a1_age',a1_nrc='$a1_nrc',a1_phone='$a1_phone',a1_passport='$a1_passport',a2_name='$a2_name',a2_fName='$a2_fName',a2_activity='$a2_activity',a2_paddress='$a2_paddress',a2_age='$a2_age',a2_nrc='$a2_nrc',a2_phone='$a2_phone',a2_passport='$a2_passport',a2_photo='$target_file_two',a3_name='$a3_name',a3_fName='$a3_fName',a3_activity='$a3_activity',a3_paddress='$a3_paddress',a3_age='$a3_age',a3_nrc='$a3_nrc',a3_phone='$a3_phone',a3_passport='$a3_passport' WHERE ref_id=".$ref_id;
         }
 
-        if($_FILES["a1_photo"] == '' && $_FILES["a2_photo"] == ''){
-            $querry = "UPDATE guar_data SET ref_id='$ref_id',a1_name='$a1_name',a1_fName='$a1_fName',a1_activity='$a1_activity',a1_paddress='$a1_paddress',a1_age='$a1_age',a1_nrc='$a1_nrc',a1_phone='$a1_phone',a1_passport='$a1_passport',a2_name='$a2_name',a2_fName='$a2_fName',a2_activity='$a2_activity',a2_paddress='$a2_paddress',a2_age='$a2_age',a2_nrc='$a2_nrc',a2_phone='$a2_phone',a2_passport='$a2_passport' WHERE ref_id=".$ref_id;
+        if($_FILES["a3_photo"] != ''){
+            $querry = "UPDATE guar_data SET ref_id='$ref_id',a1_name='$a1_name',a1_fName='$a1_fName',a1_activity='$a1_activity',a1_paddress='$a1_paddress',a1_age='$a1_age',a1_nrc='$a1_nrc',a1_phone='$a1_phone',a1_passport='$a1_passport',a2_name='$a2_name',a2_fName='$a2_fName',a2_activity='$a2_activity',a2_paddress='$a2_paddress',a2_age='$a2_age',a2_nrc='$a2_nrc',a2_phone='$a2_phone',a2_passport='$a2_passport',a3_name='$a3_name',a3_fName='$a3_fName',a3_activity='$a3_activity',a3_paddress='$a3_paddress',a3_age='$a3_age',a3_nrc='$a3_nrc',a3_phone='$a3_phone',a3_passport='$a3_passport',a3_photo='$target_file_three' WHERE ref_id=".$ref_id;
         }
 
-        if($_FILES["a1_photo"] != '' && $_FILES["a2_photo"] != ''){
-            $querry = "UPDATE guar_data SET ref_id='$ref_id',a1_name='$a1_name',a1_fName='$a1_fName',a1_activity='$a1_activity',a1_paddress='$a1_paddress',a1_age='$a1_age',a1_nrc='$a1_nrc',a1_phone='$a1_phone',a1_passport='$a1_passport',a2_name='$a2_name',a2_fName='$a2_fName',a2_activity='$a2_activity',a2_paddress='$a2_paddress',a2_age='$a2_age',a2_nrc='$a2_nrc',a2_phone='$a2_phone',a2_passport='$a2_passport',a1_photo='$target_file_one',a2_photo='$target_file_two' WHERE ref_id=".$ref_id;
+        if($_FILES["a1_photo"] == '' && $_FILES["a2_photo"] == '' && $_FILES["a3_photo"] == ''){
+            $querry = "UPDATE guar_data SET ref_id='$ref_id',a1_name='$a1_name',a1_fName='$a1_fName',a1_activity='$a1_activity',a1_paddress='$a1_paddress',a1_age='$a1_age',a1_nrc='$a1_nrc',a1_phone='$a1_phone',a1_passport='$a1_passport',a2_name='$a2_name',a2_fName='$a2_fName',a2_activity='$a2_activity',a2_paddress='$a2_paddress',a2_age='$a2_age',a2_nrc='$a2_nrc',a2_phone='$a2_phone',a2_passport='$a2_passport',a3_name='$a3_name',a3_fName='$a3_fName',a3_activity='$a3_activity',a3_paddress='$a3_paddress',a3_age='$a3_age',a3_nrc='$a3_nrc',a3_phone='$a3_phone',a3_passport='$a3_passport' WHERE ref_id=".$ref_id;
+        }
+
+        if($_FILES["a1_photo"] != '' && $_FILES["a2_photo"] != '' && $_FILES["a3_photo"] != ''){
+            $querry = "UPDATE guar_data SET ref_id='$ref_id',a1_name='$a1_name',a1_fName='$a1_fName',a1_activity='$a1_activity',a1_paddress='$a1_paddress',a1_age='$a1_age',a1_nrc='$a1_nrc',a1_phone='$a1_phone',a1_passport='$a1_passport',a2_name='$a2_name',a2_fName='$a2_fName',a2_activity='$a2_activity',a2_paddress='$a2_paddress',a2_age='$a2_age',a2_nrc='$a2_nrc',a2_phone='$a2_phone',a2_passport='$a2_passport',a1_photo='$target_file_one',a2_photo='$target_file_two',a3_photo='$target_file_three' WHERE ref_id=".$ref_id;
         }
     }
 

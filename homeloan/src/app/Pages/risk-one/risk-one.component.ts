@@ -28,6 +28,7 @@ export class RiskOneComponent implements OnInit {
   mws4 = 0;
   mws5 = 0;
   mws6 = 0;
+  mws7 = 0;
   mws_total = 0;
 
   s_mws1 = 0;
@@ -36,6 +37,7 @@ export class RiskOneComponent implements OnInit {
   s_mws4 = 0;
   s_mws5 = 0;
   s_mws6 = 0;
+  s_mws7 = 0;
   s_mws_total = 0;
 
   a1 = '';
@@ -73,13 +75,30 @@ export class RiskOneComponent implements OnInit {
   f2 = '';
   f3 = '';
 
+  // for Applicant's Source of Income :
+  g1 = '';
+  g2 = '';
+  g3 = '';
+
   logedInUser: any;
   userId = "";
   status = "";
   viewOnly: any = false;
   nextButtonText: any = "";
+  url:any = "";
+
+  ques1H:any = "";
+  ques1I:any = "";
+
+  ques3A:any = "";
+  ques3B:any = "";
+  ques3C:any = "";
+  ques3D:any = "";
+  ques3E:any = "";
+  ques3F:any = "";
 
   ngOnInit(): void {
+    this.url = this.ds.commonUrl(this.router);
     this.route.params.subscribe((params: any) => {
       if (params.id != null) {
         localStorage.setItem("applicant1Id", params.id)
@@ -92,6 +111,8 @@ export class RiskOneComponent implements OnInit {
       }
     });
     this.logedInUser = this.ds.userLoggedIn()
+    // this.url = this.ds.commonUrl(this.router);
+    
     let checkView = localStorage.getItem("viewOnly")
     if (checkView === 'true') {
       this.viewOnly = true;
@@ -109,23 +130,63 @@ export class RiskOneComponent implements OnInit {
       let newWorth = response[response.length - 1];
       let loanAmountRatio = newWorth.loanAmountRatio;
       // console.log('loanAmountRatio', loanAmountRatio)
-      if (loanAmountRatio >= 1.5) {
-        this.handleUpdate(2, 3, 1);
-      }
-      if (loanAmountRatio >= 1 && loanAmountRatio < 1.5) {
-        this.handleUpdate(1.75, 3, 2);
-      }
-      if (loanAmountRatio >= 0.75 && loanAmountRatio < 1) {
-        this.handleUpdate(1.5, 3, 3);
-      }
-      if (loanAmountRatio >= 0.5 && loanAmountRatio < 0.75) {
-        this.handleUpdate(1.25, 3, 4);
-      }
-      if (loanAmountRatio >= 0.25 && loanAmountRatio < 0.5) {
-        this.handleUpdate(1, 3, 4);
-      }
-      if (loanAmountRatio < 0.25) {
-        this.handleUpdate(0.5, 1, 4);
+      if(this.url == 'personal-vehicle-loan'){
+        this.ques1H = "H. 50 and more but less than 60";
+        this.ques1I = "I. 60 and above";
+
+        this.ques3A = "A. Applicant's present combined worth is estimated at 4 and More times  of the proposed loan amount.";
+        this.ques3B = "B. Applicant's present combined worth is estimated at 3  and More But < 4.00 times of the proposed loan amount.";
+        this.ques3C = "C. Applicant's present combined worth is estimated at 2.00 and More but <  3.00 times of the proposed loan amount.";
+        this.ques3D = "D. Applicant's present combined worth is estimated at 1.00 and More but < 2.00 times of the proposed loan amount.";
+        this.ques3E = "E. Applicant's present combined worth is estimated at < 1 time of the proposed loan amount.";
+        // this.ques3F = "F. Applicant's present combined worth is estimated at Less than 0.25 time of the proposed loan amount.";
+
+        if (loanAmountRatio >= 4) {
+          this.handleUpdate(3, 3, 1);
+        }
+        if (loanAmountRatio >= 3 && loanAmountRatio < 4) {
+          this.handleUpdate(2.5, 3, 2);
+        }
+        if (loanAmountRatio >= 2 && loanAmountRatio < 3) {
+          this.handleUpdate(2, 3, 3);
+        }
+        if (loanAmountRatio >= 1 && loanAmountRatio < 2) {
+          this.handleUpdate(1.25, 3, 4);
+        }
+        if (loanAmountRatio < 1) {
+          this.handleUpdate(0.5, 3, 5);
+        }
+        // if (loanAmountRatio < 0.25) {
+        //   this.handleUpdate(0.5, 1, 4);
+        // }
+      }else{
+        this.ques1H = "H. 50 and more but less than 55";
+        this.ques1I = "I. 55 and above";
+
+        this.ques3A = "A. Applicant's present combined worth is estimated at More than 1.50 times of the proposed loan amount.";
+        this.ques3B = " B. Applicant's present combined worth is estimated at 1 and More But Less than 1.50 times of the proposed loan amount.";
+        this.ques3C = "C. Applicant's present combined worth is estimated at 0.75 and More but Less than 1 of the proposed loan amount.";
+        this.ques3D = "D. Applicant's present combined worth is estimated at 0.5 and More but Less than 0.75 time of the proposed loan amount.";
+        this.ques3E = "E. Applicant's present combined worth is estimated at 0.25 and More but Less than 0.50 time of the proposed loan amount.";
+        this.ques3F = "F. Applicant's present combined worth is estimated at Less than 0.25 time of the proposed loan amount.";
+        if (loanAmountRatio >= 1.5) {
+          this.handleUpdate(2, 3, 1);
+        }
+        if (loanAmountRatio >= 1 && loanAmountRatio < 1.5) {
+          this.handleUpdate(1.75, 3, 2);
+        }
+        if (loanAmountRatio >= 0.75 && loanAmountRatio < 1) {
+          this.handleUpdate(1.5, 3, 3);
+        }
+        if (loanAmountRatio >= 0.5 && loanAmountRatio < 0.75) {
+          this.handleUpdate(1.25, 3, 4);
+        }
+        if (loanAmountRatio >= 0.25 && loanAmountRatio < 0.5) {
+          this.handleUpdate(1, 3, 5);
+        }
+        if (loanAmountRatio < 0.25) {
+          this.handleUpdate(0.5, 1, 6);
+        }
       }
 
 
@@ -383,8 +444,28 @@ export class RiskOneComponent implements OnInit {
       this.mws6 = value * 1;
       this.s_mws6 = value;
     }
+
+    if (type == 7) {
+      if (no == 1) {
+        this.g1 = 'activeOpt';
+        this.g2 = '';
+        this.g3 = '';
+      }
+      if (no == 2) {
+        this.g1 = '';
+        this.g2 = 'activeOpt';
+        this.g3 = '';
+      }
+      if (no == 3) {
+        this.g1 = '';
+        this.g2 = '';
+        this.g3 = 'activeOpt';
+      }
+      this.mws7 = value * 1;
+      this.s_mws7 = value;
+    }
     this.mws_total =
-      this.mws1 + this.mws2 + this.mws3 + this.mws4 + this.mws5 + this.mws6;
+      this.mws1 + this.mws2 + this.mws3 + this.mws4 + this.mws5 + this.mws6 + this.mws7;
   }
 
   getSingleData() {
@@ -425,12 +506,14 @@ export class RiskOneComponent implements OnInit {
         this.mws4 = result.mws4;
         this.mws5 = result.mws5;
         this.mws6 = result.mws6;
+        this.mws7 = result.mws7;
         this.s_mws1 = result.s_mws1;
         this.s_mws2 = result.s_mws2;
         this.s_mws3 = result.s_mws3;
         this.s_mws4 = result.s_mws4;
         this.s_mws5 = result.s_mws5;
         this.s_mws6 = result.s_mws6;
+        this.s_mws7 = result.s_mws7;
         this.mws_total = result.mws_total;
         this.s_mws_total = result.s_mws_total;
         this.a1 = result.a1;
@@ -462,6 +545,9 @@ export class RiskOneComponent implements OnInit {
         this.f1 = result.f1;
         this.f2 = result.f2;
         this.f3 = result.f3;
+        this.g1 = result.g1;
+        this.g2 = result.g2;
+        this.g3 = result.g3;
       }
     });
   }
@@ -518,12 +604,14 @@ export class RiskOneComponent implements OnInit {
       mws4: this.mws4,
       mws5: this.mws5,
       mws6: this.mws6,
+      mws7: this.mws7,
       s_mws1: this.s_mws1,
       s_mws2: this.s_mws2,
       s_mws3: this.s_mws3,
       s_mws4: this.s_mws4,
       s_mws5: this.s_mws5,
       s_mws6: this.s_mws6,
+      s_mws7: this.s_mws7,
       mws_total: this.mws_total,
       s_mws_total: this.s_mws_total,
       a1: this.a1,
@@ -555,6 +643,9 @@ export class RiskOneComponent implements OnInit {
       f1: this.f1,
       f2: this.f2,
       f3: this.f3,
+      g1: this.g1,
+      g2: this.g2,
+      g3: this.g3,
     };
     // console.log(JsonData);
     let data: any = new FormData();

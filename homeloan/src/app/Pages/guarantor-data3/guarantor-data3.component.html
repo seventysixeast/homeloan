@@ -1,0 +1,158 @@
+<main id="main" class="main">
+    <div class="pagetitle">
+      <h1>Guarantor Data 3</h1>
+      <!-- <nav>
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+            <li class="breadcrumb-item active">Guarantor Data</li>
+          </ol>
+        </nav> -->
+    </div>
+    <!-- End Page Title -->
+  
+    <section class="section">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">
+                <!-- Guarantor Data -->
+              </h5>
+  
+              <!-- Default Tabs -->
+              <!-- <ul class="nav nav-tabs" id="myTab" role="tablist">
+                  <li class="nav-item" role="presentation">
+                    <button
+                      class="nav-link active"
+                      id="home-tab"
+                      data-bs-toggle="tab"
+                      data-bs-target="#home"
+                      type="button"
+                      role="tab"
+                      aria-controls="home"
+                      aria-selected="true"
+                    >
+                      1st Guarantor
+                    </button>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                    <button
+                      class="nav-link"
+                      id="profile-tab"
+                      data-bs-toggle="tab"
+                      data-bs-target="#profile"
+                      type="button"
+                      role="tab"
+                      aria-controls="profile"
+                      aria-selected="false"
+                    >
+                      2nd Guarantor
+                    </button>
+                  </li>
+                </ul> -->
+              <div class="tab-content pt-2" id="myTabContent">
+                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                  <div class="row g-3 mx-2 my-1">
+                    <div class="col-12">
+                      <label for="inputNanme4" class="form-label">{{labelDisplay}} Full Name </label>
+                      <input autocomplete="nope" [(ngModel)]="a3_name" type="text" class="form-control" id="inputNanme4"
+                        [readonly]="viewOnly" autocomplete="off"/>
+                    </div>
+                    <div class="col-12">
+                      <label for="inputEmail4" class="form-label">Father's / Husband's Name</label>
+                      <input autocomplete="nope" [(ngModel)]="a3_fName" type="text" class="form-control" id="inputEmail4"
+                        [readonly]="viewOnly" autocomplete="off"/>
+                    </div>
+                    <div class="col-12" *ngIf="url == 'homeloan'">
+                      <label for="inputPassword4" class="form-label">Activity </label>
+                      <input autocomplete="nope" [(ngModel)]="a3_activity" type="text" class="form-control"
+                        id="inputPassword4" [readonly]="viewOnly" autocomplete="off"/>
+                    </div>
+                    <div class="col-12" *ngIf="url == 'personal-vehicle-loan'">
+                      <label for="inputPassword4" class="form-label">Activity </label>
+                      <textarea autocomplete="nope" rows="6"  [(ngModel)]="a3_activity" type="text" class="form-control"
+                        id="inputPassword4" [readonly]="viewOnly" autocomplete="off"></textarea>
+                    </div>
+                    <div class="col-12">
+                      <label for="inputAddress" class="form-label">Present Address</label>
+                      <input autocomplete="nope" [(ngModel)]="a3_paddress" type="text" class="form-control"
+                        id="inputAddress" [readonly]="viewOnly" autocomplete="off"/>
+                    </div>
+                    <div class="col-12">
+                      <label for="inputAddress" class="form-label">{{labelDisplay}} Age</label>
+                      <input autocomplete="nope" [(ngModel)]="a3_age" type="text" class="form-control" id="inputAddress"
+                        [readonly]="viewOnly" autocomplete="off"/>
+                    </div>
+                    <div class="col-12">
+                      <label for="inputAddress" class="form-label">NRC No</label>
+                      <input autocomplete="nope" [(ngModel)]="a3_nrc" type="text" class="form-control" id="inputAddress"
+                        [readonly]="viewOnly" autocomplete="off"/>
+                    </div>
+                    <div class="col-12">
+                      <label for="inputAddress" class="form-label">Mobile No</label>
+                      <input autocomplete="nope" [(ngModel)]="a3_phone" type="text" class="form-control" id="inputAddress"
+                        [readonly]="viewOnly" autocomplete="off"/>
+                    </div>
+                    <div class="col-12">
+                      <label for="inputAddress" class="form-label">Passport No</label>
+                      <input autocomplete="nope" [(ngModel)]="a3_passport" type="text" class="form-control"
+                        id="inputAddress" [readonly]="viewOnly" autocomplete="off"/>
+                    </div>
+                    <div [class]="viewOnly ? 'col-6 onlyViewClass':'col-6'">
+                      <label for="inputAddress" class="form-label">Guarantor's Photo </label>
+                      <input (change)="handleFileInput($event.target, 3)" type="file" class="form-control"
+                        id="inputAddress" [readonly]="viewOnly" />
+                    </div>
+                    <div class="col-6" style="text-align: center">
+                      <img [src]="a3_photo" style="width: 200px" />
+                    </div>
+                    <div class="col-12">
+                      <button type="submit" class="btn btn-primary mx-3" (click)="goBack()">
+                        Back
+                      </button>
+                      <button type="submit" class="btn btn-primary" (click)="handleSubmit(2)">
+                        {{nextButtonText}}
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                
+              </div>
+              <!-- End Default Tabs -->
+              <div class="row mx-1 my-3">
+                <!-- <div class="col-12">
+                    <label for="inputAddress" class="form-label"
+                      >Guarantorion Date</label
+                    >
+                    <input
+                      type="date"
+                      [(ngModel)]="app_date"
+                      class="form-control"
+                      id="inputAddress"
+                    />
+                  </div> -->
+                <div class="col-12 mt-3">
+                  <!-- <button
+                      type="submit"
+                      class="btn btn-primary"
+                      (click)="goBack()"
+                    >
+                      Back
+                    </button>
+                    <button
+                      type="submit"
+                      class="btn btn-primary mx-3"
+                      (click)="goNext()"
+                    >
+                      Next
+                    </button> -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <!-- End #main -->
+  <ngx-spinner type="ball-scale-multiple"></ngx-spinner>

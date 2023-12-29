@@ -17,8 +17,15 @@ export class RetailLoanComponent {
   ) {}
 
   gotodashboard(){
-    // window.location.href = "/homeloan/dashboard"
-    window.location.href = "/retailloan/homeloan/dashboard"
+    window.location.href = "/homeloan/dashboard"
+    // window.location.href = "/retailloan/homeloan/dashboard"
+  }
+
+  gotoPersonalVehicleLoanDashboard(){
+    window.location.href = "/personal-vehicle-loan/dashboard"
+    // window.location.href = "/retailloan/personal-vehicle-loan/dashboard"
+
+    // https://76east.com/retailloan/personal-vehicle-loan/dashboard
   }
 
 }

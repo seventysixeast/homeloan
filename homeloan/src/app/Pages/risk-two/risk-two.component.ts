@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, SimpleChanges } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { DataService } from 'src/app/data.service';
@@ -44,7 +44,10 @@ export class RiskTwoComponent implements OnInit {
   a2 = '';
   a3 = '';
   a4 = '';
-
+  // newly added ooptions
+  a5 = "";
+  a6 = "";
+  // end newly added ooptions
   b1 = '';
   b2 = '';
   b3 = '';
@@ -78,8 +81,33 @@ export class RiskTwoComponent implements OnInit {
   status = "";
   viewOnly: any = false;
   nextButtonText: any = "";
+  url:any = "";
+  vehicleType:any = "new-vehicle";
+  marginAge:any = 0;
+
+  ques1A:any = "";
+  ques1B:any = "";
+  ques1C:any = "";
+  ques1D:any = "";
+  ques1E:any = "";
+  ques1F:any = "";
+
+  ques2A:any = "";
+  ques2B:any = "";
+  ques2C:any = "";
+  ques2D:any = "";
+
+  ques4A:any = "";
+  ques4B:any = "";
+  ques4C:any = "";
+  ques4D:any = "";
+  ques4E:any = "";
+  ques4F:any = "";
+  ques4G:any = "";
+  ques4H:any = "";
 
   ngOnInit(): void {
+    this.url = this.ds.commonUrl(this.router);
     this.route.params.subscribe((params: any) => {
       if (params.id != null) {
         localStorage.setItem("applicant1Id", params.id)
@@ -107,6 +135,8 @@ export class RiskTwoComponent implements OnInit {
         this.a2 = '';
         this.a3 = '';
         this.a4 = '';
+        this.a5 = '';
+        this.a6 = '';
       }
 
       if (no == 2) {
@@ -114,18 +144,40 @@ export class RiskTwoComponent implements OnInit {
         this.a2 = 'activeOpt';
         this.a3 = '';
         this.a4 = '';
+        this.a5 = '';
+        this.a6 = '';
       }
       if (no == 3) {
         this.a1 = '';
         this.a2 = '';
         this.a3 = 'activeOpt';
         this.a4 = '';
+        this.a5 = '';
+        this.a6 = '';
       }
       if (no == 4) {
         this.a1 = '';
         this.a2 = '';
         this.a3 = '';
         this.a4 = 'activeOpt';
+        this.a5 = '';
+        this.a6 = '';
+      }
+      if (no == 5) {
+        this.a1 = '';
+        this.a2 = '';
+        this.a3 = '';
+        this.a4 = '';
+        this.a5 = 'activeOpt';
+        this.a6 = '';
+      }
+      if (no == 6) {
+        this.a1 = '';
+        this.a2 = '';
+        this.a3 = '';
+        this.a4 = '';
+        this.a5 = '';
+        this.a6 = 'activeOpt';
       }
 
       this.mws1 = value * 3;
@@ -335,33 +387,179 @@ export class RiskTwoComponent implements OnInit {
       let IIR1 = newWorth.IIR1;
       let IIR2 = newWorth.IIR2;
 
-      if (IIR1 >= 3) {
-        this.handleUpdate(5, 1, 1);
-      }
-      if (IIR1 >= 2 && IIR1 < 3) {
-        this.handleUpdate(3, 1, 2);
-      }
-      if (IIR1 >= 1 && IIR1 < 2) {
-        this.handleUpdate(2, 1, 3);
-      }
-      if (IIR1 < 1) {
-        this.handleUpdate(-1, 1, 4);
+      if(this.url == 'personal-vehicle-loan'){
+        this.ques1A = "A. Applicant's estimated Monthly Income is at 5 times and more of Monthly Installment.";
+        this.ques1B = "B. Applicant's estimated Monthly Income is at 4 times and more but < 5 times of Monthly Installment.";
+        this.ques1C = "C. Applicant's estimated Monthly Income is at 3 times and more but < 4 times of Monthly Installment.";
+        this.ques1D = "D. Applicant's estimated Monthly Income is at 2 time and more but Less than 3  times of Monthly Installment.";
+        this.ques1E = "E. Applicant's estimated Monthly Income is at 1 time and more but Less than  2 times of Monthly Installment.";
+        this.ques1F = "F. Applicant's estimated Monthly Income is Less than 1 time of Monthly Installment.";
+
+        this.ques2A = "A. Estimated combined Family Income is  6 and More  times of Monthly Installment.";
+        this.ques2B = "B. Estimated combined Family Income is at 4 times and more but  less than 6 times of Monthly Installment.";
+        this.ques2C = "C. Estimated combined Family Income is at 2 times and more but less than 4 times of Monthly Installment.";
+        this.ques2D = "D. Estimated combined Family Income is Less than 2 times of Monthly Installment.";
+        console.log('vehicleType', this.vehicleType)
+        this.onChangeVehicleType()
+        if (IIR1 >= 5) {
+          this.handleUpdate(5, 1, 1);
+        }
+        if (IIR1 >= 4 && IIR1 < 5) {
+          this.handleUpdate(4, 1, 2);
+        }
+        if (IIR1 >= 3 && IIR1 < 4) {
+          this.handleUpdate(3, 1, 3);
+        }
+        if (IIR1 >= 2 && IIR1 < 3) {
+          this.handleUpdate(2, 1, 4);
+        }
+        if (IIR1 >= 1 && IIR1 < 2) {
+          this.handleUpdate(1, 1, 5);
+        }
+        if (IIR1 < 1) {
+          this.handleUpdate(-3, 1, 6);
+        }
+
+        if (IIR2 >= 6) {
+          this.handleUpdate(4, 2, 1);
+        }
+        if (IIR2 >= 4 && IIR2 < 6) {
+          this.handleUpdate(3, 2, 2);
+        }
+        if (IIR2 >= 2 && IIR2 < 4) {
+          this.handleUpdate(1.5, 2, 3);
+        }
+        if (IIR2 < 2) {
+          this.handleUpdate(-1, 2, 4);
+        }
+      }else{
+        this.ques1A = "A. Applicant's estimated Monthly Income is at 3 times and more of Monthly Installment.";
+        this.ques1B = "B. Applicant's estimated Monthly Income is at 2 time and more but Less than 3 times of Monthly Installment.";
+        this.ques1C = "C. Applicant's estimated Monthly Income is at 1 time and more but Less than 2 times of Monthly Installment.";
+        this.ques1D = "D. Applicant's estimated Monthly Income is Less than 1 time of Monthly Installment.";
+
+        this.ques2A = "A. Estimated combined Family Income is more than 4 times of Monthly Installment.";
+        this.ques2B = "B. Estimated combined Family Income is at 3 times and more but less than 4 times of Monthly Installment.";
+        this.ques2C = "C. Estimated combined Family Income is at 2 times and more but less than 3 times of Monthly Installment.";
+        this.ques2D = " D. Estimated combined Family Income is Less than 2 times of Monthly Installment.";
+
+        this.ques4A = "A. Applicant's Margin Contribution is Less than 10 %";
+        this.ques4B = "B. Applicant's Margin Contribution is 10 % and more but Less than 15 %";
+        this.ques4C = "C. Applicant's Margin Contribution is 15 % and more but Less than 20 %";
+        this.ques4D = "D. Applicant's Margin Contribution is 20 % and more but Less than 25 %";
+        this.ques4E = "E. Applicant's Margin Contribution is 25 % and more but Less than 30 %";
+        this.ques4F = "F. Applicant's Margin Contribution is 30 % and more but Less than 35 %";
+        this.ques4G = "G. Applicant's Margin Contribution is 35 % and more but Less than 40 %";
+        this.ques4H = "H. Applicant's Margin Contribution is 40 % and more.";
+        if (IIR1 >= 3) {
+          this.handleUpdate(5, 1, 1);
+        }
+        if (IIR1 >= 2 && IIR1 < 3) {
+          this.handleUpdate(3, 1, 2);
+        }
+        if (IIR1 >= 1 && IIR1 < 2) {
+          this.handleUpdate(2, 1, 3);
+        }
+        if (IIR1 < 1) {
+          this.handleUpdate(-1, 1, 4);
+        }
+  
+        if (IIR2 >= 4) {
+          this.handleUpdate(4, 2, 1);
+        }
+        if (IIR2 >= 3 && IIR2 < 4) {
+          this.handleUpdate(3, 2, 2);
+        }
+        if (IIR2 >= 2 && IIR2 < 3) {
+          this.handleUpdate(1.5, 2, 3);
+        }
+        if (IIR2 < 2) {
+          this.handleUpdate(-1, 2, 4);
+        }
       }
 
-      if (IIR2 >= 4) {
-        this.handleUpdate(4, 2, 1);
-      }
-      if (IIR2 >= 3 && IIR2 < 4) {
-        this.handleUpdate(3, 2, 2);
-      }
-      if (IIR2 >= 2 && IIR2 < 3) {
-        this.handleUpdate(1.5, 2, 3);
-      }
-      if (IIR2 < 2) {
-        this.handleUpdate(-1, 2, 4);
-      }
     });
   }
+
+  onChangeVehicleType(){
+    console.log('this.vehicleType',this.vehicleType)
+    if(this.vehicleType =="new-vehicle"){
+      this.ques4A = "A. Applicant's Margin Contribution is Less than 10 % for NEW vehicles .";
+      this.ques4B = "B. Applicant's Margin Contribution is 10 % and more  but Less than 15 % for NEW Vehicles.";
+      this.ques4C = "C. Applicant's Margin Contribution is 15 % and more but Less than 20 % for NEW Vehicles.";
+      this.ques4D = "D. Applicant's Margin Contribution is 20 % and more but Less than 25 % for NEW Vehicles";
+      this.ques4E = "E. Applicant's Margin Contribution is 25 % and more but Less than 30 % for NEW Vehicles.";
+      this.ques4F = "F. Applicant's Margin Contribution is 30 % and more but Less than 35 % for NEW Vehicles.";
+      this.ques4G = "G. Applicant's Margin Contribution is 35 % and more but Less than 40 % for NEW Vehicles.";
+      this.ques4H = "H. Applicant's Margin Contribution is 40 % and more for NEW Vehicles.";
+    }else{
+      this.ques4A = "A. Applicant's Margin Contribution is Less than 20 % for USED Vehicles .";
+      this.ques4B = "B. Applicant's Margin Contribution is 20 % and more  but Less than 25 % for USED Vehicles.";
+      this.ques4C = "C. Applicant's Margin Contribution is 25 % and more but Less than 30 % for USED  Vehicles.";
+      this.ques4D = "D. Applicant's Margin Contribution is 30 % and more but Less than 35 % for USED Vehicles";
+      this.ques4E = "E. Applicant's Margin Contribution is 35 % and more but Less than 40 % for USED Vehicles.";
+      this.ques4F = "F. Applicant's Margin Contribution is 40 % and more but Less than 45 % for USED Vehicles.";
+      this.ques4G = "G. Applicant's Margin Contribution is 45 % and more but Less than 50 % for USED Vehicles. ";
+      this.ques4H = "H. Applicant's Margin Contribution is 50 % and more for USED Vehicles.";
+    }
+    if(this.vehicleType == "new-vehicle"){
+      if (this.marginAge < 10) {
+        this.handleUpdate(-5, 4, 1);
+      }
+      if (this.marginAge >= 10 && this.marginAge < 15) {
+        this.handleUpdate(2.5, 4, 2);
+      }
+      if (this.marginAge >= 15 && this.marginAge < 20) {
+        this.handleUpdate(2.75, 4, 3);
+      }
+      if (this.marginAge >= 20 && this.marginAge < 25) {
+        this.handleUpdate(3, 4, 4);
+      }
+      if (this.marginAge >= 25 && this.marginAge < 30) {
+        this.handleUpdate(3.5, 4, 5);
+      }
+      if (this.marginAge >= 30 && this.marginAge < 35) {
+        this.handleUpdate(4, 4, 6);
+      }
+      if (this.marginAge >= 35 && this.marginAge < 40) {
+        this.handleUpdate(4.5, 4, 7);
+      }
+      if (this.marginAge >= 40) {
+        this.handleUpdate(5, 4, 8);
+      }
+    }else{
+      if (this.marginAge < 20) {
+        this.handleUpdate(-5, 4, 1);
+      }
+      if (this.marginAge >= 20 && this.marginAge < 25) {
+        this.handleUpdate(2.5, 4, 2);
+      }
+      if (this.marginAge >= 25 && this.marginAge < 30) {
+        this.handleUpdate(2.75, 4, 3);
+      }
+      if (this.marginAge >= 30 && this.marginAge < 35) {
+        this.handleUpdate(3, 4, 4);
+      }
+      if (this.marginAge >= 35 && this.marginAge < 40) {
+        this.handleUpdate(3.5, 4, 5);
+      }
+      if (this.marginAge >= 40 && this.marginAge < 45) {
+        this.handleUpdate(4, 4, 6);
+      }
+      if (this.marginAge >= 45 && this.marginAge < 50) {
+        this.handleUpdate(4.5, 4, 7);
+      }
+      if (this.marginAge >= 50) {
+        this.handleUpdate(5, 4, 8);
+      }
+    }
+  
+  }
+
+  // ngOnChanges(changes: SimpleChanges) {
+  //   console.log('this.vehicleType',this.vehicleType)
+  //   this.onChangeVehicleType()
+  // }
 
   getLoanRequest() {
     let data = new FormData();
@@ -369,31 +567,88 @@ export class RiskTwoComponent implements OnInit {
     data.append('action', 'getSingleDataLoan');
     this.ds.submitAppData(data).subscribe((response: any) => {
       let locanR = response[response.length - 1];
-      let marginAge = locanR.marginAge;
+      // let marginAge = locanR.marginAge;
+      let marginAge = 30;
+      this.marginAge = marginAge;
+      // this.vehicleType = locanR.vehicleType;
 
-      if (marginAge < 10) {
-        this.handleUpdate(-5, 4, 1);
-      }
-      if (marginAge >= 10 && marginAge < 15) {
-        this.handleUpdate(-1, 4, 2);
-      }
-      if (marginAge >= 15 && marginAge < 20) {
-        this.handleUpdate(2, 4, 3);
-      }
-      if (marginAge >= 20 && marginAge < 25) {
-        this.handleUpdate(3, 4, 4);
-      }
-      if (marginAge >= 25 && marginAge < 30) {
-        this.handleUpdate(3.5, 4, 5);
-      }
-      if (marginAge >= 30 && marginAge < 35) {
-        this.handleUpdate(4, 4, 6);
-      }
-      if (marginAge >= 35 && marginAge < 40) {
-        this.handleUpdate(4.5, 4, 7);
-      }
-      if (marginAge >= 40) {
-        this.handleUpdate(5, 4, 8);
+      if(this.url == 'personal-vehicle-loan'){
+        if(this.vehicleType == "new-vehicle"){
+          if (marginAge < 10) {
+            this.handleUpdate(-5, 4, 1);
+          }
+          if (marginAge >= 10 && marginAge < 15) {
+            this.handleUpdate(2.5, 4, 2);
+          }
+          if (marginAge >= 15 && marginAge < 20) {
+            this.handleUpdate(2.75, 4, 3);
+          }
+          if (marginAge >= 20 && marginAge < 25) {
+            this.handleUpdate(3, 4, 4);
+          }
+          if (marginAge >= 25 && marginAge < 30) {
+            this.handleUpdate(3.5, 4, 5);
+          }
+          if (marginAge >= 30 && marginAge < 35) {
+            this.handleUpdate(4, 4, 6);
+          }
+          if (marginAge >= 35 && marginAge < 40) {
+            this.handleUpdate(4.5, 4, 7);
+          }
+          if (marginAge >= 40) {
+            this.handleUpdate(5, 4, 8);
+          }
+        }else{
+          if (marginAge < 20) {
+            this.handleUpdate(-5, 4, 1);
+          }
+          if (marginAge >= 20 && marginAge < 25) {
+            this.handleUpdate(2.5, 4, 2);
+          }
+          if (marginAge >= 25 && marginAge < 30) {
+            this.handleUpdate(2.75, 4, 3);
+          }
+          if (marginAge >= 30 && marginAge < 35) {
+            this.handleUpdate(3, 4, 4);
+          }
+          if (marginAge >= 35 && marginAge < 40) {
+            this.handleUpdate(3.5, 4, 5);
+          }
+          if (marginAge >= 40 && marginAge < 45) {
+            this.handleUpdate(4, 4, 6);
+          }
+          if (marginAge >= 45 && marginAge < 50) {
+            this.handleUpdate(4.5, 4, 7);
+          }
+          if (marginAge >= 50) {
+            this.handleUpdate(5, 4, 8);
+          }
+        }
+      }else{
+        if (marginAge < 10) {
+          this.handleUpdate(-5, 4, 1);
+        }
+        if (marginAge >= 10 && marginAge < 15) {
+          this.handleUpdate(-1, 4, 2);
+        }
+        if (marginAge >= 15 && marginAge < 20) {
+          this.handleUpdate(2, 4, 3);
+        }
+        if (marginAge >= 20 && marginAge < 25) {
+          this.handleUpdate(3, 4, 4);
+        }
+        if (marginAge >= 25 && marginAge < 30) {
+          this.handleUpdate(3.5, 4, 5);
+        }
+        if (marginAge >= 30 && marginAge < 35) {
+          this.handleUpdate(4, 4, 6);
+        }
+        if (marginAge >= 35 && marginAge < 40) {
+          this.handleUpdate(4.5, 4, 7);
+        }
+        if (marginAge >= 40) {
+          this.handleUpdate(5, 4, 8);
+        }
       }
     });
   }
@@ -406,6 +661,7 @@ export class RiskTwoComponent implements OnInit {
       if (response !== null) {
         let result = response[response.length - 1];
         result = JSON.parse(result.JsonData);
+        this.vehicleType = result.vehicleType;
         this.mws1 = result.mws1;
         this.mws2 = result.mws2;
         this.mws3 = result.mws3;
@@ -482,6 +738,7 @@ export class RiskTwoComponent implements OnInit {
   }
 
   handleSubmit() {
+    console.log
     if (this.viewOnly) {
       this.goNext();
       return;
@@ -503,6 +760,7 @@ export class RiskTwoComponent implements OnInit {
     }
     this.spiner.show();
     let JsonData = {
+      vehicleType:this.vehicleType,
       mws1: this.mws1,
       mws2: this.mws2,
       mws3: this.mws3,

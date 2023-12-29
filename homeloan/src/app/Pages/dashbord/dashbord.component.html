@@ -13,7 +13,7 @@
       <button
         type="button"
         class="btn btn-primary"
-        routerLink="/homeloan/applicant-data"
+        [routerLink]="addNewApplicationLink"
         *ngIf="logedInUser.type == 'Credit-Analyst'"
       >
         Add New Client
@@ -89,7 +89,7 @@
                     </tr>
                   </tbody>
                 </table>
-                <div *ngIf="!dataList" class="textCenter">
+                <div *ngIf="!dataList || dataList.length == 0" class="textCenter">
                   No Record
                 </div>
               </div>

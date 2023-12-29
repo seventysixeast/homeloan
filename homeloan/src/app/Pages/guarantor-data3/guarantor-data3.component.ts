@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DataService } from 'src/app/data.service';
 import Swal from 'sweetalert2';
@@ -6,12 +6,12 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { SideNavComponent } from '../../Components/side-nav/side-nav.component';
 
 @Component({
-  selector: 'app-guarantor-data2',
-  templateUrl: './guarantor-data2.component.html',
-  styleUrls: ['./guarantor-data2.component.css'],
-  providers: [SideNavComponent],
+  selector: 'app-guarantor-data3',
+  templateUrl: './guarantor-data3.component.html',
+  styleUrls: ['./guarantor-data3.component.css'],
+  providers: [SideNavComponent]
 })
-export class GuarantorData2Component {
+export class GuarantorData3Component {
   constructor(
     public ds: DataService,
     private route: ActivatedRoute,
@@ -63,6 +63,7 @@ export class GuarantorData2Component {
   viewOnly: any = false;
   nextButtonText: any = "";
   url:any = "";
+  labelDisplay:any = "";
 
   ngOnInit(): void {
     this.route.params.subscribe((params: any) => {
@@ -78,6 +79,11 @@ export class GuarantorData2Component {
     });
     this.logedInUser = this.ds.userLoggedIn();
     this.url = this.ds.commonUrl(this.router);
+    if(this.url == 'personal-vehicle-loan'){
+      this.labelDisplay = "Applicant's";
+    }else{
+      this.labelDisplay = "Guarantor's";
+    }
     // console.log('this.logedInUser',this.logedInUser)
     let checkView = localStorage.getItem("viewOnly")
     // checkView =  JSON.parse(checkView)
@@ -86,7 +92,7 @@ export class GuarantorData2Component {
       this.viewOnly =  true;
       this.nextButtonText = "Next"
     }else{
-      this.nextButtonText = "Save Guarantor 2"
+      this.nextButtonText = "Save Guarantor 3"
     }
   }
 
@@ -116,7 +122,7 @@ export class GuarantorData2Component {
         this.a2_nrc = response[0].a2_nrc;
         this.a2_phone = response[0].a2_phone;
         this.a2_passport = response[0].a2_passport;
-        this.a2_photo = response[0].a2_photo == '' ? '' :this.ds.mediaUrl + response[0].a2_photo;
+        this.a2_photo = this.ds.mediaUrl + response[0].a2_photo;
 
         this.a3_name = response[0].a3_name;
         this.a3_fName = response[0].a3_fName;
@@ -126,7 +132,7 @@ export class GuarantorData2Component {
         this.a3_nrc = response[0].a_nrc;
         this.a3_phone = response[0].a_phone;
         this.a3_passport = response[0].a3_passport;
-        this.a3_photo = this.ds.mediaUrl + response[0].a3_photo;
+        this.a3_photo = response[0].a3_photo == '' ? '' :this.ds.mediaUrl + response[0].a3_photo;
   
         this.app_date = response[0].app_date;
       }
@@ -169,6 +175,19 @@ export class GuarantorData2Component {
         reader.onload = (event: any) => {
           // called once readAsDataURL is completed
           this.a2_photo = event.target.result;
+        };
+      }
+    }
+
+    if (no == 3) {
+      this.a3_photo_data = files.files.item(0);
+
+      if (files.files && files.files[0]) {
+        var reader = new FileReader();
+        reader.readAsDataURL(files.files[0]); // read file as data url
+        reader.onload = (event: any) => {
+          // called once readAsDataURL is completed
+          this.a3_photo = event.target.result;
         };
       }
     }
@@ -262,12 +281,7 @@ export class GuarantorData2Component {
 
   goNext() {
     // this.router.navigateByUrl('loan-request/' + this.openId);
-    if(this.url == "personal-vehicle-loan"){
-      this.sideNav.openPage(1, 13);
-    }else{
-      this.sideNav.openPage(1, 3);
-    }
-    // this.sideNav.openPage(1, 3);
+    this.sideNav.openPage(1, 3);
   }
 
   showApp1() {
@@ -281,7 +295,11 @@ export class GuarantorData2Component {
   }
 
   goBack() {
-    this.sideNav.openPage(1, 2);
+    if(this.url == "personal-vehicle-loan"){
+      this.sideNav.openPage(1, 12);
+    }else{
+      this.sideNav.openPage(1, 2);
+    }
     // this.router.navigateByUrl('guarantor-data/' + this.openId);
   }
 }

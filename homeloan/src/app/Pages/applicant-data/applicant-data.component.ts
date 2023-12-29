@@ -33,6 +33,7 @@ export class ApplicantDataComponent implements OnInit {
   a1_passport = '';
   a1_photo: any = '';
   a1_photo_data: any;
+  a1_title_account = '';
 
   a2_name = '';
   a2_fName = '';
@@ -54,6 +55,7 @@ export class ApplicantDataComponent implements OnInit {
   status = "";
   viewOnly: any = false;
   nextButtonText: any = "";
+  url:any = "";
 
   ngOnInit(): void {
     // this.sideNav.openPage(1, 1);
@@ -68,6 +70,7 @@ export class ApplicantDataComponent implements OnInit {
       }
     });
     this.logedInUser = this.ds.userLoggedIn()
+    this.url = this.ds.commonUrl(this.router);
     // console.log('this.logedInUser',this.logedInUser)
     let checkView = localStorage.getItem("viewOnly")
     // checkView =  JSON.parse(checkView)
@@ -94,6 +97,7 @@ export class ApplicantDataComponent implements OnInit {
         this.a1_name = response[0].a1_name;
         this.a1_fName = response[0].a1_fName;
         this.a1_activity = response[0].a1_activity;
+        this.a1_title_account = response[0].a1_title_account;
         this.a1_paddress = response[0].a1_paddress;
         this.a1_age = response[0].a1_age;
         this.a1_nrc = response[0].a1_nrc;
@@ -200,6 +204,7 @@ export class ApplicantDataComponent implements OnInit {
       data.append('openType', this.openType);
       data.append('a1_fName', this.a1_fName);
       data.append('a1_activity', this.a1_activity);
+      data.append('a1_title_account', this.a1_title_account);
       data.append('a1_paddress', this.a1_paddress);
       data.append('a1_age', this.a1_age);
       data.append('a1_nrc', this.a1_nrc);
@@ -216,6 +221,7 @@ export class ApplicantDataComponent implements OnInit {
       data.append('a2_passport', this.a2_passport);
       data.append('a2_photo', this.a2_photo_data);
       data.append('app_date', this.app_date);
+      data.append('loan_type', this.url);
       data.append('action', 'submit-app-data');
       this.ds.submitAppData(data).subscribe((response: any) => {
         if (response != 0) {
@@ -265,7 +271,11 @@ export class ApplicantDataComponent implements OnInit {
 
   goNext() {
     // this.router.navigateByUrl('applicant-data2/' + this.openId);
-    this.sideNav.openPage(1, 11);
+    if(this.url == "personal-vehicle-loan"){
+      this.sideNav.openPage(1, 2);
+    }else{
+      this.sideNav.openPage(1, 11);
+    }
   }
 
   goHome() {

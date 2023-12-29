@@ -24,6 +24,7 @@ import { UploadReportComponent } from './Pages/upload-report/upload-report.compo
 import { RetailLoanComponent } from './Pages/retail-loan/retail-loan.component';
 import { AdminGuard } from './admin.guard'; 
 import { UserGuard } from './user.guard';
+import { GuarantorData3Component } from './Pages/guarantor-data3/guarantor-data3.component';
 
 const routes: Routes = [
   {
@@ -152,6 +153,109 @@ const routes: Routes = [
   //     },
   //   ],
   // },
+
+  {
+    path: 'personal-vehicle-loan',
+    // path: '',
+    component: LayoutMainComponent,
+		// canActivate: [UserGuard],
+    canActivate: [AdminGuard],
+    children: [
+      {
+        path: 'dashboard',
+        component: DashbordComponent,
+      },
+      // {
+      //   path: 'retailloan',
+      //   component: RetailLoanComponent,
+      // },
+      {
+        path: 'applicant-data',
+        component: ApplicantDataComponent,
+      },
+      {
+        path: 'applicant-data/:id',
+        component: ApplicantDataComponent,
+      },
+      {
+        path: 'applicant-data2/:id',
+        component: ApplicantData2Component,
+      },
+      {
+        path: 'guarantor-data/:id',
+        component: GuarantorDataComponent,
+      },
+      {
+        path: 'guarantor-data2/:id',
+        component: GuarantorData2Component,
+      },
+      {
+        path: 'guarantor-data3/:id',
+        component: GuarantorData3Component,
+      },
+      {
+        path: 'loan-request/:id',
+        component: LoanRequestComponent,
+      },
+      {
+        path: 'net-worth/:id',
+        component: NetWorthComponent,
+      },
+      {
+        path: 'due-diligence/:id',
+        component: ClientVistComponent,
+      },
+      {
+        path: 'site-vist/:id',
+        component: SiteVistComponent,
+      },
+      {
+        path: 'risk-1/:id',
+        component: RiskOneComponent,
+      },
+      {
+        path: 'risk-2/:id',
+        component: RiskTwoComponent,
+      },
+      {
+        path: 'score/:id',
+        component: ScoreComponent,
+      },
+      {
+        path: 'add-info/:id',
+        component: AddInfoComponent,
+      },
+      {
+        path: 'media-upload/:id',
+        component: MedisUploadComponent,
+      },
+      {
+        path: 'report/:id',
+        component: ReportGenComponent,
+      },
+      {
+        path: 'upload-report/:id',
+        component: UploadReportComponent,
+      },
+
+      {
+        path: 'upload-files/:id',
+        component: UFilesComponent,
+      },
+      {
+        path: 'users',
+        component: UsersComponent,
+      },
+      {
+        path: 'users-add',
+        component: UsersAddComponent,
+      },
+      {
+        path: 'user-update/:id',
+        component: UsersAddComponent,
+      },
+    ],
+  },
   {
     path: 'retailloan-products',
     canActivate: [AdminGuard],

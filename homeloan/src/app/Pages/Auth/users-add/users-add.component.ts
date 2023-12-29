@@ -32,7 +32,7 @@ export class UsersAddComponent {
   titleText : any = 'New User';
   buttonText : any = "Save New User";
   username: any = '';
-
+  url:any = "";
 
   ngOnInit(): void {
     this.route.params.subscribe((params: any) => {
@@ -40,6 +40,7 @@ export class UsersAddComponent {
         this.getUser(params.id);
       }
     });
+    this.url = this.ds.commonUrl(this.router);
     // console.log('this.type',this.type)
   }
 
@@ -131,7 +132,8 @@ export class UsersAddComponent {
             timer: 1500,
           });
         }
-        this.router.navigateByUrl('/homeloan/users');
+        
+        this.router.navigateByUrl('/'+ this.url+'/users');
       }else if(response == "email found"){
         Swal.fire({
           position: 'top-end',

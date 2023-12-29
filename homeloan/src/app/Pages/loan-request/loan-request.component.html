@@ -1,6 +1,6 @@
 <main id="main" class="main">
   <div class="pagetitle">
-    <h1>Project Cost and Loan Request</h1>
+    <h1>{{TitleDisplay}}</h1>
     <!-- <nav>
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
@@ -21,7 +21,7 @@
             <div class="row g-3 mx-2 my-1">
               <div class="col-12">
                 <label for="inputNanme4" class="form-label"
-                  >Purchase of Flat / Apartment</label
+                  >{{field1}}</label
                 >
                 <div class="row">
                   <div class="col-4">
@@ -61,7 +61,7 @@
               </div>
               <div class="col-12">
                 <label for="inputEmail4" class="form-label"
-                  >Purchase of House</label
+                  >{{field2}}</label
                 >
                 <div class="row">
                   <div class="col-4">
@@ -101,7 +101,7 @@
               </div>
               <div class="col-12">
                 <label for="inputPassword4" class="form-label"
-                  >Purchase of Land
+                  >{{field3}}
                 </label>
                 <div class="row">
                   <div class="col-4">
@@ -141,7 +141,7 @@
               </div>
               <div class="col-12">
                 <label for="inputAddress" class="form-label"
-                  >Registration Fee / Stamp Duty</label
+                  >{{field4}}</label
                 >
                 <div class="row">
                   <div class="col-4">
@@ -181,7 +181,7 @@
               </div>
               <div class="col-12">
                 <label for="inputAddress" class="form-label"
-                  >Construction / Additional Construction</label
+                  >{{field5}}</label
                 >
                 <div class="row">
                   <div class="col-4">
@@ -219,7 +219,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-12">
+              <div class="col-12" *ngIf="url == 'homeloan'">
                 <label for="inputAddress" class="form-label"
                   >Home Renovation / Upgradation</label
                 >
@@ -259,7 +259,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-12">
+              <div class="col-12" *ngIf="url == 'homeloan'">
                 <label for="inputAddress" class="form-label"
                   >Home Furnishing
                 </label>
@@ -419,7 +419,7 @@
               </div>
               <div class="col-12">
                 <label for="inputAddress" class="form-label"
-                  >Property Details
+                  >{{loanTypeDisplay}}
                 </label>
                 <div class="row">
                   <div class="col-12">
@@ -433,7 +433,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-12">
+              <div class="col-12" *ngIf="url == 'homeloan'">
                 <label for="inputAddress" class="form-label"
                   >Comments ( If Any )
                 </label>

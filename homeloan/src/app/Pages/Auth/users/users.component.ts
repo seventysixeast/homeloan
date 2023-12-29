@@ -19,6 +19,8 @@ export class UsersComponent {
 
   dataList: any = [];
   logedInUser: any;
+  addNewUserLink:any = "";
+  url:any = "";
 
   ngOnInit(): void {
     localStorage.removeItem("mId");
@@ -29,6 +31,8 @@ export class UsersComponent {
     localStorage.removeItem("viewOnly");
     this.getData();
     this.logedInUser = this.ds.userLoggedIn()
+    this.url = this.ds.commonUrl(this.router);
+    this.addNewUserLink = "/"+ this.url+"/users-add";
     // console.log('this.logedInUser', this.logedInUser)
   }
 
@@ -43,7 +47,7 @@ export class UsersComponent {
 
   openData(id: any) {
     // console.log(id);
-    this.router.navigateByUrl('homeloan/user-update/' + id);
+    this.router.navigateByUrl(this.url+'/user-update/' + id);
     // localStorage.setItem('activeId', id);
     // this.sideNav.openPage(1, 1);
     // // this.router.navigateByUrl('applicant-data/' + id);

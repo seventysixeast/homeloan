@@ -70,11 +70,22 @@
                     <input autocomplete="nope" [(ngModel)]="a1_fName" type="text" class="form-control" id="inputEmail4"
                       [readonly]="viewOnly"  autocomplete="off"/>
                   </div>
-                  <div class="col-12">
+                  <div class="col-12" *ngIf="url == 'personal-vehicle-loan'">
+                    <label for="inputPassword4" class="form-label">Title of Account :</label>
+                    <textarea autocomplete="nope"  rows="6" [(ngModel)]="a1_title_account" type="text" class="form-control"
+                      id="inputPassword4" [readonly]="viewOnly"  autocomplete="off" ></textarea>
+                  </div>
+                  <div class="col-12" *ngIf="url == 'homeloan'">
                     <label for="inputPassword4" class="form-label">Activity</label>
                     <input autocomplete="nope" [(ngModel)]="a1_activity" type="text" class="form-control"
                       id="inputPassword4" [readonly]="viewOnly"  autocomplete="off" />
                   </div>
+                  <div class="col-12" *ngIf="url == 'personal-vehicle-loan'">
+                    <label for="inputPassword4" class="form-label">Activity</label>
+                    <textarea autocomplete="nope"  rows="6" [(ngModel)]="a1_activity" type="text" class="form-control"
+                      id="inputPassword4" [readonly]="viewOnly"  autocomplete="off" ></textarea>
+                  </div>
+                  
                   <div class="col-12">
                     <label for="inputAddress" class="form-label">Present Address</label>
                     <input autocomplete="nope" [(ngModel)]="a1_paddress" type="text" class="form-control"
@@ -95,7 +106,7 @@
                     <input autocomplete="nope" [(ngModel)]="a1_phone" type="text" class="form-control" id="inputAddress"
                       [readonly]="viewOnly"  autocomplete="off"/>
                   </div>
-                  <div class="col-12">
+                  <div class="col-12" *ngIf="url == 'homeloan'">
                     <label for="inputAddress" class="form-label">Passport No</label>
                     <input autocomplete="nope" [(ngModel)]="a1_passport" type="text" class="form-control"
                       id="inputAddress" [readonly]="viewOnly"  autocomplete="off"/>

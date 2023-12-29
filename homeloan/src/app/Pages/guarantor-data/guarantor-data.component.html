@@ -54,7 +54,7 @@
               <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                 <div class="row g-3 mx-2 my-1">
                   <div class="col-12">
-                    <label for="inputNanme4" class="form-label">Guarantor's Full Name </label>
+                    <label for="inputNanme4" class="form-label">{{labelDisplay}} Full Name </label>
                     <input autocomplete="nope" [(ngModel)]="a1_name" type="text" class="form-control" id="inputNanme4"
                       [readonly]="viewOnly" autocomplete="off"/>
                   </div>
@@ -63,10 +63,15 @@
                     <input autocomplete="nope" [(ngModel)]="a1_fName" type="text" class="form-control" id="inputEmail4"
                       [readonly]="viewOnly" autocomplete="off"/>
                   </div>
-                  <div class="col-12">
+                  <div class="col-12" *ngIf="url == 'homeloan'">
                     <label for="inputPassword4" class="form-label">Activity</label>
                     <input autocomplete="nope" [(ngModel)]="a1_activity" type="text" class="form-control"
                       id="inputPassword4" [readonly]="viewOnly" autocomplete="off"/>
+                  </div>
+                  <div class="col-12" *ngIf="url == 'personal-vehicle-loan'">
+                    <label for="inputPassword4" class="form-label">Activity</label>
+                    <textarea autocomplete="nope" rows="6" [(ngModel)]="a1_activity" type="text" class="form-control"
+                      id="inputPassword4" [readonly]="viewOnly" autocomplete="off"></textarea>
                   </div>
                   <div class="col-12">
                     <label for="inputAddress" class="form-label">Present Address</label>
@@ -74,7 +79,7 @@
                       id="inputAddress" [readonly]="viewOnly" autocomplete="off"/>
                   </div>
                   <div class="col-12">
-                    <label for="inputAddress" class="form-label">Guarantor's Age</label>
+                    <label for="inputAddress" class="form-label">{{labelDisplay}} Age</label>
                     <input autocomplete="nope" [(ngModel)]="a1_age" type="text" class="form-control" id="inputAddress"
                       [readonly]="viewOnly" autocomplete="off"/>
                   </div>

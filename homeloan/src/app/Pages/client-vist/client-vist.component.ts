@@ -45,6 +45,11 @@ export class ClientVistComponent implements OnInit {
   viewOnly: any = false;
   nextButtonText: any = "";
 
+  url:any = "";
+  comment1Heading:any = "";
+  comment2Heading:any = "";
+  comment3Heading:any = "";
+
   ngOnInit(): void {
     this.route.params.subscribe((params: any) => {
       if(params.id != null){
@@ -58,6 +63,15 @@ export class ClientVistComponent implements OnInit {
     });
 
     this.logedInUser = this.ds.userLoggedIn()
+    this.url = this.ds.commonUrl(this.router);
+    if(this.url == 'personal-vehicle-loan'){
+      this.comment1Heading = "A. Applicant :";
+      this.comment2Heading = "B. Guarantors:";
+      this.comment3Heading = "C. Vehicle:";
+    }else{
+      this.comment1Heading = "A. Applicant/s Visit Details";
+      // this.applicant2Text = "2nd Applicant";
+    }
     // console.log('this.logedInUser',this.logedInUser)
     let checkView = localStorage.getItem("viewOnly")
     if(checkView === 'true'){
@@ -164,7 +178,15 @@ export class ClientVistComponent implements OnInit {
 
   goNext() {
     // this.router.navigateByUrl('site-vist/' + this.openId);
-    this.sideNav.openPage(2, 3);
+    if(this.url == "personal-vehicle-loan"){
+      // this.sideNav.openPage(1, 4);
+      this.sideNav.openPage(2, 4);
+    }else{
+      // this.sideNav.openPage(1, 2);
+      // this.sideNav.openPage(2, 1);
+      // this.sideNav.openPage(1, 12);
+      this.sideNav.openPage(2, 3);
+    }
   }
 
   updateTotal() {
@@ -173,6 +195,14 @@ export class ClientVistComponent implements OnInit {
 
   goBack() {
     // this.router.navigateByUrl('net-worth/' + this.openId);
-    this.sideNav.openPage(2, 1);
+    if(this.url == "personal-vehicle-loan"){
+      // this.sideNav.openPage(1, 4);
+      this.sideNav.openPage(1, 4);
+    }else{
+      // this.sideNav.openPage(1, 2);
+      // this.sideNav.openPage(2, 1);
+      // this.sideNav.openPage(1, 12);
+      this.sideNav.openPage(2, 1);
+    }
   }
 }

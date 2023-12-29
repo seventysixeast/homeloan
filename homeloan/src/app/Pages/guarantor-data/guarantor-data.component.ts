@@ -45,12 +45,25 @@ export class GuarantorDataComponent implements OnInit {
   a2_photo: any = '';
   a2_photo_data: any;
 
+  a3_name = '';
+  a3_fName = '';
+  a3_activity = '';
+  a3_paddress = '';
+  a3_age = '';
+  a3_nrc = '';
+  a3_phone = '';
+  a3_passport = '';
+  a3_photo: any = '';
+  a3_photo_data: any;
+
   app_date = '';
   logedInUser : any;
   userId = "";
   status = "";
   viewOnly: any = false;
   nextButtonText: any = "";
+  url:any = "";
+  labelDisplay:any = "";
 
   ngOnInit(): void {
     this.route.params.subscribe((params: any) => {
@@ -65,6 +78,12 @@ export class GuarantorDataComponent implements OnInit {
       }
     });
     this.logedInUser = this.ds.userLoggedIn()
+    this.url = this.ds.commonUrl(this.router);
+    if(this.url == 'personal-vehicle-loan'){
+      this.labelDisplay = "Applicant's";
+    }else{
+      this.labelDisplay = "Guarantor's";
+    }
     // console.log('this.logedInUser',this.logedInUser)
     let checkView = localStorage.getItem("viewOnly")
     // checkView =  JSON.parse(checkView)
@@ -104,6 +123,16 @@ export class GuarantorDataComponent implements OnInit {
         this.a2_phone = response[0].a2_phone;
         this.a2_passport = response[0].a2_passport;
         this.a2_photo = this.ds.mediaUrl + response[0].a2_photo;
+
+        this.a3_name = response[0].a3_name;
+        this.a3_fName = response[0].a3_fName;
+        this.a3_activity = response[0].a3_activity;
+        this.a3_paddress = response[0].a3_paddress;
+        this.a3_age = response[0].a3_age;
+        this.a3_nrc = response[0].a_nrc;
+        this.a3_phone = response[0].a_phone;
+        this.a3_passport = response[0].a3_passport;
+        this.a3_photo = response[0].a3_photo == '' ? '' :this.ds.mediaUrl + response[0].a3_photo;
   
         this.app_date = response[0].app_date;
       }
@@ -204,6 +233,16 @@ export class GuarantorDataComponent implements OnInit {
     data.append('a2_passport', this.a2_passport);
     data.append('a2_photo', this.a2_photo_data);
 
+    data.append('a3_name', this.a3_name);
+    data.append('a3_fName', this.a3_fName);
+    data.append('a3_activity', this.a3_activity);
+    data.append('a3_paddress', this.a3_paddress);
+    data.append('a3_age', this.a3_age);
+    data.append('a3_nrc', this.a3_nrc);
+    data.append('a3_phone', this.a3_phone);
+    data.append('a3_passport', this.a3_passport);
+    data.append('a3_photo', this.a3_photo_data);
+
     data.append('app_date', this.app_date);
     data.append('action', 'submit-guar-data');
     // data.append('status', "guarantor1");
@@ -251,6 +290,11 @@ export class GuarantorDataComponent implements OnInit {
 
   goBack() {
     // this.router.navigateByUrl('applicant-data2/' + this.openId);
-    this.sideNav.openPage(1, 11);
+    // this.sideNav.openPage(1, 11);
+    if(this.url == "personal-vehicle-loan"){
+      this.sideNav.openPage(1, 1);
+    }else{
+      this.sideNav.openPage(1, 11);
+    }
   }
 }
