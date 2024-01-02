@@ -1587,24 +1587,24 @@ export class DocumentCreator {
                       ],
                       columnSpan: 1,
                     }),
-                    new TableCell({
-                      children: [
-                        new Paragraph({
-                          children: [
-                            imageObj1
-                          ]
-                        })
-                      ]
-                    }),
-                    new TableCell({
-                      children: [
-                        new Paragraph({
-                          children: [
-                            imageObj2
-                          ]
-                        })
-                      ],
-                    }),
+                    // new TableCell({
+                    //   children: [
+                    //     new Paragraph({
+                    //       children: [
+                    //         imageObj1
+                    //       ]
+                    //     })
+                    //   ]
+                    // }),
+                    // new TableCell({
+                    //   children: [
+                    //     new Paragraph({
+                    //       children: [
+                    //         imageObj2
+                    //       ]
+                    //     })
+                    //   ],
+                    // }),
                   ],
                 }),
               ],

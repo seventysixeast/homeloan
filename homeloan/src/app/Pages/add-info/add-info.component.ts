@@ -50,7 +50,10 @@ export class AddInfoComponent implements OnInit {
   viewOnly: any = false;
   nextButtonText: any = "";
 
+  url:any = "";
+
   ngOnInit(): void {
+    this.url = this.ds.commonUrl(this.router);
     this.route.params.subscribe((params: any) => {
       if(params.id != null){
         localStorage.setItem("applicant1Id",params.id)

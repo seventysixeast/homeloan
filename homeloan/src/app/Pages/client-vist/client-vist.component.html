@@ -1,6 +1,6 @@
 <main id="main" class="main">
   <div class="pagetitle">
-    <h1>Client Visit Information</h1>
+    <h1>{{titleHeading}}</h1>
     <!-- <nav>
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
@@ -124,7 +124,7 @@
                   autocomplete="off"
                 ></textarea>
               </div>
-              <div class="col-12 mb-3">
+              <div class="col-12 mb-3" *ngIf='comment2Heading !=""'>
                 <label for="inputNanme4" class="form-label"
                   >{{comment2Heading}}</label
                 >
@@ -164,9 +164,14 @@
                   id="inputNanme4"
                 />
               </div> -->
-              <div class="col-12 mb-3">
+              <div class="col-3 mb-3 mt-3" *ngIf='comment3Heading !=""'>
                 <label for="inputNanme4" class="form-label"
                   >{{comment3Heading}}</label
+                >
+              </div>
+              <div class="col-9 mb-3 mt-3" *ngIf='comment3Heading !=""'>
+                <label for="inputNanme4" class="form-label"
+                  >{{comment3Text}}</label
                 >
               </div>
               <div class="col-3 mt-3">

@@ -203,7 +203,7 @@ export class ScoreComponent implements OnInit {
       });
     }else if(this.logedInUser.type == "Credit-Approver"){
       data.append('ref_id', this.openId);
-      data.append('status', "Processing by Credit Approver("+this.logedInUser.f_name +")");
+      data.append('status', "Reveiwing by Credit Approver("+this.logedInUser.f_name +")");
       this.ds.submitAppData(data).subscribe((response: any) => {
         this.spiner.hide();
         Swal.fire({

@@ -25,6 +25,9 @@ import { RetailLoanComponent } from './Pages/retail-loan/retail-loan.component';
 import { AdminGuard } from './admin.guard'; 
 import { UserGuard } from './user.guard';
 import { GuarantorData3Component } from './Pages/guarantor-data3/guarantor-data3.component';
+import { MediaUploadPersonalLoanComponent } from './Pages/media-upload-personal-loan/media-upload-personal-loan.component';
+import { ScorePersonalLoanComponent } from './Pages/score-personal-loan/score-personal-loan.component';
+import { ReportGenPersonalLoanComponent } from './report-gen-personal-loan/report-gen-personal-loan.component';
 
 const routes: Routes = [
   {
@@ -219,7 +222,8 @@ const routes: Routes = [
       },
       {
         path: 'score/:id',
-        component: ScoreComponent,
+        // component: ScoreComponent,
+        component: ScorePersonalLoanComponent,
       },
       {
         path: 'add-info/:id',
@@ -227,11 +231,13 @@ const routes: Routes = [
       },
       {
         path: 'media-upload/:id',
-        component: MedisUploadComponent,
+        // component: MedisUploadComponent,
+        component:MediaUploadPersonalLoanComponent
       },
       {
         path: 'report/:id',
-        component: ReportGenComponent,
+        // component: ReportGenComponent,
+        component:ReportGenPersonalLoanComponent
       },
       {
         path: 'upload-report/:id',

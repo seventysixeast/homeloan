@@ -7,7 +7,8 @@
     <a routerLink="/retailloan-products" class="logo d-flex align-items-center">
       <!-- <img src="assets/img/logo.png" alt="" /> -->
       <i *ngIf="!imageShow" class="bx bxs-home" style="font-size: 30px; margin: 15px"></i>
-      <span *ngIf="!imageShow" class="d-none d-lg-block">Home Loan</span>
+      <span *ngIf="!imageShow && url =='homeloan'" class="d-none d-lg-block">Home Loan</span>
+      <span *ngIf="!imageShow && url == 'personal-vehicle-loan'" class="d-none d-lg-block">Personal Vehicle Loan</span>
 
       <img
       *ngIf="imageShow"

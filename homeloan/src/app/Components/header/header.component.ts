@@ -18,7 +18,10 @@ export class HeaderComponent implements OnInit {
   mediaUrl: string = '';
   imageShow: boolean =  false;
 
+  url:any = "";
+
   ngOnInit(): void {
+    this.url = this.ds.commonUrl(this.router);
     this.logedInUser = this.ds.userLoggedIn();
     // console.log('this.logedInUser',this.logedInUser);
     this.mediaUrl = this.ds.mediaUrl;

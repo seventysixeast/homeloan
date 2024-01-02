@@ -153,13 +153,13 @@
                   />
                 </div>
   
-                <div class="col-3 mb-3">
+                <div class="col-3 mb-3" *ngIf="url == 'homeloan'">
                   <label for="inputNanme4" class="form-label"
                     >Interest Recovery During Moratorium
                   </label>
                 </div>
   
-                <div class="col-9 mb-3">
+                <div class="col-9 mb-3" *ngIf="url == 'homeloan'">
                   <input
                     autocomplete="nope"
                     [(ngModel)]="irdm"
@@ -172,11 +172,11 @@
                   />
                 </div>
   
-                <div class="col-3 mb-3">
+                <div class="col-3 mb-3" *ngIf="url == 'homeloan'">
                   <label for="inputNanme4" class="form-label">Repayment </label>
                 </div>
   
-                <div class="col-7 mb-3">
+                <div class="col-7 mb-3" *ngIf="url == 'homeloan'">
                   <div class="row">
                     <!-- <div class="col-6 mb-2">No. of Installments</div>
                     <div class="col-6 mb-2">
@@ -215,7 +215,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-2 mb-3"></div>
+                <div class="col-2 mb-3" *ngIf="url == 'homeloan'"></div>
   
                 <div class="col-3 mb-3">
                   <label for="inputNanme4" class="form-label"

@@ -68,7 +68,7 @@ export class DashbordComponent implements OnInit {
     localStorage.setItem('viewOnly', "true")
     localStorage.setItem('applicant1Id', id)
     // if (this.logedInUser.type == "Credit-Approver" && status.indexOf("Approved by Credit Approver") == -1 && status.indexOf("Approved by Credit Approver") == -1 ) {
-    if (this.logedInUser.type == "Credit-Approver" && status.indexOf("Submitted by Admin") > -1  ) {
+    if (this.logedInUser.type == "Credit-Approver" && (status.indexOf("Reveiwing by Credit Approver") > -1 || status.indexOf("Submitted by Admin") > -1)  ) {
       // console.log('status',status)
       // return;
       let data = new FormData();
@@ -78,7 +78,7 @@ export class DashbordComponent implements OnInit {
       this.ds.submitAppData(data).subscribe((response: any) => {
       });
       this.sideNav.openPage(2, 8);
-      window.location.href = 'homeloan/media-upload/' + id;
+      window.location.href = this.url+'/media-upload/' + id;
 
       return;
       // return  "Reveiwing by Credit Approver("+this.logedInUser.f_name +")";
@@ -86,7 +86,7 @@ export class DashbordComponent implements OnInit {
     // console.log('check')
     this.sideNav.openPage(1, 1);
     // this.router.navigateByUrl('applicant-data/' + id);
-    window.location.href = 'homeloan/applicant-data/' + id;
+    window.location.href = this.url+'/applicant-data/' + id;
     // window.location.href = 'homeloan/homeloan/applicant-data/' + id;
   }
 

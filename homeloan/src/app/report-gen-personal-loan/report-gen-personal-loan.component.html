@@ -1,0 +1,94 @@
+<main id="main" class="main">
+    <div class="pagetitle">
+      <h1>Reports</h1>
+      <!-- <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+          <li class="breadcrumb-item active">Photos / Videos Upload</li>
+        </ol>
+      </nav> -->
+    </div>
+    <!-- End Page Title -->
+  
+    <section class="section">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title" style="text-align: center">
+                Generate Report
+              </h5>
+              <div class="row mx-2 my-3" style="align-items: center">
+                <div *ngIf="!showUploadButton && !showDownloadButton" class="col-12 mt-5">
+                  No Report
+                </div>
+                <div *ngIf="showUploadButton" class="col-12 mt-5">
+                  <button type="submit" class="btn btn-primary" (click)="doc1()">
+                    Preview Loan Application
+                  </button>
+                </div>
+  
+                <div *ngIf="showUploadButton" class="col-12 my-3">
+                  <button type="submit" class="btn btn-primary" (click)="doc2()">
+                    Preview Loan Proposal
+                  </button>
+                </div>
+                <div class="col-12 mt-3">
+                  <button type="submit" class="btn btn-primary" (click)="goBack()">
+                    Back
+                  </button>
+                  <button type="submit" class="btn btn-primary mx-3" (click)="handleSubmit()">
+                    Dashboard
+                  </button>
+                </div>
+                <!-- <div [class]="showUploadButton ? 'col-12 mt-3' : 'col-12 mt-3 notShowEdit'">
+                  <input type="file" (change)="handlePdfUpload($event, 'application')" accept=".pdf" />
+                  <button type="submit" class="btn btn-primary" (click)="uploadPdf('application')">
+                    Upload Application PDF
+                  </button>
+                </div>
+  
+                <div [class]="showUploadButton ? 'col-12 mt-3' : 'col-12 mt-3 notShowEdit'">
+                  <input type="file" (change)="handlePdfUpload($event, 'proposal')" accept=".pdf" />
+                  <button type="submit" class="btn btn-primary" (click)="uploadPdf('proposal')">
+                    Upload Proposal PDF
+                  </button>
+                </div> -->
+                <div [class]="showDownloadButton ? 'col-12 mt-3' : 'col-12 mt-3 notShowEdit'"
+                  *ngFor="let pdfFile of pdfFiles">
+                  <button (click)="downloadPdf(pdfFile.filename)">
+                    Download {{ pdfFile.type | titlecase }} PDF
+                  </button>
+                  <!-- <div ng-controller="docxController">
+                    <button ng-click="generateDocx()">Call Helper Function</button>
+                  </div> -->
+                </div>
+                <!-- <div *ngIf="submitButtonForAdmin" class="col-12 mt-3">
+                  <button type="submit" class="btn btn-primary" (click)="submitStatus('Submitted by Admin')">
+                    Submit
+                  </button>
+                </div> -->
+                <div *ngIf="showButtonForApprover && !showStatusButton" class="col-12 mt-3">
+                  <button type="submit" class="btn btn-primary" (click)="submitStatus('Approved')">
+                    Approve
+                  </button>
+                  <button type="submit" class="btn btn-primary mx-3" (click)="submitStatus('Rejected')">
+                    Reject
+                  </button>
+                </div>
+  
+                <div *ngIf="showStatusButton" class="col-12 mt-3">
+                  <button type="submit" class="btn btn-primary">
+                    Status : {{status | titlecase}}
+                  </button>
+  
+                </div>
+  
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <!-- End #main -->

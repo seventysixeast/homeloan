@@ -1,0 +1,244 @@
+<main id="main" class="main">
+    <div class="pagetitle">
+      <h1>Risk Assessment</h1>
+      <!-- <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+          <li class="breadcrumb-item active">Risk Assessment Data - II</li>
+        </ol>
+      </nav> -->
+    </div>
+    <!-- End Page Title -->
+  
+    <section class="section">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="card">
+            <div class="card-body">
+              <div [class]="viewOnly ? 'row mx-2 onlyViewClass':'row mx-2'" style="text-align: center; font-size: 14px">
+                <div class="col-12 my-1">
+                  <h5 class="card-title" style="text-align: center">
+                    Client Safety Score
+                  </h5>
+                </div>
+                <div class="col-12 my-1">
+                  <table id="customers">
+                    <tr>
+                      <th></th>
+                      <th>Maximum</th>
+                      <th>Client Score</th>
+                    </tr>
+                    <tr>
+                      <td>Personal Credentials Score :</td>
+                      <td class="myRyt">30</td>
+                      <td class="myRyt" style="font-weight: bold; font-size: 15px" colspan="6">
+                        {{ mws_total_old.toFixed(2) }}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Credit Credentials Score :</td>
+                      <td class="myRyt">50</td>
+                      <td class="myRyt" style="font-weight: bold; font-size: 15px" colspan="6">
+                        {{ mws_total.toFixed(2) }}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Management Assessment Score :</td>
+                      <td class="myRyt">20</td>
+                      <td class="myRyt" style="font-weight: bold; font-size: 15px" colspan="6">
+                        <!-- <input
+                          type="number"
+                          [(ngModel)]="m_score"
+                          style="width: 8%"
+                          (change)="updateTotal()"
+                        /> -->
+                        <select [(ngModel)]="m_score" (change)="updateTotal()" [disabled]="logedInUser.type != 'Credit-Approver'">
+                          <option value="0">Select Score</option>
+                          <option value="1">1</option>
+                          <option value="2">2</option>
+                          <option value="3">3</option>
+                          <option value="4">4</option>
+                          <option value="5">5</option>
+                          <option value="6">6</option>
+                          <option value="7">7</option>
+                          <option value="8">8</option>
+                          <option value="9">9</option>
+                          <option value="10">10</option>
+                          <option value="11">11</option>
+                          <option value="12">12</option>
+                          <option value="13">13</option>
+                          <option value="14">14</option>
+                          <option value="15">15</option>
+                          <option value="16">16</option>
+                          <option value="17">17</option>
+                          <option value="18">18</option>
+                          <option value="19">19</option>
+                          <option value="20">20</option>
+                        </select>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Total Score</td>
+                      <td class="myRyt">100</td>
+                      <td class="myRyt" style="font-weight: bold; font-size: 15px" colspan="6">
+                        {{ total_score_end2.toFixed(2) }}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Client Safety Level</td>
+                      <td colspan="2" style="font-weight: bold">
+                        {{ safetyScore }}
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+                <div class="col-12 my-1">
+                  <h5 class="card-title" style="text-align: center">
+                    Management Assessment Score : Guidance Sheet
+                  </h5>
+                </div>
+                <div class="col-12 my-1">
+                  <table id="customers">
+                    <tr>
+                      <th>Safety Level Score</th>
+                      <th>Client Safety Level</th>
+                    </tr>
+                    <tr>
+                      <td>If Client Safety Score is 80 and More.</td>
+                      <td style="font-weight: bold; font-size: 15px" colspan="6">
+                        High
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>If Client Safety Score is 70 and above but < 80</td>
+                      <td style="font-weight: bold; font-size: 15px" colspan="6">
+                        Good
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>If Client Safety Score is 60 and above but < 70</td>
+                      <td style="font-weight: bold; font-size: 15px" colspan="6">
+                        Moderate
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>If Client Safety Score is 50 and above but < 60</td>
+                      <td style="font-weight: bold; font-size: 15px" colspan="6">
+                        Average
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>If Safety Client Score is < 50</td>
+                      <td style="font-weight: bold; font-size: 15px" colspan="6">
+                        Poor
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+                <!-- <div class="col-12 my-1">
+                  <h5 class="card-title" style="text-align: center">Repayment</h5>
+                </div> -->
+                <!-- <div class="col-12 my-1">
+                  <table id="customers">
+                    <tr>
+                      <th>Repayment</th>
+                      <th>Value</th>
+                    </tr>
+                    <tr>
+                      <td>Loan Amount</td>
+                      <td
+                        style="
+                          font-weight: bold;
+                          font-size: 15px;
+                          text-align: end;
+                        "
+                        colspan="6"
+                      >
+                        <input
+                          class="form-control"
+                          style="text-align: end"
+                          type="number"
+                          disabled
+                          [(ngModel)]="c_loanAmount"
+                        />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Rate of Interest</td>
+                      <td
+                        style="
+                          font-weight: bold;
+                          font-size: 15px;
+                          text-align: end;
+                        "
+                        colspan="6"
+                      >
+                        <input
+                          style="text-align: end"
+                          class="form-control"
+                          type="number"
+                          [(ngModel)]="c_intrestRate"
+                          (keyup)="updateTotal2()"
+                        />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>No. of Installments</td>
+                      <td
+                        style="
+                          font-weight: bold;
+                          font-size: 15px;
+                          text-align: end;
+                        "
+                        colspan="6"
+                      >
+                        <input
+                          style="text-align: end"
+                          class="form-control"
+                          type="number"
+                          [(ngModel)]="c_months"
+                          (keyup)="updateTotal2()"
+                        />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>EMI Amount</td>
+                      <td
+                        style="
+                          font-weight: bold;
+                          font-size: 15px;
+                          text-align: end;
+                        "
+                        colspan="6"
+                      >
+                        <input
+                          style="text-align: end"
+                          class="form-control"
+                          type="number"
+                          [(ngModel)]="c_emi"
+                          disabled
+                          (change)="updateTotal2()"
+                        />
+                      </td>
+                    </tr>
+                  </table>
+                </div> -->
+              </div>
+  
+              <div class="col-12 mt-3">
+                <button type="submit" class="btn btn-primary" (click)="goBack()">
+                  Back
+                </button>
+                <button type="submit" class="btn btn-primary mx-3" (click)="handleSubmit()">
+                  {{nextButtonText}}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <!-- End #main -->
+  
+  <ngx-spinner type="ball-scale-multiple"></ngx-spinner>

@@ -7,7 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "admin": "ng g component Pages/guarantor-data3"
+    "admin": "ng g component report-gen-personal-loan"
   },
   "private": true,
   "dependencies": {
@@ -19,7 +19,9 @@
     "@angular/platform-browser": "^15.2.0",
     "@angular/platform-browser-dynamic": "^15.2.0",
     "@angular/router": "^15.2.0",
+    "@pdftron/webviewer": "^10.6.0",
     "docx": "^8.0.1",
+    "docx-pdf": "^0.0.1",
     "ngx-spinner": "^15.0.1",
     "rxjs": "~7.8.0",
     "sweetalert2": "^11.7.3",

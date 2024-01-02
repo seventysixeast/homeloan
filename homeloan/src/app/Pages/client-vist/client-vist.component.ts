@@ -49,6 +49,8 @@ export class ClientVistComponent implements OnInit {
   comment1Heading:any = "";
   comment2Heading:any = "";
   comment3Heading:any = "";
+  comment3Text:any = "";
+  titleHeading:any = "";
 
   ngOnInit(): void {
     this.route.params.subscribe((params: any) => {
@@ -65,10 +67,13 @@ export class ClientVistComponent implements OnInit {
     this.logedInUser = this.ds.userLoggedIn()
     this.url = this.ds.commonUrl(this.router);
     if(this.url == 'personal-vehicle-loan'){
+      this.titleHeading = "Due Diligence Findings / Comments :";
       this.comment1Heading = "A. Applicant :";
       this.comment2Heading = "B. Guarantors:";
       this.comment3Heading = "C. Vehicle:";
+      this.comment3Text = "Applicable , If client wants to buy Old / Used Vehicle.";
     }else{
+      this.titleHeading = "Client Visit Information";
       this.comment1Heading = "A. Applicant/s Visit Details";
       // this.applicant2Text = "2nd Applicant";
     }

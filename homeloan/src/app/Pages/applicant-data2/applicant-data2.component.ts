@@ -55,6 +55,7 @@ export class ApplicantData2Component {
   status = "";
   viewOnly: any = false;
   nextButtonText: any = "";
+  url:any = "";
 
   ngOnInit(): void {
     this.application_no = localStorage.getItem('application_no');
@@ -68,6 +69,7 @@ export class ApplicantData2Component {
       }
     });
     this.logedInUser = this.ds.userLoggedIn()
+    this.url = this.ds.commonUrl(this.router);
     let checkView = localStorage.getItem("viewOnly")
     // checkView =  JSON.parse(checkView)
     console.log('checkView',checkView)
@@ -207,6 +209,7 @@ export class ApplicantData2Component {
       data.append('a2_passport', this.a2_passport);
       data.append('a2_photo', this.a2_photo_data);
       data.append('app_date', this.app_date);
+      data.append('loan_type', this.url);
       data.append('action', 'submit-app-data');
       this.ds.submitAppData(data).subscribe((response: any) => {
         window.scroll({

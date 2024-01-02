@@ -34,6 +34,11 @@ import { UsersAddComponent } from './Pages/Auth/users-add/users-add.component';
 import { UploadReportComponent } from './Pages/upload-report/upload-report.component';
 import { RetailLoanComponent } from './Pages/retail-loan/retail-loan.component';
 import { GuarantorData3Component } from './Pages/guarantor-data3/guarantor-data3.component';
+import { MediaUploadPersonalLoanComponent } from './Pages/media-upload-personal-loan/media-upload-personal-loan.component';
+import { ScorePersonalLoanComponent } from './Pages/score-personal-loan/score-personal-loan.component';
+// import { ReportGenPersonalLoanComponent } from '.report-gen-personal-loan/report-gen-personal-loan.component';
+import { ReportGenPersonalLoanComponent } from './report-gen-personal-loan/report-gen-personal-loan.component';
+
 
 @NgModule({
   declarations: [
@@ -64,6 +69,9 @@ import { GuarantorData3Component } from './Pages/guarantor-data3/guarantor-data3
     UploadReportComponent,
     RetailLoanComponent,
     GuarantorData3Component,
+    MediaUploadPersonalLoanComponent,
+    ScorePersonalLoanComponent,
+    ReportGenPersonalLoanComponent,
   ],
   imports: [
     BrowserModule,
