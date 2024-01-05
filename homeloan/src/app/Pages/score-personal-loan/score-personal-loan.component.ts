@@ -163,7 +163,7 @@ export class ScorePersonalLoanComponent {
   }
 
   handleSubmit() {
-    if(this.viewOnly || this.m_score != 0){
+    if(this.viewOnly || (this.logedInUser.type != "Credit-Approver" && this.m_score != 0)){
       this.goNext();
       return;
     }

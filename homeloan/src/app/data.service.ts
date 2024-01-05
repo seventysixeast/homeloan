@@ -24,11 +24,11 @@ export class DataService {
 
   // baseurl = 'http://localhost/homeloan/admin/Api.php';
   // mediaUrl = 'http://localhost/homeloan/admin/uploads/';
-  baseurl = 'http://localhost/29nov/homeloan/admin/Api.php';
-  mediaUrl = 'http://localhost/29nov/homeloan/admin/uploads/';
+  // baseurl = 'http://localhost/29nov/homeloan/admin/Api.php';
+  // mediaUrl = 'http://localhost/29nov/homeloan/admin/uploads/';
 
-  // baseurl = 'https://76east.com/retailloan/admin/Api.php';
-  // mediaUrl = 'https://76east.com/retailloan/admin/uploads/'; 
+  baseurl = 'https://76east.com/retailloan/admin/Api.php';
+  mediaUrl = 'https://76east.com/retailloan/admin/uploads/'; 
 
   // baseurl = 'http://localhost/28nov/homeloan/admin/Api.php';
   // mediaUrl = 'http://localhost/28nov/homeloan/admin/uploads/';

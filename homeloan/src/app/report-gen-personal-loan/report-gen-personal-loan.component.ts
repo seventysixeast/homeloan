@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DataService } from '../data.service';
 import { Packer } from 'docx';
@@ -11,6 +11,8 @@ import { SideNavComponent } from '../Components/side-nav/side-nav.component';
 import { NgxSpinnerService } from 'ngx-spinner';
 import Swal from 'sweetalert2';
 import { async } from '@angular/core/testing';
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 
 @Component({
   selector: 'app-report-gen-personal-loan',
@@ -67,6 +69,30 @@ export class ReportGenPersonalLoanComponent {
   imageBlob4: any = '';
   imageMediaBlob: any = [];
 
+  displayStyle = "none";
+  displayStyleProposal = "none";
+
+  dataJson1:any;
+  dataOfBank:any;
+  dataOfapp:any;
+
+  dataJson2:any;
+  dataJson3:any;
+  dataJson4:any;
+  dataJson4ForAddInfo:any;
+  dataJson5:any;
+  safetyScore:any = "";
+
+  netData:any;
+  url1:any = "";
+
+  url3:any = "";
+  url4:any = "";
+
+  mediaUrls:any = [];
+  @ViewChild('pdfTable', {static: false}) pdfTable!: ElementRef;
+  @ViewChild('pdfTableProposal', {static: false}) pdfTableProposal!: ElementRef;
+
   ngOnInit(): void {
     this.route.params.subscribe((params: any) => {
       if (params.id != null) {
@@ -76,7 +102,7 @@ export class ReportGenPersonalLoanComponent {
           this.getData();
           this.getPdfFiles();
           this.getSingleAppData()
-          this.getImageBefore()
+          // this.getImageBefore()
         }
       }
       // this.openId = params.id;
@@ -101,6 +127,23 @@ export class ReportGenPersonalLoanComponent {
       });
       this.medialist = response;
     });
+
+
+  }
+
+  
+  inWords (num:any) {
+      var a = ['','one ','two ','three ','four ', 'five ','six ','seven ','eight ','nine ','ten ','eleven ','twelve ','thirteen ','fourteen ','fifteen ','sixteen ','seventeen ','eighteen ','nineteen '];
+      var b = ['', '', 'twenty','thirty','forty','fifty', 'sixty','seventy','eighty','ninety'];
+      if ((num = num.toString()).length > 9) return 'overflow';
+      var n:any = ('000000000' + num).substr(-9).match(/^(\d{2})(\d{2})(\d{2})(\d{1})(\d{2})$/);
+      if (!n) return; var str = '';
+      str += (n[1] != 0) ? (a[Number(n[1])] || b[n[1][0]] + ' ' + a[n[1][1]]) + 'crore ' : '';
+      str += (n[2] != 0) ? (a[Number(n[2])] || b[n[2][0]] + ' ' + a[n[2][1]]) + 'lakh ' : '';
+      str += (n[3] != 0) ? (a[Number(n[3])] || b[n[3][0]] + ' ' + a[n[3][1]]) + 'thousand ' : '';
+      str += (n[4] != 0) ? (a[Number(n[4])] || b[n[4][0]] + ' ' + a[n[4][1]]) + 'hundred ' : '';
+      str += (n[5] != 0) ? ((str != '') ? 'and ' : '') + (a[Number(n[5])] || b[n[5][0]] + ' ' + a[n[5][1]]) + 'only ' : '';
+      return  str.charAt(0).toUpperCase() + str.slice(1);
   }
 
   getSingleAppData() {
@@ -157,6 +200,84 @@ export class ReportGenPersonalLoanComponent {
         }
       }
     });
+
+    let data1 = new FormData();
+    
+
+    data1.append('action', 'getDoc1Data');
+    data1.append('id', this.openId);
+
+    this.ds.submitAppData(data1).subscribe((response: any) => {
+      const documentCreator = new DocumentCreator();
+      console.log('response',response)
+      // response.mediaUrl = this.ds.mediaUrl;
+      this.netData = response;
+
+      if(response.app_data.a1_photo != ""){
+        this.url1 = this.ds.mediaUrl + response.app_data.a1_photo;
+      }
+
+      if(response.guar_data.a1_photo != ""){
+        this.url3 = this.ds.mediaUrl + response.guar_data.a1_photo;
+      }
+      if(response.guar_data.a2_photo != ""){
+        this.url4 = this.ds.mediaUrl + response.guar_data.a2_photo;
+      }
+
+      for (let i = 0; i < 4; i++) {
+        if(response.media[i]){
+          let medUrl = this.ds.mediaUrl + response.media[i].filename
+          this.mediaUrls.push(medUrl)
+        }else{
+          this.mediaUrls.push("")
+        }
+        // let blobMedia = await fetch(
+        //   medUrl
+        // ).then(r =>
+        //   (r.blob())
+        // );
+        // // console.log('blob2',blob2)
+        // if (blobMedia.size > 0 && blobMedia.type != 'text/html') {
+        //   // this.imageBlob4 = blob4
+        // }
+        // this.mediaUrls.push(medUrl)
+      }
+      // this.mediaUrls = response.media;
+      console.log('this.netData',this.netData)
+      console.log('this.mediaUrls',this.mediaUrls)
+      // return;
+      // const doc = documentCreator.create(response, this.imageBlob1, this.imageBlob2);
+      this.dataJson1 = JSON.parse(response.loan_request.dataJson);
+      this.dataOfBank = JSON.parse(response.addinfo.JsonData);
+      this.dataOfapp = (response.app_data);
+
+      this.dataJson2 = JSON.parse(response.risk_one.JsonData);
+      this.dataJson3 = JSON.parse(response.risk_two.JsonData);
+      this.dataJson4 = JSON.parse(response.addinfo.JsonData);
+      this.dataJson4ForAddInfo = (response.addinfo);
+      this.dataJson5 = (response.score);
+
+
+      let score = this.dataJson2.mws_total + this.dataJson3.mws_total + JSON.parse(this.dataJson5.m_score)
+
+      this.dataJson5.m_score = JSON.parse(this.dataJson5.m_score)
+      this.dataJson5.total2 = JSON.parse(this.dataJson5.total2)
+
+      console.log('this.score', score)
+      // let safetyScore = '';
+      if (score >= 80) {
+        this.safetyScore = 'High';
+      } else if (score >= 70 && score < 80) {
+        this.safetyScore = 'Good';
+      } else if (score >= 60 && score < 70) {
+        this.safetyScore = 'Moderate';
+      } else if (score >= 50 && score < 60) {
+        this.safetyScore = 'Average';
+      } else {
+        this.safetyScore = 'Poor';
+      }
+     
+    });
   }
 
   handleFileInput(files: any) {
@@ -193,11 +314,8 @@ export class ReportGenPersonalLoanComponent {
     }
   }
 
-  uploadPdf(type: 'application' | 'proposal') {
-    const file = this[type];
-
-    if (file) {
-      const data = new FormData();
+  uploadPdfForPersonalLoan(type: any, file:any){
+    const data = new FormData();
 
       data.append('action', 'savePdfFile');
       data.append('ref_id', this.openId);
@@ -227,19 +345,13 @@ export class ReportGenPersonalLoanComponent {
           });
         }
 
+        this.closePopup();
+        this.closePopupForLoanProposal();
+
         // Clear the selected file and perform any other necessary actions
-        this[type] = null;
         this.getData();
       });
-    } else {
-      Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'No file selected. Please choose a PDF file to upload.',
-      });
-    }
   }
-
 
   getPdfFiles() {
     let data = new FormData();
@@ -287,160 +399,98 @@ export class ReportGenPersonalLoanComponent {
     this.sideNav.openPage(2, 6);
   }
 
-  getImageBefore() {
-    let data = new FormData();
-    data.append('action', 'getDoc1Data');
-    data.append('id', this.openId);
-
-    this.ds.submitAppData(data).subscribe(async (response: any) => {
-      // const documentCreator = new DocumentCreator();
-      // console.log('response',response)
-      // response.mediaUrl = this.ds.mediaUrl;
-      console.log('response', response)
-      // console.log('this.ds.mediaUrl + response.app_data.a1_photo',this.ds.mediaUrl + response.app_data.a1_photo)
-      let url1 = this.ds.mediaUrl + response.app_data.a1_photo
-      let url2 = this.ds.mediaUrl + response.app_data.a2_photo
-      let url3 = this.ds.mediaUrl + response.guar_data.a1_photo
-      let url4 = this.ds.mediaUrl + response.guar_data.a2_photo
-      let mediaUrls = response.media
-      try {
-        // let blob1 = await fetch(
-        //   url1, { mode: 'no-cors'}
-        //   );
-        const headerDict = {
-          'Content-Type': 'application/pdf',
-          // 'Accept':'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
-          'Access-Control-Allow-Origin': '*',
-          'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE',
-          'Access-Control-Allow-Headers': 'Authorization, X-Requested-With, Content-Type, Origin, Accept, X-clientid, X-locale, X-loggedin, X-version',
-          'Access-Control-Allow-Credentials': true
-        }
-
-        // const requestOptions = {
-        //   headers: new Headers(headerDict), responseType: ResponseContentType.Blob
-        // };
-
-        // const proxyurl = "https://cors-anywhere.herokuapp.com/";
-
-        // let blob1 = this.Http.get(url1,{ headers: new HttpHeaders({
-        // // 'Authorization': 'Basic ' + encodedAuth,
-        // 'Access-Control-Allow-Origin': '*',
-        // 'Content-Type': 'application/octet-stream',
-        // }), responseType: 'blob'}).subscribe(
-        //   res => {
-        //     // const data: Blob = new Blob([res.blob()], { type: 'application/pdf' });
-        //     return res;
-        //     // saveAs(data, fileNAme);
-        // })
-        // let blob1 = await this.Http.get(url1, { responseType: 'blob' }).subscribe(result => {
-        //   console.log(result);
-        //   return result;
-        // });
-        // "https://raw.githubusercontent.com/dolanmiu/docx/master/demo/images/cat.jpg"
-        const blob1 = await fetch(
-          url1
-        ).then(r =>
-          (r.blob())
-        );
-        // console.log('blob1',blob1)
-        if (blob1.size > 0 && blob1.type != 'text/html') {
-          this.imageBlob1 = blob1
-        }
-
-        console.log('this.imageBlob1', this.imageBlob1)
-
-        const blob2 = await fetch(
-          url2
-        ).then(r =>
-          (r.blob())
-        );
-        // console.log('blob2',blob2)
-        if (blob2.size > 0 && blob2.type != 'text/html') {
-          this.imageBlob2 = blob2
-        }
-
-        console.log('this.imageBlob2', this.imageBlob2)
-
-        const blob3 = await fetch(
-          url3
-        ).then(r =>
-          (r.blob())
-        );
-        // console.log('blob2',blob2)
-        if (blob3.size > 0 && blob3.type != 'text/html') {
-          this.imageBlob3 = blob3
-        }
-
-        console.log('this.imageBlob3', this.imageBlob3)
-
-        const blob4 = await fetch(
-          url4
-        ).then(r =>
-          (r.blob())
-        );
-        // console.log('blob2',blob2)
-        if (blob4.size > 0 && blob4.type != 'text/html') {
-          this.imageBlob4 = blob4
-        }
-
-        console.log('this.imageBlob4', this.imageBlob4)
-
-        for (let i = 0; i < mediaUrls.length; i++) {
-          let medUrl = this.ds.mediaUrl + mediaUrls[i].filename
-          let blobMedia = await fetch(
-            medUrl
-          ).then(r =>
-            (r.blob())
-          );
-          // console.log('blob2',blob2)
-          if (blobMedia.size > 0 && blobMedia.type != 'text/html') {
-            // this.imageBlob4 = blob4
-            this.imageMediaBlob.push({ filename: blobMedia, comment: mediaUrls[i].comment })
-          }
-        }
-
-
-      } catch (error) {
-        console.error('Error:', error);
-      }
-      // return;
-      // const doc = documentCreator.create(response);
-
-      // Packer.toBlob(doc).then((blob) => {
-      //   this.saveAsBlob(blob, 'Loan_Application.docx');
-      //   console.log('Document created successfully');
-      // });
-    });
-  }
-
-  doc1() {
+  async doc1() {
 
     // console.log('sta',this.status)
     if (this.status.indexOf('Processing by Credit Analyst') > -1) {
       alert('Being Filled by Credit Analyst')
       return;
     }
-    let data = new FormData();
 
-    data.append('action', 'getDoc1Data');
-    data.append('id', this.openId);
-
-    this.ds.submitAppData(data).subscribe((response: any) => {
-      const documentCreator = new DocumentCreator();
-      // console.log('response',response)
-      response.mediaUrl = this.ds.mediaUrl;
-      // return;
-      const doc = documentCreator.create(response, this.imageBlob1, this.imageBlob2);
-
-      Packer.toBlob(doc).then((blob) => {
-        this.saveAsBlob(blob, 'Loan_Application.docx');
-        // const arr = new Uint8Array(blob);
-        const blob1 = new Blob([blob], { type: 'application/pdf' });
-        // this.saveAsBlob(blob1, 'Loan_Application.pdf');
-        console.log('Document created successfully');
-      });
+    // required
+   
+    const DATA = this.pdfTable.nativeElement;
+    // const doc: jsPDF = new jsPDF("p", "mm", "a4");
+    const doc: jsPDF = new jsPDF("p", "pt", "a3");
+  
+    // doc.setFontSize(5)
+    doc.html(DATA, {
+      html2canvas: {
+        scale: 1,
+      },
+      callback: (doc) => {
+        // var temp = doc.save("Loan_Application.pdf");
+        var temp = doc.output('blob');
+        this.uploadPdfForPersonalLoan("application",temp)
+      }
     });
+
+    // required
+
+      // var chartContainer = document.getElementById('pdfTable');
+      // if(chartContainer){
+      //   console.log('chartContainer.children',chartContainer.children)
+      //   if (!chartContainer) {
+      //       console.error("Element with ID 'chart_pdf' not found.");
+      //       return;
+      //   }
+      //   var pageWrappers = Array.from(chartContainer.children);
+    
+      //   if (pageWrappers.length === 0) {
+      //       console.warn("No child elements found inside 'chart_pdf'.");
+      //       return;
+      //   }
+    
+      //   var doc = new jsPDF('p', 'mm');
+
+      //   console.log('pageWrappers.children',pageWrappers)
+    
+      //   for (var i = 0; i < pageWrappers.length; i++) {
+      //       var pageWrapper = pageWrappers[i];
+      //       var canvas = await html2canvas(pageWrapper as HTMLElement, {
+      //           scale: 1,
+      //           backgroundColor: 'white',
+      //           useCORS: true,
+      //           allowTaint: true,
+      //           // proxy: true,
+      //           proxy: 'anonymous',
+      //           // letterRendering: true
+      //       });
+      //       var imgData = canvas.toDataURL('image/png');
+      //       if(!imgData){
+      //           var imgData = canvas.toDataURL('image/jpeg');
+      //       }
+      //       var imgWidth = 210;
+      //       var pageHeight = 295;
+      //       var imgHeight = canvas.height * imgWidth / canvas.width;
+      //       var position = 0;
+    
+      //       if (i !== 0) {
+      //           doc.addPage();
+      //       }
+      //       doc.addImage(imgData, 'JPEG', 0, position, imgWidth, imgHeight);
+      //   }
+    
+      //   doc.save("chart_reports.pdf");
+      // }
+    
   }
+
+  openPopup(){
+    this.displayStyle = "block"; 
+  }
+
+  closePopup() { 
+    this.displayStyle = "none"; 
+  } 
+
+  openPopupForLoanProposal(){
+    this.displayStyleProposal = "block"; 
+  }
+
+  closePopupForLoanProposal() { 
+    this.displayStyleProposal = "none"; 
+  } 
 
   doc2() {
     if (this.status.indexOf('Processing by Credit Analyst') > -1) {
@@ -453,13 +503,18 @@ export class ReportGenPersonalLoanComponent {
     data.append('id', this.openId);
 
     this.ds.submitAppData(data).subscribe((response: any) => {
-      // const documentCreator = new DocumentCreator2();
-      // const doc = documentCreator.create(response, this.imageBlob3, this.imageBlob4, this.imageMediaBlob);
-
-      // Packer.toBlob(doc).then((blob) => {
-      //   this.saveAsBlob(blob, 'Loan_Proposal.docx');
-      //   console.log('Document created successfully');
-      // });
+      const DATA = this.pdfTableProposal.nativeElement;
+      // const doc: jsPDF = new jsPDF("p", "mm", "a4");
+      const doc: jsPDF = new jsPDF("p", "pt", "a3");
+    
+      // doc.setFontSize(5)
+      doc.html(DATA, {
+        callback: (doc) => {
+          // var temp = doc.save("Loan_proposal.pdf");
+          var temp = doc.output('blob');
+          this.uploadPdfForPersonalLoan("proposal",temp)
+        }
+      });
     });
   }
 
